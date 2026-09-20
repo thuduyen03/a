@@ -5,62 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đề Thi THPT Quốc Gia - Tiếng Anh (Cấu trúc 2026)</title>
     <style>
-/* ========================================================
-   BỔ SUNG CSS RESPONSIVE CHO MÀN HÌNH ĐIỆN THOẠI / TABLET 
-   ======================================================== */
-@media (max-width: 992px) {
-    /* Chuyển Layout chính thành cột dọc */
-    .main-layout {
-        flex-direction: column-reverse; /* Đẩy Sidebar xuống dưới cùng hoặc bạn có thể đổi thành 'column' để Sidebar nằm trên */
-    }
-
-    /* Mở rộng Sidebar 100% và bỏ ghim (sticky) để không chiếm diện tích hiển thị câu hỏi */
-    .sidebar {
-        width: 100%;
-        position: relative;
-        top: 0;
-        margin-top: 20px;
-        box-sizing: border-box;
-    }
-
-    /* Chuyển các phần chứa bài đọc và câu hỏi thành xếp chồng lên nhau */
-    .part-split {
-        flex-direction: column;
-        padding: 15px;
-    }
-
-    .passage-col, .questions-col {
-        flex: none;
-        width: 100%;
-        max-height: none; /* Bỏ giới hạn chiều cao để cuộn trang tự nhiên theo điện thoại */
-        padding: 0;
-    }
-
-    /* Đổi đường gạch ngang ngăn cách giữa bài đọc và câu hỏi thay vì gạch dọc */
-    .passage-col {
-        border-right: none;
-        border-bottom: 2px dashed #e0e0e0;
-        padding-bottom: 15px;
-        margin-bottom: 15px;
-    }
-
-    /* Fix lỗi cho giao diện có class part-container (nếu có sử dụng) */
-    .part-container {
-        flex-direction: column;
-        height: auto;
-        width: 100%;
-        box-sizing: border-box;
-    }
-    .left-pane, .right-pane {
-        width: 100%;
-        height: auto;
-        border-right: none;
-        box-sizing: border-box;
-    }
-    .left-pane {
-        border-bottom: 2px dashed #ccc;
-    }
-}
         :root {
             --primary: #1e90ff;
             --success: #2ed573;
@@ -274,6 +218,63 @@
 
         u, b { font-weight: bold; }
         u { text-decoration: underline; }
+
+        /* ========================================================
+           BỔ SUNG CSS RESPONSIVE CHO MÀN HÌNH ĐIỆN THOẠI / TABLET 
+           ======================================================== */
+        @media (max-width: 992px) {
+            /* Chuyển Layout chính thành cột dọc */
+            .main-layout {
+                flex-direction: column-reverse; /* Đẩy Sidebar xuống dưới cùng hoặc bạn có thể đổi thành 'column' để Sidebar nằm trên */
+            }
+
+            /* Mở rộng Sidebar 100% và bỏ ghim (sticky) để không chiếm diện tích hiển thị câu hỏi */
+            .sidebar {
+                width: 100%;
+                position: relative;
+                top: 0;
+                margin-top: 20px;
+                box-sizing: border-box;
+            }
+
+            /* Chuyển các phần chứa bài đọc và câu hỏi thành xếp chồng lên nhau */
+            .part-split {
+                flex-direction: column;
+                padding: 15px;
+            }
+
+            .passage-col, .questions-col {
+                flex: none;
+                width: 100%;
+                max-height: none; /* Bỏ giới hạn chiều cao để cuộn trang tự nhiên theo điện thoại */
+                padding: 0;
+            }
+
+            /* Đổi đường gạch ngang ngăn cách giữa bài đọc và câu hỏi thay vì gạch dọc */
+            .passage-col {
+                border-right: none;
+                border-bottom: 2px dashed #e0e0e0;
+                padding-bottom: 15px;
+                margin-bottom: 15px;
+            }
+
+            /* Fix lỗi cho giao diện có class part-container (nếu có sử dụng) */
+            .part-container {
+                flex-direction: column;
+                height: auto;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .left-pane, .right-pane {
+                width: 100%;
+                height: auto;
+                border-right: none;
+                box-sizing: border-box;
+            }
+            .left-pane {
+                border-bottom: 2px dashed #ccc;
+            }
+        }
     </style>
 </head>
 <body>
