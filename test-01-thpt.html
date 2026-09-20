@@ -223,42 +223,12 @@
            BỔ SUNG CSS RESPONSIVE CHO MÀN HÌNH ĐIỆN THOẠI / TABLET 
            ======================================================== */
         @media (max-width: 992px) {
-            /* Chuyển Layout chính thành cột dọc */
-            .main-layout {
-                flex-direction: column-reverse; /* Đẩy Sidebar xuống dưới cùng hoặc bạn có thể đổi thành 'column' để Sidebar nằm trên */
+            /* 1. Xử lý phần thân trang để không bị lấp chữ */
+            body { 
+                padding-bottom: 140px; 
             }
-
-            /* Mở rộng Sidebar 100% và bỏ ghim (sticky) để không chiếm diện tích hiển thị câu hỏi */
-            .sidebar {
-                width: 100%;
-                position: relative;
-                top: 0;
-                margin-top: 20px;
-                box-sizing: border-box;
-            }
-
-            /* Chuyển các phần chứa bài đọc và câu hỏi thành xếp chồng lên nhau */
-            .part-split {
-                flex-direction: column;
-                padding: 15px;
-            }
-
-            .passage-col, .questions-col {
-                flex: none;
-                width: 100%;
-                max-height: none; /* Bỏ giới hạn chiều cao để cuộn trang tự nhiên theo điện thoại */
-                padding: 0;
-            }
-
-            /* Đổi đường gạch ngang ngăn cách giữa bài đọc và câu hỏi thay vì gạch dọc */
-            .passage-col {
-                border-right: none;
-                border-bottom: 2px dashed #e0e0e0;
-                padding-bottom: 15px;
-                margin-bottom: 15px;
-            }
-
-            /* Fix lỗi cho giao diện có class part-container (nếu có sử dụng) */
+            
+            /* 2. Ép cấu trúc chia đôi thành cột dọc */
             .part-container {
                 flex-direction: column;
                 height: auto;
@@ -273,6 +243,35 @@
             }
             .left-pane {
                 border-bottom: 2px dashed #ccc;
+            }
+
+            /* 3. Sửa lỗi thanh Tracking che kín màn hình */
+            .tracker-bar { 
+                flex-direction: column; 
+                padding: 10px; 
+            }
+            .tracker-grid { 
+                flex-wrap: nowrap; 
+                overflow-x: auto; 
+                width: 100%; 
+                padding-bottom: 10px; 
+            }
+            .track-box { 
+                flex-shrink: 0; 
+            }
+            .submit-btn { 
+                width: 100%; 
+                margin-left: 0; 
+                margin-top: 5px; 
+            }
+            
+            /* 4. Tùy chỉnh thanh cuộn ngang nhỏ gọn cho điện thoại */
+            .tracker-grid::-webkit-scrollbar {
+                height: 5px;
+            }
+            .tracker-grid::-webkit-scrollbar-thumb {
+                background: #ccc;
+                border-radius: 10px;
             }
         }
     </style>
