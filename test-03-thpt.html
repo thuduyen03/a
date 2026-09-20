@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đề Số 03 - THPT Quốc Gia Môn Tiếng Anh</title>
+    <style>
+        :root {
+            --primary: #1e90ff;
+            --success: #2ed573;
+            --danger: #ff4757;
+            --hover-bg: #e0f7fa;
+            --bg-color: #f4f7f6;
+            --highlight: yellow;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            padding-bottom: 80px; /* Space for sticky tracker */
+            background-color: var(--bg-color);
+            color: #333;
+        }
+        .header {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .header h2, .header h3 { margin: 5px 0; }
+        
+        .timer {
+            position: fixed;
+            top: 15px;
+            right: 20px;
+            background: var(--danger);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Layout */
+        .part-container {
+            display: flex;
+            margin: 15px auto;
+            width: 98%;
+            height: 85vh; /* Split screen height */
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .left-pane {
+            width: 60%;
+            padding: 20px;
+            overflow-y: auto;
+            border-right: 2px solid #eee;
+            background-color: #fafafa;
+        }
+        .right-pane {
+            width: 40%;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #fff;
+        }
+
+        /* Typography & Effects */
+        .text-content {
+            font-size: 16px;
+            line-height: 1.8;
+        }
+        .text-content p {
+            padding: 5px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        /* Hover text effect */
+        .text-content p:hover {
+            background-color: var(--hover-bg);
+        }
+        /* Persistent highlight class */
+        .highlight {
+            background-color: var(--highlight);
+        }
+
+        /* Questions */
+        .question-block {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #ccc;
+        }
+        .question-text {
+            font-weight: bold;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+        .options label {
+            display: block;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 1px solid #f0f0f0;
+            transition: 0.2s;
+        }
+        .options label:hover {
+            background-color: #f8f9fa;
+        }
+        .options input { margin-right: 10px; }
+        
+        .correct-ans {
+            background-color: var(--success) !important;
+            color: white;
+            font-weight: bold;
+            border-color: var(--success) !important;
+        }
+        .wrong-ans {
+            background-color: var(--danger) !important;
+            color: white;
+            border-color: var(--danger) !important;
+        }
+
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            background-color: var(--hover-bg);
+            border-left: 5px solid var(--primary);
+            border-radius: 4px;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        /* Sidebar Tracker */
+        .tracker-bar {
+            position: fixed;
+            bottom: 0; left: 0; width: 100%;
+            background: white;
+            padding: 15px;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-sizing: border-box;
+        }
+        .tracker-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            flex: 1;
+        }
+        .track-box {
+            width: 32px; height: 32px;
+            display: flex; justify-content: center; align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .track-box:hover { border-color: var(--primary); }
+        .track-box.active { background: var(--primary); color: white; border-color: var(--primary); }
+        .track-box.correct { background: var(--success); color: white; border-color: var(--success); }
+        .track-box.wrong { background: var(--danger); color: white; border-color: var(--danger); }
+        
+        .submit-btn {
+            padding: 12px 25px;
+            background: var(--success);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-left: 20px;
+            transition: 0.3s;
+        }
+        .submit-btn:hover { background: #26b360; }
+
+        /* Modal Popup */
+        .modal-overlay {
+            display: none;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 2000;
+            justify-content: center; align-items: center;
+        }
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            width: 400px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            animation: popIn 0.3s ease-out;
+        }
+        @keyframes popIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .modal-content h2 { color: #2f3542; margin-top: 0; font-size: 28px;}
+        .modal-content p { font-size: 18px; margin: 15px 0; color: #57606f;}
+        .score-display { font-size: 36px; font-weight: bold; color: var(--primary); margin: 20px 0; }
+        .modal-btns { margin-top: 30px; display: flex; justify-content: space-around; }
+        .modal-btns button {
+            padding: 12px 20px; border: none; border-radius: 6px;
+            font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.2s;
+        }
+        .btn-view { background: var(--primary); color: white; }
+        .btn-view:hover { background: #187bcd; }
+        .btn-redo { background: var(--danger); color: white; }
+        .btn-redo:hover { background: #e03e4d; }
+
+        u { font-weight: bold; text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <div class="timer" id="timer">⏳ 50:00</div>
+
+    <div class="header">
+        <h2>ĐỀ SỐ 03 - KỲ THI THPT QUỐC GIA</h2>
+        <h3>Môn thi: TIẾNG ANH</h3>
+        <p><strong>Giáo viên: NGUYỄN THỊ THU DUYÊN - Zalo: 0918204603</strong></p>
+    </div>
+
+    <!-- PART 1 -->
+    <div class="part-container">
+        <div class="left-pane text-content">
+            <p><strong>Read the following advertisement and mark the letter A, B, C or D on your answer sheet to indicate the correct option that best fits each of the numbered blanks from 1 to 6.</strong></p>
+            <p><strong>Super Typhoon Milton and its Destruction</strong></p>
+            <p>Super Typhoon Milton struck the eastern coastline last weekend, causing widespread devastation. Many residents described it as the most (1) ______ experience they had ever faced. The combination of (2) ______ and relentless rain left the town completely paralyzed.</p>
+            <p>The typhoon, (3) ______ the coast at around 3 PM, brought winds exceeding 180 km/h. This resulted in massive flooding and left thousands (4) ______ need of emergency assistance. The authorities worked hard to (5) ______ a difference, but the sheer scale of the disaster made recovery efforts slow.</p>
+            <p>Now, the community is slowly rebuilding their homes, hoping (6) ______ what was lost.</p>
+        </div>
+        <div class="right-pane" id="questions-part-1"></div>
+    </div>
+
+    <!-- PART 2 -->
+    <div class="part-container">
+        <div class="left-pane text-content">
+            <p><strong>Read the following leaflet and mark the letter A, B, C or D on your answer sheet to indicate the correct option that best fits each of the numbered blanks from 7 to 12.</strong></p>
+            <p>Students born in 2007 have just received the university entrance mock exam issued by the Ministry of Education. The exam, which is reportedly shorter and more difficult than previous years, has left many (7) ______ feeling anxious. The questions are mainly focused on reading comprehension and vocabulary, requiring students to (8) ______ complex words and phrases.</p>
+            <p>Teachers have acknowledged that this is a (9) ______ exam, but they believe it has the potential to accurately classify students based on their abilities. (10) ______ the increased difficulty, the exam is considered fair and capable of assessing the students' true competencies.</p>
+            <p>Despite the pressure, the (11) ______ of students sitting for the exam remains high. With a focus on reading comprehension, the exam is expected to test the (12) ______ of students' preparedness for the university entrance process.</p>
+        </div>
+        <div class="right-pane" id="questions-part-2"></div>
+    </div>
+
+    <!-- PART 3 -->
+    <div class="part-container">
+        <div class="left-pane text-content">
+            <p><strong>Mark the letter A, B, C, or D on your answer sheet to indicate the correct arrangement of the sentences to make a meaningful exchange or text in each of the following questions.</strong></p>
+            
+            <p><strong>Question 13.</strong><br>
+            a. Alice: "That sounds serious. Have you been to see a doctor?"<br>
+            b. Mark: "Not great, actually. I've been feeling under the weather for a few days."<br>
+            c. Alice: "How have you been, Mark?"</p>
+            
+            <p><strong>Question 14.</strong><br>
+            a. Mark: "Yeah, I really needed to relax after such a stressful week at work."<br>
+            b. Alice: "Did you do anything fun this weekend, Mark?"<br>
+            c. Alice: "I'm glad to hear that! What did you do?"<br>
+            d. Mark: "I went hiking in the mountains. The fresh air was amazing."<br>
+            e. Alice: "That sounds like a perfect way to unwind!"</p>
+
+            <p><strong>Question 15.</strong><br>
+            Dear Emily,<br>
+            a. I wanted to tell you that I've recently accepted a new job in New York, and I'll be moving there next month. It's a big change, but I'm really excited about this new chapter in my life.<br>
+            b. I'm planning to visit my family before the big move, and I'd love to see you if you're free during that time.<br>
+            c. Hope this message finds you well! I wanted to catch you up on some recent news.<br>
+            d. Take care, and I hope to see you soon!</p>
+
+            <p><strong>Question 16.</strong><br>
+            a. Online education has grown in popularity due to its flexibility, allowing students to balance their studies with personal and professional responsibilities.<br>
+            b. This means that students can attend classes from anywhere in the world, without being tied to a specific location.<br>
+            c. In addition to convenience, online courses often provide a wide range of resources, such as recorded lectures, discussion forums, and interactive assignments.<br>
+            d. In conclusion, online education offers students the flexibility and resources they need to succeed, especially in today's fast-paced world.<br>
+            e. Furthermore, online platforms are accessible at any time, allowing learners to study at their own pace, which is particularly beneficial for those with busy schedules.</p>
+
+            <p><strong>Question 17.</strong><br>
+            a. However, once the foundation is laid, the real work begins as they start building more complex systems of thought and understanding.<br>
+            b. Learning a new language is challenging, especially at the beginning when students are overwhelmed by grammar rules and unfamiliar vocabulary.<br>
+            c. With continuous practice, learners gradually develop confidence in their speaking, listening, and writing skills, although progress may seem slow at first.<br>
+            d. Many language learners experience frustration early on, but it's important to remember that fluency comes with time and dedication.<br>
+            e. In the end, the sense of accomplishment that comes from mastering a language makes the effort worthwhile, opening doors to new cultures and opportunities.</p>
+        </div>
+        <div class="right-pane" id="questions-part-3"></div>
+    </div>
+
+    <!-- PART 4 -->
+    <div class="part-container">
+        <div class="left-pane text-content">
+            <p><strong>Read the following passage about humanoid robots and mark the letter A, B, C or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 18 to 22.</strong></p>
+            <p>In recent years, artificial intelligence (AI) has been widely applied in various fields, including healthcare, finance, and education. AI systems are now (18) ______. Despite these advancements, there are still concerns about the ethical use of AI, particularly in (19) ______.</p>
+            <p>Many organizations are adopting AI technologies (20) ______. These technologies have the potential to transform industries, but experts emphasize that AI should complement human abilities rather than replace them.</p>
+            <p>For example, in education, AI can (21) ______, allowing teachers to focus on other important aspects of teaching. However, it remains crucial to ensure that AI (22) ______.</p>
+        </div>
+        <div class="right-pane" id="questions-part-4"></div>
+    </div>
+
+    <!-- PART 5 -->
+    <div class="part-container">
+        <div class="left-pane text-content">
+            <p><strong>Read the following passage about endangered languages and mark the letter A, B, C, D on your answer sheet to indicate the best answer to each of the following questions from 23 to 30.</strong></p>
+            <p>Living in the stressful modern era, most of us usually look for sources of relaxation, and it's no secret that viewing nature and being outdoors can be pleasant and <u>restorative</u>. Spending time in nature is linked to improvements in mental health, mood, emotional well-being, and cognitive benefits. However, the more surprising thing is that, according to new research, viewing water may be a better environment for relaxation than green areas with grass and trees.</p>
+            <p>In a recent article, Harvard psychologist Adam Grant discussed a remarkable 2024 study that he <u>came across</u>, showing that people who viewed water for less than two minutes had reduced blood pressure compared to people who viewied green areas and trees.</p>
+            <p>So why are nature's blue spaces more relaxing than green ones? According to the original authors of the study, the reason might be related to the process of our evolution. For early humans who have to work hard to survive day by day, the lack of water has always been a major challenge, as <u>it</u> posed a direct threat to life, leading to heightened levels of stress, increases in blood pressure and cardiac stress. Therefore, successfully detecting water or simply just looking at it can provide a sense of great relief.</p>
+            <p><u>Being in nature can help you re-invigorate your body, mind, and spirit, offering moments of awe, calm, and relaxation.</u> And now we are learning that bodies of water may bring even greater relaxation. So, whether it's a river, lake, or ocean, it might be time to go outside and find the nearest blue space to experience the effects for yourself!</p>
+        </div>
+        <div class="right-pane" id="questions-part-5"></div>
+    </div>
+
+    <!-- PART 6 -->
+    <div class="part-container">
+        <div class="left-pane text-content">
+            <p><strong>Read the following passage about urban shift and mark the letter A, B, C, D on your answer sheet to indicate the best answer to each of the following questions from 31 to 40.</strong></p>
+            <p>[I] Sperm whales are fascinating creatures. [II] They possess the biggest brain of any species, six times larger than a human's, which scientists believe may have evolved to support intelligent, rational behavior. [III] They're also highly social and capable of making decisions as a group. [IV] But there's also a lot we don't know about them, including what they may be saying to one another when communicating with a system of short clicks, known as codas.</p>
+            <p>Now, new research published in Nature Communications today suggests that sperm whales' communication is actually much more expressive and complicated than was previously thought. A team of researchers led by Pratyusha Sharma at MIT's Computer Science and Artificial Intelligence Lab (CSAIL) working with Project CETI, a nonprofit focused on using AI to understand whales, used statistical models to analyze whale codas and managed to identify a structure to their language that's similar to features of human language. Their findings represent a tool future researchers could use to <u>decipher</u> not just the structure but the actual meaning of whale sounds.</p>
+            <p>For the study, the researchers examined recordings of 8,719 codas from around 60 whales collected by the Dominica Sperm Whale Project between 2005 and 2018, using a mix of AI algorithms for pattern recognition and classification. The AI then turned the clicks within the coda data into a new kind of data visualization called an exchange plot, revealing that some codas featured extra clicks. These extra clicks, combined with variations in the duration of their calls, appeared in interactions between multiple whales, which <u>they</u> say suggests that codas can carry more information and possess a more complicated internal structure than we had previously believed.</p>
+            <p>The team's next step is to build language models of whale calls and to examine how those calls relate to different behaviors. They also plan to work on a more <u>universal</u> system that could be used across species, says Sharma. <u>Taking a communication system we know nothing about, working out how it encodes and transmits information, and slowly beginning to understand what's being communicated could have many purposes beyond whales.</u> "I think we're just starting to understand some of these things," she says. "We're very much at the beginning, but we are slowly making our way through."</p>
+        </div>
+        <div class="right-pane" id="questions-part-6"></div>
+    </div>
+
+    <!-- Sidebar Tracker -->
+    <div class="tracker-bar">
+        <div class="tracker-grid" id="tracker-grid"></div>
+        <button class="submit-btn" onclick="submitExam()">NỘP BÀI THI</button>
+    </div>
+
+    <!-- Modal Popup -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-content">
+            <h2>Kết Quả Bài Thi</h2>
+            <div class="score-display" id="score-text">0 / 40</div>
+            <p>Số câu bỏ trống: <strong id="unanswered-count" style="color:var(--danger)">0</strong></p>
+            <div class="modal-btns">
+                <button class="btn-view" onclick="viewAnswers()">XEM ĐÁP ÁN</button>
+                <button class="btn-redo" onclick="location.reload()">LÀM LẠI BÀI</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dữ liệu Đáp án và Giải thích chi tiết
+        const dapAn = {
+            1: 'A', 2: 'A', 3: 'B', 4: 'A', 5: 'A', 6: 'C', 7: 'B', 8: 'A', 9: 'A', 10: 'B',
+            11: 'A', 12: 'C', 13: 'C', 14: 'D', 15: 'A', 16: 'A', 17: 'D', 18: 'C', 19: 'A', 20: 'D',
+            21: 'B', 22: 'C', 23: 'C', 24: 'A', 25: 'A', 26: 'D', 27: 'B', 28: 'A', 29: 'C', 30: 'C',
+            31: 'C', 32: 'D', 33: 'D', 34: 'A', 35: 'A', 36: 'C', 37: 'A', 38: 'A', 39: 'D', 40: 'C'
+        };
+
+        const giaiThich = {
+            1: "Dùng tính từ đuôi -ing (terrifying) để miêu tả tính chất của trải nghiệm (experience).",
+            2: "Trật tự cụm danh từ: tính từ (strong, stormy) đứng trước danh từ (winds).",
+            3: "Rút gọn mệnh đề quan hệ chủ động dùng V-ing (hitting) thay thế cho 'which hit'.",
+            4: "Cụm từ cố định: in need of (cần thiết, trong tình trạng cần sự giúp đỡ).",
+            5: "Cụm từ cố định: make a difference (tạo ra sự khác biệt).",
+            6: "Cấu trúc: hope + to V (hy vọng làm gì đó). Đáp án C (to restore).",
+            7: "Many others = nhiều người khác (đại từ 'others' thay thế cho học sinh).",
+            8: "Figure out: hiểu ra, tìm ra. Complex words: những từ phức tạp.",
+            9: "Challenging (thử thách). Bài thi mang tính thử thách nhưng có thể phân loại đúng năng lực.",
+            10: "On account of = bởi vì (Do độ khó tăng lên, bài thi được đánh giá là công bằng).",
+            11: "The number of + N(số nhiều) dùng với động từ số ít (remains). Dịch: Số lượng học sinh.",
+            12: "The depth of students' preparedness: chiều sâu của sự chuẩn bị.",
+            13: "Trình tự hợp lý: (c) Hỏi thăm -> (b) Đáp bị ốm -> (a) Lời khuyên đi khám bác sĩ.",
+            14: "Trình tự: (b) Bạn có làm gì vui không -> (a) Cần thư giãn -> (c) Bạn đã làm gì -> (d) Đi leo núi -> (e) Cách hoàn hảo để giải tỏa.",
+            15: "Trình tự viết thư: (c) Hỏi thăm sức khỏe -> (a) Báo tin nhận việc mới -> (b) Kế hoạch thăm gia đình -> (d) Lời chào tạm biệt.",
+            16: "Đoạn văn: (a) Giáo dục trực tuyến phổ biến -> (b) Giải thích ý nghĩa 'this means' -> (e) Hơn nữa (furthermore) -> (c) Thêm vào đó (In addition) -> (d) Kết luận (In conclusion).",
+            17: "Đoạn văn: (b) Học ngôn ngữ rất khó -> (d) Nhiều người nản lòng -> (a) Tuy nhiên khi có nền tảng -> (c) Thực hành liên tục -> (e) Cuối cùng đạt thành quả.",
+            18: "Being integrated into systems designed to automate: Đang được tích hợp vào các hệ thống tự động hóa.",
+            19: "Making decisions which traditionally relied on human expertise: Đưa ra những quyết định mà trước đây phụ thuộc vào chuyên gia con người.",
+            20: "In order to improve efficiency: Nhằm mục đích cải thiện hiệu suất.",
+            21: "Perform tasks like grading: Thực hiện các tác vụ như chấm điểm.",
+            22: "Operates consistently to ensure: Hoạt động nhất quán để đảm bảo tiêu chuẩn đạo đức.",
+            23: "Increased creativity (Tăng cường sáng tạo) không được đề cập trong đoạn 1.",
+            24: "Restorative (phục hồi) trái nghĩa với damaging (phá hoại).",
+            25: "Came across (tình cờ thấy/phát hiện) đồng nghĩa với discovered.",
+            26: "It thay thế cho 'the lack of water' (việc thiếu nước).",
+            27: "Đoạn 3 chỉ ra rằng: Con người cổ đại chịu nhiều căng thẳng hơn khi không có đủ nước (the lack of water posed a direct threat to life).",
+            28: "Câu này paraphrase lại ý: Ở ngoài thiên nhiên giúp làm mới lại thể chất lẫn tinh thần.",
+            29: "Đoạn 3 đề cập đến quá trình tiến hóa (the process of our evolution).",
+            30: "Đoạn 3 giải thích lý do (why) không gian xanh dương giúp thư giãn hơn (vì lý do sinh tồn cổ đại).",
+            31: "Câu [III] nói về tính xã hội, câu chèn vào cung cấp thêm thông tin chứng minh khả năng ra quyết định tập thể.",
+            32: "Đoạn 1 nêu: Chúng có khả năng đưa ra quyết định cùng nhau (capable of making decisions as a group).",
+            33: "Behavioral experiments (Thí nghiệm hành vi) không được đề cập là phương pháp ở đoạn 2 và 3.",
+            34: "Decipher (giải mã) đồng nghĩa với decode.",
+            35: "They thay thế cho nhóm nghiên cứu (researchers).",
+            36: "Theo đoạn 3: Thuật toán AI được sử dụng để phân tích các đoạn mã coda và tìm ra mẫu.",
+            37: "Universal (phổ quát, chung) đồng nghĩa với general.",
+            38: "Paraphrase: Việc nghiên cứu hệ thống giao tiếp của cá voi mang lại hiểu biết hữu ích cho nhiều mục đích hoặc hệ thống khác.",
+            39: "Suy luận từ câu cuối: Chúng ta vẫn đang ở vạch xuất phát, chưa hoàn toàn hiểu được sự phức tạp ngôn ngữ của cá voi.",
+            40: "Tóm tắt: Giao tiếp cá voi phức tạp hơn suy nghĩ trước đây và AI đang giúp các nhà nghiên cứu bắt đầu giải mã điều này."
+        };
+
+        const questionsData = {
+            part1: [
+                {id: 1, ops: ["A. terrifying", "B. terrified", "C. terrifies", "D. terrify"]},
+                {id: 2, ops: ["A. strong stormy winds", "B. winds strong stormy", "C. stormy strong winds", "D. stormy winds strong"]},
+                {id: 3, ops: ["A. which hit", "B. hitting", "C. that hits", "D. hit"]},
+                {id: 4, ops: ["A. in", "B. at", "C. on", "D. with"]},
+                {id: 5, ops: ["A. make", "B. take", "C. do", "D. have"]},
+                {id: 6, ops: ["A. to be restored", "B. restoring", "C. to restore", "D. being restored"]}
+            ],
+            part2: [
+                {id: 7, ops: ["A. another", "B. others", "C. other", "D. the other"]},
+                {id: 8, ops: ["A. figure out", "B. look for", "C. take in", "D. give up"]},
+                {id: 9, ops: ["A. challenging", "B. relaxing", "C. simple", "D. boring"]},
+                {id: 10, ops: ["A. Instead of", "B. On account of", "C. Irrespective of", "D. In spite of"]},
+                {id: 11, ops: ["A. number", "B. amount", "C. quantity", "D. level"]},
+                {id: 12, ops: ["A. accuracy", "B. width", "C. depth", "D. randomness"]}
+            ],
+            part3: [
+                {id: 13, ops: ["A. c-a-b", "B. b-c-a", "C. c-b-a", "D. a-c-b"]},
+                {id: 14, ops: ["A. c-b-a-e-d", "B. c-e-d-b-a", "C. d-b-a-e-c", "D. b-a-c-d-e"]},
+                {id: 15, ops: ["A. c-a-b-d", "B. d-a-b-c", "C. c-b-a-d", "D. a-b-d-c"]},
+                {id: 16, ops: ["A. a-b-e-c-d", "B. b-c-e-d-a", "C. d-a-c-e-b", "D. a-e-b-c-d"]},
+                {id: 17, ops: ["A. d-b-a-c-e", "B. b-a-c-d-e", "C. a-b-d-e-c", "D. b-d-a-c-e"]}
+            ],
+            part4: [
+                {id: 18, ops: ["A. being integrating into critical industries...", "B. integrated in workflows where human input...", "C. being integrated into systems designed to automate...", "D. being integrate into systems which still depend..."]},
+                {id: 19, ops: ["A. making decisions which traditionally relied...", "B. to make decisions that required careful...", "C. making of decisions that influence...", "D. make decisions in situations that require..."]},
+                {id: 20, ops: ["A. with aim improve processes...", "B. in order improving operations...", "C. with the goal of to enhancing...", "D. in order to improve efficiency and reduce..."]},
+                {id: 21, ops: ["A. helps performing automated grading...", "B. perform tasks like grading and giving feedback...", "C. be applied to doing various tasks...", "D. performs tasks to providing real-time..."]},
+                {id: 22, ops: ["A. operating in a manner which respects...", "B. operate with consistent regulations to guarantee...", "C. operates consistently to ensure that ethical standards...", "D. are operating according to principles..."]}
+            ],
+            part5: [
+                {id: 23, text: "Which of the following is NOT mentioned in paragraph 1 as a benefit of spending time in nature?", ops: ["A. Improvements in mental health", "B. Cognitive benefits", "C. Increased creativity", "D. Emotional well - being"]},
+                {id: 24, text: "The word \"restorative\" in paragraph 1 is OPPOSITE in meaning to", ops: ["A. damaging", "B. energizing", "C. refreshing", "D. beneficial"]},
+                {id: 25, text: "The word \"came across\" in paragraph 2 could be best replaced by", ops: ["A. discovered", "B. ignored", "C. created", "D. explained"]},
+                {id: 26, text: "The word \"it\" in paragraph 3 refers to", ops: ["A. stressor", "B. blood pressure", "C. cardiac stress", "D. water"]},
+                {id: 27, text: "Which of the following is TRUE, according to paragraphs 2 and 3?", ops: ["A. Finding water was the biggest survival challenge for early humans.", "B. Early humans suffered more stress when there is not enough water.", "C. Only by being in nature can we heal both our body and our spirit.", "D. The larger the area of water you look at, the more relaxed you are."]},
+                {id: 28, text: "Which of the following best paraphrases the underlined sentence in paragraph 4?", ops: ["A. Spending time outdoors in nature can refresh both your physical and mental state...", "B. Nature is a perfect escape from modern life...", "C. Nature offers a temporary distraction from life's problems...", "D. Being in nature brings challenges to both the mind and body..."]},
+                {id: 29, text: "In which paragraph does the writer mention the possible evolutionary reasons why viewing water can be more relaxing than viewing green areas?", ops: ["A. Paragraph 1", "B. Paragraph 2", "C. Paragraph 3", "D. Paragraph 4"]},
+                {id: 30, text: "In which paragraph does the writer explain why viewing water might be more relaxing than viewing green areas?", ops: ["A. Paragraph 1", "B. Paragraph 2", "C. Paragraph 3", "D. Paragraph 4"]}
+            ],
+            part6: [
+                {id: 31, text: "Where in paragraph 1 does the following sentence best fit?<br><em>They demonstrate a high level of sociability and are capable of collective decision - making.</em>", ops: ["A. [I]", "B. [II]", "C. [III]", "D. [IV]"]},
+                {id: 32, text: "What do we learn about sperm whales in paragraph 1?", ops: ["A. They are one of the most interesting creatures for humans to study.", "B. Their brains are more advanced than human brains by six times.", "C. The size of their brains is the reason why they are highly social.", "D. They have the ability to make decisions together rather than alone."]},
+                {id: 33, text: "According to paragraph 2, which of the following is NOT mentioned as a tool or method used by researchers to study whale communication?", ops: ["A. AI algorithms for pattern recognition", "B. Statistical models", "C. Recordings of codas", "D. Behavioral experiments with whales"]},
+                {id: 34, text: "The word \"decipher\" in paragraph 2 can be best replaced by", ops: ["A. decode", "B. resolve", "C. detect", "D. reveal"]},
+                {id: 35, text: "The word \"they\" in paragraph 3 refers to", ops: ["A. researchers", "B. algorithms", "C. clicks", "D. interactions"]},
+                {id: 36, text: "Which of the following is TRUE about the study discussed in this passage?", ops: ["A. The study involved over 10,000 recordings...", "B. The research found that whale communication is simpler...", "C. AI algorithms were used to analyze whale codas and uncover patterns.", "D. The study concluded that codas cannot carry more information..."]},
+                {id: 37, text: "The word \"universal\" in paragraph 4 is closest in meaning to", ops: ["A. general", "B. conventional", "C. prevalent", "D. ordinary"]},
+                {id: 38, text: "Which of the following best paraphrases the underlined sentence in paragraph 4?", ops: ["A. Studying whale communication will provide insights useful for understanding other communication systems.", "B. Once we decode whale communication, we will fully understand how they transmit information.", "C. Understanding whale communication systems has limited applications outside marine biology.", "D. Whale communication can only be understood through long-term study without further application."]},
+                {id: 39, text: "Which of the following can most likely be inferred from the passage?", ops: ["A. Sperm whales are much more intelligent than what people commonly think.", "B. Project CETI is using the most advanced AI in order to achieve their end goal.", "C. Codas with extra clicks are the most structurally similar to human language.", "D. We have yet to fully grasp the complexity of the sperm whale language system."]},
+                {id: 40, text: "Which of the following best summarizes the passage?", ops: ["A. Sperm whales are known for their large brains and complex group behavior...", "B. Researchers have fully decoded the structure and meaning of whale codas...", "C. A recent study suggests that sperm whale communication may be more complex than previously thought, and researchers are beginning to unravel its structure and meaning with the help of AI.", "D. The study found that whale communication is not related to behavior..."]}
+            ]
+        };
+
+        // Render Questions
+        function renderQuestions(partData, containerId) {
+            const container = document.getElementById(containerId);
+            partData.forEach(q => {
+                let optionsHTML = '';
+                q.ops.forEach(opt => {
+                    const val = opt.charAt(0); // A, B, C or D
+                    optionsHTML += `<label><input type="radio" name="q${q.id}" value="${val}"> ${opt}</label>`;
+                });
+                
+                const qText = q.text ? `<div class="question-text">Question ${q.id}: ${q.text}</div>` : `<div class="question-text">Question ${q.id}:</div>`;
+
+                container.innerHTML += `
+                    <div class="question-block" id="q-block-${q.id}">
+                        ${qText}
+                        <div class="options">
+                            ${optionsHTML}
+                        </div>
+                        <div class="explanation" id="exp-${q.id}"></div>
+                    </div>
+                `;
+            });
+        }
+
+        renderQuestions(questionsData.part1, 'questions-part-1');
+        renderQuestions(questionsData.part2, 'questions-part-2');
+        renderQuestions(questionsData.part3, 'questions-part-3');
+        renderQuestions(questionsData.part4, 'questions-part-4');
+        renderQuestions(questionsData.part5, 'questions-part-5');
+        renderQuestions(questionsData.part6, 'questions-part-6');
+
+        // Initialize Tracker
+        const trackerGrid = document.getElementById('tracker-grid');
+        for (let i = 1; i <= 40; i++) {
+            trackerGrid.innerHTML += `<div class="track-box" id="track-${i}" onclick="scrollToQ(${i})">${i}</div>`;
+        }
+
+        // Scroll to question
+        function scrollToQ(id) {
+            document.getElementById(`q-block-${id}`).scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Update Tracker on Radio Change
+        document.querySelectorAll('input[type=radio]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                if(isSubmitted) return;
+                const qNum = this.name.replace('q', '');
+                document.getElementById(`track-${qNum}`).classList.add('active');
+            });
+        });
+
+        // Timer Logic
+        let timeLeft = 50 * 60; // 50 minutes
+        const timerEl = document.getElementById('timer');
+        let timerInterval = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                submitExam();
+            } else {
+                timeLeft--;
+                let m = Math.floor(timeLeft / 60);
+                let s = timeLeft % 60;
+                timerEl.innerText = `⏳ ${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+            }
+        }, 1000);
+
+        // Persistent Text Highlight Logic
+        document.addEventListener('mouseup', function(e) {
+            // Only highlight if selection is inside .text-content
+            if (e.target.closest('.text-content')) {
+                let selection = window.getSelection();
+                if (selection.toString().trim().length > 0) {
+                    try {
+                        let range = selection.getRangeAt(0);
+                        let span = document.createElement('span');
+                        span.className = 'highlight';
+                        range.surroundContents(span);
+                        selection.removeAllRanges();
+                    } catch (error) {
+                        // Ignore complex selections crossing DOM nodes
+                        console.log("Cannot highlight across multiple tags.");
+                    }
+                }
+            }
+        });
+
+        // Submission & Grading
+        let isSubmitted = false;
+        function submitExam() {
+            if (isSubmitted) return;
+            let answered = 0;
+            let score = 0;
+            
+            for (let i = 1; i <= 40; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                if (selected) {
+                    answered++;
+                    if (selected.value === dapAn[i]) score++;
+                }
+            }
+            
+            let unanswered = 40 - answered;
+            document.getElementById('score-text').innerText = `${score} / 40`;
+            document.getElementById('unanswered-count').innerText = unanswered;
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function viewAnswers() {
+            isSubmitted = true;
+            document.getElementById('modal').style.display = 'none';
+            clearInterval(timerInterval);
+            
+            for (let i = 1; i <= 40; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                const correctAns = dapAn[i];
+                const trackBox = document.getElementById(`track-${i}`);
+                const allLabels = document.querySelectorAll(`input[name="q${i}"]`);
+                
+                // Disable & Style radios
+                allLabels.forEach(radio => {
+                    radio.disabled = true;
+                    if (radio.value === correctAns) {
+                        radio.parentElement.classList.add('correct-ans');
+                    }
+                });
+                
+                // Grade & Tracker Update
+                trackBox.classList.remove('active');
+                if (selected) {
+                    if (selected.value === correctAns) {
+                        trackBox.classList.add('correct');
+                    } else {
+                        selected.parentElement.classList.add('wrong-ans');
+                        trackBox.classList.add('wrong');
+                    }
+                } else {
+                    trackBox.classList.add('wrong'); // Unanswered
+                }
+                
+                // Show Explanation
+                const expDiv = document.getElementById(`exp-${i}`);
+                if (expDiv && giaiThich[i]) {
+                    expDiv.innerHTML = `<strong>💡 Giải thích:</strong> ${giaiThich[i]}`;
+                    expDiv.style.display = 'block';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
