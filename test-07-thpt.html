@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đề Số 07 - KỲ THI THPT QUỐC GIA (Cấu trúc 2026)</title>
+    <style>
+        :root {
+            --primary: #1e90ff;
+            --success: #2ed573;
+            --danger: #ff4757;
+            --hover-bg: #e0f7fa;
+            --bg-color: #f4f7f6;
+            --highlight: yellow;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            padding-bottom: 80px; 
+            background-color: var(--bg-color);
+            color: #333;
+        }
+        .header {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .header h2, .header h3 { margin: 5px 0; }
+        
+        .timer {
+            position: fixed;
+            top: 15px;
+            right: 20px;
+            background: var(--danger);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        /* Hiệu ứng chớp nháy cảnh báo gần hết giờ */
+        @keyframes flashWarning {
+            0% { background-color: var(--danger); color: white; transform: scale(1); }
+            50% { background-color: #ffeb3b; color: #d32f2f; transform: scale(1.1); box-shadow: 0 0 15px #ffeb3b; }
+            100% { background-color: var(--danger); color: white; transform: scale(1); }
+        }
+        .timer.warning {
+            animation: flashWarning 1s infinite;
+        }
+
+        /* Layout */
+        .part-container {
+            display: flex;
+            margin: 15px auto;
+            width: 98%;
+            height: 85vh; 
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .left-pane {
+            width: 55%;
+            padding: 20px;
+            overflow-y: auto;
+            border-right: 2px solid #eee;
+            background-color: #fafafa;
+        }
+        .right-pane {
+            width: 45%;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #fff;
+        }
+
+        /* Typography & Effects */
+        .text-content {
+            font-size: 16px;
+            line-height: 1.8;
+        }
+        .text-content p, .text-content span {
+            padding: 3px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .text-content p:hover, .text-content span:hover {
+            background-color: var(--hover-bg);
+            cursor: text;
+        }
+        .highlight {
+            background-color: var(--highlight);
+        }
+
+        /* Questions */
+        .question-block {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #ccc;
+        }
+        .question-text {
+            font-weight: bold;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+        .options label {
+            display: block;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 1px solid #f0f0f0;
+            transition: 0.2s;
+        }
+        .options label:hover {
+            background-color: #f8f9fa;
+        }
+        .options input { margin-right: 10px; transform: scale(1.1); }
+        
+        .correct-ans {
+            background-color: var(--success) !important;
+            color: white;
+            font-weight: bold;
+            border-color: var(--success) !important;
+        }
+        .wrong-ans {
+            background-color: var(--danger) !important;
+            color: white;
+            border-color: var(--danger) !important;
+        }
+
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            background-color: var(--hover-bg);
+            border-left: 5px solid var(--primary);
+            border-radius: 4px;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        /* Sidebar Tracker */
+        .tracker-bar {
+            position: fixed;
+            bottom: 0; left: 0; width: 100%;
+            background: white;
+            padding: 15px;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-sizing: border-box;
+        }
+        .tracker-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            flex: 1;
+        }
+        .track-box {
+            width: 32px; height: 32px;
+            display: flex; justify-content: center; align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .track-box:hover { border-color: var(--primary); }
+        .track-box.active { background: var(--primary); color: white; border-color: var(--primary); }
+        .track-box.correct { background: var(--success); color: white; border-color: var(--success); }
+        .track-box.wrong { background: var(--danger); color: white; border-color: var(--danger); }
+        
+        .submit-btn {
+            padding: 12px 25px;
+            background: var(--success);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-left: 20px;
+            transition: 0.3s;
+        }
+        .submit-btn:hover { background: #26b360; }
+
+        /* Modal Popup */
+        .modal-overlay {
+            display: none;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 2000;
+            justify-content: center; align-items: center;
+        }
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            width: 400px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            animation: popIn 0.3s ease-out;
+        }
+        @keyframes popIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .modal-content h2 { color: #2f3542; margin-top: 0; font-size: 28px;}
+        .modal-content p { font-size: 18px; margin: 15px 0; color: #57606f;}
+        .score-display { font-size: 36px; font-weight: bold; color: var(--primary); margin: 20px 0; }
+        .modal-btns { margin-top: 30px; display: flex; justify-content: space-around; }
+        .modal-btns button {
+            padding: 12px 20px; border: none; border-radius: 6px;
+            font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.2s;
+        }
+        .btn-view { background: var(--primary); color: white; }
+        .btn-view:hover { background: #187bcd; }
+        .btn-redo { background: var(--danger); color: white; }
+        .btn-redo:hover { background: #e03e4d; }
+
+        u, b { font-weight: bold; }
+        u { text-decoration: underline; }
+
+        /* ========================================================
+           BỔ SUNG CSS RESPONSIVE CHO MÀN HÌNH ĐIỆN THOẠI / TABLET 
+           (BẮT BUỘC ĐẶT Ở DƯỚI CÙNG)
+           ======================================================== */
+        @media (max-width: 992px) {
+            body { padding-bottom: 140px; }
+            .part-container { flex-direction: column; height: auto; width: 100%; box-sizing: border-box; }
+            .left-pane, .right-pane { width: 100%; height: auto; border-right: none; box-sizing: border-box; }
+            .left-pane { border-bottom: 2px dashed #ccc; }
+            .tracker-bar { flex-direction: column; padding: 10px; }
+            .tracker-grid { flex-wrap: nowrap; overflow-x: auto; width: 100%; padding-bottom: 10px; }
+            .track-box { flex-shrink: 0; }
+            .submit-btn { width: 100%; margin-left: 0; margin-top: 5px; }
+            .tracker-grid::-webkit-scrollbar { height: 5px; }
+            .tracker-grid::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="timer" id="timer">⏳ 50:00</div>
+
+    <div class="header">
+        <h2>ĐỀ SỐ 07 - KỲ THI THPT QUỐC GIA</h2>
+        <h3>Môn thi: TIẾNG ANH</h3>
+        <p><strong>Giáo viên: NGUYỄN THỊ THU DUYÊN - Zalo: 0918204603</strong></p>
+    </div>
+
+    <!-- PART 1 -->
+    <div class="part-container">
+        <div class="left-pane text-content">
+            <p><strong>Read the following advertisement and mark the letter A, B, C, or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 1 to 6.</strong></p>
+            <p>Thirsty for something refreshing? Coca-Cola has the perfect (1) ______ for you. Whether you're relaxing at home or out with friends, Coca-Cola offers the (2) ______. With its crisp, bold taste, it's the perfect companion for any moment. Feeling tired? Grab an ice-cold Coke to (3) ______ your energy. Want to celebrate? Share a Coca-Cola with loved ones to create memories. Its unique flavor, (4) ______ by millions, has made Coca-Cola a global favorite (5) ______ over a century. There's a Coke for everyone, and now you can sip it at anytime, anywhere. Choose Coca-Cola and taste the difference! Every sip is a moment of refreshment that keeps you (6) ______ back for more.</p>
+        </div>
+        <div class="right-pane" id="questions-part-1"></div>
+    </div>
+
+    <!-- PART 2 -->
+    <div class="part-container">
+        <div class="left-pane text-content">
+            <p><strong>Read the following leaflet and mark the letter A, B, C, or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 7 to 12.</strong></p>
+            <p style="text-align: center; font-size: 18px;"><strong>Stay Safe: Preventing the Flu Epidemic</strong></p>
+            <p><strong>What is the flu epidemic?</strong><br>
+            The flu epidemic is a contagious viral (7) ______ that affects the respiratory system. Every year, millions of people worldwide are impacted, leading to severe health issues and hospitalizations.</p>
+            <p><strong>Why it matters</strong><br>
+            When flu season arrives, it's essential to take precautions. If not managed effectively, the flu can (8) ______ into a widespread epidemic, putting vulnerable populations at risk. The (9) ______ of flu cases can surge dramatically during peak season, leading to increased hospital visits and strain on healthcare systems. It's vital to stay informed and take preventative measures.</p>
+            <p><strong>How to prevent the flu</strong><br>
+            • Get vaccinated: The flu vaccine is the most effective way to protect yourself and (10) ______. It's recommended to get vaccinated annually.<br>
+            • Stay home when sick: If you experience flu (11) ______, stay home to prevent spreading the virus to those around you.<br>
+            • Follow guidelines: (12) ______ your health status, everyone should follow health guidelines to minimize the risk of flu transmission.</p>
+        </div>
+        <div class="right-pane" id="questions-part-2"></div>
+    </div>
+
+    <!-- PART 3 -->
+    <div class="part-container">
+        <div class="left-pane text-content">
+            <p><strong>Mark the letter A, B, C, or D on your answer sheet to indicate the best arrangement of utterances or sentences to make a meaningful exchange or text in each of the following questions from 13 to 17.</strong></p>
+            
+            <p><strong>Question 13.</strong><br>
+            a. Anna: I mostly do Hatha yoga; it's perfect for beginners and really focuses on breathing and relaxation.<br>
+            b. Anna: I've started doing yoga every morning, and it's amazing how much it helps with my stress levels.<br>
+            c. Sarah: That sounds great! What kind of yoga do you practice?</p>
+            
+            <p><strong>Question 14.</strong><br>
+            a. Michael: That's true, and I think practicing with a native speaker could really help!<br>
+            b. Kim: I know it can be challenging, but I heard that once you get the hang of the tones, it becomes easier.<br>
+            c. Michael: I've been thinking about learning Chinese, but it seems so difficult with all the characters!<br>
+            d. Kim: That sounds perfect! I'll join you, and we can practice together.<br>
+            e. Michael: Absolutely! I found some great online resources and language exchange partners.</p>
+
+            <p><strong>Question 15.</strong><br>
+            Hi Susan,<br>
+            a. I hope you had a great time with everyone, and I promise to make it up to you soon.<br>
+            b. Please forgive me for not being there. I've been overwhelmed with work and completely lost track of time.<br>
+            c. I feel terrible about missing your birthday party last weekend.<br>
+            d. It was really irresponsible of me not to let you know earlier that I couldn't make it.<br>
+            e. Let's catch up sometime this week if you're free,<br>
+            Alex</p>
+
+            <p><strong>Question 16.</strong><br>
+            a. Over the past few years, I've journeyed to various parts of the world, from the bustling streets of Tokyo to the serene beaches of Bali.<br>
+            b. My love for adventure and curiosity about different ways of life have fueled my desire to explore, making each trip more rewarding than the last.<br>
+            c. Traveling to new countries and experiencing diverse cultures has always been my greatest passion.<br>
+            d. Each destination offers unique adventures, whether it's sampling street food, exploring historical sites, or connecting with locals who share their stories.<br>
+            e. In conclusion, being a globetrotter not only enriches my life but also broadens my perspective, reminding me of the beauty of our diverse world.</p>
+
+            <p><strong>Question 17.</strong><br>
+            a. Despite these issues, the allure of exploring new places and experiencing different cultures continues to attract millions of travelers each year.<br>
+            b. This surge in tourism has also encouraged local businesses, from restaurants to souvenir shops, to flourish, thereby boosting the local economy.<br>
+            c. However, with increased foot traffic comes challenges, such as overcrowding and strain on infrastructure.<br>
+            d. Tourism has become a vital part of many economies around the world, offering countless opportunities for growth and development.<br>
+            e. In recent years, popular destinations have seen a significant increase in visitors, leading to a vibrant atmosphere filled with cultural exchanges.</p>
+        </div>
+        <div class="right-pane" id="questions-part-3"></div>
+    </div>
+
+    <!-- PART 4 -->
+    <div class="part-container">
+        <div class="left-pane text-content">
+            <p><strong>Read the following passage about humanoid robots and mark the letter A, B, C, or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 18 to 22.</strong></p>
+            <p>Cristiano Ronaldo, one of the greatest football players of all time, (18) ______. Born on February 5, 1985, in Funchal, Madeira, Portugal, he showed exceptional talent from a young age. His journey began at Sporting Lisbon, (19) ______. There, he developed into a formidable player, winning multiple Premier League titles and the coveted UEFA Champions League.</p>
+            <p>During his time at Manchester United, Ronaldo developed into a world-class player, winning three Premier League titles and the UEFA Champions League. He became known for his incredible speed and powerful shots, qualities that made him a formidable opponent on the pitch. In 2009, he transferred to Real Madrid, where he broke numerous records, including becoming the club's all-time leading scorer. (20) ______. Possessing remarkable athleticism and a keen sense of strategy, (21) ______. His training regimen, which includes intense workouts and a strict diet, ensures that he remains at peak performance. This dedication has allowed him to adapt his playing style over the years, maintaining his relevance in an ever-evolving sport. Additionally, Ronaldo's ability to lead his teammates has earned him respect both on and off the field.</p>
+            <p>Beyond his football career, Ronaldo is a philanthropist who uses his platform to give back to the community. (22) ______. His influence extends far beyond the pitch, making him a global icon and a role model for aspiring athletes. Ultimately, Cristiano Ronaldo's legacy is defined not only by his records but also by his commitment to making a positive impact in the world.</p>
+        </div>
+        <div class="right-pane" id="questions-part-4"></div>
+    </div>
+
+    <!-- PART 5 -->
+    <div class="part-container">
+        <div class="left-pane text-content">
+            <p><strong>Read the following passage about endangered languages and mark the letter A, B, C or D on your answer sheet to indicate the best answer to each of the following questions from 23 to 30.</strong></p>
+            <p>In an era marked by climate change and environmental degradation, adopting green living habits has become increasingly <b><u>vital</u></b>. Green living refers to a lifestyle that seeks to minimize one's ecological footprint through conscious choices in daily activities. This can include everything from reducing waste to conserving energy and using sustainable products. As more individuals recognize the importance of preserving our planet, the movement toward greener practices continues to gain momentum.</p>
+            <p>One of the most significant aspects of green living is its focus on sustainability. <u><b>By choosing products that are eco-friendly, consumers can support businesses that prioritize environmental responsibility.</b></u> For instance, using reusable bags, bottles, and containers reduces plastic waste and promotes a circular economy. Furthermore, opting for locally sourced foods not only supports local farmers but also decreases the carbon emissions associated with transportation.</p>
+            <p>When green living habits are adopted, they can lead to profound changes in our environment. By reducing <b><u>their</u></b> energy consumption through the use of energy-efficient appliances, individuals help lower greenhouse gas emissions. Consequently, this contributes to cleaner air and mitigates the effects of climate change. Moreover, by practicing water conservation methods, such as fixing leaks and using low-flow fixtures, households can significantly decrease water waste, promoting the sustainable use of this precious resource.</p>
+            <p>In conclusion, educating individuals about green living habits is crucial for promoting a more sustainable future. Schools and community organizations can offer workshops and resources that highlight the benefits of eco-friendly practices. Additionally, social media campaigns can raise awareness and encourage people to share their experiences with sustainable living. By <b><u>empowering</u></b> individuals to make informed choices, we can collectively work toward a healthier planet for generations to come.</p>
+        </div>
+        <div class="right-pane" id="questions-part-5"></div>
+    </div>
+
+    <!-- PART 6 -->
+    <div class="part-container">
+        <div class="left-pane text-content">
+            <p><strong>Read the following passage about the urban shift and mark the letter A, B, C or D on your answer sheet to indicate the best answer to each of the following questions from 31 to 40.</strong></p>
+            <p><strong>[I]</strong> In today's globalized world, cultural diversity has become a fundamental aspect of many societies. <strong>[II]</strong> Many countries are experiencing increasing levels of migration. <strong>[III]</strong> With the rise of immigration and the blending of traditions, people from various cultural backgrounds are now living side by side in cities across the globe. <strong>[IV]</strong></p>
+            <p>One of the key advantages of cultural diversity is the richness <b><u>it</u></b> adds to a society. Different cultures introduce unique perspectives, foods, languages, and traditions, which help people broaden their understanding of the world. In schools and workplaces, cultural diversity fosters creativity and innovation, as individuals from different backgrounds approach problems in <b><u>novel</u></b> ways. However, there are also challenges associated with living in culturally diverse communities. Misunderstandings and communication barriers can arise when people are unfamiliar with each other's customs and values. To address these issues, societies must encourage cultural sensitivity and create opportunities for cross-cultural exchange.</p>
+            <p>Governments and institutions around the world are beginning to implement policies that promote inclusion and respect for cultural differences. <u><b>By celebrating diversity through events, education, and media representation, communities can create environments where people feel valued regardless of their background.</b></u> Ultimately, embracing cultural diversity helps to build more peaceful and <b><u>harmonious</u></b> societies.</p>
+        </div>
+        <div class="right-pane" id="questions-part-6"></div>
+    </div>
+
+    <!-- Sidebar Tracker -->
+    <div class="tracker-bar">
+        <div class="tracker-grid" id="tracker-grid"></div>
+        <button class="submit-btn" onclick="submitExam()">NỘP BÀI THI</button>
+    </div>
+
+    <!-- Modal Popup -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-content">
+            <h2>Kết Quả Bài Thi</h2>
+            <div class="score-display" id="score-text">0 / 40</div>
+            <p>Số câu bỏ trống: <strong id="unanswered-count" style="color:var(--danger)">0</strong></p>
+            <div class="modal-btns">
+                <button class="btn-view" onclick="viewAnswers()">XEM ĐÁP ÁN</button>
+                <button class="btn-redo" onclick="location.reload()">LÀM LẠI BÀI</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dữ liệu Đáp án
+        const dapAn = {
+            1: 'C', 2: 'A', 3: 'B', 4: 'D', 5: 'B', 6: 'B', 7: 'A', 8: 'C', 9: 'A', 10: 'B',
+            11: 'D', 12: 'B', 13: 'B', 14: 'A', 15: 'D', 16: 'D', 17: 'D', 18: 'A', 19: 'B', 20: 'C',
+            21: 'D', 22: 'D', 23: 'C', 24: 'B', 25: 'C', 26: 'D', 27: 'D', 28: 'B', 29: 'C', 30: 'D',
+            31: 'D', 32: 'C', 33: 'C', 34: 'C', 35: 'A', 36: 'B', 37: 'B', 38: 'D', 39: 'A', 40: 'C'
+        };
+
+        const giaiThich = {
+            1: "C. solution: Coca-Cola có 'giải pháp' hoàn hảo (perfect solution) cho bạn.",
+            2: "A. ideal drink experience: Trật tự danh từ ghép 'trải nghiệm đồ uống lý tưởng'.",
+            3: "B. boost: Cụm từ 'boost your energy' (tăng cường năng lượng).",
+            4: "D. loved: Rút gọn mệnh đề quan hệ dạng bị động (which is loved -> loved).",
+            5: "B. for: 'for over a century' (trong hơn một thế kỷ).",
+            6: "B. coming: 'keeps you coming back' (khiến bạn quay trở lại).",
+            7: "A. infection: 'viral infection' (sự lây nhiễm virus).",
+            8: "C. break out: 'break out into an epidemic' (bùng phát thành dịch bệnh).",
+            9: "A. number: 'The number of flu cases' (Số lượng các ca cúm - danh từ đếm được).",
+            10: "B. others: 'others' thay thế cho những người khác nói chung.",
+            11: "D. symptoms: 'flu symptoms' (triệu chứng bệnh cúm).",
+            12: "B. Regardless of: 'Regardless of your health status' (Bất kể tình trạng sức khỏe của bạn).",
+            13: "B. b-c-a: Anna khoe mới tập yoga (b) -> Sarah hỏi loại yoga nào (c) -> Anna trả lời Hatha yoga (a).",
+            14: "A. c-b-a-d-e: Michael than học tiếng Trung khó (c) -> Kim động viên (b) -> Michael đồng tình (a) -> Kim rủ học chung (d) -> Michael hào hứng đồng ý (e).",
+            15: "D. c-a-d-b-e: Cảm thấy tệ vì lỡ sinh nhật (c) -> Hy vọng bạn vui (a) -> Nhận lỗi vô trách nhiệm (d) -> Xin tha thứ vì bận (b) -> Hẹn gặp (e).",
+            16: "D. c-a-d-b-e: Đam mê du lịch (c) -> Hành trình đã qua (a) -> Mỗi điểm đến có gì (d) -> Tình yêu phiêu lưu thúc đẩy (b) -> Kết luận (e).",
+            17: "D. d-e-b-c-a: Du lịch là phần quan trọng (d) -> Sự gia tăng du khách (e) -> Thúc đẩy kinh tế (b) -> Tuy nhiên có thách thức (c) -> Mặc dù vậy vẫn thu hút (a).",
+            18: "A. has made a significant impact on the sport: (Đã tạo ra tác động lớn đến môn thể thao).",
+            19: "B. where he honed his skills before moving to Manchester United in 2003: Sử dụng 'where' thay thế cho địa điểm.",
+            20: "C. Ronaldo's relentless drive and work ethic have inspired many young athletes...: Động lực và đạo đức nghề nghiệp đã truyền cảm hứng.",
+            21: "D. Ronaldo consistently demonstrates why he is considered one of the best players of all time.",
+            22: "D. He has donated millions of dollars to various charities, supporting causes...",
+            23: "C. Composting organic waste: Không được đề cập trong đoạn 1.",
+            24: "B. inessential: 'vital' (quan trọng, thiết yếu) trái nghĩa với 'inessential' (không cần thiết).",
+            25: "C. individuals: Đại từ 'their' thay thế cho 'individuals' (cá nhân) ở đầu câu.",
+            26: "D. enabling: 'empowering' (trao quyền, tạo điều kiện) đồng nghĩa với 'enabling'.",
+            27: "D. Choosing eco-friendly products allows consumers to back businesses that emphasize environmental stewardship: Paraphrase chuẩn nhất ý câu gạch chân.",
+            28: "B. Using reusable products can contribute to a decrease in plastic waste and promote sustainability: Dựa trên đoạn 2.",
+            29: "C. Paragraph 3: Đoạn 3 có mối quan hệ nguyên nhân - kết quả (When... they can lead to... Consequently...).",
+            30: "D. Paragraph 4: Đoạn 4 nhắc đến trường học, tổ chức, mạng xã hội để giáo dục (educating individuals).",
+            31: "D. [IV]: Câu 'This increasing diversity brings about both challenges and opportunities' tóm tắt ý chính hoàn hảo ở cuối đoạn 1.",
+            32: "C. original: 'novel' trong ngữ cảnh này nghĩa là mới lạ, độc đáo (original).",
+            33: "C. cultural diversity: Đại từ 'it' thay thế cho sự đa dạng văn hóa.",
+            34: "C. Preventing misunderstandings: Đây là thách thức, không phải lợi thế.",
+            35: "A. Governments are taking steps to ensure that cultural diversity is celebrated and respected.",
+            36: "B. hostile: 'harmonious' (hài hòa, hòa bình) trái nghĩa với 'hostile' (thù địch).",
+            37: "B. Misunderstandings in diverse communities arise due to unfamiliar customs: Dựa vào đoạn 2.",
+            38: "D. Communities can create inclusive environments by encouraging cultural events and education: Paraphrase chuẩn ý câu gạch chân.",
+            39: "A. Cultural diversity can be both an asset and a challenge for communities.",
+            40: "C. Cultural diversity enriches societies by promoting new perspectives and innovation, but it also requires efforts..."
+        };
+
+        const questionsData = {
+            part1: [
+                {id: 1, ops: ["A. solve", "B. solver", "C. solution", "D. solvable"]},
+                {id: 2, ops: ["A. ideal drink experience", "B. ideal experience drink", "C. experience ideal drink", "D. drink experience ideal"]},
+                {id: 3, ops: ["A. grow", "B. boost", "C. raise", "D. cope"]},
+                {id: 4, ops: ["A. which loved", "B. loving", "C. was loved", "D. loved"]},
+                {id: 5, ops: ["A. in", "B. for", "C. on", "D. by"]},
+                {id: 6, ops: ["A. to coming", "B. coming", "C. come", "D. to come"]}
+            ],
+            part2: [
+                {id: 7, ops: ["A. infection", "B. injury", "C. sickness", "D. ailment"]},
+                {id: 8, ops: ["A. bring up", "B. take over", "C. break out", "D. call off"]},
+                {id: 9, ops: ["A. number", "B. level", "C. amount", "D. quality"]},
+                {id: 10, ops: ["A. other", "B. others", "C. another", "D. the other"]},
+                {id: 11, ops: ["A. patterns", "B. features", "C. signals", "D. symptoms"]},
+                {id: 12, ops: ["A. In view of", "B. Regardless of", "C. Rather than", "D. On account of"]}
+            ],
+            part3: [
+                {id: 13, ops: ["A. a-c-b", "B. b-c-a", "C. c-b-a", "D. a-c-b"]},
+                {id: 14, ops: ["A. c-b-a-d-e", "B. e-c-d-b-a", "C. d-b-a-c-e", "D. d-e-a-b-c"]},
+                {id: 15, ops: ["A. d-b-a-e-c", "B. b-e-a-d-c", "C. a-d-b-c-e", "D. c-a-d-b-e"]},
+                {id: 16, ops: ["A. d-b-a-c-e", "B. a-b-c-d-e", "C. b-c-d-e-a", "D. c-a-d-b-e"]},
+                {id: 17, ops: ["A. d-b-c-a-e", "B. d-c-a-b-e", "C. d-a-e-b-c", "D. d-e-b-c-a"]}
+            ],
+            part4: [
+                {id: 18, ops: ["A. has made a significant impact on the sport", "B. impacting significantly on the sport", "C. of whom significant impact on the sport", "D. that has his significant impact on the sport recognized"]},
+                {id: 19, ops: ["A. refining his skills there before making the move to Manchester United in 2003", "B. where he honed his skills before moving to Manchester United in 2003", "C. aided him in polishing his skills before transferring to Manchester United in 2003", "D. of which his skills were honed before signing with Manchester United in 2003"]},
+                {id: 20, ops: ["A. Young athletes have inspired Ronaldo to strengthen his relentless drive and work ethic", "B. The relentless drive and work ethic of Ronaldo have forced many young fans to become footballers", "C. Ronaldo's relentless drive and work ethic have inspired many young athletes who aspire to follow his footsteps", "D. Aiming to encourage young athletes to become footballers, Ronaldo trained hard and shared his experiences with them."]},
+                {id: 21, ops: ["A. The label of one of the all-time best players is attributed to Ronaldo", "B. Experts consistently regard Ronaldo as one of the greatest players of all time", "C. Achieving the title of the best player of all time is a simple feat for Ronaldo", "D. Ronaldo consistently demonstrates why he is considered one of the best players of all time"]},
+                {id: 22, ops: ["A. Various charities would definitely struggle to support causes like children's hospitals and disaster relief efforts without Ronaldo's contributions", "B. His millions of dollars serve as an aid to causes like children's hospitals and disaster relief efforts", "C. Spending millions of dollars, various charities can support causes such as children's hospitals and disaster relief efforts on behalf of Ronaldo", "D. He has donated millions of dollars to various charities, supporting causes such as children's hospitals and disaster relief efforts"]}
+            ],
+            part5: [
+                {id: 23, text: "Which of the following is NOT mentioned as one of the green living practices?", ops: ["A. Reducing waste", "B. Conserving energy", "C. Composting organic waste", "D. Using sustainable products"]},
+                {id: 24, text: "The word \"vital\" in paragraph 1 is OPPOSITE in meaning to", ops: ["A. imperfect", "B. inessential", "C. important", "D. crucial"]},
+                {id: 25, text: "The word \"their\" in paragraph 3 refers to", ops: ["A. green living habits", "B. profound changes", "C. individuals", "D. energy-efficient appliances"]},
+                {id: 26, text: "The word \"empowering\" in paragraph 4 could be best replaced by", ops: ["A. prohibiting", "B. abandoning", "C. forbidding", "D. enabling"]},
+                {id: 27, text: "Which of the following best paraphrases the underlined sentence in paragraph 2?", ops: ["A. Opting for eco-friendly products may distract consumers from recognizing businesses that neglect environmental responsibility.", "B. By purchasing items that are harmful to the planet, consumers can inadvertently encourage businesses that do not care about environmental issues.", "C. When consumers select non-eco-friendly products, they undermine companies committed to environmental responsibility.", "D. Choosing eco-friendly products allows consumers to back businesses that emphasize environmental stewardship."]},
+                {id: 28, text: "Which of the following is TRUE according to the passage?", ops: ["A. Green living exclusively focuses on reducing energy consumption and does not address waste management.", "B. Using reusable products can contribute to a decrease in plastic waste and promote sustainability.", "C. The movement toward greener practices has lost momentum as fewer individuals recognize the importance of preserving the planet.", "D. Teaching people about green living practices is not essential for promoting a sustainable future."]},
+                {id: 29, text: "In which paragraph does the writer mention a present causal relationship?", ops: ["A. Paragraph 1", "B. Paragraph 2", "C. Paragraph 3", "D. Paragraph 4"]},
+                {id: 30, text: "In which paragraph does the writer discuss methods for teaching people about eco-friendly living practices?", ops: ["A. Paragraph 1", "B. Paragraph 2", "C. Paragraph 3", "D. Paragraph 4"]}
+            ],
+            part6: [
+                {id: 31, text: "Where in paragraph 1 does the following sentence best fit?<br><i>\"This increasing diversity brings about both challenges and opportunities.\"</i>", ops: ["A. [I]", "B. [II]", "C. [III]", "D. [IV]"]},
+                {id: 32, text: "The word \"novel\" in paragraph 2 could best be replaced by", ops: ["A. customary", "B. common", "C. original", "D. flexible"]},
+                {id: 33, text: "The word \"it\" in paragraph 2 refers to", ops: ["A. society", "B. richness", "C. cultural diversity", "D. opportunity"]},
+                {id: 34, text: "According to paragraph 2, which of the following is NOT an advantage of cultural diversity?", ops: ["A. Promoting innovation", "B. Enhancing creativity", "C. Preventing misunderstandings", "D. Expanding perspectives"]},
+                {id: 35, text: "Which of the following best summarizes paragraph 3?", ops: ["A. Governments are taking steps to ensure that cultural diversity is celebrated and respected.", "B. Policies that promote inclusion are reducing the challenges caused by cultural diversity.", "C. Celebrating cultural diversity creates more harmonious and peaceful societies.", "D. Promoting cross-cultural exchange helps societies overcome the challenges of diversity."]},
+                {id: 36, text: "The word \"harmonious\" in paragraph 3 is OPPOSITE in meaning to", ops: ["A. adaptable", "B. hostile", "C. friendly", "D. freezing"]},
+                {id: 37, text: "Which of the following is TRUE according to the passage?", ops: ["A. Cultural diversity mainly benefits societies by creating job opportunities.", "B. Misunderstandings in diverse communities arise due to unfamiliar customs.", "C. Governments have not yet addressed the challenges posed by cultural diversity.", "D. Cross-cultural exchange programs are unnecessary for promoting inclusion."]},
+                {id: 38, text: "Which of the following best paraphrases the underlined sentence in paragraph 3?", ops: ["A. Celebrating diversity alone cannot solve the issues in culturally diverse communities.", "B. Understanding cultural diversity fully is necessary for harmonious societies.", "C. Misunderstandings will persist without education about different cultures.", "D. Communities can create inclusive environments by encouraging cultural events and education."]},
+                {id: 39, text: "Which of the following can be inferred from the passage?", ops: ["A. Cultural diversity can be both an asset and a challenge for communities.", "B. Governments are failing to address the complexities of cultural diversity.", "C. Cultural sensitivity programs are ineffective in reducing communication barriers.", "D. Increased immigration automatically leads to social harmony."]},
+                {id: 40, text: "Which of the following best summarizes the passage?", ops: ["A. Embracing cultural diversity is easy for societies that celebrate traditions and language differences without the need for cross-cultural exchange.", "B. Immigration has led to challenges for societies that can only be solved by eliminating cultural differences.", "C. Cultural diversity enriches societies by promoting new perspectives and innovation, but it also requires efforts to overcome misunderstandings and communication barriers.", "D. Governments should focus on reducing immigration to prevent the problems associated with cultural diversity."]}
+            ]
+        };
+
+        // Render Questions HTML
+        function renderQuestions(partData, containerId) {
+            const container = document.getElementById(containerId);
+            partData.forEach(q => {
+                let optionsHTML = '';
+                q.ops.forEach(opt => {
+                    const val = opt.charAt(0);
+                    optionsHTML += `<label><input type="radio" name="q${q.id}" value="${val}"> ${opt}</label>`;
+                });
+                
+                const qText = q.text ? `<div class="question-text">Question ${q.id}: ${q.text}</div>` : `<div class="question-text">Question ${q.id}:</div>`;
+
+                container.innerHTML += `
+                    <div class="question-block" id="q-block-${q.id}">
+                        ${qText}
+                        <div class="options">
+                            ${optionsHTML}
+                        </div>
+                        <div class="explanation" id="exp-${q.id}"></div>
+                    </div>
+                `;
+            });
+        }
+
+        renderQuestions(questionsData.part1, 'questions-part-1');
+        renderQuestions(questionsData.part2, 'questions-part-2');
+        renderQuestions(questionsData.part3, 'questions-part-3');
+        renderQuestions(questionsData.part4, 'questions-part-4');
+        renderQuestions(questionsData.part5, 'questions-part-5');
+        renderQuestions(questionsData.part6, 'questions-part-6');
+
+        // Initialize Tracker
+        const trackerGrid = document.getElementById('tracker-grid');
+        for (let i = 1; i <= 40; i++) {
+            trackerGrid.innerHTML += `<div class="track-box" id="track-${i}" onclick="scrollToQ(${i})">${i}</div>`;
+        }
+
+        function scrollToQ(id) {
+            document.getElementById(`q-block-${id}`).scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        document.querySelectorAll('input[type=radio]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                if(isSubmitted) return;
+                const qNum = this.name.replace('q', '');
+                document.getElementById(`track-${qNum}`).classList.add('active');
+            });
+        });
+
+        // Persistent Text Highlight Logic
+        document.addEventListener('mouseup', function(e) {
+            if (e.target.closest('.text-content')) {
+                let selection = window.getSelection();
+                if (selection.toString().trim().length > 0) {
+                    try {
+                        let range = selection.getRangeAt(0);
+                        let span = document.createElement('span');
+                        span.className = 'highlight';
+                        range.surroundContents(span);
+                        selection.removeAllRanges();
+                    } catch (error) {
+                        console.log("Cannot highlight across multiple tags.");
+                    }
+                }
+            }
+        });
+
+        /* --- TÍNH NĂNG ÂM THANH & ĐẾM NGƯỢC --- */
+        let timeLeft = 50 * 60; // 50 minutes
+        const timerEl = document.getElementById('timer');
+        let audioCtx; 
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        function playBeep(isLong = false) {
+            initAudio();
+            if(audioCtx.state === 'suspended') audioCtx.resume();
+
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(1000, audioCtx.currentTime); 
+            gainNode.gain.setValueAtTime(0.5, audioCtx.currentTime); 
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            
+            oscillator.start();
+            oscillator.stop(audioCtx.currentTime + (isLong ? 0.8 : 0.2)); 
+        }
+
+        document.body.addEventListener('click', initAudio, { once: true });
+
+        // Logic Đồng Hồ Đếm Ngược
+        let timerInterval = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                timerEl.classList.remove('warning');
+                timerEl.innerText = `⏳ 00:00`;
+                submitExam();
+                return;
+            }
+
+            timeLeft--;
+            let m = Math.floor(timeLeft / 60);
+            let s = timeLeft % 60;
+            timerEl.innerText = `⏳ ${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+
+            if (timeLeft <= 60 && timeLeft > 0) {
+                timerEl.classList.add('warning'); 
+
+                if (timeLeft === 60) {
+                    playBeep(true); 
+                } else if (timeLeft <= 10) {
+                    playBeep(false); 
+                }
+            }
+        }, 1000);
+
+        // Submission & Grading
+        let isSubmitted = false;
+        function submitExam() {
+            if (isSubmitted) return;
+            let answered = 0;
+            let score = 0;
+            
+            for (let i = 1; i <= 40; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                if (selected) {
+                    answered++;
+                    if (selected.value === dapAn[i]) score++;
+                }
+            }
+            
+            let unanswered = 40 - answered;
+            let finalPoint = (score * 0.25).toFixed(2);
+            document.getElementById('score-text').innerText = `${score} / 40 (${finalPoint}đ)`;
+            document.getElementById('unanswered-count').innerText = unanswered;
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function viewAnswers() {
+            isSubmitted = true;
+            document.getElementById('modal').style.display = 'none';
+            clearInterval(timerInterval);
+            timerEl.classList.remove('warning');
+            
+            for (let i = 1; i <= 40; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                const correctAns = dapAn[i];
+                const trackBox = document.getElementById(`track-${i}`);
+                const allLabels = document.querySelectorAll(`input[name="q${i}"]`);
+                
+                // Disable & Style radios
+                allLabels.forEach(radio => {
+                    radio.disabled = true;
+                    if (radio.value === correctAns) {
+                        radio.parentElement.classList.add('correct-ans');
+                    }
+                });
+                
+                // Grade & Tracker Update
+                trackBox.classList.remove('active');
+                if (selected) {
+                    if (selected.value === correctAns) {
+                        trackBox.classList.add('correct');
+                    } else {
+                        selected.parentElement.classList.add('wrong-ans');
+                        trackBox.classList.add('wrong');
+                    }
+                } else {
+                    trackBox.classList.add('wrong'); 
+                }
+                
+                // Show Explanation
+                const expDiv = document.getElementById(`exp-${i}`);
+                if (expDiv && giaiThich[i]) {
+                    expDiv.innerHTML = `<strong>💡 Giải thích:</strong> ${giaiThich[i]}`;
+                    expDiv.style.display = 'block';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
