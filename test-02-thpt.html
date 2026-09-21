@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ĐỀ SỐ 02 - KỲ THI THPT QUỐC GIA</title>
+    <title>Đề Số 02 - THPT Quốc Gia Môn Tiếng Anh (Cấu trúc 2026)</title>
     <style>
         :root {
             --primary: #1e90ff;
@@ -28,8 +28,7 @@
             margin-bottom: 10px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        .header h2, .header h3, .header p { margin: 5px 0; }
-        .header h2 { color: #d32f2f; }
+        .header h2, .header h3 { margin: 5px 0; }
         
         .timer {
             position: fixed;
@@ -45,7 +44,7 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
-        /* Split Layout */
+        /* Layout */
         .part-container {
             display: flex;
             margin: 15px auto;
@@ -72,7 +71,7 @@
 
         /* Typography & Effects */
         .text-content {
-            font-size: 16.5px;
+            font-size: 16px;
             line-height: 1.8;
         }
         .text-content p {
@@ -83,7 +82,10 @@
         .text-content p:hover {
             background-color: var(--hover-bg);
         }
-        
+        .highlight {
+            background-color: var(--highlight);
+        }
+
         /* Questions */
         .question-block {
             margin-bottom: 25px;
@@ -94,11 +96,9 @@
             font-weight: bold;
             margin-bottom: 12px;
             font-size: 16px;
-            color: #1565C0;
         }
         .options label {
-            display: flex;
-            align-items: center;
+            display: block;
             padding: 10px;
             margin-bottom: 8px;
             border-radius: 6px;
@@ -109,7 +109,7 @@
         .options label:hover {
             background-color: #f8f9fa;
         }
-        .options input { margin-right: 12px; transform: scale(1.2); }
+        .options input { margin-right: 10px; }
         
         .correct-ans {
             background-color: var(--success) !important;
@@ -132,7 +132,6 @@
             border-radius: 4px;
             font-size: 15px;
             line-height: 1.5;
-            color: #0d47a1;
         }
 
         /* Sidebar Tracker */
@@ -171,7 +170,7 @@
         
         .submit-btn {
             padding: 12px 25px;
-            background: #ff9800;
+            background: var(--success);
             color: white;
             font-size: 16px;
             font-weight: bold;
@@ -180,9 +179,8 @@
             cursor: pointer;
             margin-left: 20px;
             transition: 0.3s;
-            text-transform: uppercase;
         }
-        .submit-btn:hover { background: #f57c00; box-shadow: 0 2px 8px rgba(255,152,0,0.4); }
+        .submit-btn:hover { background: #26b360; }
 
         /* Modal Popup */
         .modal-overlay {
@@ -191,14 +189,13 @@
             background: rgba(0,0,0,0.6);
             z-index: 2000;
             justify-content: center; align-items: center;
-            backdrop-filter: blur(3px);
         }
         .modal-content {
             background: white;
             padding: 40px;
             border-radius: 12px;
             text-align: center;
-            width: 420px;
+            width: 400px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             animation: popIn 0.3s ease-out;
         }
@@ -206,17 +203,77 @@
             from { transform: scale(0.8); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
-        .modal-content h2 { color: var(--primary); margin-top: 0; font-size: 24px;}
-        .score-display { font-size: 32px; font-weight: bold; color: var(--success); margin: 20px 0; }
-        .modal-btns { margin-top: 30px; display: flex; justify-content: space-around; gap: 15px;}
+        .modal-content h2 { color: #2f3542; margin-top: 0; font-size: 28px;}
+        .modal-content p { font-size: 18px; margin: 15px 0; color: #57606f;}
+        .score-display { font-size: 36px; font-weight: bold; color: var(--primary); margin: 20px 0; }
+        .modal-btns { margin-top: 30px; display: flex; justify-content: space-around; }
         .modal-btns button {
-            padding: 12px 20px; border: none; border-radius: 6px; flex: 1;
-            font-weight: bold; font-size: 15px; cursor: pointer; transition: 0.2s;
+            padding: 12px 20px; border: none; border-radius: 6px;
+            font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.2s;
         }
-        .btn-view { background: var(--success); color: white; }
-        .btn-view:hover { background: #388E3C; }
-        .btn-redo { background: #757575; color: white; }
-        .btn-redo:hover { background: #616161; }
+        .btn-view { background: var(--primary); color: white; }
+        .btn-view:hover { background: #187bcd; }
+        .btn-redo { background: var(--danger); color: white; }
+        .btn-redo:hover { background: #e03e4d; }
+
+        u, b { font-weight: bold; }
+        u { text-decoration: underline; }
+
+        /* ========================================================
+           BỔ SUNG CSS RESPONSIVE CHO MÀN HÌNH ĐIỆN THOẠI / TABLET 
+           ======================================================== */
+        @media (max-width: 992px) {
+            /* Xử lý phần thân trang để không bị lấp chữ */
+            body { 
+                padding-bottom: 140px; 
+            }
+            
+            /* Ép cấu trúc chia đôi thành cột dọc */
+            .part-container {
+                flex-direction: column;
+                height: auto;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .left-pane, .right-pane {
+                width: 100%;
+                height: auto;
+                border-right: none;
+                box-sizing: border-box;
+            }
+            .left-pane {
+                border-bottom: 2px dashed #ccc;
+            }
+
+            /* Sửa lỗi thanh Tracking che kín màn hình */
+            .tracker-bar { 
+                flex-direction: column; 
+                padding: 10px; 
+            }
+            .tracker-grid { 
+                flex-wrap: nowrap; 
+                overflow-x: auto; 
+                width: 100%; 
+                padding-bottom: 10px; 
+            }
+            .track-box { 
+                flex-shrink: 0; 
+            }
+            .submit-btn { 
+                width: 100%; 
+                margin-left: 0; 
+                margin-top: 5px; 
+            }
+            
+            /* Tùy chỉnh thanh cuộn ngang nhỏ gọn cho điện thoại */
+            .tracker-grid::-webkit-scrollbar {
+                height: 5px;
+            }
+            .tracker-grid::-webkit-scrollbar-thumb {
+                background: #ccc;
+                border-radius: 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -224,19 +281,18 @@
     <div class="timer" id="timer">⏳ 50:00</div>
 
     <div class="header">
-        <h2>ĐỀ SỐ 02</h2>
-        <h3>KỲ THI THPT QUỐC GIA</h3>
-        <p><b>Môn thi: TIẾNG ANH</b></p>
-        <p>Giáo viên: NGUYỄN THỊ THU DUYÊN- Zalo: 0918204603</p>
+        <h2>ĐỀ SỐ 02 - KỲ THI THPT QUỐC GIA</h2>
+        <h3>Môn thi: TIẾNG ANH</h3>
+        <p><strong>Giáo viên: NGUYỄN THỊ THU DUYÊN - Zalo: 0918204603</strong></p>
     </div>
 
     <!-- PART 1 -->
     <div class="part-container">
         <div class="left-pane text-content">
-            <p><b>Read the following advertisement about a new travel platform and mark the letter A, B, C or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 1 to 6.</b></p>
-            <h3 style="text-align:center;">DISCOVER NEW TRAVEL BUDDIES WITH TRAVELMATE</h3>
+            <p><strong>Read the following advertisement about a new travel platform and mark the letter A, B, C or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 1 to 6.</strong></p>
+            <p><strong>DISCOVER NEW TRAVEL BUDDIES WITH TRAVELMATE</strong></p>
             <p>"Who will you explore your next destination with? Will they share the same (1) ______ for adventure, or will they prefer a more relaxing trip?" If you often wonder (2) ______ your travel companions before your next vacation, we have exciting news for you! TravelMate, a (3) ______, allows you to select your future travel buddies before your trip. This service is designed to give you a more enjoyable and personalized experience. All you need to do is share your travel preferences with the platform, and you'll be matched with others (4) ______ similar tastes. Whether you're looking to make new friends or reconnect with previous ones, TravelMate (5) ______ it easy. If you're seeking adventure or simply want (6) ______ a relaxing getaway, there's a perfect match waiting for you!</p>
-            <p><i>(Adapted from Global Travel)</i></p>
+            <p><em>(Adapted from Global Travel)</em></p>
         </div>
         <div class="right-pane" id="questions-part-1"></div>
     </div>
@@ -244,15 +300,15 @@
     <!-- PART 2 -->
     <div class="part-container">
         <div class="left-pane text-content">
-            <p><b>Read the following leaflet and mark the letter A, B, C or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 7 to 12.</b></p>
-            <h3 style="text-align:center;">☑ EXPLORE CULTURAL DIVERSITY</h3>
+            <p><strong>Read the following leaflet and mark the letter A, B, C or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 7 to 12.</strong></p>
+            <p><strong>☑ EXPLORE CULTURAL DIVERSITY</strong></p>
             <p>Culture is the heart of every society, reflecting traditions, values, and creativity. By understanding different cultures, we enrich our perspectives and build connections with (7) ______. Whether through art, language, or celebrations, culture (8) ______ our identities and offers a window into the lives of others.</p>
-            <p><b>Why Embrace Cultural Diversity?</b><br>
-            <b>Celebrate Differences:</b> Every culture has unique traditions, from festivals and dances to foods and clothing. (9) ______ experiencing these, we gain a deeper appreciation of our global community.<br>
-            <b>Language as a Key:</b> Learning even a few words in another language can open (10) ______ to new friendships and understanding.<br>
-            <b>Art & Music:</b> Cultural (11) ______ in music, paintings, and performances are windows into a community's history and values.</p>
-            <p><b>Get Involved!</b><br>
-            Attend local cultural festivals. Try traditional cuisines from around the world. (12) ______ art and films from different countries. Celebrating culture brings us closer together.</p>
+            <p><strong>Why Embrace Cultural Diversity?</strong></p>
+            <p>Celebrate Differences: Every culture has unique traditions, from festivals and dances to foods and clothing. (9) ______ experiencing these, we gain a deeper appreciation of our global community.</p>
+            <p>Language as a Key: Learning even a few words in another language can open (10) ______ to new friendships and understanding.</p>
+            <p>Art & Music: Cultural (11) ______ in music, paintings, and performances are windows into a community's history and values.</p>
+            <p><strong>Get Involved!</strong></p>
+            <p>Attend local cultural festivals. Try traditional cuisines from around the world. (12) ______ art and films from different countries. Celebrating culture brings us closer together.</p>
         </div>
         <div class="right-pane" id="questions-part-2"></div>
     </div>
@@ -260,52 +316,42 @@
     <!-- PART 3 -->
     <div class="part-container">
         <div class="left-pane text-content">
-            <p><b>Mark the letter A, B, C or D on your answer sheet to indicate the best arrangement of utterances or sentences to make a meaningful exchange or text in each of the following questions from 13 to 17.</b></p>
+            <p><strong>Mark the letter A, B, C or D on your answer sheet to indicate the best arrangement of utterances or sentences to make a meaningful exchange or text in each of the following questions from 13 to 17.</strong></p>
             
-            <div style="margin-bottom: 20px;">
-                <p><b>Question 13:</b><br>
-                a. Mi: I'm fine, thanks. By the way, we moved to a new house in a suburb last month.<br>
-                b. Ann: Oh, that's why I haven't seen you in the Reading Club very often.<br>
-                c. Ann: Hi, Mi. Long time no see. How're you doing?</p>
-            </div>
+            <p><strong>Question 13:</strong><br>
+            a. Mi: I'm fine, thanks. By the way, we moved to a new house in a suburb last month.<br>
+            b. Ann: Oh, that's why I haven't seen you in the Reading Club very often.<br>
+            c. Ann: Hi, Mi. Long time no see. How're you doing?</p>
             
-            <div style="margin-bottom: 20px;">
-                <p><b>Question 14:</b><br>
-                a. John: I'm planning to visit Japan next summer.<br>
-                b. Mary: Why Japan?<br>
-                c. Mary: Have you already decided on the places you want to visit?<br>
-                d. John: I've always been fascinated by Japanese culture and history.<br>
-                e. Mary: That sounds amazing! I hope you enjoy the trip.</p>
-            </div>
+            <p><strong>Question 14:</strong><br>
+            a. John: I'm planning to visit Japan next summer.<br>
+            b. Mary: Why Japan?<br>
+            c. Mary: Have you already decided on the places you want to visit?<br>
+            d. John: I've always been fascinated by Japanese culture and history.<br>
+            e. Mary: That sounds amazing! I hope you enjoy the trip.</p>
 
-            <div style="margin-bottom: 20px;">
-                <p><b>Question 15:</b><br>
-                Hi John,<br>
-                a. It's fantastic that you've taken the time to recommend those cultural podcasts to me.<br>
-                b. I listened to the first one on ancient civilizations, and it was truly insightful.<br>
-                c. You know, maybe we could start a discussion group about these topics, what do you think?<br>
-                d. Thanks also for introducing me to those documentaries. They've been an amazing supplement to the podcasts!<br>
-                e. While I'm busy at the moment preparing for my exam, I'm eager to dive deeper into the content afterward.<br>
-                Write back soon, Emily</p>
-            </div>
+            <p><strong>Question 15:</strong><br>
+            Hi John,<br>
+            a. It's fantastic that you've taken the time to recommend those cultural podcasts to me.<br>
+            b. I listened to the first one on ancient civilizations, and it was truly insightful.<br>
+            c. You know, maybe we could start a discussion group about these topics, what do you think?<br>
+            d. Thanks also for introducing me to those documentaries. They've been an amazing supplement to the podcasts!<br>
+            e. While I'm busy at the moment preparing for my exam, I'm eager to dive deeper into the content afterward.<br>
+            Write back soon, Emily</p>
 
-            <div style="margin-bottom: 20px;">
-                <p><b>Question 16:</b><br>
-                a. While managing large teams and coordinating multiple tasks can be challenging, the sense of accomplishment when a project is completed successfully is truly rewarding.<br>
-                b. I started my journey in project management five years ago, where I quickly developed a passion for overseeing complex projects.<br>
-                c. My ability to communicate clearly with clients and colleagues is one of my greatest strengths in this role.<br>
-                d. I have honed my skills through various leadership training programs and by handling diverse projects across industries.<br>
-                e. In conclusion, my experience in leading teams and delivering results under tight deadlines has shaped me into a well-rounded project manager.</p>
-            </div>
+            <p><strong>Question 16:</strong><br>
+            a. While managing large teams and coordinating multiple tasks can be challenging, the sense of accomplishment when a project is completed successfully is truly rewarding.<br>
+            b. I started my journey in project management five years ago, where I quickly developed a passion for overseeing complex projects.<br>
+            c. My ability to communicate clearly with clients and colleagues is one of my greatest strengths in this role.<br>
+            d. I have honed my skills through various leadership training programs and by handling diverse projects across industries.<br>
+            e. In conclusion, my experience in leading teams and delivering results under tight deadlines has shaped me into a well-rounded project manager.</p>
 
-            <div style="margin-bottom: 20px;">
-                <p><b>Question 17:</b><br>
-                a. However, despite these advancements, the region still struggles with infrastructure challenges, as public transportation remains underdeveloped.<br>
-                b. Over the past decade, Greystone has undergone a remarkable transformation, shifting from a quiet suburban town to a vibrant hub of commercial activity.<br>
-                c. The influx of new residents has increased demand for housing, resulting in a rapid expansion of residential developments across the city.<br>
-                d. This economic growth has attracted businesses from tech startups to retail giants, significantly enhancing employment opportunities and boosting the local economy.<br>
-                e. The surge in population, along with the expansion of commercial sectors, has led to a noticeable strain on public services and transportation networks.</p>
-            </div>
+            <p><strong>Question 17:</strong><br>
+            a. However, despite these advancements, the region still struggles with infrastructure challenges, as public transportation remains underdeveloped.<br>
+            b. Over the past decade, Greystone has undergone a remarkable transformation, shifting from a quiet suburban town to a vibrant hub of commercial activity.<br>
+            c. The influx of new residents has increased demand for housing, resulting in a rapid expansion of residential developments across the city.<br>
+            d. This economic growth has attracted businesses from tech startups to retail giants, significantly enhancing employment opportunities and boosting the local economy.<br>
+            e. The surge in population, along with the expansion of commercial sectors, has led to a noticeable strain on public services and transportation networks.</p>
         </div>
         <div class="right-pane" id="questions-part-3"></div>
     </div>
@@ -313,8 +359,8 @@
     <!-- PART 4 -->
     <div class="part-container">
         <div class="left-pane text-content">
-            <p><b>Read the following passage about humanoid robots and mark the letter A, B, C or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 18 to 22.</b></p>
-            <p>The future of electric vehicles (EVs) is promising, as technological advancements and environmental concerns (18) ______. As governments worldwide implement stricter emissions regulations and offer incentives for EV adoption, manufacturers are investing heavily in research and development. (19) ______, resulting in longer ranges and faster charging times. For instance, new solid-state batteries have the potential to enhance energy density and safety, making EVs more practical for everyday use.</p>
+            <p><strong>Read the following passage about humanoid robots and mark the letter A, B, C or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 18 to 22.</strong></p>
+            <p>The future of electric vehicles (EVs) is promising, as technological advancements and environmental concerns (18) ______. As governments worldwide implement stricter emissions regulations and offer incentives for EV adoption, manufacturers are investing heavily in research and development. (19) ______ resulting in longer ranges and faster charging times. For instance, new solid-state batteries have the potential to enhance energy density and safety, making EVs more practical for everyday use.</p>
             <p>Additionally, the rise of autonomous driving technology is set to revolutionize the way we interact with vehicles. Many electric models are now equipped with advanced driver-assistance systems (20) ______. Furthermore, the integration of smart technology allows for seamless connectivity, enabling drivers to monitor their vehicle's performance and locate charging stations through mobile apps.</p>
             <p>As charging infrastructure continues to expand, (21) ______ the convenience of owning an EV is increasing. This transition to electric vehicles not only promises a reduction in carbon emissions but also fosters a cleaner, healthier environment. Overall, (22) ______ and sustainable transportation.</p>
         </div>
@@ -324,13 +370,13 @@
     <!-- PART 5 -->
     <div class="part-container">
         <div class="left-pane text-content">
-            <p><b>Read the following passage about endangered languages and mark the letter A, B, C or D on your answer sheet to indicate the best answer to each of the following questions from 23 to 30.</b></p>
+            <p><strong>Read the following passage about endangered languages and mark the letter A, B, C or D on your answer sheet to indicate the best answer to each of the following questions from 23 to 30.</strong></p>
             <p>Vietnamese cultural identity is a rich and intricate tapestry that reflects the nation's long and storied history. Rooted in over a thousand years of civilization, Vietnam's cultural identity is a fusion of <b><u>indigenous</u></b> traditions and external influences, shaped by its geographical location and historical interactions.</p>
             <p>First and foremost, at the heart of Vietnamese culture is a deep <b><u>reverence</u></b> for family and community. Confucian values emphasizing respect for elders, filial piety, and social harmony have played a pivotal role in shaping Vietnamese society. These values are reflected in the close-knit family structures, hierarchical relationships, and communal rituals that are integral to daily life.</p>
             <p>Secondly, Vietnamese cuisine is celebrated worldwide for its exquisite flavors and diversity. With its emphasis on fresh ingredients, fragrant herbs, and balanced flavors, Vietnamese food tells a story of the country's agricultural heritage and regional variations. Iconic dishes like pho, banh mi, and spring rolls have become global favorites, representing the culinary artistry deeply ingrained in Vietnamese culture.</p>
-            <p>Also, Vietnam's artistic expressions are equally captivating. Traditional art forms like water puppetry, silk painting, and folk music continue to thrive alongside contemporary artistic movements. <u>Áo dài, a graceful traditional dress, exemplifies the fusion of elegance and modesty in Vietnamese fashion, symbolizing cultural pride and identity.</u></p>
-            <p>Today, in the face of modernization and globalization, Vietnamese cultural identity remains resilient. While adapting to the challenges of the 21st century, the Vietnamese people continue to honor their traditions, celebrate <b><u>their</u></b> unique cultural expressions, and pass on their heritage to future generations, ensuring that their cultural identity remains vibrant and enduring.</p>
-            <p><i>(Adapted from Saigoneer)</i></p>
+            <p>Also, Vietnam's artistic expressions are equally captivating. Traditional art forms like water puppetry, silk painting, and folk music continue to thrive alongside contemporary artistic movements. <b><u>Áo dài, a graceful traditional dress, exemplifies the fusion of elegance and modesty in Vietnamese fashion, symbolizing cultural pride and identity.</u></b></p>
+            <p>Today, in the face of modernization and globalization, Vietnamese cultural identity remains resilient. While adapting to the challenges of the 21st century, the Vietnamese people continue to honor <b><u>their</u></b> traditions, celebrate their unique cultural expressions, and pass on their heritage to future generations, ensuring that their cultural identity remains vibrant and enduring.</p>
+            <p><em>(Adapted from Saigoneer)</em></p>
         </div>
         <div class="right-pane" id="questions-part-5"></div>
     </div>
@@ -338,12 +384,11 @@
     <!-- PART 6 -->
     <div class="part-container">
         <div class="left-pane text-content">
-            <p><b>Read the following passage about the urban shift and mark the letter A, B, C or D on your answer sheet to indicate the best answer to each of the following questions from 31 to 40.</b></p>
-            <p><b>[I]</b> Landslides are a significant environmental challenge in the northern mountainous provinces of Vietnam, particularly during the rainy season. The region, characterized by steep slopes and heavy rainfall, is <b><u>prone</u></b> to this natural disaster, which poses serious threats to both the local population and infrastructure.</p>
-            <p><b>[II]</b> In recent years, numerous landslides have occurred, often triggered by prolonged periods of heavy rain, resulting in devastating impacts on communities and livelihoods.</p>
-            <p>The mountainous terrain, combined with deforestation and improper land use, exacerbates the risk of landslides. <b>[III]</b> As farmers clear forests for agriculture, the natural vegetation that stabilizes the soil is lost, making slopes more <b><u>susceptible to</u></b> erosion. When heavy rains saturate the soil, <b><u>it</u></b> can quickly become unstable, leading to sudden and destructive landslides. <b>[IV]</b></p>
+            <p><strong>Read the following passage about the urban shift and mark the letter A, B, C or D on your answer sheet to indicate the best answer to each of the following questions from 31 to 40.</strong></p>
+            <p>[I] Landslides are a significant environmental challenge in the northern mountainous provinces of Vietnam, particularly during the rainy season. The region, characterized by steep slopes and heavy rainfall, is <b><u>prone</u></b> to this natural disaster, which poses serious threats to both the local population and infrastructure.</p>
+            <p>[II] In recent years, numerous landslides have occurred, often triggered by prolonged periods of heavy rain, resulting in devastating impacts on communities and livelihoods. The mountainous terrain, combined with deforestation and improper land use, exacerbates the risk of landslides. [III] As farmers clear forests for agriculture, the natural vegetation that stabilizes the soil is lost, making slopes more <b><u>susceptible to</u></b> erosion. When heavy rains saturate the soil, <b><u>it</u></b> can quickly become unstable, leading to sudden and destructive landslides. [IV]</p>
             <p>In response to this growing threat, local authorities and environmental organizations are taking proactive measures to mitigate the risks associated with landslides. Efforts include reforestation projects, improving drainage systems, and raising public awareness about safe practices during the rainy season. Additionally, advanced monitoring systems are being implemented to provide early warnings, allowing communities to evacuate before a disaster strikes.</p>
-            <p><u>Despite these efforts, the challenges remain significant</u>, and ongoing education and support for sustainable land management practices are crucial for reducing the incidence and impact of landslides in northern Vietnam.</p>
+            <p><b><u>Despite these efforts, the challenges remain significant,</u></b> and ongoing education and support for sustainable land management practices are crucial for reducing the incidence and impact of landslides in northern Vietnam.</p>
         </div>
         <div class="right-pane" id="questions-part-6"></div>
     </div>
@@ -351,74 +396,72 @@
     <!-- Sidebar Tracker -->
     <div class="tracker-bar">
         <div class="tracker-grid" id="tracker-grid"></div>
-        <button class="submit-btn" onclick="submitExam()">Nộp Bài Thi</button>
+        <button class="submit-btn" onclick="submitExam()">NỘP BÀI THI</button>
     </div>
 
     <!-- Modal Popup -->
     <div class="modal-overlay" id="modal">
         <div class="modal-content">
-            <h2>KẾT QUẢ BÀI LÀM</h2>
-            <div class="score-display" id="score-text">0/40 (0.00 điểm)</div>
+            <h2>Kết Quả Bài Thi</h2>
+            <div class="score-display" id="score-text">0 / 40</div>
             <p>Số câu bỏ trống: <strong id="unanswered-count" style="color:var(--danger)">0</strong></p>
             <div class="modal-btns">
-                <button class="btn-view" onclick="viewAnswers()">Xem Đáp Án</button>
-                <button class="btn-redo" onclick="location.reload()">Làm Lại Bài</button>
+                <button class="btn-view" onclick="viewAnswers()">XEM ĐÁP ÁN</button>
+                <button class="btn-redo" onclick="location.reload()">LÀM LẠI BÀI</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Data Đáp án dựa theo nội dung Đề 02[cite: 1]
+        // Dữ liệu Đáp án và Giải thích chi tiết
         const dapAn = {
-            1: 'C', 2: 'A', 3: 'B', 4: 'D', 5: 'B', 6: 'C', 
-            7: 'A', 8: 'D', 9: 'D', 10: 'B', 11: 'C', 12: 'A',
-            13: 'A', 14: 'A', 15: 'C', 16: 'A', 17: 'A',
-            18: 'B', 19: 'A', 20: 'B', 21: 'B', 22: 'A',
-            23: 'B', 24: 'C', 25: 'B', 26: 'D', 27: 'B', 28: 'C', 29: 'D', 30: 'A',
+            1: 'C', 2: 'A', 3: 'B', 4: 'D', 5: 'B', 6: 'C', 7: 'A', 8: 'D', 9: 'D', 10: 'B',
+            11: 'C', 12: 'A', 13: 'A', 14: 'A', 15: 'C', 16: 'A', 17: 'A', 18: 'B', 19: 'A', 20: 'B',
+            21: 'B', 22: 'A', 23: 'B', 24: 'C', 25: 'B', 26: 'D', 27: 'B', 28: 'C', 29: 'D', 30: 'A',
             31: 'B', 32: 'B', 33: 'A', 34: 'B', 35: 'C', 36: 'A', 37: 'C', 38: 'A', 39: 'A', 40: 'C'
         };
 
         const giaiThich = {
-            1: "C. enthusiasm: danh từ đi cùng the same... for (sự nhiệt tình).",
-            2: "A. about: wonder about (tự hỏi về điều gì).",
-            3: "B. new travel platform: Trật tự danh từ hợp lý.",
-            4: "D. having: Rút gọn mệnh đề mang nghĩa chủ động (who have -> having).",
-            5: "B. makes: make it easy (làm cho điều đó trở nên dễ dàng).",
-            6: "C. to have: want to V (muốn làm gì).",
-            7: "A. others: nối kết với những người khác.",
-            8: "D. shapes: culture shapes our identities (văn hóa định hình bản sắc).",
-            9: "D. By means of: Thông qua việc trải nghiệm những điều này (chỉ phương tiện).",
-            10: "B. doors: open doors to (mở ra cánh cửa tới).",
-            11: "C. expressions: Cultural expressions (sự thể hiện văn hóa).",
-            12: "A. Engage with: Engage with art (Tương tác, tham gia vào).",
-            13: "A. c-a-b: Chào hỏi (c) -> Đáp lại và kể chuyện chuyển nhà (a) -> Hiểu ra lý do ít gặp (b).",
-            14: "A. c-a-b-d-e: Trình tự đoạn hội thoại hợp lý hỏi về chuyến đi Nhật.",
-            15: "C. a-d-b-e-c: Trình tự logic của một lá thư.",
-            16: "A. b-d-c-a-e: Sắp xếp đoạn văn kể về kinh nghiệm quản lý dự án.",
-            17: "A. b-c-d-e-a: Sắp xếp đoạn văn mô tả tiến trình phát triển và các thách thức.",
-            18: "B. drive the automotive industry toward a sustainable transformation.",
-            19: "A. This focus has led to significant improvements in battery technology.",
-            20: "B. which not only enhance safety but also pave the way for fully autonomous driving.",
-            21: "B. with more public charging stations being installed.",
-            22: "A. the future of electric vehicles holds immense potential for innovation.",
-            23: "B. foreign (ngoại lai) là từ trái nghĩa với indigenous (bản địa).",
-            24: "C. individualism (chủ nghĩa cá nhân) KHÔNG được đề cập trong các giá trị Khổng Tử.",
-            25: "B. admiration (sự ngưỡng mộ) gần nghĩa nhất với reverence (sự tôn kính).",
-            26: "D. Là câu diễn đạt lại (paraphrase) chuẩn xác ý nghĩa của câu được gạch chân trong bài.",
-            27: "B. Vietnamese people (người Việt Nam) là đối tượng mà đại từ 'their' hướng tới.",
-            28: "C. Vietnamese cuisine has gained international recognition là ý ĐÚNG theo đoạn 3.",
-            29: "D. Paragraph 4: Đoạn 4 (Today...) chứa sự nhượng bộ (While adapting...).",
-            30: "A. Paragraph 1: Chứa nội dung về các yếu tố nội sinh và ngoại lai định hình văn hóa.",
-            31: "B. [II]: Vị trí phù hợp để nói về hậu quả tàn phá của lở đất đối với các dịch vụ thiết yếu.",
-            32: "B. vulnerable (dễ bị tổn thương) gần nghĩa với prone (dễ bị).",
-            33: "A. the soil (đất) là đối tượng mà đại từ 'it' đề cập.",
-            34: "B. immune to (miễn nhiễm/không bị ảnh hưởng) TRÁI NGHĨA với susceptible to (dễ bị ảnh hưởng).",
-            35: "C. Increasing logging activities (Tăng cường chặt phá rừng) KHÔNG phải biện pháp phòng ngừa.",
-            36: "A. Tóm tắt đoạn 3 hợp lý nhất.",
-            37: "C. Deforestation contributes to landslide risks (Phá rừng góp phần tăng nguy cơ sạt lở) là ý ĐÚNG.",
-            38: "A. Paraphrase chính xác câu được gạch chân ở cuối bài.",
-            39: "A. Suy luận hợp lý: Tiếp tục trồng rừng và quản lý đất là thiết yếu để giảm thiểu rủi ro.",
-            40: "C. Tóm tắt toàn bài: Lở đất là mối đe dọa lớn, nhưng các biện pháp đang được thực hiện để giảm tác động."
+            1: "C. enthusiasm: Danh từ mang nghĩa 'sự nhiệt huyết, hào hứng' phù hợp với ngữ cảnh 'the same enthusiasm for adventure'.",
+            2: "A. about: Cụm 'wonder about' có nghĩa là tự hỏi, thắc mắc về điều gì đó.",
+            3: "B. new travel platform: Trật tự cụm danh từ 'một nền tảng du lịch mới'.",
+            4: "D. having: Rút gọn mệnh đề quan hệ chủ động 'who have' -> 'having'.",
+            5: "B. makes: Cấu trúc 'make it easy' (làm cho việc gì đó trở nên dễ dàng).",
+            6: "C. to have: Cấu trúc 'want + to V' (muốn có).",
+            7: "A. others: Dùng đại từ 'others' thay thế cho những người khác nói chung.",
+            8: "D. shapes: 'shapes our identities' (định hình bản sắc của chúng ta).",
+            9: "D. By means of: Bằng cách trải nghiệm những điều này (By means of experiencing these...).",
+            10: "B. doors: Thành ngữ 'open doors to' (mở ra cơ hội tới).",
+            11: "C. expressions: Cultural expressions (sự thể hiện/biểu đạt văn hóa).",
+            12: "A. Engage with: Tương tác, hòa mình vào (nghệ thuật và phim ảnh).",
+            13: "A. c-a-b: Chào hỏi (c) -> Trả lời sức khỏe và báo mới chuyển nhà (a) -> Hiểu ra lý do ít gặp (b).",
+            14: "A. c-a-b-d-e: Hỏi đã có kế hoạch chưa (c) -> Trả lời đi Nhật Bản (a) -> Hỏi tại sao Nhật Bản (b) -> Giải thích vì đam mê văn hóa (d) -> Khen ngợi (e).",
+            15: "C. a-d-b-e-c: Khen ngợi podcast (a) -> Cảm ơn thêm về tài liệu (d) -> Đã nghe tập đầu (b) -> Đang bận nhưng sẽ nghe thêm (e) -> Đề nghị lập nhóm thảo luận (c).",
+            16: "A. b-d-c-a-e: Mở đầu câu chuyện 5 năm trước (b) -> Trau dồi kỹ năng (d) -> Điểm mạnh giao tiếp (c) -> Cảm nhận về công việc (a) -> Kết luận (e).",
+            17: "A. b-c-d-e-a: Giới thiệu sự biến đổi (b) -> Cư dân tăng (c) -> Kinh tế tăng (d) -> Dẫn đến quá tải dịch vụ (e) -> Mặc dù vậy vẫn còn thách thức hạ tầng (a).",
+            18: "B. drive the automotive industry toward a sustainable transformation: Động từ 'drive' chia ở thì hiện tại phù hợp với chủ ngữ số nhiều 'advancements and concerns'.",
+            19: "A. This focus has led to significant improvements in battery technology: Mệnh đề hoàn chỉnh đóng vai trò câu chủ đề.",
+            20: "B. which not only enhance safety but also pave the way for fully autonomous driving: Mệnh đề quan hệ với 'which' thay thế cho 'advanced driver-assistance systems'.",
+            21: "B. with more public charging stations being installed: Cấu trúc tuyệt đối 'with + N + V-ing'.",
+            22: "A. the future of electric vehicles holds immense potential for innovation: Trật tự câu hợp lý (tương lai xe điện chứa đựng tiềm năng).",
+            23: "B. foreign: Từ 'indigenous' (bản địa) trái nghĩa với 'foreign' (nước ngoài).",
+            24: "C. individualism: Chủ nghĩa cá nhân không được nhắc tới trong danh sách giá trị Nho giáo (đoạn 2).",
+            25: "B. admiration: 'Reverence' (sự tôn kính) có thể thay thế bằng 'admiration'.",
+            26: "D. Known as a traditional dress, the áo dài beautifully combines elegance with modesty, serving as a symbol of Vietnam's cultural identity and pride.",
+            27: "B. Vietnamese people: Đại từ 'their' thay thế cho 'the Vietnamese people'.",
+            28: "C. Vietnamese cuisine has gained international recognition: Được nhắc đến ở đoạn 3 (celebrated worldwide).",
+            29: "D. Paragraph 4: Đoạn cuối ('Today, in the face of modernization... While adapting...') sử dụng mệnh đề nhượng bộ thể hiện sự tương phản.",
+            30: "A. Paragraph 1: Đoạn 1 nhắc tới 'fusion of indigenous traditions and external influences'.",
+            31: "B. [II]: Vị trí hợp lý để diễn giải hậu quả tàn phá ('These events not only destroy...').",
+            32: "B. vulnerable: 'Prone' (dễ bị ảnh hưởng) = 'vulnerable'.",
+            33: "A. the soil: Đại từ 'it' thay thế cho 'the soil' ở ngay phía trước.",
+            34: "B. immune to: 'Susceptible to' (dễ mắc/chịu) trái nghĩa với 'immune to' (miễn nhiễm).",
+            35: "C. Increasing logging activities: Đây là nguyên nhân, không phải là biện pháp phòng ngừa.",
+            36: "A. Local authorities and organizations are actively working to reduce the risks...",
+            37: "C. Deforestation contributes to landslide risks: Theo thông tin rõ ràng ở đoạn 2.",
+            38: "A. Even with these initiatives, the difficulties continue to be considerable: 'Despite these efforts' = 'Even with these initiatives'.",
+            39: "A. Ongoing reforestation and improved land management practices are essential...",
+            40: "C. Landslides pose a significant threat, but measures are being taken to reduce their impact."
         };
 
         const questionsData = {
@@ -456,33 +499,33 @@
                 {id: 23, text: "The word \"indigenous\" in paragraph 1 is opposite in meaning to:", ops: ["A. local", "B. foreign", "C. native", "D. traditional"]},
                 {id: 24, text: "Which of the following is NOT mentioned as Confucian values emphasizing respect for?", ops: ["A. filial piety", "B. social harmony", "C. individualism", "D. elders"]},
                 {id: 25, text: "The word \"reverence\" in paragraph 2 could be best replaced by:", ops: ["A. disrespect", "B. admiration", "C. indifference", "D. criticism"]},
-                {id: 26, text: "Which of the following best paraphrases the underlined sentence in paragraph 3?", ops: ["A. The áo dài, known for its elegance and modesty, represents a blend of Vietnamese fashion...", "B. As a traditional dress, the áo dài reflects the combination of sophistication and simplicity...", "C. The graceful áo dài, a traditional Vietnamese attire, signifies the blend of elegance...", "D. Known as a traditional dress, the áo dài beautifully combines elegance with modesty, serving as a symbol of Vietnam's cultural identity..."]},
-                {id: 27, text: "The word \"Their\" in paragraph 4 refers to:", ops: ["A. Vietnamese cuisine", "B. Vietnamese people", "C. Traditional art forms", "D. Agricultural heritage"]},
+                {id: 26, text: "Which of the following best paraphrases the underlined sentence in paragraph 4?", ops: ["A. The áo dài, known for its elegance and modesty, represents a blend of Vietnamese fashion...", "B. As a traditional dress, the áo dài reflects the combination of sophistication and simplicity...", "C. The graceful áo dài, a traditional Vietnamese attire, signifies the blend of elegance...", "D. Known as a traditional dress, the áo dài beautifully combines elegance with modesty, serving as a symbol..."]},
+                {id: 27, text: "The word \"Their\" in paragraph 5 refers to:", ops: ["A. Vietnamese cuisine", "B. Vietnamese people", "C. Traditional art forms", "D. Agricultural heritage"]},
                 {id: 28, text: "Which of the following is TRUE according to the passage?", ops: ["A. Vietnamese cultural identity is static and unchanging.", "B. Modernization has completely erased Vietnamese traditions.", "C. Vietnamese cuisine has gained international recognition.", "D. Water puppetry is no longer practiced in Vietnam."]},
                 {id: 29, text: "In which paragraph does the writer mention a present concession relationship?", ops: ["A. Paragraph 1", "B. Paragraph 2", "C. Paragraph 3", "D. Paragraph 4"]},
                 {id: 30, text: "In which paragraph does the writer state that Vietnamese cultural identity is influenced by both internal and external factors?", ops: ["A. Paragraph 1", "B. Paragraph 2", "C. Paragraph 3", "D. Paragraph 4"]}
             ],
             part6: [
-                {id: 31, text: "Where in this passage does the following sentence best fit? <br><i>These events not only destroy homes and roads but also disrupt essential services such as education and healthcare.</i>", ops: ["A. [I]", "B. [II]", "C. [III]", "D. [IV]"]},
+                {id: 31, text: "Where in this passage does the following sentence best fit?<br><em>These events not only destroy homes and roads but also disrupt essential services such as education and healthcare.</em>", ops: ["A. [I]", "B. [II]", "C. [III]", "D. [IV]"]},
                 {id: 32, text: "The word \"prone\" in paragraph 1 could be best replaced by:", ops: ["A. resistant", "B. vulnerable", "C. indifferent", "D. immune"]},
                 {id: 33, text: "The word \"it\" in paragraph 2 refers to:", ops: ["A. the soil", "B. the rainy season", "C. the local population", "D. the infrastructure"]},
-                {id: 34, text: "The phrase \"susceptible to\" in paragraph 3 is OPPOSITE in meaning to:", ops: ["A. open to", "B. immune to", "C. prone to", "D. favorable for"]},
+                {id: 34, text: "The phrase \"susceptible to\" in paragraph 2 is OPPOSITE in meaning to:", ops: ["A. open to", "B. immune to", "C. prone to", "D. favorable for"]},
                 {id: 35, text: "According to paragraph 3, which of the following is NOT a proactive measure to mitigate the risks associated with landslides?", ops: ["A. Reforestation projects", "B. Improving drainage systems", "C. Increasing logging activities", "D. Raising public awareness"]},
-                {id: 36, text: "Which of the following best summarises paragraph 3?", ops: ["A. Local authorities and organizations are actively working to reduce the risks...", "B. The government is focusing on implementing advanced technologies...", "C. Reforestation and improved drainage systems are essential for enhancing...", "D. Communities are encouraged to participate in disaster preparedness..."]},
+                {id: 36, text: "Which of the following best summarises paragraph 3?", ops: ["A. Local authorities and organizations are actively working to reduce the risks of landslides...", "B. The government is focusing on implementing advanced technologies to predict landslides...", "C. Reforestation and improved drainage systems are essential for enhancing the environment...", "D. Communities are encouraged to participate in disaster preparedness training..."]},
                 {id: 37, text: "Which of the following is TRUE according to the passage?", ops: ["A. Landslides only occur in the rainy season.", "B. The local population is unaffected by landslides.", "C. Deforestation contributes to landslide risks.", "D. Monitoring systems are unnecessary for landslide management."]},
                 {id: 38, text: "Which of the following best paraphrases the underlined part?", ops: ["A. Even with these initiatives, the difficulties continue to be considerable.", "B. Although these measures have been taken, the challenges are still manageable.", "C. In spite of these actions, the obstacles still appear to be minor.", "D. Regardless of these efforts, the challenges are resolvable"]},
-                {id: 39, text: "Which of the following can be inferred from the passage?", ops: ["A. Ongoing reforestation and improved land management practices are essential...", "B. The frequency of landslides in northern Vietnam will likely decrease...", "C. Local communities are fully aware of the risks of landslides...", "D. Climate change is the sole cause of the increasing landslide occurrences..."]},
+                {id: 39, text: "Which of the following can be inferred from the passage?", ops: ["A. Ongoing reforestation and improved land management practices are essential for minimizing future landslide risks...", "B. The frequency of landslides in northern Vietnam will likely decrease in the coming years...", "C. Local communities are fully aware of the risks of landslides and are actively participating...", "D. Climate change is the sole cause of the increasing landslide occurrences..."]},
                 {id: 40, text: "Which of the following best summarises the passage?", ops: ["A. Landslides are a minor issue in northern Vietnam.", "B. The effects of landslides are temporary and easily managed.", "C. Landslides pose a significant threat, but measures are being taken to reduce their impact.", "D. Local authorities have completely eliminated the risk of landslides."]}
             ]
         };
 
-        // Render Questions Function
+        // Render Questions
         function renderQuestions(partData, containerId) {
             const container = document.getElementById(containerId);
             partData.forEach(q => {
                 let optionsHTML = '';
                 q.ops.forEach(opt => {
-                    const val = opt.charAt(0); // Lấy A, B, C, D
+                    const val = opt.charAt(0); // A, B, C or D
                     optionsHTML += `<label><input type="radio" name="q${q.id}" value="${val}"> ${opt}</label>`;
                 });
                 
@@ -507,31 +550,18 @@
         renderQuestions(questionsData.part5, 'questions-part-5');
         renderQuestions(questionsData.part6, 'questions-part-6');
 
-        // Initialize Sidebar Tracker
+        // Initialize Tracker
         const trackerGrid = document.getElementById('tracker-grid');
         for (let i = 1; i <= 40; i++) {
             trackerGrid.innerHTML += `<div class="track-box" id="track-${i}" onclick="scrollToQ(${i})">${i}</div>`;
         }
 
-        // Scroll Function
+        // Scroll to question
         function scrollToQ(id) {
             document.getElementById(`q-block-${id}`).scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
-        // Highlight persistent (Bôi đen)
-        document.addEventListener('mouseup', function(e) {
-            if (e.target.closest('.text-content')) {
-                const selection = window.getSelection();
-                if (!selection.isCollapsed && selection.toString().trim() !== '') {
-                    document.designMode = "on";
-                    document.execCommand("BackColor", false, "yellow");
-                    document.designMode = "off";
-                    selection.removeAllRanges();
-                }
-            }
-        });
-
-        // Tracker update when Radio changed
+        // Update Tracker on Radio Change
         document.querySelectorAll('input[type=radio]').forEach(radio => {
             radio.addEventListener('change', function() {
                 if(isSubmitted) return;
@@ -540,8 +570,8 @@
             });
         });
 
-        // Timer
-        let timeLeft = 50 * 60; 
+        // Timer Logic
+        let timeLeft = 50 * 60; // 50 minutes
         const timerEl = document.getElementById('timer');
         let timerInterval = setInterval(() => {
             if (timeLeft <= 0) {
@@ -555,7 +585,25 @@
             }
         }, 1000);
 
-        // Nộp Bài
+        // Persistent Text Highlight Logic
+        document.addEventListener('mouseup', function(e) {
+            if (e.target.closest('.text-content')) {
+                let selection = window.getSelection();
+                if (selection.toString().trim().length > 0) {
+                    try {
+                        let range = selection.getRangeAt(0);
+                        let span = document.createElement('span');
+                        span.className = 'highlight';
+                        range.surroundContents(span);
+                        selection.removeAllRanges();
+                    } catch (error) {
+                        console.log("Không thể highlight khi chọn qua nhiều thẻ.");
+                    }
+                }
+            }
+        });
+
+        // Submission & Grading
         let isSubmitted = false;
         function submitExam() {
             if (isSubmitted) return;
@@ -571,13 +619,11 @@
             }
             
             let unanswered = 40 - answered;
-            let diem = (score * 0.25).toFixed(2);
-            document.getElementById('score-text').innerText = `${score}/40 (${diem} điểm)`;
+            document.getElementById('score-text').innerText = `${score} / 40`;
             document.getElementById('unanswered-count').innerText = unanswered;
             document.getElementById('modal').style.display = 'flex';
         }
 
-        // Xem Đáp Án
         function viewAnswers() {
             isSubmitted = true;
             document.getElementById('modal').style.display = 'none';
@@ -589,7 +635,7 @@
                 const trackBox = document.getElementById(`track-${i}`);
                 const allLabels = document.querySelectorAll(`input[name="q${i}"]`);
                 
-                // Styling the inputs and locking them
+                // Disable & Style radios
                 allLabels.forEach(radio => {
                     radio.disabled = true;
                     if (radio.value === correctAns) {
@@ -597,7 +643,7 @@
                     }
                 });
                 
-                // Tracker update for grades
+                // Grade & Tracker Update
                 trackBox.classList.remove('active');
                 if (selected) {
                     if (selected.value === correctAns) {
@@ -607,10 +653,10 @@
                         trackBox.classList.add('wrong');
                     }
                 } else {
-                    trackBox.classList.add('wrong'); // Unanswered will be marked wrong
+                    trackBox.classList.add('wrong'); // Unanswered
                 }
                 
-                // Display explanations
+                // Show Explanation
                 const expDiv = document.getElementById(`exp-${i}`);
                 if (expDiv && giaiThich[i]) {
                     expDiv.innerHTML = `<strong>💡 Giải thích:</strong> ${giaiThich[i]}`;
