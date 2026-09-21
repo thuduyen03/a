@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đề Số 05 - THPT Quốc Gia Môn Tiếng Anh (Cấu trúc 2026)</title>
+    <style>
+        :root {
+            --primary: #1e90ff;
+            --success: #2ed573;
+            --danger: #ff4757;
+            --hover-bg: #e0f7fa;
+            --bg-color: #f4f7f6;
+            --highlight: yellow;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            padding-bottom: 80px; 
+            background-color: var(--bg-color);
+            color: #333;
+        }
+        .header {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .header h2, .header h3 { margin: 5px 0; }
+        
+        .timer {
+            position: fixed;
+            top: 15px;
+            right: 20px;
+            background: var(--danger);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Layout */
+        .part-container {
+            display: flex;
+            margin: 15px auto;
+            width: 98%;
+            height: 85vh; 
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .left-pane {
+            width: 55%;
+            padding: 20px;
+            overflow-y: auto;
+            border-right: 2px solid #eee;
+            background-color: #fafafa;
+        }
+        .right-pane {
+            width: 45%;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #fff;
+        }
+
+        /* Typography & Effects */
+        .text-content {
+            font-size: 16px;
+            line-height: 1.8;
+        }
+        .text-content p {
+            padding: 5px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .text-content p:hover {
+            background-color: var(--hover-bg);
+        }
+        .highlight {
+            background-color: var(--highlight);
+        }
+
+        /* Questions */
+        .question-block {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #ccc;
+        }
+        .question-text {
+            font-weight: bold;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+        .options label {
+            display: block;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 1px solid #f0f0f0;
+            transition: 0.2s;
+        }
+        .options label:hover {
+            background-color: #f8f9fa;
+        }
+        .options input { margin-right: 10px; }
+        
+        .correct-ans {
+            background-color: var(--success) !important;
+            color: white;
+            font-weight: bold;
+            border-color: var(--success) !important;
+        }
+        .wrong-ans {
+            background-color: var(--danger) !important;
+            color: white;
+            border-color: var(--danger) !important;
+        }
+
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            background-color: var(--hover-bg);
+            border-left: 5px solid var(--primary);
+            border-radius: 4px;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        /* Sidebar Tracker */
+        .tracker-bar {
+            position: fixed;
+            bottom: 0; left: 0; width: 100%;
+            background: white;
+            padding: 15px;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-sizing: border-box;
+        }
+        .tracker-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            flex: 1;
+        }
+        .track-box {
+            width: 32px; height: 32px;
+            display: flex; justify-content: center; align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .track-box:hover { border-color: var(--primary); }
+        .track-box.active { background: var(--primary); color: white; border-color: var(--primary); }
+        .track-box.correct { background: var(--success); color: white; border-color: var(--success); }
+        .track-box.wrong { background: var(--danger); color: white; border-color: var(--danger); }
+        
+        .submit-btn {
+            padding: 12px 25px;
+            background: var(--success);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-left: 20px;
+            transition: 0.3s;
+        }
+        .submit-btn:hover { background: #26b360; }
+
+        /* Modal Popup */
+        .modal-overlay {
+            display: none;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 2000;
+            justify-content: center; align-items: center;
+        }
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            width: 400px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            animation: popIn 0.3s ease-out;
+        }
+        @keyframes popIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .modal-content h2 { color: #2f3542; margin-top: 0; font-size: 28px;}
+        .modal-content p { font-size: 18px; margin: 15px 0; color: #57606f;}
+        .score-display { font-size: 36px; font-weight: bold; color: var(--primary); margin: 20px 0; }
+        .modal-btns { margin-top: 30px; display: flex; justify-content: space-around; }
+        .modal-btns button {
+            padding: 12px 20px; border: none; border-radius: 6px;
+            font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.2s;
+        }
+        .btn-view { background: var(--primary); color: white; }
+        .btn-view:hover { background: #187bcd; }
+        .btn-redo { background: var(--danger); color: white; }
+        .btn-redo:hover { background: #e03e4d; }
+
+        u, b { font-weight: bold; }
+        u { text-decoration: underline; }
+
+        /* ========================================================
+           BỔ SUNG CSS RESPONSIVE CHO MÀN HÌNH ĐIỆN THOẠI / TABLET 
+           ======================================================== */
+        @media (max-width: 992px) {
+            body { padding-bottom: 140px; }
+            .part-container { flex-direction: column; height: auto; width: 100%; box-sizing: border-box; }
+            .left-pane, .right-pane { width: 100%; height: auto; border-right: none; box-sizing: border-box; }
+            .left-pane { border-bottom: 2px dashed #ccc; }
+            .tracker-bar { flex-direction: column; padding: 10px; }
+            .tracker-grid { flex-wrap: nowrap; overflow-x: auto; width: 100%; padding-bottom: 10px; }
+            .track-box { flex-shrink: 0; }
+            .submit-btn { width: 100%; margin-left: 0; margin-top: 5px; }
+            .tracker-grid::-webkit-scrollbar { height: 5px; }
+            .tracker-grid::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="timer" id="timer">⏳ 50:00</div>
+
+    <div class="header">
+        <h2>ĐỀ SỐ 05 - KỲ THI THPT QUỐC GIA</h2>
+        <h3>Môn thi: TIẾNG ANH</h3>
+        <p><strong>Giáo viên: NGUYỄN THỊ THU DUYÊN - Zalo: 0918204603</strong></p>
+    </div>
+
+    <!-- PART 1 -->
+    <div class="part-container">
+        <div class="left-pane text-content">
+            <p><strong>Read the following advertisement and mark the letter A, B, C or D on your answer sheet to indicate the correct option that best fits each of the numbered blanks from 1 to 6.</strong></p>
+            <p><strong>SMARTPHONES</strong></p>
+            <p>Smartphones have become an essential part of our daily lives, (1) ______ a variety of apps that can help us with various tasks. One particularly (2) ______ is Giant. It allows users to create to-do lists and set reminders for (3) ______ deadlines. The app provides users (4) ______ a well-organized way to organize tasks effectively. With this app, users can easily set their schedules, making it simpler to (5) ______ track of what needs to be done. Many people also enjoy the feature that allows them (6) ______ their progress daily, which can be very motivating. It's a useful way to ensure that nothing gets overlooked.</p>
+        </div>
+        <div class="right-pane" id="questions-part-1"></div>
+    </div>
+
+    <!-- PART 2 -->
+    <div class="part-container">
+        <div class="left-pane text-content">
+            <p><strong>Read the following advertisement and mark the letter A, B, C or D on your answer sheet to indicate the correct option that best fits each of the numbered blanks from 7 to 12.</strong></p>
+            <p><strong>Warning - Students Playing Truant</strong></p>
+            <p>Though the national entrance exam for universities approaches, the number of students playing truant have (7) ______. This is concerning, because the Ministry of Education has changed the exam format. (8) ______ students seem unaware of the implications of their actions. As a solution, parents and teachers must ensure that students (9) ______ focused. (10) ______ changing exam format, students need to adapt. A significant (11) ______ of students are struggling with the new requirements. Finally, we must (12) ______ the importance of education. Instead of ignoring the issue, we must address it to prepare students for the challenges ahead.</p>
+        </div>
+        <div class="right-pane" id="questions-part-2"></div>
+    </div>
+
+    <!-- PART 3 -->
+    <div class="part-container">
+        <div class="left-pane text-content">
+            <p><strong>Mark the letter A, B, C, or D on your answer sheet to indicate the correct arrangement of the sentence to make a meaningful paragraph/letter in each of the following questions.</strong></p>
+            
+            <p><strong>Question 13:</strong><br>
+            a. Minh: She was really nervous about it, but I think she did quite well.<br>
+            b. Anna: I hope she gets the score she needs for her university application.<br>
+            c. Anna: Hi, Minh! How did your sister do on her IELTS exam?</p>
+            
+            <p><strong>Question 14:</strong><br>
+            a. Minh: That's great to hear! What do you think he misses most from home?<br>
+            b. Lan: He has adapted well to the new environment and seems very happy.<br>
+            c. Minh: How has Manh been doing after two months in Taiwan?<br>
+            d. Minh: Have you spoken to him recently to check how he's adjusting?<br>
+            e. Lan: I think he misses his family and the food from Vietnam.</p>
+
+            <p><strong>Question 15:</strong><br>
+            Dear students,<br>
+            a. As you may have heard, we will be switching to online classes for the next few weeks because of the severe storm.<br>
+            b. I hope everyone is doing well despite the weather conditions.<br>
+            c. I appreciate your understanding and flexibility during this time, and I'm confident we can make this work together.<br>
+            d. I know this might be an adjustment for some of you, but it's important to prioritize safety.<br>
+            e. Please ensure you have access to your online resources, and let me know if you have any questions or concerns.<br>
+            Best wishes,<br>
+            Mrs. Hanh</p>
+
+            <p><strong>Question 16:</strong><br>
+            a. The quick and easy nature of platforms like TikTok and Instagram often leads to decreased attention spans, as viewers become accustomed to rapid changes and instant gratification.<br>
+            b. In conclusion, while short-form content can be entertaining and engaging, it is essential to be aware of its potential harms and to practice moderation in consumption to maintain a healthy balance in our lives.<br>
+            c. This type of media can also contribute to feelings of anxiety and inadequacy, as individuals may find themselves comparing their lives to the highlights showcased by others.<br>
+            d. In recent years, the rise of short-form content has become a significant trend, but its negative effects on viewers cannot be overlooked.<br>
+            e. Furthermore, the addictive nature of short-form content can lead to excessive screen time, negatively impacting physical health and social interactions.</p>
+
+            <p><strong>Question 17:</strong><br>
+            a. According to recent statistics, Vietnam ranks second in the world for coffee production, just behind Brazil, with an impressive output of over 1.5 million tons annually.<br>
+            b. Furthermore, the diverse climate and geography of Vietnam allow for the cultivation of various coffee varieties, including the renowned Arabica and Robusta beans, which are in high demand internationally.<br>
+            c. In conclusion, as Vietnam continues to thrive in the coffee market, it is crucial to support sustainable practices that ensure the industry's long-term viability and the well-being of those involved in it.<br>
+            d. This remarkable achievement not only highlights the country's agricultural capabilities but also underscores the importance of coffee as a key export product for the Vietnamese economy.<br>
+            e. Vietnam's coffee industry is a significant contributor to the global market, with the country being recognized as one of the top producers worldwide.</p>
+        </div>
+        <div class="right-pane" id="questions-part-3"></div>
+    </div>
+
+    <!-- PART 4 -->
+    <div class="part-container">
+        <div class="left-pane text-content">
+            <p><strong>Read the following passage and mark the letter A, B, C or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 18 to 22.</strong></p>
+            <p>ChatGPT is an advanced language model developed by OpenAI, (18) ______. It utilizes deep learning techniques to generate human-like text responses based on the input it receives. With applications ranging from customer support to content creation, ChatGPT has transformed the way people interact with machines.</p>
+            <p>(19) ______, ChatGPT can provide users with detailed answers, explanations, and even creative content, depending on the prompts given to it. Its ability to understand context and nuances makes it an invaluable tool for various industries.</p>
+            <p>Moreover, designed to continuously learn and improve its performance, (20) ______. This feature ensures that it stays relevant and effective in understanding evolving language trends and user expectations.</p>
+            <p>ChatGPT has gained popularity in various applications, (21) ______, enhancing user experience by providing instant responses. As users become more familiar with its capabilities, (22) ______, opening new avenues for innovation and creativity.</p>
+        </div>
+        <div class="right-pane" id="questions-part-4"></div>
+    </div>
+
+    <!-- PART 5 -->
+    <div class="part-container">
+        <div class="left-pane text-content">
+            <p><strong>Read the following passage and mark the letter A, B, C, D on your answer sheet to indicate the best answer to each of the following questions from 23 to 30.</strong></p>
+            <p>If you're new to running, or new to marathons, you might be worried about or even <b><u>fearful</u></b> of the distance. And these feelings are completely understandable, given the fact that more than 42 kilometres is a very long way. However, more and more people are taking on this challenge every year, and for very good reasons.</p>
+            <p>Obviously, running such a long distance requires a lot of training, and the more you train, the more your endurance will be <b><u>enhanced</u></b>. And of course, as you become more physically active, your heart and muscles will be stronger, your blood circulation will improve, and you will most likely get in shape in no time. Additionally, there are also mental and social benefits such as feeling less stressed and more energized as well as having the chance to meet and establish meaningful relationships with other people.</p>
+            <p>If you think about it, running a marathon is also a chance for personal development. Everyone has at least one fear or insecurity, and for many people, completing a marathon race can seem like an extremely daunting or even impossible task. Of course, it's true that <b><u>this</u></b> is a big challenge that requires commitment and perseverance. That being said, <b><u>every time you step outside out of your comfort zone and accomplish something new, you will grow stronger and become more confident.</u></b></p>
+            <p>Sometimes, you can actually help many others when you run a marathon. Many runners now combine their marathon goal with the goal of helping others by participating in races that raise money for charity. Besides, running in such marathon races will most likely give you all the motivation you need to get through the exhausting 42-kilometer run. After all, it's quite difficult to quit when you know that you are giving help to people in need.</p>
+            <p><em>(Adapted from active.com)</em></p>
+        </div>
+        <div class="right-pane" id="questions-part-5"></div>
+    </div>
+
+    <!-- PART 6 -->
+    <div class="part-container">
+        <div class="left-pane text-content">
+            <p><strong>Read the following passage about and mark the letter A, B, C, D on your answer sheet to indicate the best answer to each of the following questions from 31 to 40.</strong></p>
+            <p>Some people look at an equation and see a bunch of complicated numbers and symbols while others see beauty <b><u>[I]</u></b>. Now, thanks to a new tool created at Carnegie Mellon University, anyone can now translate the abstractions of mathematics into beautiful and instructive illustrations <b><u>[II]</u></b>. This exciting new tool is named Penrose after the mathematician Roger Penrose, who is famous for using diagrams and other drawings to communicate complicated mathematical ideas <b><u>[III]</u></b>. Penrose enables users to create diagrams simply by typing mathematical expressions and letting the software do the drawing <b><u>[IV]</u></b>.</p>
+            <p>Unlike a graphing calculator, these aren't <b><u>restricted</u></b> to basic functions, but can be complex relationships from any area of mathematics. "Some mathematicians have a talent for drawing beautiful diagrams by hand, but they vanish as soon as the chalkboard is erased," said Keenan Crane, an assistant professor of computer science and robotics. "We want to make this expressive power available to anyone."</p>
+            <p>Diagrams are often underused in mathematical communication, since producing high-quality illustrations is beyond the skill of many researchers and requires a great deal of time and effort. Penrose addresses these challenges by letting diagram-drawing experts turn their knowledge about creating diagrams into computer codes so that other users can access this capability using familiar mathematical language and a computer. "We started off by asking: 'How do people translate mathematical ideas into pictures in their head?'" said Katherine Ye, a Ph.D. student in the Computer Science Department who is involved in the development of Penrose. "The <b><u>secret sauce</u></b> of our system is to empower people to easily 'explain' this translation process to the computer, so the computer can do all the hard work of actually making the picture."</p>
+            <p>Once the computer learns how the user wants to see a mathematical object visualized - a vector represented by a little arrow, for instance, or a point represented as a dot - it uses these rules to draw several candidate diagrams. <b><u>Users can then select and edit the diagrams they want from a gallery of possibilities.</u></b> A special, simple-to-learn programming language was also developed so that <b><u>they</u></b> can easily convey the ideas in their minds to the Penrose system, Crane said. "Mathematicians can get very picky about notations," he explained. "We let them define whatever notation they want, so they can express themselves naturally."</p>
+            <p>The researchers will present Penrose at the SIGGRAPH 2020 Conference on Computer Graphics and Interactive Techniques, which will be held this July. "Our vision is to be able to dust off an old math textbook from the library, drop it into the computer and get a beautifully illustrated book that way more people understand," Crane said, noting that Penrose is a first step toward this goal.</p>
+            <p><em>(Adapted from sciencedaily.com)</em></p>
+        </div>
+        <div class="right-pane" id="questions-part-6"></div>
+    </div>
+
+    <!-- Sidebar Tracker -->
+    <div class="tracker-bar">
+        <div class="tracker-grid" id="tracker-grid"></div>
+        <button class="submit-btn" onclick="submitExam()">NỘP BÀI THI</button>
+    </div>
+
+    <!-- Modal Popup -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-content">
+            <h2>Kết Quả Bài Thi</h2>
+            <div class="score-display" id="score-text">0 / 40</div>
+            <p>Số câu bỏ trống: <strong id="unanswered-count" style="color:var(--danger)">0</strong></p>
+            <div class="modal-btns">
+                <button class="btn-view" onclick="viewAnswers()">XEM ĐÁP ÁN</button>
+                <button class="btn-redo" onclick="location.reload()">LÀM LẠI BÀI</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dữ liệu Đáp án và Giải thích
+        const dapAn = {
+            1: 'B', 2: 'A', 3: 'C', 4: 'C', 5: 'B', 6: 'D', 7: 'D', 8: 'A', 9: 'C', 10: 'D',
+            11: 'D', 12: 'D', 13: 'B', 14: 'B', 15: 'B', 16: 'C', 17: 'B', 18: 'C', 19: 'B', 20: 'A',
+            21: 'B', 22: 'C', 23: 'D', 24: 'B', 25: 'C', 26: 'C', 27: 'A', 28: 'A', 29: 'B', 30: 'C',
+            31: 'A', 32: 'B', 33: 'D', 34: 'D', 35: 'A', 36: 'D', 37: 'C', 38: 'C', 39: 'B', 40: 'C'
+        };
+
+        const giaiThich = {
+            1: "B. offering: Rút gọn mệnh đề quan hệ chủ động.",
+            2: "A. useful smartphone app: Trật tự tính từ và danh từ ghép.",
+            3: "C. important: Dùng tính từ bổ nghĩa cho danh từ deadlines.",
+            4: "C. with: provide somebody with something.",
+            5: "B. keep: keep track of (theo dõi).",
+            6: "D. to check: allow somebody to do something.",
+            7: "D. gone up: Tăng lên.",
+            8: "A. Many: Nhiều học sinh dường như không nhận ra...",
+            9: "C. remain: Giữ vững sự tập trung.",
+            10: "D. In terms of: Về mặt/Xét về (In terms of changing exam format).",
+            11: "D. number: A significant number of students.",
+            12: "D. communicate: Truyền đạt, truyền thông điệp về tầm quan trọng.",
+            13: "B. c-a-b: Hi Minh! How did your sister do -> She was nervous but did well -> I hope she gets the score.",
+            14: "B. c-b-a-e-d: Trình tự hợp lý để tạo thành đoạn hội thoại logic.",
+            15: "B. b-a-d-c-e: Thư thông báo chuyển sang học online vì bão.",
+            16: "C. d-a-e-c-b: Đoạn văn về tác hại của nội dung ngắn.",
+            17: "B. e-a-d-b-c: Đoạn văn về công nghiệp cà phê Việt Nam.",
+            18: "C. which has been trained on an extensive range of datasets to facilitate natural language processing: Phù hợp nhất về mặt chức năng của ChatGPT.",
+            19: "B. Given its proficiency in understanding human language: Xét sự thành thạo trong việc hiểu ngôn ngữ con người.",
+            20: "A. ChatGPT can deliver timely and accurate information to users as necessary",
+            21: "B. whose capabilities allow developers to create interactive applications employing its advanced features",
+            22: "C. the demand for more advanced features and functionalities continues to grow",
+            23: "D. You will feel less stressed when meeting other people: Bài văn không gộp hai ý này thành một mệnh đề như vậy.",
+            24: "B. afraid: fearful đồng nghĩa với afraid.",
+            25: "C. weakened: enhanced (được tăng cường) trái nghĩa với weakened (bị làm yếu đi).",
+            26: "C. completing a marathon: This thay thế cho việc hoàn thành chặng đua marathon.",
+            27: "A. Every time you leave your comfort zone and achieve something new, you will become stronger and more confident: Paraphrase sát nghĩa nhất.",
+            28: "A. If you want to run a marathon, you need to commit and persevere: Dựa trên thông tin đoạn 3.",
+            29: "B. Paragraph 2: Đoạn 2 nói về sức mạnh cơ bắp và tuần hoàn máu.",
+            30: "C. Paragraph 3: Đoạn 3 bàn về sự phát triển cá nhân.",
+            31: "A. [I]: Câu này phù hợp chèn vào vị trí I để giải thích thêm ý đầu tiên.",
+            32: "B. expanded: restricted (bị giới hạn) trái nghĩa với expanded (mở rộng).",
+            33: "D. special element: Secret sauce nghĩa là bí quyết, yếu tố đặc biệt.",
+            34: "D. It can automatically generate solutions to complex mathematical problems: Bài văn không đề cập khả năng giải toán.",
+            35: "A. users: They thay thế cho người sử dụng.",
+            36: "D. Penrose enables users to translate mathematical ideas into diagrams using expert knowledge and computer codes.",
+            37: "C. Penrose uses common mathematical rules to draw diagrams for a mathematical object: Bài văn nói Penrose dùng rule của người dùng định nghĩa, không chỉ common rules.",
+            38: "C. Users can choose and modify the diagrams they prefer from a collection of options.",
+            39: "B. How a mathematical object should be visualized varies from person to person.",
+            40: "C. Penrose is a new tool that allows users to create complex mathematical diagrams easily, enhancing mathematical communication and understanding."
+        };
+
+        const questionsData = {
+            part1: [
+                {id: 1, ops: ["A. offered", "B. offering", "C. to offer", "D. is offering"]},
+                {id: 2, ops: ["A. useful smartphone app", "B. useful app smartphone", "C. app useful smartphone", "D. smartphone useful app"]},
+                {id: 3, ops: ["A. import", "B. importantly", "C. important", "D. importance"]},
+                {id: 4, ops: ["A. at", "B. for", "C. with", "D. in"]},
+                {id: 5, ops: ["A. set", "B. keep", "C. pay", "D. take"]},
+                {id: 6, ops: ["A. check", "B. checking", "C. to checking", "D. to check"]}
+            ],
+            part2: [
+                {id: 7, ops: ["A. looked out", "B. turned off", "C. let down", "D. gone up"]},
+                {id: 8, ops: ["A. Many", "B. Every", "C. Another", "D. Little"]},
+                {id: 9, ops: ["A. maintain", "B. conserve", "C. remain", "D. preserve"]},
+                {id: 10, ops: ["A. Instead of", "B. In spite of", "C. In light of", "D. In terms of"]},
+                {id: 11, ops: ["A. amount", "B. quantity", "C. level", "D. number"]},
+                {id: 12, ops: ["A. transport", "B. generate", "C. transmit", "D. communicate"]}
+            ],
+            part3: [
+                {id: 13, ops: ["A. c-b-a", "B. c-a-b", "C. a-c-b", "D. b-c-a"]},
+                {id: 14, ops: ["A. d-b-a-e-c", "B. c-b-a-e-d", "C. d-e-a-b-c", "D. c-d-e-b-a"]},
+                {id: 15, ops: ["A. d-b-a-c-e", "B. b-a-d-c-e", "C. a-e-c-b-d", "D. c-b-e-a-d"]},
+                {id: 16, ops: ["A. b-a-c-d-e", "B. b-d-c-a-e", "C. d-a-e-c-b", "D. a-d-c-e-b"]},
+                {id: 17, ops: ["A. a-b-d-c-e", "B. e-a-d-b-c", "C. b-e-a-c-d", "D. d-b-c-a-e"]}
+            ],
+            part4: [
+                {id: 18, ops: ["A. whose utilization for a variety of applications has been available in the realm of text generation", "B. that has fundamentally altered human interactions with artificial intelligence systems", "C. which has been trained on an extensive range of datasets to facilitate natural language processing", "D. having reached a significant milestone in the development of language processing technologies"]},
+                {id: 19, ops: ["A. With the basic goal of enriching user interaction", "B. Given its proficiency in understanding human language", "C. By permitting users to pose open-ended queries", "D. The primary objective of ChatGPT is to enhance engagement"]},
+                {id: 20, ops: ["A. ChatGPT can deliver timely and accurate information to users as necessary", "B. information can be delivered to users as timely and accurately as possible", "C. users can have information delivered as timely and accurately as required", "D. timely and accurate information to users as necessary can be delivered"]},
+                {id: 21, ops: ["A. which empowers developers to tailor their functionality to meet specific user requirements", "B. whose capabilities allow developers to create interactive applications employing its advanced features", "C. that integrates effortlessly into applications, delivering users prompt and accurate replies", "D. where various functionalities have been introduced to elevate its performance in real-world situations"]},
+                {id: 22, ops: ["A. users consistently express their satisfaction with the AI's capability to respond effectively", "B. the feedback from diverse users illustrates significant enhancements in communication abilities", "C. the demand for more advanced features and functionalities continues to grow", "D. sophisticated algorithms have enabled the AI to process language accurately"]}
+            ],
+            part5: [
+                {id: 23, text: "According to the passage, all of the following are benefits of running a marathon EXCEPT", ops: ["A. You will be able to improve your blood circulation and quickly get in shape.", "B. Your endurance will start to improve as you train harder and harder.", "C. Your muscles will be strengthened since you are more active.", "D. You will feel less stressed when meeting other people."]},
+                {id: 24, text: "The word \"fearful\" in paragraph 1 could be best replaced by", ops: ["A. scary", "B. afraid", "C. anxious", "D. frightening"]},
+                {id: 25, text: "The word \"enhanced\" in paragraph 2 is OPPOSITE in meaning to", ops: ["A. preserved", "B. augmented", "C. weakened", "D. disseminated"]},
+                {id: 26, text: "The word \"this\" in paragraph 3 refers to", ops: ["A. personal development", "B. insecurity", "C. completing a marathon", "D. challenge"]},
+                {id: 27, text: "Which of the following best paraphrases the underlined sentence in paragraph 3?", ops: ["A. Every time you leave your comfort zone and achieve something new, you will become stronger and more confident.", "B. Each time you move outside your comfort zone and accomplish something odd, you will grow more resilient and confident.", "C. Whenever you step outside your comfort zone and succeed in something different, you will feel a sense of superiority.", "D. Every time you venture beyond your comfort zone and do something unique, you will grow stronger and become less confident."]},
+                {id: 28, text: "Which of the following is TRUE according to the passage?", ops: ["A. If you want to run a marathon, you need to commit and persevere.", "B. When you complete a marathon, you will no longer have any fear.", "C. Most runners will not run marathons that do not raise money at all.", "D. You cannot complete a marathon if you do not want to help others."]},
+                {id: 29, text: "In which paragraph does the writer mention the physical benefits of running?", ops: ["A. Paragraph 1", "B. Paragraph 2", "C. Paragraph 3", "D. Paragraph 4"]},
+                {id: 30, text: "In which paragraph does the writer discuss personal growth opportunities that come from running a marathon?", ops: ["A. Paragraph 1", "B. Paragraph 2", "C. Paragraph 3", "D. Paragraph 4"]}
+            ],
+            part6: [
+                {id: 31, text: "Where in paragraph 1 does the following sentence best fit?<br><i>For many, the elegance of mathematical concepts often goes unnoticed amidst the complexity.</i>", ops: ["A. [I]", "B. [II]", "C. [III]", "D. [IV]"]},
+                {id: 32, text: "The word \"restricted\" in paragraph 2 is OPPOSITE in meaning to", ops: ["A. contained", "B. expanded", "C. confined", "D. enclosed"]},
+                {id: 33, text: "The phrase \"secret sauce\" in paragraph 3 could be best replaced by", ops: ["A. unexpected benefit", "B. mysterious feature", "C. unnatural ability", "D. special element"]},
+                {id: 34, text: "According to the passage, which of the following is NOT mentioned as a feature or benefit of the Penrose tool?", ops: ["A. It allows users to create diagrams from mathematical expressions.", "B. It can produce high-quality illustrations without requiring advanced drawing skills.", "C. It enables users to communicate mathematical ideas using a programming language.", "D. It can automatically generate solutions to complex mathematical problems."]},
+                {id: 35, text: "The word \"they\" in paragraph 4 refers to", ops: ["A. users", "B. diagrams", "C. possibilities", "D. ideas"]},
+                {id: 36, text: "Which of the following best summarizes paragraph 3?", ops: ["A. Penrose allows users to create high-quality diagrams quickly without needing artistic skills.", "B. Diagrams in mathematics are often underused due to the time required to create them.", "C. Katherine Ye discusses the challenges mathematicians face when trying to visualize complex ideas.", "D. Penrose enables users to translate mathematical ideas into diagrams using expert knowledge and computer codes."]},
+                {id: 37, text: "Which of the following is NOT TRUE according to the passage?", ops: ["A. Mathematical diagrams that are drawn by hand on chalkboards are not long-lasting.", "B. Diagrams are usually not widely used to illustrate or communicate mathematical ideas.", "C. Penrose uses common mathematical rules to draw diagrams for a mathematical object.", "D. Penrose's developers want to make math easier to understand by using illustrations."]},
+                {id: 38, text: "Which of the following best paraphrases the underlined sentence in paragraph 4?", ops: ["A. Users can browse and alter the diagrams they like from a variety of choices.", "B. Users can create and adjust the diagrams they desire from a selection of examples.", "C. Users can choose and modify the diagrams they prefer from a collection of options.", "D. Users can view and customize the diagrams they wish to use from an assortment of images."]},
+                {id: 39, text: "Which of the following can be inferred from the passage?", ops: ["A. Hand-drawn diagrams are not as beautiful and easy to understand as digital diagrams.", "B. How a mathematical object should be visualized varies from person to person.", "C. In general, mathematicians are not very good at remembering and defining notations.", "D. Almost all people consider traditional math textbooks to be extremely boring."]},
+                {id: 40, text: "Which of the following best summaries the passage?", ops: ["A. The development of Penrose by Carnegie Mellon University aims to replace traditional graphing calculators with a tool that can only produce basic mathematical functions.", "B. Penrose enables mathematicians to draw by hand and provides them with a programming language to express their ideas naturally.", "C. Penrose is a new tool that allows users to create complex mathematical diagrams easily, enhancing mathematical communication and understanding.", "D. The researchers at Carnegie Mellon University are focusing on the history of mathematical diagrams and their importance in education."]}
+            ]
+        };
+
+        // Render Questions
+        function renderQuestions(partData, containerId) {
+            const container = document.getElementById(containerId);
+            partData.forEach(q => {
+                let optionsHTML = '';
+                q.ops.forEach(opt => {
+                    const val = opt.charAt(0);
+                    optionsHTML += `<label><input type="radio" name="q${q.id}" value="${val}"> ${opt}</label>`;
+                });
+                
+                const qText = q.text ? `<div class="question-text">Question ${q.id}: ${q.text}</div>` : `<div class="question-text">Question ${q.id}:</div>`;
+
+                container.innerHTML += `
+                    <div class="question-block" id="q-block-${q.id}">
+                        ${qText}
+                        <div class="options">
+                            ${optionsHTML}
+                        </div>
+                        <div class="explanation" id="exp-${q.id}"></div>
+                    </div>
+                `;
+            });
+        }
+
+        renderQuestions(questionsData.part1, 'questions-part-1');
+        renderQuestions(questionsData.part2, 'questions-part-2');
+        renderQuestions(questionsData.part3, 'questions-part-3');
+        renderQuestions(questionsData.part4, 'questions-part-4');
+        renderQuestions(questionsData.part5, 'questions-part-5');
+        renderQuestions(questionsData.part6, 'questions-part-6');
+
+        // Initialize Tracker
+        const trackerGrid = document.getElementById('tracker-grid');
+        for (let i = 1; i <= 40; i++) {
+            trackerGrid.innerHTML += `<div class="track-box" id="track-${i}" onclick="scrollToQ(${i})">${i}</div>`;
+        }
+
+        // Scroll to question
+        function scrollToQ(id) {
+            document.getElementById(`q-block-${id}`).scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Update Tracker on Radio Change
+        document.querySelectorAll('input[type=radio]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                if(isSubmitted) return;
+                const qNum = this.name.replace('q', '');
+                document.getElementById(`track-${qNum}`).classList.add('active');
+            });
+        });
+
+        // Timer Logic
+        let timeLeft = 50 * 60; // 50 minutes
+        const timerEl = document.getElementById('timer');
+        let timerInterval = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                submitExam();
+            } else {
+                timeLeft--;
+                let m = Math.floor(timeLeft / 60);
+                let s = timeLeft % 60;
+                timerEl.innerText = `⏳ ${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+            }
+        }, 1000);
+
+        // Persistent Text Highlight Logic
+        document.addEventListener('mouseup', function(e) {
+            if (e.target.closest('.text-content')) {
+                let selection = window.getSelection();
+                if (selection.toString().trim().length > 0) {
+                    try {
+                        let range = selection.getRangeAt(0);
+                        let span = document.createElement('span');
+                        span.className = 'highlight';
+                        range.surroundContents(span);
+                        selection.removeAllRanges();
+                    } catch (error) {
+                        console.log("Cannot highlight across multiple tags.");
+                    }
+                }
+            }
+        });
+
+        // Submission & Grading
+        let isSubmitted = false;
+        function submitExam() {
+            if (isSubmitted) return;
+            let answered = 0;
+            let score = 0;
+            
+            for (let i = 1; i <= 40; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                if (selected) {
+                    answered++;
+                    if (selected.value === dapAn[i]) score++;
+                }
+            }
+            
+            let unanswered = 40 - answered;
+            document.getElementById('score-text').innerText = `${score} / 40`;
+            document.getElementById('unanswered-count').innerText = unanswered;
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function viewAnswers() {
+            isSubmitted = true;
+            document.getElementById('modal').style.display = 'none';
+            clearInterval(timerInterval);
+            
+            for (let i = 1; i <= 40; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                const correctAns = dapAn[i];
+                const trackBox = document.getElementById(`track-${i}`);
+                const allLabels = document.querySelectorAll(`input[name="q${i}"]`);
+                
+                // Disable & Style radios
+                allLabels.forEach(radio => {
+                    radio.disabled = true;
+                    if (radio.value === correctAns) {
+                        radio.parentElement.classList.add('correct-ans');
+                    }
+                });
+                
+                // Grade & Tracker Update
+                trackBox.classList.remove('active');
+                if (selected) {
+                    if (selected.value === correctAns) {
+                        trackBox.classList.add('correct');
+                    } else {
+                        selected.parentElement.classList.add('wrong-ans');
+                        trackBox.classList.add('wrong');
+                    }
+                } else {
+                    trackBox.classList.add('wrong'); // Unanswered
+                }
+                
+                // Show Explanation
+                const expDiv = document.getElementById(`exp-${i}`);
+                if (expDiv && giaiThich[i]) {
+                    expDiv.innerHTML = `<strong>💡 Giải thích:</strong> ${giaiThich[i]}`;
+                    expDiv.style.display = 'block';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
