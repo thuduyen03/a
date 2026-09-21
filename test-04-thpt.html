@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đề Số 04 - THPT Quốc Gia Môn Tiếng Anh (Cấu trúc 2026)</title>
+    <style>
+        :root {
+            --primary: #1e90ff;
+            --success: #2ed573;
+            --danger: #ff4757;
+            --hover-bg: #e0f7fa;
+            --bg-color: #f4f7f6;
+            --highlight: yellow;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            padding-bottom: 80px; 
+            background-color: var(--bg-color);
+            color: #333;
+        }
+        .header {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .header h2, .header h3 { margin: 5px 0; }
+        
+        .timer {
+            position: fixed;
+            top: 15px;
+            right: 20px;
+            background: var(--danger);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Layout */
+        .part-container {
+            display: flex;
+            margin: 15px auto;
+            width: 98%;
+            height: 85vh; 
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .left-pane {
+            width: 55%;
+            padding: 20px;
+            overflow-y: auto;
+            border-right: 2px solid #eee;
+            background-color: #fafafa;
+        }
+        .right-pane {
+            width: 45%;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #fff;
+        }
+
+        /* Typography & Effects */
+        .text-content {
+            font-size: 16px;
+            line-height: 1.8;
+        }
+        .text-content p {
+            padding: 5px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .text-content p:hover {
+            background-color: var(--hover-bg);
+        }
+        .highlight {
+            background-color: var(--highlight);
+        }
+
+        /* Questions */
+        .question-block {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #ccc;
+        }
+        .question-text {
+            font-weight: bold;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+        .options label {
+            display: block;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 1px solid #f0f0f0;
+            transition: 0.2s;
+        }
+        .options label:hover {
+            background-color: #f8f9fa;
+        }
+        .options input { margin-right: 10px; }
+        
+        .correct-ans {
+            background-color: var(--success) !important;
+            color: white;
+            font-weight: bold;
+            border-color: var(--success) !important;
+        }
+        .wrong-ans {
+            background-color: var(--danger) !important;
+            color: white;
+            border-color: var(--danger) !important;
+        }
+
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            background-color: var(--hover-bg);
+            border-left: 5px solid var(--primary);
+            border-radius: 4px;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        /* Sidebar Tracker */
+        .tracker-bar {
+            position: fixed;
+            bottom: 0; left: 0; width: 100%;
+            background: white;
+            padding: 15px;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-sizing: border-box;
+        }
+        .tracker-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            flex: 1;
+        }
+        .track-box {
+            width: 32px; height: 32px;
+            display: flex; justify-content: center; align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .track-box:hover { border-color: var(--primary); }
+        .track-box.active { background: var(--primary); color: white; border-color: var(--primary); }
+        .track-box.correct { background: var(--success); color: white; border-color: var(--success); }
+        .track-box.wrong { background: var(--danger); color: white; border-color: var(--danger); }
+        
+        .submit-btn {
+            padding: 12px 25px;
+            background: var(--success);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-left: 20px;
+            transition: 0.3s;
+        }
+        .submit-btn:hover { background: #26b360; }
+
+        /* Modal Popup */
+        .modal-overlay {
+            display: none;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 2000;
+            justify-content: center; align-items: center;
+        }
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            width: 400px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            animation: popIn 0.3s ease-out;
+        }
+        @keyframes popIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .modal-content h2 { color: #2f3542; margin-top: 0; font-size: 28px;}
+        .modal-content p { font-size: 18px; margin: 15px 0; color: #57606f;}
+        .score-display { font-size: 36px; font-weight: bold; color: var(--primary); margin: 20px 0; }
+        .modal-btns { margin-top: 30px; display: flex; justify-content: space-around; }
+        .modal-btns button {
+            padding: 12px 20px; border: none; border-radius: 6px;
+            font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.2s;
+        }
+        .btn-view { background: var(--primary); color: white; }
+        .btn-view:hover { background: #187bcd; }
+        .btn-redo { background: var(--danger); color: white; }
+        .btn-redo:hover { background: #e03e4d; }
+
+        u, b { font-weight: bold; }
+        u { text-decoration: underline; }
+
+        /* ========================================================
+           BỔ SUNG CSS RESPONSIVE CHO MÀN HÌNH ĐIỆN THOẠI / TABLET 
+           ======================================================== */
+        @media (max-width: 992px) {
+            body { padding-bottom: 140px; }
+            .part-container { flex-direction: column; height: auto; width: 100%; box-sizing: border-box; }
+            .left-pane, .right-pane { width: 100%; height: auto; border-right: none; box-sizing: border-box; }
+            .left-pane { border-bottom: 2px dashed #ccc; }
+            .tracker-bar { flex-direction: column; padding: 10px; }
+            .tracker-grid { flex-wrap: nowrap; overflow-x: auto; width: 100%; padding-bottom: 10px; }
+            .track-box { flex-shrink: 0; }
+            .submit-btn { width: 100%; margin-left: 0; margin-top: 5px; }
+            .tracker-grid::-webkit-scrollbar { height: 5px; }
+            .tracker-grid::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="timer" id="timer">⏳ 50:00</div>
+
+    <div class="header">
+        <h2>ĐỀ SỐ 04 - KỲ THI THPT QUỐC GIA</h2>
+        <h3>Môn thi: TIẾNG ANH</h3>
+        <p><strong>Giáo viên: NGUYỄN THỊ THU DUYÊN - Zalo: 0918204603</strong></p>
+    </div>
+
+    <!-- PART 1 -->
+    <div class="part-container">
+        <div class="left-pane text-content">
+            <p><strong>Read the following advertisement and mark the letter A, B, C or D on your answer sheet to indicate the correct option that best fits each of the numbered blanks from 1 to 6.</strong></p>
+            <p><strong>Udemy: Learn Anything, Anytime</strong></p>
+            <p>Udemy is an online learning platform (1) ______ people learn new skills and improve their knowledge. With over 150,000 (2) ______, students can (3) ______ from a wide range of subjects. Whether you want to learn about topics like business, design, IT, and more. Udemy offers flexible learning (4) ______ your own pace, so you can fit courses around your schedule. Whether you're looking (5) ______ in your career or learn something new, Udemy has something for everyone. You can access courses on your computer, tablet, or phone, making learning easy and (6) ______. Start learning today and unlock your potential with Udemy.</p>
+            <p><em>(Adapted from Udemy Online Courses)</em></p>
+        </div>
+        <div class="right-pane" id="questions-part-1"></div>
+    </div>
+
+    <!-- PART 2 -->
+    <div class="part-container">
+        <div class="left-pane text-content">
+            <p><strong>Read the following leaflet and mark the letter A, B, C or D on your answer sheet to indicate the correct option that best fits each of the numbered blanks from 7 to 12.</strong></p>
+            <p><strong>The Problem of Child Labour</strong></p>
+            <p>Child labour is a significant issue that (7) ______ many children worldwide. It often forces them to work long hours in poor conditions, affecting their (8) ______ and mental health. Many children are unable to attend school, which has a long-term impact on their futures. (9) ______ these challenges, organizations like UNICEF are (10) ______ to provide better opportunities for children. They believe that through offering education and protection, child labour can be significantly reduced. Although child labour still remains in (11) ______ parts of the world, efforts are being made to (12) ______ its impact.</p>
+            <p><em>(Adapted from UNICEF - Child Labour)</em></p>
+        </div>
+        <div class="right-pane" id="questions-part-2"></div>
+    </div>
+
+    <!-- PART 3 -->
+    <div class="part-container">
+        <div class="left-pane text-content">
+            <p><strong>Mark the letter A, B, C, or D on your answer sheet to indicate the correct arrangement of the sentence to make a meaningful paragraph/letter in each of the following questions.</strong></p>
+            
+            <p><strong>Question 13.</strong><br>
+            a. John: That sounds amazing! Italy is such a beautiful country to visit.<br>
+            b. Mary: Yes, I'm going to Italy next month, and I can't wait to explore the countryside.<br>
+            c. John: Have you booked your holiday for this summer yet?</p>
+            
+            <p><strong>Question 14.</strong><br>
+            a. Jenny: I'll be working as a graphic designer for an advertising agency.<br>
+            b. Jenny: Yes, I'm really excited about it.<br>
+            c. Tom: That sounds like a fantastic opportunity.<br>
+            d. Tom: What will you be doing there?<br>
+            e. Tom: I heard you're starting a new job next week!</p>
+
+            <p><strong>Question 15.</strong><br>
+            Dear Michael,<br>
+            a. I'm really grateful for your feedback; it gave me a fresh perspective.<br>
+            b. Thanks for reviewing the draft of my article on environmental issues.<br>
+            c. I'm making the necessary edits now and hope to submit it by the end of the week.<br>
+            d. If you have time, maybe we can discuss the revisions over coffee.<br>
+            e. I look forward to your thoughts on the updated version once it's ready.<br>
+            Best wishes,<br>
+            Lily</p>
+
+            <p><strong>Question 16.</strong><br>
+            a. Although it was initially difficult to adjust, I've grown accustomed to the fast-paced work environment.<br>
+            b. My team and I collaborate regularly to meet tight deadlines, which keeps me on my toes.<br>
+            c. For instance, we're currently working on an important project that requires constant communication and creativity.<br>
+            d. Since joining this company, I've gained a tremendous amount of experience in managing complex tasks.<br>
+            e. Overall, I feel proud of the work we've accomplished and how far we've come as a team.</p>
+
+            <p><strong>Question 17.</strong><br>
+            a. In addition to teaching, I participated in language exchange programs and helped organize cultural events for the local community.<br>
+            b. Recently, I completed a six-month internship in France, where I taught English to students of various ages.<br>
+            c. Looking back, I realise how much I've grown both personally and professionally during my time abroad.<br>
+            d. This experience not only improved my teaching skills but also deepened my understanding of different cultures.<br>
+            e. I've always been fascinated by languages, and my studies have taken me to several different countries.</p>
+        </div>
+        <div class="right-pane" id="questions-part-3"></div>
+    </div>
+
+    <!-- PART 4 -->
+    <div class="part-container">
+        <div class="left-pane text-content">
+            <p><strong>Read the following passage about the benefits of learning a foreign language and mark the letter A, B, C, or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 18 to 22.</strong></p>
+            <p>Learning a foreign language has become increasingly important in our globalized world. It not only opens up new opportunities for communication and cultural exchange but also (18) ______. Despite these advantages, there are still challenges involved in learning a new language, especially in (19) ______.</p>
+            <p>Many educational institutions are incorporating foreign language programs (20) ______. These programs are designed to enhance students' cultural awareness and improve their career prospects. For example, (21) ______ in various job markets, where employers value language skills. However, it is essential (22) ______ to meet the needs of diverse learners.</p>
+            <p><em>(Adapted from The Benefits of Learning a Foreign Language)</em></p>
+        </div>
+        <div class="right-pane" id="questions-part-4"></div>
+    </div>
+
+    <!-- PART 5 -->
+    <div class="part-container">
+        <div class="left-pane text-content">
+            <p><strong>Read the following passage about peer pressure among students and mark the letter A, B, C, or D on your answer sheet to indicate the best answer to each of the following questions from 23 to 30.</strong></p>
+            <p>Peer Pressure Among Youth</p>
+            <p>Peer pressure can be particularly prevalent among teenagers, who are at a vulnerable stage of development and seeking their identity. It is a powerful force that can significantly impact the thoughts, actions, and behaviors of teenagers. During adolescence, individuals strive for acceptance and belonging, making them particularly susceptible to the influence of their peers. Understanding the nature of peer pressure and its effects is essential for supporting teenagers in navigating this challenging aspect of their social lives.</p>
+            <p>One aspect of peer pressure is the pressure to <b><u>conform</u></b> to the norms and expectations of a social group. Teenagers may feel compelled to adopt certain behaviors, preferences, or attitudes to fit in and avoid <b><u>social rejection</u></b>. This conformity can range from relatively harmless choices, such as fashion trends, to more concerning behaviors, such as substance abuse or risky activities.</p>
+            <p>Peer pressure can manifest in both explicit and implicit ways. Direct peer pressure involves explicit requests, invitations, or demands from peers to engage in specific actions or behaviors. <b><u>Indirect or implicit peer pressure, on the other hand, is more subtle and involves observing others' behaviors and feeling pressured to conform without any explicit requests.</u></b> This type of pressure can be equally influential and difficult for teenagers to navigate.</p>
+            <p>It is important to note that peer pressure can have positive or negative implications. Positive peer pressure can motivate teenagers to engage in healthy behaviors, such as participating in sports, pursuing academic goals, or engaging in community service. However, <b><u>it</u></b> can lead to risky or harmful behaviors, such as substance abuse, delinquency, or academic underachievement.</p>
+            <p>Parents, educators, and mentors play a crucial role in helping teenagers navigate peer pressure. By fostering open and supportive relationships, adults can provide a safe space for teenagers to discuss their experiences and concerns. Promoting critical thinking, assertiveness skills, and self-confidence can empower teenagers to resist negative peer pressure and make independent, healthy choices.</p>
+            <p><em>(Adapted from "Peer Pressure: Its Influence on Teens and Decision Making")</em></p>
+        </div>
+        <div class="right-pane" id="questions-part-5"></div>
+    </div>
+
+    <!-- PART 6 -->
+    <div class="part-container">
+        <div class="left-pane text-content">
+            <p><strong>Read the following passage about the importance of conserving water and mark the letter A, B, C, or D on your answer sheet to indicate the best answer to each of the following questions from 31 to 40.</strong></p>
+            <p>[I] Water is one of the most essential resources on our planet, <b><u>vital</u></b> for all forms of life. However, increasing demand and pollution are putting immense pressure on our freshwater supplies. [II] According to recent studies, nearly 2 billion people worldwide live in countries experiencing <b><u>high water stress</u></b>, leading to a decline in the availability of this precious resource. This situation not only affects drinking water but also agriculture, sanitation, and energy production.</p>
+            <p>The primary causes of water scarcity include population growth, urbanization, and climate change. As cities expand, the demand for water increases significantly. Moreover, agricultural practices that rely heavily on water are becoming unsustainable in many regions. Climate change further <b><u>exacerbates</u></b> these issues, causing unpredictable weather patterns and extreme droughts, which reduce water availability.</p>
+            <p>[III] In response to this growing crisis, <b><u>everyone must prioritize water conservation</u></b>. Simple actions, such as fixing leaks, using water-efficient appliances, and practicing mindful consumption, can make a significant difference. Additionally, implementing policies that promote sustainable water management and investing in technologies for water recycling can help mitigate the impacts of water scarcity. [IV]</p>
+            <p>Despite these efforts, the challenges remain substantial. It is crucial that we recognize the importance of conserving water and take immediate steps to protect this vital resource for future generations.</p>
+        </div>
+        <div class="right-pane" id="questions-part-6"></div>
+    </div>
+
+    <!-- Sidebar Tracker -->
+    <div class="tracker-bar">
+        <div class="tracker-grid" id="tracker-grid"></div>
+        <button class="submit-btn" onclick="submitExam()">NỘP BÀI THI</button>
+    </div>
+
+    <!-- Modal Popup -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-content">
+            <h2>Kết Quả Bài Thi</h2>
+            <div class="score-display" id="score-text">0 / 40</div>
+            <p>Số câu bỏ trống: <strong id="unanswered-count" style="color:var(--danger)">0</strong></p>
+            <div class="modal-btns">
+                <button class="btn-view" onclick="viewAnswers()">XEM ĐÁP ÁN</button>
+                <button class="btn-redo" onclick="location.reload()">LÀM LẠI BÀI</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dữ liệu Đáp án
+        const dapAn = {
+            1: 'A', 2: 'D', 3: 'B', 4: 'C', 5: 'D', 6: 'D', 7: 'B', 8: 'A', 9: 'B', 10: 'A',
+            11: 'B', 12: 'D', 13: 'C', 14: 'C', 15: 'B', 16: 'B', 17: 'B', 18: 'A', 19: 'D', 20: 'D',
+            21: 'C', 22: 'D', 23: 'A', 24: 'D', 25: 'B', 26: 'B', 27: 'C', 28: 'B', 29: 'D', 30: 'C',
+            31: 'D', 32: 'B', 33: 'B', 34: 'B', 35: 'D', 36: 'B', 37: 'C', 38: 'B', 39: 'B', 40: 'B'
+        };
+
+        const giaiThich = {
+            1: "A. that helps: Sử dụng mệnh đề quan hệ để bổ nghĩa cho 'an online learning platform'.",
+            2: "D. online learning courses: Trật tự cụm danh từ 'các khóa học học trực tuyến'.",
+            3: "B. choose: 'choose from a wide range of subjects' (lựa chọn từ nhiều chủ đề).",
+            4: "C. at: Cụm từ 'at your own pace' (theo tiến độ của riêng bạn).",
+            5: "D. to advance: 'looking to V' mang nghĩa muốn/tìm cách làm gì đó.",
+            6: "D. accessible: Tính từ có nghĩa là dễ tiếp cận/truy cập.",
+            7: "B. involves: Phù hợp ngữ cảnh nhất trong các phương án được đưa ra theo đáp án chuẩn.",
+            8: "A. physical: Cụm từ 'physical and mental health' (sức khỏe thể chất và tinh thần).",
+            9: "B. In spite of: 'In spite of these challenges' (Bất chấp những thách thức này).",
+            10: "A. focusing on: 'focusing on to provide...' (Tập trung vào việc...).",
+            11: "B. many: 'many parts of the world' (nhiều nơi trên thế giới).",
+            12: "D. reduce: 'reduce its impact' (giảm thiểu tác động của nó).",
+            13: "C. c-b-a: (c) Hỏi về kỳ nghỉ -> (b) Trả lời đi Ý -> (a) Khen ngợi nước Ý.",
+            14: "C. e-b-d-a-c: (e) Nghe nói sắp đi làm -> (b) Xác nhận và hào hứng -> (d) Hỏi làm công việc gì -> (a) Thiết kế đồ họa -> (c) Khen ngợi cơ hội tuyệt vời.",
+            15: "B. b-a-c-e-d: (b) Cảm ơn vì đã review -> (a) Biết ơn feedback -> (c) Đang chỉnh sửa -> (e) Mong nhận ý kiến bản cập nhật -> (d) Đề nghị gặp cafe bàn luận.",
+            16: "B. d-a-b-c-e: (d) Từ khi gia nhập công ty -> (a) Ban đầu khó khăn nhưng đã quen -> (b) Làm việc nhóm thường xuyên -> (c) Ví dụ về dự án hiện tại -> (e) Cảm thấy tự hào.",
+            17: "B. e-b-d-a-c: (e) Đam mê ngôn ngữ -> (b) Vừa hoàn thành thực tập ở Pháp -> (d) Cải thiện kỹ năng và hiểu biết văn hóa -> (a) Tham gia nhiều chương trình -> (c) Nhìn lại bản thân trưởng thành.",
+            18: "A. provides a competitive edge in a highly interconnected and diverse society: Bổ sung cho 'It not only... but also'.",
+            19: "D. maintaining motivation and interest in learning to practice every day: Sử dụng V-ing sau giới từ 'in'.",
+            20: "D. with the aim of improving students' overall language skills: Cụm 'with the aim of V-ing' (với mục đích làm gì).",
+            21: "C. Bilingual programs can significantly increase employability and advancement opportunities: Các chương trình song ngữ có thể tăng cơ hội việc làm đáng kể.",
+            22: "D. that language education be tailored to accommodate various learning preferences: Sử dụng thể giả định 'it is essential that + S + (should) V'.",
+            23: "A. resist: Từ 'conform' (tuân theo/phù hợp) có từ trái nghĩa là 'resist' (chống cự).",
+            24: "D. Developing unique personal interests: Không được nhắc đến là hệ quả của áp lực đồng trang lứa.",
+            25: "B. social exclusion: 'Social rejection' (sự từ chối của xã hội) đồng nghĩa với 'social exclusion'.",
+            26: "B. Friends can influence each other by their actions and behaviors without direct communication: Phù hợp ý nghĩa câu gạch chân.",
+            27: "C. peer pressure: Đại từ 'it' ở đoạn 4 thay thế cho 'Positive peer pressure / peer pressure' được nhắc ngay trước đó.",
+            28: "B. Positive peer pressure can lead to healthy behaviors: Dựa theo thông tin đoạn 4.",
+            29: "D. Paragraph 5: Đoạn 5 bàn về vai trò của 'Parents, educators, and mentors'.",
+            30: "C. Paragraph 3: Đoạn 3 nhắc đến áp lực đồng trang lứa 'explicit' và 'implicit'.",
+            31: "D. [IV]: Đoạn này nói về chiến lược quản lý nên hợp lý ghép với câu 'These strategies can significantly improve...'.",
+            32: "B. crucial: 'vital' = quan trọng/thiết yếu = crucial.",
+            33: "B. significant water shortage: 'high water stress' = thiếu hụt nước nghiêm trọng.",
+            34: "B. alleviates: 'exacerbate' (làm trầm trọng thêm) trái nghĩa với 'alleviate' (làm giảm bớt).",
+            35: "D. City expansion: Từ dùng trong bài là 'urbanization' (ở câu A), câu D có ý nghĩa tương đương nhưng đáp án chỉ định là D.",
+            36: "B. Both the government and each individual have a role to play in protecting water resources: Tóm tắt nội dung đoạn 3.",
+            37: "C. Climate change negatively impacts water availability: Rõ ràng được nêu trong bài.",
+            38: "B. Society needs to focus on water conservation to effectively address the growing water shortage problem: Paraphrase hợp lý nhất.",
+            39: "B. Water conservation measures need to be widely applied to create an impact: Suy luận từ đoạn 3.",
+            40: "B. The importance of water conservation to combat the growing water shortage caused by increased demand and climate change: Ý chính bao quát toàn bài."
+        };
+
+        const questionsData = {
+            part1: [
+                {id: 1, ops: ["A. that helps", "B. help", "C. which help", "D. helped"]},
+                {id: 2, ops: ["A. learning online courses", "B. courses online learning", "C. courses learning online", "D. online learning courses"]},
+                {id: 3, ops: ["A. select", "B. choose", "C. pick", "D. find"]},
+                {id: 4, ops: ["A. in", "B. on", "C. at", "D. with"]},
+                {id: 5, ops: ["A. to be advanced", "B. advancing", "C. advance", "D. to advance"]},
+                {id: 6, ops: ["A. accessibility", "B. accessing", "C. accession", "D. accessible"]}
+            ],
+            part2: [
+                {id: 7, ops: ["A. includes", "B. involves", "C. affects", "D. causes"]},
+                {id: 8, ops: ["A. physical", "B. mental", "C. social", "D. emotional"]},
+                {id: 9, ops: ["A. Because of", "B. In spite of", "C. Due to", "D. Instead of"]},
+                {id: 10, ops: ["A. focusing on", "B. look forward to", "C. come up with", "D. find out"]},
+                {id: 11, ops: ["A. much", "B. many", "C. little", "D. most"]},
+                {id: 12, ops: ["A. decrease", "B. lessen", "C. control", "D. reduce"]}
+            ],
+            part3: [
+                {id: 13, ops: ["A. a-c-b", "B. c-a-b", "C. c-b-a", "D. b-c-a"]},
+                {id: 14, ops: ["A. d-a-e-b-c", "B. d-b-e-a-c", "C. e-b-d-a-c", "D. e-a-d-b-c"]},
+                {id: 15, ops: ["A. b-a-d-c-e", "B. b-a-c-e-d", "C. d-a-c-b-e", "D. b-c-d-a-e"]},
+                {id: 16, ops: ["A. b-c-a-d-e", "B. d-a-b-c-e", "C. d-c-b-a-e", "D. c-b-d-a-e"]},
+                {id: 17, ops: ["A. d-c-a-b-e", "B. e-b-d-a-c", "C. e-c-b-d-a", "D. c-d-e-b-a"]}
+            ],
+            part4: [
+                {id: 18, ops: ["A. provides a competitive edge in a highly interconnected and diverse society", "B. provide a competitive edge in a highly interconnected and diverse society", "C. that provides a competitive edge in a highly interconnected and diverse society", "D. providing a competitive edge in a highly interconnected and diverse society"]},
+                {id: 19, ops: ["A. from which maintain motivation and interest in learning to practice every day", "B. maintaining motivation and interesting in learning to practice every day", "C. that maintain motivation and interest in learning to practice every day", "D. maintaining motivation and interest in learning to practice every day"]},
+                {id: 20, ops: ["A. with the goal to improve students' overall language skills", "B. that aim to improve students' overall language skills", "C. aiming to improve students' overall language skills", "D. with the aim of improving students' overall language skills"]},
+                {id: 21, ops: ["A. Bilingual programs can offer competitive advantages in a globalized job market", "B. Bilingual programs can help individuals to navigate multicultural workplaces effectively", "C. Bilingual programs can significantly increase employability and advancement opportunities", "D. Bilingual programs can create pathways for international career development"]},
+                {id: 22, ops: ["A. that language education must be appropriate to the goals and environment of use", "B. to include practical and experiential activities for use in the workplace", "C. that all language education focuses solely on grammar and vocabulary", "D. that language education be tailored to accommodate various learning preferences"]}
+            ],
+            part5: [
+                {id: 23, text: "The word \"conform\" in paragraph 2 is OPPOSITE in meaning to:", ops: ["A. resist", "B. adapt", "C. follow", "D. imitate"]},
+                {id: 24, text: "Which of the following is NOT mentioned as a potential outcome of peer pressure?", ops: ["A. Participating in sports", "B. Using harmful substances", "C. Poor academic performance", "D. Developing unique personal interests"]},
+                {id: 25, text: "The phrase \"social rejection\" in paragraph 2 could be best replaced by:", ops: ["A. social approval", "B. social exclusion", "C. social interaction", "D. social engagement"]},
+                {id: 26, text: "Which of the following best paraphrases the underlined sentence in paragraph 3?", ops: ["A. Peer pressure can be seen directly through demands made by friends.", "B. Friends can influence each other by their actions and behaviors without direct communication.", "C. Indirect peer pressure is easier to recognize and avoid than direct requests from peers.", "D. Observing the behaviors of those around us to conform in order to avoid being different."]},
+                {id: 27, text: "The word \"it\" in paragraph 4 refers to:", ops: ["A. academic performance", "B. negative behavior", "C. peer pressure", "D. social group"]},
+                {id: 28, text: "Which of the following is TRUE according to the passage?", ops: ["A. Peer pressure has only negative effects on teenagers.", "B. Positive peer pressure can lead to healthy behaviors.", "C. All peer pressure is easy to identify.", "D. Teenagers do not seek social acceptance."]},
+                {id: 29, text: "In which paragraph does the writer discuss the role of adults in addressing peer pressure?", ops: ["A. Paragraph 2", "B. Paragraph 3", "C. Paragraph 4", "D. Paragraph 5"]},
+                {id: 30, text: "In which paragraph does the writer explain the different forms of peer pressure?", ops: ["A. Paragraph 1", "B. Paragraph 2", "C. Paragraph 3", "D. Paragraph 4"]}
+            ],
+            part6: [
+                {id: 31, text: "Where in this passage does the following sentence best fit?<br><em>\"These strategies can significantly improve water availability in stressed regions.\"</em>", ops: ["A. [I]", "B. [II]", "C. [III]", "D. [IV]"]},
+                {id: 32, text: "The word \"vital\" in paragraph 1 could be best replaced by:", ops: ["A. unimportant", "B. crucial", "C. optional", "D. harmful"]},
+                {id: 33, text: "The phrase \"high water stress\" in paragraph 2 refers to:", ops: ["A. excessive rainfall", "B. significant water shortage", "C. improved water quality", "D. reduced water demand"]},
+                {id: 34, text: "The phrase \"exacerbates\" in paragraph 3 is OPPOSITE in meaning to:", ops: ["A. worsens", "B. alleviates", "C. maintains", "D. complicates"]},
+                {id: 35, text: "According to paragraph 2, which of the following is NOT a contributing factor to water scarcity?", ops: ["A. Urbanization", "B. Population growth", "C. Extreme droughts", "D. City expansion"]},
+                {id: 36, text: "Which of the following best summarises paragraph 3?", ops: ["A. Governments should focus solely on technology to solve water issues.", "B. Both the government and each individual have a role to play in protecting water resources.", "C. Water conservation is primarily a government responsibility, not individual.", "D. The role of each individual in protecting water resources is very important."]},
+                {id: 37, text: "Which of the following is TRUE according to the passage?", ops: ["A. Water scarcity affects only drinking water supplies.", "B. Urbanization decreases the demand for water.", "C. Climate change negatively impacts water availability.", "D. Sustainable practices are unnecessary for water management."]},
+                {id: 38, text: "Which of the following best paraphrases the underlined part in paragraph 3?", ops: ["A. Individuals should consider water conservation a secondary concern when addressing this problem.", "B. Society needs to focus on water conservation to effectively address the growing water shortage problem.", "C. Water conservation is not an urgent issue for people facing this crisis.", "D. People can manage the crisis without prioritizing water conservation."]},
+                {id: 39, text: "Which of the following can be inferred from the passage?", ops: ["A. Applying technology can solve all problems of water shortage.", "B. Water conservation measures need to be widely applied to create an impact.", "C. Climate change is an important factor that affects water resources globally.", "D. Governments play an important role in protecting polluted water sources."]},
+                {id: 40, text: "Which of the following best summarises the passage?", ops: ["A. Water shortage is a major problem that requires immediate government action.", "B. The importance of water conservation to combat the growing water shortage caused by increased demand and climate change.", "C. The impact of water shortage due to climate change on human life and agricultural development.", "D. Immediate action is needed to address the growing water shortage crisis."]}
+            ]
+        };
+
+        // Render Questions
+        function renderQuestions(partData, containerId) {
+            const container = document.getElementById(containerId);
+            partData.forEach(q => {
+                let optionsHTML = '';
+                q.ops.forEach(opt => {
+                    const val = opt.charAt(0);
+                    optionsHTML += `<label><input type="radio" name="q${q.id}" value="${val}"> ${opt}</label>`;
+                });
+                
+                const qText = q.text ? `<div class="question-text">Question ${q.id}: ${q.text}</div>` : `<div class="question-text">Question ${q.id}:</div>`;
+
+                container.innerHTML += `
+                    <div class="question-block" id="q-block-${q.id}">
+                        ${qText}
+                        <div class="options">
+                            ${optionsHTML}
+                        </div>
+                        <div class="explanation" id="exp-${q.id}"></div>
+                    </div>
+                `;
+            });
+        }
+
+        renderQuestions(questionsData.part1, 'questions-part-1');
+        renderQuestions(questionsData.part2, 'questions-part-2');
+        renderQuestions(questionsData.part3, 'questions-part-3');
+        renderQuestions(questionsData.part4, 'questions-part-4');
+        renderQuestions(questionsData.part5, 'questions-part-5');
+        renderQuestions(questionsData.part6, 'questions-part-6');
+
+        // Initialize Tracker
+        const trackerGrid = document.getElementById('tracker-grid');
+        for (let i = 1; i <= 40; i++) {
+            trackerGrid.innerHTML += `<div class="track-box" id="track-${i}" onclick="scrollToQ(${i})">${i}</div>`;
+        }
+
+        // Scroll to question
+        function scrollToQ(id) {
+            document.getElementById(`q-block-${id}`).scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Update Tracker on Radio Change
+        document.querySelectorAll('input[type=radio]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                if(isSubmitted) return;
+                const qNum = this.name.replace('q', '');
+                document.getElementById(`track-${qNum}`).classList.add('active');
+            });
+        });
+
+        // Timer Logic
+        let timeLeft = 50 * 60; // 50 minutes
+        const timerEl = document.getElementById('timer');
+        let timerInterval = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                submitExam();
+            } else {
+                timeLeft--;
+                let m = Math.floor(timeLeft / 60);
+                let s = timeLeft % 60;
+                timerEl.innerText = `⏳ ${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+            }
+        }, 1000);
+
+        // Persistent Text Highlight Logic
+        document.addEventListener('mouseup', function(e) {
+            if (e.target.closest('.text-content')) {
+                let selection = window.getSelection();
+                if (selection.toString().trim().length > 0) {
+                    try {
+                        let range = selection.getRangeAt(0);
+                        let span = document.createElement('span');
+                        span.className = 'highlight';
+                        range.surroundContents(span);
+                        selection.removeAllRanges();
+                    } catch (error) {
+                        console.log("Cannot highlight across multiple tags.");
+                    }
+                }
+            }
+        });
+
+        // Submission & Grading
+        let isSubmitted = false;
+        function submitExam() {
+            if (isSubmitted) return;
+            let answered = 0;
+            let score = 0;
+            
+            for (let i = 1; i <= 40; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                if (selected) {
+                    answered++;
+                    if (selected.value === dapAn[i]) score++;
+                }
+            }
+            
+            let unanswered = 40 - answered;
+            document.getElementById('score-text').innerText = `${score} / 40`;
+            document.getElementById('unanswered-count').innerText = unanswered;
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function viewAnswers() {
+            isSubmitted = true;
+            document.getElementById('modal').style.display = 'none';
+            clearInterval(timerInterval);
+            
+            for (let i = 1; i <= 40; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                const correctAns = dapAn[i];
+                const trackBox = document.getElementById(`track-${i}`);
+                const allLabels = document.querySelectorAll(`input[name="q${i}"]`);
+                
+                // Disable & Style radios
+                allLabels.forEach(radio => {
+                    radio.disabled = true;
+                    if (radio.value === correctAns) {
+                        radio.parentElement.classList.add('correct-ans');
+                    }
+                });
+                
+                // Grade & Tracker Update
+                trackBox.classList.remove('active');
+                if (selected) {
+                    if (selected.value === correctAns) {
+                        trackBox.classList.add('correct');
+                    } else {
+                        selected.parentElement.classList.add('wrong-ans');
+                        trackBox.classList.add('wrong');
+                    }
+                } else {
+                    trackBox.classList.add('wrong'); // Unanswered
+                }
+                
+                // Show Explanation
+                const expDiv = document.getElementById(`exp-${i}`);
+                if (expDiv && giaiThich[i]) {
+                    expDiv.innerHTML = `<strong>💡 Giải thích:</strong> ${giaiThich[i]}`;
+                    expDiv.style.display = 'block';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
