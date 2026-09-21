@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đề Số 06 - THPT Quốc Gia Môn Tiếng Anh</title>
+    <style>
+        :root {
+            --primary: #1e90ff;
+            --success: #2ed573;
+            --danger: #ff4757;
+            --hover-bg: #e0f7fa;
+            --bg-color: #f4f7f6;
+            --highlight: yellow;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            padding-bottom: 80px; 
+            background-color: var(--bg-color);
+            color: #333;
+        }
+        .header {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .header h2, .header h3 { margin: 5px 0; }
+        
+        .timer {
+            position: fixed;
+            top: 15px;
+            right: 20px;
+            background: var(--danger);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Layout */
+        .part-container {
+            display: flex;
+            margin: 15px auto;
+            width: 98%;
+            height: 85vh; 
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .left-pane {
+            width: 55%;
+            padding: 20px;
+            overflow-y: auto;
+            border-right: 2px solid #eee;
+            background-color: #fafafa;
+        }
+        .right-pane {
+            width: 45%;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #fff;
+        }
+
+        /* Typography & Effects */
+        .text-content {
+            font-size: 16px;
+            line-height: 1.8;
+        }
+        .text-content p {
+            padding: 5px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .text-content p:hover {
+            background-color: var(--hover-bg);
+        }
+        .highlight {
+            background-color: var(--highlight);
+        }
+
+        /* Questions */
+        .question-block {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #ccc;
+        }
+        .question-text {
+            font-weight: bold;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+        .options label {
+            display: block;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 1px solid #f0f0f0;
+            transition: 0.2s;
+        }
+        .options label:hover {
+            background-color: #f8f9fa;
+        }
+        .options input { margin-right: 10px; }
+        
+        .correct-ans {
+            background-color: var(--success) !important;
+            color: white;
+            font-weight: bold;
+            border-color: var(--success) !important;
+        }
+        .wrong-ans {
+            background-color: var(--danger) !important;
+            color: white;
+            border-color: var(--danger) !important;
+        }
+
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            background-color: var(--hover-bg);
+            border-left: 5px solid var(--primary);
+            border-radius: 4px;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        /* Sidebar Tracker */
+        .tracker-bar {
+            position: fixed;
+            bottom: 0; left: 0; width: 100%;
+            background: white;
+            padding: 15px;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-sizing: border-box;
+        }
+        .tracker-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            flex: 1;
+        }
+        .track-box {
+            width: 32px; height: 32px;
+            display: flex; justify-content: center; align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .track-box:hover { border-color: var(--primary); }
+        .track-box.active { background: var(--primary); color: white; border-color: var(--primary); }
+        .track-box.correct { background: var(--success); color: white; border-color: var(--success); }
+        .track-box.wrong { background: var(--danger); color: white; border-color: var(--danger); }
+        
+        .submit-btn {
+            padding: 12px 25px;
+            background: var(--success);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-left: 20px;
+            transition: 0.3s;
+        }
+        .submit-btn:hover { background: #26b360; }
+
+        /* Modal Popup */
+        .modal-overlay {
+            display: none;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 2000;
+            justify-content: center; align-items: center;
+        }
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            width: 400px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            animation: popIn 0.3s ease-out;
+        }
+        @keyframes popIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .modal-content h2 { color: #2f3542; margin-top: 0; font-size: 28px;}
+        .modal-content p { font-size: 18px; margin: 15px 0; color: #57606f;}
+        .score-display { font-size: 36px; font-weight: bold; color: var(--primary); margin: 20px 0; }
+        .modal-btns { margin-top: 30px; display: flex; justify-content: space-around; }
+        .modal-btns button {
+            padding: 12px 20px; border: none; border-radius: 6px;
+            font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.2s;
+        }
+        .btn-view { background: var(--primary); color: white; }
+        .btn-view:hover { background: #187bcd; }
+        .btn-redo { background: var(--danger); color: white; }
+        .btn-redo:hover { background: #e03e4d; }
+
+        u, b { font-weight: bold; }
+        u { text-decoration: underline; }
+
+        /* ========================================================
+           BỔ SUNG CSS RESPONSIVE CHO MÀN HÌNH ĐIỆN THOẠI / TABLET 
+           ======================================================== */
+        @media (max-width: 992px) {
+            body { padding-bottom: 140px; }
+            .part-container { flex-direction: column; height: auto; width: 100%; box-sizing: border-box; }
+            .left-pane, .right-pane { width: 100%; height: auto; border-right: none; box-sizing: border-box; }
+            .left-pane { border-bottom: 2px dashed #ccc; }
+            .tracker-bar { flex-direction: column; padding: 10px; }
+            .tracker-grid { flex-wrap: nowrap; overflow-x: auto; width: 100%; padding-bottom: 10px; }
+            .track-box { flex-shrink: 0; }
+            .submit-btn { width: 100%; margin-left: 0; margin-top: 5px; }
+            .tracker-grid::-webkit-scrollbar { height: 5px; }
+            .tracker-grid::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="timer" id="timer">⏳ 50:00</div>
+
+    <div class="header">
+        <h2>ĐỀ SỐ 06</h2>
+        <h3>KỲ THI THPT QUỐC GIA - Môn thi: TIẾNG ANH</h3>
+        <p><strong>Giáo viên: NGUYỄN THỊ THU DUYÊN - Zalo: 0918204603</strong></p>
+    </div>
+
+    <!-- PART 1 -->
+    <div class="part-container">
+        <div class="left-pane text-content">
+            <p><strong>Read the following advertisement and mark the letter A, B, C, or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 1 to 6.</strong></p>
+            <p><strong>FEELING STRESSED?</strong></p>
+            <p>Have you ever felt tired and even stressed? Diao Chan therapy and retreat helps you with (1) ______. What you need is just 30 minutes (2) ______ a day.</p>
+            <p>You get (3) ______ if you need 15 minutes of foot massage. Our service is (4) ______ is convenient for businessmen. Free hot drinks are also (5) ______.</p>
+            <p>From now on you must remember this address: 123 Lu Bu Street, downtown area. You can (6) ______ 09634908823 in advance.</p>
+        </div>
+        <div class="right-pane" id="questions-part-1"></div>
+    </div>
+
+    <!-- PART 2 -->
+    <div class="part-container">
+        <div class="left-pane text-content">
+            <p><strong>Read the following leaflet and mark the letter A, B, C, or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 7 to 12.</strong></p>
+            <p>Our natural resources will be (7) ______ unless we save the energy (8) ______.</p>
+            <p><strong>Follow these tips to avoid wasting energy:</strong></p>
+            <ul>
+                <li>Use a timer on your air-conditioning system. Just set air conditioning to come only (9) ______.</li>
+                <li>Close your curtains at dust to stop heat escaping (10) ______ the windows.</li>
+                <li>Don't leave the apps on your phones or laptops (11) ______ unnecessarily.</li>
+                <li>If you have a hot water tank, set the cylinder thermostat to 60°C (140°F).</li>
+                <li>Don't use your (12) ______ every day. Hang out washing outside during nice weather.</li>
+            </ul>
+        </div>
+        <div class="right-pane" id="questions-part-2"></div>
+    </div>
+
+    <!-- PART 3 -->
+    <div class="part-container">
+        <div class="left-pane text-content">
+            <p><strong>Mark the letter A, B, C, or D on your answer sheet to indicate the best arrangement of utterances or sentences to make a meaningful exchange or text in each of the following questions from 13 to 17.</strong></p>
+            
+            <p><strong>Question 13:</strong><br>
+            a. Tom: Good morning, Alice! Did you sleep well?<br>
+            b. Alice: Yes, thank you. How about you?<br>
+            c. Alice: Good morning, Tom!</p>
+            
+            <p><strong>Question 14:</strong><br>
+            a. Jack: Morning, Emily! It was good, thanks. I went hiking with some friends. How about you?<br>
+            b. Emily: Good morning, Jack! How was your weekend?<br>
+            c. Emily: Sounds fun! I had a relaxing weekend at home. Hey, have you seen the agenda?<br>
+            d. Emily: Alright, thanks. Oh, and don't forget, we have that client presentation at 2 PM.<br>
+            e. Jack: Not yet. Let me check my email.</p>
+
+            <p><strong>Question 15:</strong><br>
+            Dear Giang,<br>
+            a. Distance may keep us apart, but my love for you only grows stronger.<br>
+            b. I miss you more with each passing day.<br>
+            c. I cherish the moments we shared, and I hold onto the hope of being together soon.<br>
+            d. Our love knows no bounds, transcending the miles that separate us.<br>
+            e. Every day brings us closer to our reunion, and I eagerly wait for that day.<br>
+            f. You are my guiding star, my source of strength, and my reason to smile.<br>
+            With all my love, Ho</p>
+
+            <p><strong>Question 16:</strong><br>
+            a. Furthermore, highly educated women have opportunities to become leaders at work.<br>
+            b. Educated women can both take care of their children and fulfil their job requirements.<br>
+            c. In conclusion, there should be no sex discrimination in our society nowadays.<br>
+            d. Their incomes are higher and higher. Why has the situation changed lately?<br>
+            e. Girls who stay at school longer can build their good backgrounds.<br>
+            f. The number of women who become highly educated labourers is increasing.</p>
+
+            <p><strong>Question 17:</strong><br>
+            a. All in all, sharing child-rearing and housework helps make a full house.<br>
+            b. That is why more and more fathers are loved by both their wives and their children.<br>
+            c. Additionally, housework helps men sympathise with their wives.<br>
+            d. They have a chance to bond with their children and improve their relationships.<br>
+            e. In my opinion, men sometimes should stay home, take care of their children and do housework.<br>
+            f. Children instructed by their fathers should become stronger and stronger.</p>
+        </div>
+        <div class="right-pane" id="questions-part-3"></div>
+    </div>
+
+    <!-- PART 4 -->
+    <div class="part-container">
+        <div class="left-pane text-content">
+            <p><strong>Read the following passage about gender equality and mark the letter A, B, C or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 18 to 22.</strong></p>
+            <p>Gender equality is not only a fundamental human right, but a necessary foundation for a peaceful, prosperous and sustainable world. It is estimated that (18) ______. Unfortunately, at the current time, 1 in 5 women and girls between the ages of 15-49 have reported experiencing physical or sexual violence by an intimate partner within a 12-month period and 49 countries currently have no laws (19) ______. This type of violence doesn't just harm individual women and girls, it also undermines (20) ______ and hinders their active involvement in society. Progress is occurring regarding harmful practices such as child marriage and FGM (Female Genital Mutilation), (21) ______ but there is still much work to be done to complete eliminate such practices.</p>
+            <p>Providing women and girls with equal access to education, health care, decent work, and (22) ______ will fuel sustainable economies and benefit societies and humanity at large. Implementing new legal frameworks regarding female equality in the workplace and the eradication of harmful practices targeted at women is crucial to ending the gender-based discrimination prevalent in many countries around the world.</p>
+        </div>
+        <div class="right-pane" id="questions-part-4"></div>
+    </div>
+
+    <!-- PART 5 -->
+    <div class="part-container">
+        <div class="left-pane text-content">
+            <p><strong>Read the following passage about human life expectancy and mark the letter A, B, C or D on your answer sheet to indicate the best answer to each of the following questions from 23 to 30.</strong></p>
+            <p>How long will a baby born today live? 100 years? 120 years? Scientists are studying genes that could mean long life for us all.</p>
+            <p>There are already many, many people who have passed the landmark age of 100. In fact, there are now so many healthy, <b><u>elderly</u></b> people that there's a name for them: the wellderly. These are people over the age of eighty who have no major illnesses, such as high blood pressure, heart disease or diabetes.</p>
+            <p>There are many scientific studies of communities where healthy old age is typical. These include places like Calabria in southern Italy and the island of Okinawa in Japan. In Calabria, the small village of Molochio has about 2,000 inhabitants. And of these, there are at least eight people over a hundred years old. When researchers ask people like this the secret of their long life, the answer is almost always about food and is almost always the same: 'I eat a lot of fruit and vegetables.' 'I eat a little bit of everything. I neither smoke nor drink.'</p>
+            <p>In the past, scientists looked at things such as diet and lifestyle for an explanation of long life, but these days <b><u>they</u></b> are also looking at genetics. <b><u>Researcher Eric Topol says that there must be genes that explain why people are protected from the effects of aging process.</u></b> The new research into long life did <b><u>scrutinize</u></b> groups of people who have a genetic connection. One interesting group lives in Ecuador. In one area of the country there are a number of people with the same genetic condition. It's called Laron syndrome. These people don't grow very tall - just over one metre. But Laron syndrome also give them protection against cancer and diabetes. As a result, they live longer than other people in their families. Meanwhile, on the Hawaiian island of Oahu, there's another group of long-lived men, Japanese-Americans. They have a similar gene to the Laron syndrome group.</p>
+            <p>Back in Calabria, researchers constructed the family trees of the 100-year-old people. They looked at family information from the 19th century to today. It is concluded that there are genetic factors that give health benefits to the men. This is a surprising result because generally in Europe, women live longer than men. So what really makes people live longer? It seems likely that it is an interaction of genes, the environment and probably a third factor - luck.</p>
+        </div>
+        <div class="right-pane" id="questions-part-5"></div>
+    </div>
+
+    <!-- PART 6 -->
+    <div class="part-container">
+        <div class="left-pane text-content">
+            <p><strong>Read the following passage about education in Nepal and mark the letter A, B, C or D on your answer sheet to indicate the best answer to each of the following questions from 31 to 40.</strong></p>
+            <p>An education pioneer born into rural poverty in Nepal has opened 30 schools in a bid to boost prospects for his country's children. The World Bank ranks Nepal as the globe's 31st poorest country, with almost 10 million people living on daily incomes between £1.48 and £2.50. Many rural villages remain unreached by government schooling and adult literacy stood at just 60 per cent in 2011.</p>
+            <p>Surya Karki and his charity United World Schools Nepal (UWS) are <b><u>tackling</u></b> high illiteracy and poverty rates by funding and improving education. The first school opened in 2015- since then 92 per cent of children have completed primary education, which finishes at age eight, and continued into secondary education with UWS schools. In comparison to 39 per cent of students continuing education who attended government schools.</p>
+            <p>Mr Karki was born into poverty in rural Nepal. Speaking to the Telegraph he said: "School is the only solution to the poverty cycle that we live in. I was raised by a single mother in a male-dominated society. The school that I went to was approximately two hours walk away. My house was on top of a hill and my mother had to drag me across rivers. We used to walk 10 miles a day. The schooling was really bad." Of the students who would go to school, he said: "They would end up in the same place, as cheap migrant workers in Qatar, Saudi, or Dubai. There was no value in education no success stories."</p>
+            <p><strong>[I]</strong> Karki's mother was a firm believer in education, and at age eight Karki secured a scholarship to study in the capital, Kathmandu. <strong>[II]</strong> From there he won scholarships and completed Masters degrees in China and the United States. <strong>[III]</strong> Karki said. "<b><u>Inequalities in a country can only be decreased if there is access to knowledge.</u></b>" <strong>[IV]</strong></p>
+            <p>The devastating earthquake in 2015 damaged 9,300 schools, <b><u>displacing</u></b> hundreds of thousands of families and pushing 700,000 people into poverty. As of January 2018, only 2,891 schools had been rebuilt. Karki said: "We came at a crucial time, where we could redo or <b><u>undo</u></b> what had been done badly. Education was really bad in terms of infrastructure, quality of teachers, training. It was an opportunity for us to really make things better."</p>
+            <p>UWS Nepal has so far built 30 schools and has seven more in construction. The schools run between 10 am and 3:30 pm, and have an 86 per cent average attendance rate, which Karki says is almost double the attendance rates for government schools in the vicinity. Sexual health classes are taught to the children in the later years.</p>
+        </div>
+        <div class="right-pane" id="questions-part-6"></div>
+    </div>
+
+    <!-- Sidebar Tracker -->
+    <div class="tracker-bar">
+        <div class="tracker-grid" id="tracker-grid"></div>
+        <button class="submit-btn" onclick="submitExam()">NỘP BÀI THI</button>
+    </div>
+
+    <!-- Modal Popup -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-content">
+            <h2>Kết Quả Bài Thi</h2>
+            <div class="score-display" id="score-text">0 / 40</div>
+            <p>Số câu bỏ trống: <strong id="unanswered-count" style="color:var(--danger)">0</strong></p>
+            <div class="modal-btns">
+                <button class="btn-view" onclick="viewAnswers()">XEM ĐÁP ÁN</button>
+                <button class="btn-redo" onclick="location.reload()">LÀM LẠI BÀI</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dữ liệu Đáp án và Giải thích chi tiết
+        const dapAn = {
+            1: 'A', 2: 'C', 3: 'C', 4: 'B', 5: 'D', 6: 'D', 7: 'C', 8: 'D', 9: 'B', 10: 'C',
+            11: 'A', 12: 'B', 13: 'D', 14: 'C', 15: 'C', 16: 'A', 17: 'B', 18: 'C', 19: 'A', 20: 'D',
+            21: 'C', 22: 'B', 23: 'C', 24: 'C', 25: 'A', 26: 'C', 27: 'D', 28: 'D', 29: 'B', 30: 'D',
+            31: 'A', 32: 'D', 33: 'C', 34: 'A', 35: 'C', 36: 'B', 37: 'C', 38: 'A', 39: 'B', 40: 'A'
+        };
+
+        const giaiThich = {
+            1: "Cần một danh từ sau giới từ 'with'. 'Relaxation' (sự thư giãn) là đáp án đúng.",
+            2: "Cụm danh từ đúng trật tự: total body massage.",
+            3: "Free of charge: miễn phí.",
+            4: "Mệnh đề quan hệ không xác định, sử dụng dấu phẩy và đại từ 'which' thay thế cho vế trước.",
+            5: "Sử dụng dạng bị động 'are included' (được bao gồm).",
+            6: "Dial in advance: gọi điện trước để đặt chỗ.",
+            7: "Used up: dùng cạn kiệt.",
+            8: "The energy (which/that) we are consuming: Mệnh đề quan hệ xác định lược bỏ đại từ.",
+            9: "When required: khi được yêu cầu / khi cần thiết (rút gọn mệnh đề).",
+            10: "Through the windows: xuyên qua các ô cửa sổ.",
+            11: "On standby: ở chế độ chờ.",
+            12: "Drying machine: máy sấy (phù hợp với vế sau 'Hang out washing...').",
+            13: "Trình tự: (c) Chào buổi sáng -> (a) Hỏi thăm giấc ngủ -> (b) Trả lời và hỏi lại.",
+            14: "Trình tự: (b) Emily hỏi thăm cuối tuần -> (a) Jack trả lời đi leo núi và hỏi lại -> (c) Emily chia sẻ và hỏi về agenda -> (e) Jack nói chưa kiểm tra -> (d) Lời nhắc nhở.",
+            15: "Trình tự: (b) Mở đầu nói nhớ -> (a) Khoảng cách và tình yêu -> (d) Tình yêu vượt qua khoảng cách -> (c) Trân trọng và hy vọng -> (f) Định vị tầm quan trọng -> (e) Kết thúc mong chờ.",
+            16: "Đoạn văn bắt đầu bằng xu hướng tăng (f), lý do thay đổi (d), đi học lâu hơn (e), chăm sóc con và công việc (b), cơ hội (a) và kết luận (c).",
+            17: "Bắt đầu với ý kiến cá nhân (e), dẫn đến sự gắn kết (d), con cái mạnh mẽ hơn (f), hiểu vợ hơn (c), tạo mái ấm gia đình (a) và kết luận vì sao các ông bố được yêu thương (b).",
+            18: "Mệnh đề danh ngữ đóng vai trò tân ngữ hoàn chỉnh 'Women and girls represent...'.",
+            19: "Mệnh đề phân từ hiện tại: protecting women from domestic violence.",
+            20: "Their overall quality of life: Đại từ 'their' thay thế cho phụ nữ và trẻ em gái.",
+            21: "Sử dụng 'which' thay thế cho mệnh đề phía trước.",
+            22: "Representation in political and economic decision-making processes: Cần một danh từ song song với các danh từ trước đó.",
+            23: "Hội chứng Laron có bảo vệ họ khỏi ung thư và tiểu đường, do đó đáp án C (có xu hướng mắc tiểu đường) là SAI.",
+            24: "Elderly (người già) trái nghĩa với short-lived (chết yểu, tuổi thọ ngắn).",
+            25: "They thay thế cho các nhà khoa học (scientists) ở vế trước.",
+            26: "Scrutinize (xem xét kỹ lưỡng) gần nghĩa với inspect.",
+            27: "Slow down our aging process: diễn giải lại 'protected from the effects of aging process'.",
+            28: "Họ là những người già không có vấn đề sức khỏe (old people without health problems).",
+            29: "Đoạn 3 đề cập đến câu trả lời khi được hỏi về bí quyết (I eat a lot of fruit...).",
+            30: "Đoạn cuối cùng (đoạn 5) có nhắc đến yếu tố may mắn (a third factor - luck).",
+            31: "Đoạn văn chủ yếu kể về người đàn ông sinh ra trong nghèo khó đã truyền cảm hứng và giúp trẻ em đến trường.",
+            32: "Tackling (giải quyết) đồng nghĩa với addressing.",
+            33: "Displacing: làm cho mất nhà cửa (making people homeless).",
+            34: "Undo: loại bỏ tác động xấu của điều gì đó.",
+            35: "Câu chèn vào [III] hợp lý vì nói về sự trở lại Nepal sau khi học xong ở Mỹ và Trung Quốc.",
+            36: "Diễn giải lại: Việc tiếp cận tri thức giúp giảm bớt sự bất bình đẳng.",
+            37: "Năm 2011, tỷ lệ biết chữ của người lớn là 60% (chỉ hơn 50%).",
+            38: "Thông tin ông ấy làm việc chặt chẽ với World Bank KHÔNG được đề cập.",
+            39: "Hệ thống giáo dục rất tệ về cơ sở vật chất, giáo viên và giảng dạy.",
+            40: "Có thể suy luận rằng Karki và tổ chức của ông có thành tích tốt hơn các trường học của chính phủ."
+        };
+
+        const questionsData = {
+            part1: [
+                {id: 1, ops: ["A. relaxation", "B. relax", "C. relaxed", "D. relaxing"]},
+                {id: 2, ops: ["A. massage total body", "B. total massage body", "C. total body massage", "D. body massage total"]},
+                {id: 3, ops: ["A. freedom", "B. duty-free", "C. free of charge", "D. feeling free"]},
+                {id: 4, ops: ["A. available 24/7 which", "B. available 24/7, which", "C. available 24/7", "D. available 24/7 that"]},
+                {id: 5, ops: ["A. composing", "B. including", "C. composed", "D. included"]},
+                {id: 6, ops: ["A. do", "B. change", "C. make", "D. dial"]}
+            ],
+            part2: [
+                {id: 7, ops: ["A. used for", "B. used in", "C. used up", "D. used all"]},
+                {id: 8, ops: ["A. which is consuming", "B. we are consumed", "C. which are consumed", "D. we are consuming"]},
+                {id: 9, ops: ["A. when is required", "B. when required", "C. when is requiring", "D. when requiring"]},
+                {id: 10, ops: ["A. from", "B. out", "C. through", "D. though"]},
+                {id: 11, ops: ["A. on standby", "B. at standby", "C. for standby", "D. with standby"]},
+                {id: 12, ops: ["A. washing machine", "B. drying machine", "C. cutting machine", "D. fixing machine"]}
+            ],
+            part3: [
+                {id: 13, ops: ["A. a-b-c", "B. c-b-a", "C. b-c-a", "D. c-a-b"]},
+                {id: 14, ops: ["A. a-b-c-d-e", "B. c-b-a-e-d", "C. b-a-c-e-d", "D. c-a-b-d-e"]},
+                {id: 15, ops: ["A. a-b-c-d-e-f", "B. f-e-d-c-b-a", "C. b-a-d-c-f-e", "D. e-f-c-d-a-b"]},
+                {id: 16, ops: ["A. f-d-e-b-a-c", "B. d-a-c-f-e-b", "C. b-a-e-c-d-f", "D. d-c-e-a-b-f"]},
+                {id: 17, ops: ["A. f-a-c-d-b-e", "B. e-d-f-c-a-b", "C. e-f-b-d-c-a", "D. b-d-e-c-f-a"]}
+            ],
+            part4: [
+                {id: 18, ops: ["A. While women and girls represent half of the world's population.", "B. Because women and girls represent half of the world's population", "C. Women and girls represent half of the world's population", "D. Which women and girls represent half of the world's population"]},
+                {id: 19, ops: ["A. protecting women from domestic violence", "B. that protecting women from domestic violence", "C. which protecting women from domestic violence", "D. having protected women from domestic violence"]},
+                {id: 20, ops: ["A. they overall quality of life", "B. our overall quality of life", "C. its overall quality of life", "D. their overall quality of life"]},
+                {id: 21, ops: ["A. has declined by 30% in the past decade", "B. that has declined by 30% in the past decade", "C. which has declined by 30% in the past decade", "D. what has declined by 30% in the past decade"]},
+                {id: 22, ops: ["A. to represent in political and economic decision-making processes", "B. representation in political and economic decision-making processes", "C. that represent in political and economic decision-making processes", "D. who represent in political and economic decision-making processes"]}
+            ],
+            part5: [
+                {id: 23, text: "Which of the following is NOT true about the Laron syndrome?", ops: ["A. This syndrome is a health problem for groups of people in Ecuador and Hawaii.", "B. It is the result of a genetic condition.", "C. People diagnosed with this syndrome are prone to diabetes.", "D. Ecuadorians having Laron syndrome are approximately one metre tall."]},
+                {id: 24, text: "The word \"elderly\" in paragraph 2 is OPPOSITE in meaning to", ops: ["A. short-list", "B. short-sighted", "C. short-lived", "D. short-tempered"]},
+                {id: 25, text: "The word \"they\" in paragraph 4 refers to", ops: ["A. scientists", "B. explanations", "C. things", "D. diet and lifestyle"]},
+                {id: 26, text: "The word \"scrutinize\" in paragraph 4 is closest in meaning to", ops: ["A. weigh", "B. peruse", "C. inspect", "D. discover"]},
+                {id: 27, text: "Which of the following best paraphrases the underlined sentence in paragraph 4?", ops: ["A. Researcher Eric Topol says that some genes can give us the reason for our aging process.", "B. Researcher Eric Topol says that some genes can cause effects on our aging process.", "C. Researcher Eric Topol says that some genes can make our aging process shorter.", "D. Researcher Eric Topol says that some genes can slow down our aging process."]},
+                {id: 28, text: "Who is TRUE about the wellderly?", ops: ["A. They are old people with health problems.", "B. They are young people with health problems.", "C. They are young people without health problems.", "D. They are old people without health problems."]},
+                {id: 29, text: "In which paragraph does the write mention that most people talk about what to eat as the secret of their long life?", ops: ["A. Paragraph 2", "B. Paragraph 3", "C. Paragraph 4", "D. Paragraph 5"]},
+                {id: 30, text: "In which paragraph does the writer mention that fortune may be also a factor of their long life?", ops: ["A. Paragraph 2", "B. Paragraph 3", "C. Paragraph 4", "D. Paragraph 5"]}
+            ],
+            part6: [
+                {id: 31, text: "What is the main idea of the passage?", ops: ["A. A man born into poverty in Nepal inspired thousands of children to finish school.", "B. It was not easy to be born by a single mother in a male-dominated society.", "C. The disastrous earthquake in 2015 deteriorated schooling system in Nepal.", "D. Nepal successfully got rid of illiteracy thanks to the financial aid from World Bank."]},
+                {id: 32, text: "The word \"tackling\" in the passage is closest in meaning to", ops: ["A. suffering", "B. planning", "C. discussing", "D. addressing"]},
+                {id: 33, text: "The word \"displacing\" in the passage mostly means", ops: ["A. making people lose directions", "B. bringing people safety", "C. making people homeless", "D. causing people to panic"]},
+                {id: 34, text: "The word \"undo\" in the passage mostly means", ops: ["A. remove the bad effects of something", "B. highlight the advantages of something", "C. restore the old conditions of something", "D. suffer the consequences of something"]},
+                {id: 35, text: "Where does the following sentence best fit?<br><em>He returned to Nepal in 2015 and decided to stay and develop the education system.</em>", ops: ["A. [I]", "B. [II]", "C. [III]", "D. [IV]"]},
+                {id: 36, text: "Which of the following expresses the essential information in the underlined sentence?", ops: ["A. Even if there were access to intellectual data, there would still remain inequalities among the people.", "B. If people in a nation can gain access to knowledge, equalities among people will be improved.", "C. The more inequalities in a country are decreased, the more knowledge there is for people to access.", "D. It is impossible to gain access to knowledge as there are such a lot of difficulties in a country."]},
+                {id: 37, text: "Which of the following is TRUE about Nepal?", ops: ["A. It used to have higher literacy rates than 31 other countries in the world.", "B. It currently has the population of just under 10 million people.", "C. In 2011, just more than 50% of its population were able to read and write.", "D. Governmental schooling could reach even the most remote rural villages."]},
+                {id: 38, text: "All of the following is true about Surya Karki EXCEPT.", ops: ["A. He was one of a few Nepalese who could work closely with the World Bank.", "B. He used to travel a long way in order to get to school.", "C. He was academically stronger most other students in his class.", "D. He was not raised by his father, which was a disadvantage in a male-dominated like that."]},
+                {id: 39, text: "According to Karki, the education system in Nepal", ops: ["A. had been much better before many schools were destroyed in the storm", "B. was undesirable in terms of teachers, facilities and teaching quality", "C. was effective in reducing illiteracy among adult learners", "D. was lacking in proper sex education classes"]},
+                {id: 40, text: "Which of the following can be inferred from the passage?", ops: ["A. Karki and his organisation have generally outperformed Nepal governmental schools in inspiring children to continue their schooling.", "B. The obstacles faced by schools in Nepal were made more serious due to the harsh weather and the disastrous earthquake in 2015.", "C. The schooling offered to Karki had been of higher quality to that offered to current students in Nepal.", "D. School children in Nepal are bored with attending governmental schools and opting for attending UWS schools for higher levels."]}
+            ]
+        };
+
+        // Render Questions
+        function renderQuestions(partData, containerId) {
+            const container = document.getElementById(containerId);
+            partData.forEach(q => {
+                let optionsHTML = '';
+                q.ops.forEach(opt => {
+                    const val = opt.charAt(0); // A, B, C or D
+                    optionsHTML += `<label><input type="radio" name="q${q.id}" value="${val}"> ${opt}</label>`;
+                });
+                
+                const qText = q.text ? `<div class="question-text">Question ${q.id}: ${q.text}</div>` : `<div class="question-text">Question ${q.id}:</div>`;
+
+                container.innerHTML += `
+                    <div class="question-block" id="q-block-${q.id}">
+                        ${qText}
+                        <div class="options">
+                            ${optionsHTML}
+                        </div>
+                        <div class="explanation" id="exp-${q.id}"></div>
+                    </div>
+                `;
+            });
+        }
+
+        renderQuestions(questionsData.part1, 'questions-part-1');
+        renderQuestions(questionsData.part2, 'questions-part-2');
+        renderQuestions(questionsData.part3, 'questions-part-3');
+        renderQuestions(questionsData.part4, 'questions-part-4');
+        renderQuestions(questionsData.part5, 'questions-part-5');
+        renderQuestions(questionsData.part6, 'questions-part-6');
+
+        // Initialize Tracker
+        const trackerGrid = document.getElementById('tracker-grid');
+        for (let i = 1; i <= 40; i++) {
+            trackerGrid.innerHTML += `<div class="track-box" id="track-${i}" onclick="scrollToQ(${i})">${i}</div>`;
+        }
+
+        // Scroll to question
+        function scrollToQ(id) {
+            document.getElementById(`q-block-${id}`).scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Update Tracker on Radio Change
+        document.querySelectorAll('input[type=radio]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                if(isSubmitted) return;
+                const qNum = this.name.replace('q', '');
+                document.getElementById(`track-${qNum}`).classList.add('active');
+            });
+        });
+
+        // Timer Logic
+        let timeLeft = 50 * 60; // 50 minutes
+        const timerEl = document.getElementById('timer');
+        let timerInterval = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                submitExam();
+            } else {
+                timeLeft--;
+                let m = Math.floor(timeLeft / 60);
+                let s = timeLeft % 60;
+                timerEl.innerText = `⏳ ${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+            }
+        }, 1000);
+
+        // Persistent Text Highlight Logic
+        document.addEventListener('mouseup', function(e) {
+            if (e.target.closest('.text-content')) {
+                let selection = window.getSelection();
+                if (selection.toString().trim().length > 0) {
+                    try {
+                        let range = selection.getRangeAt(0);
+                        let span = document.createElement('span');
+                        span.className = 'highlight';
+                        range.surroundContents(span);
+                        selection.removeAllRanges();
+                    } catch (error) {
+                        console.log("Không thể highlight khi chọn qua nhiều thẻ.");
+                    }
+                }
+            }
+        });
+
+        // Submission & Grading
+        let isSubmitted = false;
+        function submitExam() {
+            if (isSubmitted) return;
+            let answered = 0;
+            let score = 0;
+            
+            for (let i = 1; i <= 40; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                if (selected) {
+                    answered++;
+                    if (selected.value === dapAn[i]) score++;
+                }
+            }
+            
+            let unanswered = 40 - answered;
+            document.getElementById('score-text').innerText = `${score} / 40`;
+            document.getElementById('unanswered-count').innerText = unanswered;
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function viewAnswers() {
+            isSubmitted = true;
+            document.getElementById('modal').style.display = 'none';
+            clearInterval(timerInterval);
+            
+            for (let i = 1; i <= 40; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                const correctAns = dapAn[i];
+                const trackBox = document.getElementById(`track-${i}`);
+                const allLabels = document.querySelectorAll(`input[name="q${i}"]`);
+                
+                // Disable & Style radios
+                allLabels.forEach(radio => {
+                    radio.disabled = true;
+                    if (radio.value === correctAns) {
+                        radio.parentElement.classList.add('correct-ans');
+                    }
+                });
+                
+                // Grade & Tracker Update
+                trackBox.classList.remove('active');
+                if (selected) {
+                    if (selected.value === correctAns) {
+                        trackBox.classList.add('correct');
+                    } else {
+                        selected.parentElement.classList.add('wrong-ans');
+                        trackBox.classList.add('wrong');
+                    }
+                } else {
+                    trackBox.classList.add('wrong'); // Unanswered
+                }
+                
+                // Show Explanation
+                const expDiv = document.getElementById(`exp-${i}`);
+                if (expDiv && giaiThich[i]) {
+                    expDiv.innerHTML = `<strong>💡 Giải thích:</strong> ${giaiThich[i]}`;
+                    expDiv.style.display = 'block';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
