@@ -648,6 +648,20 @@
                 }
             }
         }
+// Bôi đen chữ tự động lưu lại nền vàng dạ quang (Persistent Highlight)
+        document.addEventListener('mouseup', function(e) {
+            // Cho phép highlight trong toàn bộ khu vực làm bài (cả phần bài đọc và phần câu hỏi)
+            if (e.target.closest('.part-container') || e.target.closest('.part-split')) {
+                const selection = window.getSelection();
+                if (!selection.isCollapsed && selection.toString().trim() !== '') {
+                    document.designMode = "on";
+                    document.execCommand("BackColor", false, "yellow");
+                    document.designMode = "off";
+                    // Xóa vùng chọn sau khi highlight để giao diện gọn gàng
+                    selection.removeAllRanges();
+                }
+            }
+        });
     </script>
 </body>
 </html>
