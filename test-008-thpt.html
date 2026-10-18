@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đề Thi THPT Quốc Gia - Tiếng Anh Đề Số 8</title>
+    <style>
+        :root {
+            --primary: #2196F3;
+            --success: #4CAF50;
+            --danger: #F44336;
+            --bg-hover: #e0ffff;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f5f7fa; color: #333; margin: 0; padding: 20px; line-height: 1.6; }
+        .header { text-align: center; margin-bottom: 25px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .header h2, .header h3, .header p { margin: 5px 0; }
+        .header h2 { font-size: 20px; color: #d32f2f; }
+        
+        /* CSS cho phần nhập thông tin học sinh */
+        .student-info { margin-top: 15px; display: flex; gap: 15px; justify-content: center; align-items: center; }
+        .student-info input { padding: 10px; border-radius: 6px; border: 1px solid #ccc; font-size: 15px; outline: none; transition: 0.3s; }
+        .student-info input:focus { border-color: var(--primary); box-shadow: 0 0 5px rgba(33, 150, 243, 0.3); }
+        #student-name { width: 250px; }
+        #student-class { width: 150px; }
+
+        .main-layout { display: flex; gap: 20px; max-width: 1500px; margin: 0 auto; }
+        .exam-content { flex: 1; min-width: 0; }
+        .sidebar { width: 220px; position: sticky; top: 20px; align-self: flex-start; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        
+        .part-split { display: flex; gap: 20px; margin-bottom: 20px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .passage-col { flex: 5.5; position: sticky; top: 20px; align-self: flex-start; max-height: 85vh; overflow-y: auto; padding-right: 15px; border-right: 2px dashed #e0e0e0; font-size: 16.5px; scroll-behavior: smooth; }
+        .questions-col { flex: 4.5; max-height: 85vh; overflow-y: auto; padding-left: 10px; scroll-behavior: smooth;}
+        
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-thumb { background: #bdbdbd; border-radius: 4px; }
+        
+        .text-content p, .text-content span, .text-content li { transition: background-color 0.2s; padding: 2px; border-radius: 3px; }
+        .text-content p:hover, .text-content span:hover, .text-content li:hover { background-color: var(--bg-hover); cursor: text; }
+        
+        .evidence-highlight { background-color: #ffeb3b !important; color: #d32f2f !important; font-weight: bold; padding: 2px 4px; border-radius: 4px; border: 2px dashed #f44336; transition: all 0.3s ease; }
+        .btn-evidence { margin-top: 10px; background: #ff9800; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: bold; transition: 0.2s; }
+        .btn-evidence:hover { background: #f57c00; }
+
+        .question-block { margin-bottom: 20px; padding: 15px; background: #fafafa; border: 1px solid #eee; border-radius: 6px; }
+        .question-block b { font-size: 16px; color: #1565C0; }
+        .options { list-style: none; padding: 0; margin-top: 10px; }
+        .options li { margin-bottom: 8px; }
+        .options label { display: flex; align-items: center; padding: 8px; border-radius: 6px; cursor: pointer; transition: background 0.2s; border: 1px solid transparent; }
+        .options label:hover { background: #e3f2fd; }
+        .options input { margin-right: 12px; transform: scale(1.2); }
+        
+        .correct-ans { background-color: #c8e6c9 !important; border-color: #4CAF50 !important; font-weight: bold; }
+        .wrong-ans { background-color: #ffcdd2 !important; border-color: #F44336 !important; }
+        .explanation { display: none; background: #e3f2fd; padding: 12px; border-left: 4px solid var(--primary); margin-top: 15px; border-radius: 4px; font-size: 14.5px; color: #0d47a1; }
+        
+        .timer-box { text-align: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+        .timer-box p { margin: 0 0 5px 0; font-weight: bold; color: #555; }
+        .timer { font-size: 32px; font-weight: bold; color: var(--danger); font-family: monospace; }
+        .tracker { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-bottom: 20px; }
+        .tracker-box { width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border: 1px solid #ccc; font-size: 13px; font-weight: bold; border-radius: 4px; cursor: pointer; background: #f9f9f9; color: #777; transition: 0.2s; }
+        .tracker-box:hover { background: #e0e0e0; }
+        .tracker-box.answered { background-color: var(--primary); color: white; border-color: var(--primary); }
+        .tracker-box.correct { background-color: var(--success) !important; color: white; border-color: var(--success); }
+        .tracker-box.incorrect { background-color: var(--danger) !important; color: white; border-color: var(--danger); }
+        .submit-btn { width: 100%; padding: 12px; background-color: #ff9800; color: white; border: none; font-size: 16px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.3s; text-transform: uppercase; }
+        .submit-btn:hover { background-color: #f57c00; box-shadow: 0 2px 8px rgba(255,152,0,0.4); }
+        
+        /* Modal & Status */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 2000; align-items: center; justify-content: center; backdrop-filter: blur(3px); }
+        .modal-content { background: white; padding: 30px; border-radius: 12px; text-align: center; width: 420px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .modal-content h2 { color: var(--primary); margin-top: 0; font-size: 24px; }
+        .score-display { font-size: 28px; font-weight: bold; color: var(--success); margin: 15px 0; }
+        .unanswered-text { color: var(--danger); font-weight: bold; margin-bottom: 5px; }
+        .submit-status { font-size: 15px; font-weight: bold; margin-bottom: 20px; min-height: 24px; }
+        .modal-buttons { display: flex; gap: 15px; justify-content: center; }
+        .btn { padding: 12px 20px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 15px; flex: 1; transition: 0.2s; }
+        .btn-view { background: var(--success); color: white; }
+        .btn-view:hover { background: #388E3C; }
+        .btn-retry { background: #757575; color: white; }
+        .btn-retry:hover { background: #616161; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        u, b { font-weight: bold; }
+        u { text-decoration: underline; }
+
+        @media (max-width: 992px) {
+            body { padding: 10px; padding-bottom: 170px; }
+            .header { padding: 15px; margin-bottom: 15px; }
+            .student-info { flex-direction: column; gap: 10px; }
+            #student-name, #student-class { width: 100%; box-sizing: border-box; }
+            .main-layout { display: flex; flex-direction: column; gap: 10px; }
+            .part-split { flex-direction: column; padding: 10px; gap: 10px; }
+            .passage-col { flex: none; width: 100%; max-height: none; position: static; border-right: none; border-bottom: 2px dashed #e0e0e0; padding-right: 0; padding-bottom: 15px; }
+            .questions-col { flex: none; width: 100%; max-height: none; padding-left: 0; }
+            .sidebar { position: fixed; bottom: 0; left: 0; width: 100%; margin: 0; padding: 10px 15px; box-sizing: border-box; border-radius: 12px 12px 0 0; box-shadow: 0 -4px 15px rgba(0,0,0,0.2); z-index: 1000; display: flex; flex-direction: column; background: white; }
+            .timer-box { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px dashed #eee; }
+            .timer-box p { margin: 0; font-size: 14px; font-weight: bold; }
+            .timer { font-size: 22px; color: var(--danger); }
+            .tracker { display: flex !important; flex-wrap: nowrap !important; overflow-x: auto; gap: 8px; margin-bottom: 10px; padding-bottom: 8px; }
+            .tracker-box { flex: 0 0 40px; height: 40px; aspect-ratio: auto; font-size: 14px; border-radius: 8px; }
+            .submit-btn { padding: 12px; font-size: 16px; margin-top: 5px; border-radius: 8px; }
+            .tracker::-webkit-scrollbar { height: 4px; }
+            .tracker::-webkit-scrollbar-thumb { background: #bbb; border-radius: 4px; }
+            .modal-content { width: 90%; padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h2>ĐỀ SỐ 8</h2>
+    <h3>KỲ THI THPT QUỐC GIA - Môn thi: TIẾNG ANH</h3>
+    <p>Giáo viên: NGUYỄN THỊ THU DUYÊN - Zalo: 0918204603</p>
+    
+    <!-- KHUNG NHẬP THÔNG TIN HỌC SINH -->
+    <div class="student-info">
+        <input type="text" id="student-name" placeholder="Họ và tên (Bắt buộc)" required>
+        <input type="text" id="student-class" placeholder="Lớp (VD: 12A, 11A)" required>
+    </div>
+</div>
+
+<div class="main-layout">
+    <div class="exam-content">
+        <!-- PART 1 -->
+        <div class="part-split">
+            <div class="passage-col text-content">
+                <p><b>Read the following advertisement and mark the letter A, B, C, or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 1 to 6.</b></p>
+                <p>Do you love children? We need some tutors (1) ______ students aged 6 and 9 at 133 Duong Ba Trac, Ward 1, District 8 this summer.</p>
+                <ul>
+                    <li>You will work with children full of (2) ______.</li>
+                    <li>Good appearance is needed. Don't worry (3) ______ you have tutored before.</li>
+                    <li>(4) ______.</li>
+                </ul>
+                <p>How (5) ______? Our tutors must provide (6) ______ IDs and criminal records, and they must pass our rigorous application process. If you want to know more about our process, please visit us at www.hcmc.vn.</p>
+            </div>
+            <div class="questions-col" id="questions-part-1"></div>
+        </div>
+
+        <!-- PART 2 -->
+        <div class="part-split">
+            <div class="passage-col text-content">
+                <p><b>Read the following leaflet and mark the letter A, B, C, or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 7 to 12.</b></p>
+                <p><b>ANNOUNCEMENT OF CHINESE SPEAKING CONTEST</b></p>
+                <p>The (7) ______ would like to announce:</p>
+                <ul>
+                    <li>We (8) ______ a Chinese Speaking Competition on June 01.</li>
+                    <li>All students (9) ______ in speaking Chinese can take part in this exciting contest!</li>
+                    <li>Express your ideas confidently, (10) ______ you build your self-assurance in using Chinese.</li>
+                    <li>Get ready to share your thoughts (11) ______ our friendly atmosphere.</li>
+                    <li>Keep an eye out for more details (12) ______ to participate in the contest!</li>
+                </ul>
+            </div>
+            <div class="questions-col" id="questions-part-2"></div>
+        </div>
+
+        <!-- PART 3 -->
+        <div class="part-split">
+            <div class="passage-col text-content">
+                <p><b>Mark the letter A, B, C, or D on your answer sheet to indicate the best arrangement of utterances or sentences to make a meaningful exchange or text in each of the following questions from 13 to 17.</b></p>
+                <p><b>Question 13.</b><br>
+                a. Tom: Yes, I did it yesterday.<br>
+                b. Jenny: Have you finished your homework?<br>
+                c. Jenny: Really? That's great! You must have been working hard.</p>
+                <p><b>Question 14.</b><br>
+                a. John: How do you feel about working from home?<br>
+                b. John: But don't you think it could be lonely sometimes?<br>
+                c. John: That's great! I'm sure you'll adapt to it quickly.<br>
+                d. Sarah: I think it will help me balance my work and personal life.<br>
+                e. Sarah: Yes, it might be challenging, but I can manage it.</p>
+                <p><b>Question 15.</b><br>
+                a. Finally, difficulties in communication and forming genuine connections due to social media and technology dependence are common among teens.<br>
+                b. Additionally, cyberbullying and online harassment present significant challenges in the digital age.<br>
+                c. Teens often face various social challenges.<br>
+                d. Firstly, peer pressure can lead to risky behaviors such as substance abuse, smoking, or involvement in harmful activities.<br>
+                e. Moreover, mental health issues, including anxiety and depression, are prevalent among teenagers due to academic stress or social pressures.</p>
+                <p><b>Question 16.</b><br>
+                Dear Mike,<br>
+                a. Also, when we do chores like sweeping or washing dishes, we're moving our bodies, which is good for our health.<br>
+                b. I hope you are well! I've been thinking about why it's important for children to share the household chores with their parents.<br>
+                c. Sharing the household chores is really a good way to help us have more time to do fun things together.<br>
+                d. Firstly, it helps keep our home tidy and clean, making it a nicer place to live.<br>
+                e. Additionally, children learn to be responsible and take care of our things when they help with tasks at home.<br>
+                Best wishes.</p>
+                <p><b>Question 17.</b><br>
+                Dear Mr. Francis,<br>
+                a. Additionally, revenue streams have increased more than 60 percent over the five years I have been part of The Whitney team.<br>
+                b. I have been following the recent growth of the business after the launch of your new apartment complex in Queens. I am writing to express my sincere interest in working with the property management team at RAP Properties.<br>
+                c. I have a proven record of managing 100 plus unit apartment complexes, supervising employees, preparing budgets, processing applications, and working closely with residents and maintenance, security, and professional personnel to ensure clean, safe, and properly run properties.<br>
+                d. I am excited to discuss further how my qualifications could benefit RAP Properties and hope that you can add my name to your list of potential candidates for future property management positions. Thank you so much for your time and consideration.<br>
+                e. I have several years of professional property management experience at The Whitney Apartments and am confident that my skills and abilities would be a great asset to RAP Properties. During the entirety of my role as a property manager at The Whitney Apartments, I have had zero vacancies and steady positive approval ratings from both residents and senior management.<br>
+                Kind regards,<br>
+                Maggie Lynch</p>
+            </div>
+            <div class="questions-col" id="questions-part-3"></div>
+        </div>
+
+        <!-- PART 4 -->
+        <div class="part-split">
+            <div class="passage-col text-content">
+                <p><b>Read the following passage about gender equality and mark the letter A, B, C or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 18 to 22.</b></p>
+                <p><b>EXPLORING PATHS AFTER SCHOOL</b></p>
+                <p>Finishing high school is a big step (18) ______. There are various paths to choose from after leaving school, and each one offers unique opportunities. Some students decide to continue their studies at universities. Universities have many subjects to learn, like science, art, or business. They offer degrees that can lead to exciting careers. This option allows students to dive deeper into subjects they are passionate about. For others, vocational training is a great choice. Vocational training focuses on specific skills that are important in jobs like mechanics, cooking, or healthcare. It gives practical knowledge and (19) ______.</p>
+                <p>Another option is (20) ______. These colleges offer courses that are practical and also give the chance to move to bigger universities later. They are a good starting point for many students. Apprenticeships are great for those who like to learn while working. This option gives hands-on experience in fields such as engineering, culinary arts, or information technology. It not only facilitates the acquisition of comprehensive knowledge and advanced skills but also enables individuals to gain valuable experience and (21) ______.</p>
+                <p>In recent times, online courses have become very popular. These courses offer flexibility (22) ______. They cover a wide range of subjects and give access to education no matter where someone lives. In conclusion, there are many paths available after finishing school. Each path has its advantages and can lead to a bright future. It's important for school leavers to explore these options and choose the one that suits them best.</p>
+            </div>
+            <div class="questions-col" id="questions-part-4"></div>
+        </div>
+
+        <!-- PART 5 -->
+        <div class="part-split">
+            <div class="passage-col text-content" id="passage-5">
+                <p><b>Read the following passage about human life expectancy and mark the letter A, B, C or D on your answer sheet to indicate the best answer to each of the following questions from 23 to 30.</b></p>
+                <p>An engine is a machine that creates mechanical motion from energy. In order to do this, an engine frequently requires some type of fuel to burn. Nowadays, many engines are used to power cars and other forms of transportation. These vehicles most commonly have an internal combustion engine and rely upon gasoline for power. However, there are several types of engines that can use alternative energy sources. Many people are trying to switch to them because <span id="ev-23"><span id="ev-24">gasoline, which is a fossil fuel, creates pollution and is also a non-renewable resource.</span></span></p>
+                <p>These days, engines that are able to burn biofuels are somewhat common. <span id="ev-26">Biofuels are fuels that are made from biological material, such as corn, soybeans, and sugarcane.</span> These biofuels burn cleanly, so they produce much less pollution than fossil fuels. In some countries, such as Brazil, cars with biofuel engines are standard. <span id="ev-30">In fact, most of the cars in Brazil have engines that can operate on either gasoline or biofuel.</span></p>
+                <p>A second type of alternative engine is the electric engine. Cars with electric engines have been common for decades. Most are being used in hybrid cars at the moment. <span id="ev-28">These are vehicles that have both a gasoline-powered engine and an electric one.</span> In many cases, the gasoline-powered engine is used to operate the car at high speeds on expressways. The electric engine is utilised for city driving. One benefit of hybrid cars is that as the gasoline-powered engine runs, <span id="ev-25">it simultaneously <b><u>recharges</u></b> the electric engine.</span></p>
+                <p>A third type of alternative engine is the hydrogen engine. <span id="ev-29">It utilises hydrogen fuel cells, which convert hydrogen into electricity that can power the car.</span> These days, there are many cars and buses that rely upon hydrogen engines. However, there are some problems associated with this type of engine. The hydrogen used in the engine must be processed from other materials, and it is also difficult to store. As a result, vehicles that run on hydrogen are expensive.</p>
+                <p><span id="ev-27"><b><u>Alternative energy sources create less pollution and are often renewable sources of energy.</u></b></span> It is hoped that more and more innovations help the use of alternative energy sources become easier and easier.</p>
+            </div>
+            <div class="questions-col" id="questions-part-5"></div>
+        </div>
+
+        <!-- PART 6 -->
+        <div class="part-split">
+            <div class="passage-col text-content" id="passage-6">
+                <p><b>Read the following passage about managing change and mark the letter A, B, C or D on your answer sheet to indicate the best answer to each of the following questions from 31 to 40.</b></p>
+                <p><span id="ev-31">Managing change means managing people's fear.</span> <span id="ev-37">Change is natural and good, but people's reaction to change is unpredictable and can be irrational.</span> It can be managed if done right. <span id="ev-40">Nothing is as upsetting to your people as change.</span> Nothing has greater potential to cause failures, loss of production, or falling quality of work. Yet nothing is as important to the survival of your organization as change. History is full of examples of organizations that failed to change and are now extinct. <span id="ev-38">The secret to successfully managing change, from the perspective of the employees, is definition and understanding.</span></p>
+                <p>Resistance to change comes from a fear of the unknown or an expectation of loss. The front end of an individual's resistance to change is how they <span id="ev-32"><b><u>perceive</u></b></span> the change. The back end is how well they are equipped to deal with the change they expect. <span id="ev-36"><b><u>An individual's degree of resistance to change is determined by whether they perceive the change as good or bad, and how severe they expect the impact of the change to be on them.</u></b></span> Their ultimate acceptance of the change is a function of how much resistance the person has and the quality of <span id="ev-33"><b><u>their</u></b></span> coping skills and their support system.</p>
+                <p><span id="ev-39">If you move an employee's desk six inches, they may not notice or care. Yet if the reason you moved it those six inches was to fit in another worker in an adjacent desk, there may be high resistance to the change. It depends on whether the original employee feels the hiring of an additional employee is a threat to his job or perceives the hiring as bringing in some needed assistance.</span></p>
+                <p>A promotion is usually considered a good change. However, an employee who doubts their ability to handle the new job may strongly resist the promotion. They will give you all kinds of reasons for not wanting the promotion, just not the real one. You might expect a higher-level employee to be less concerned about being laid off because they have savings and investments to support them during a job search. However, the individual may feel they are overextended and that a job search will be long and complicated. Conversely, your concern for a low-income employee being laid off may be unfounded if they have stashed a nest egg in anticipation of the cut.</p>
+                <p>Your best salesperson may balk at taking on new, high-potential account because they have an irrational feeling that they don't dress well enough. If you try and <span id="ev-34"><b><u>bulldoze</u></b></span> this resistance, you will fail. <b>[A]</b> The employee whose desk you had to move will develop production problems. <b>[B]</b> The top worker who keeps declining the promotion may quit rather than have to continue making up excuses for turning you down. <b>[C]</b> <span id="ev-35">And the top salesperson's sales may drop to the point that you stop considering them for the new account. <b>[D]</b></span></p>
+            </div>
+            <div class="questions-col" id="questions-part-6"></div>
+        </div>
+
+    </div>
+
+    <!-- CỘT PHẢI: SIDEBAR -->
+    <div class="sidebar">
+        <div class="timer-box">
+            <p>THỜI GIAN CÒN LẠI</p>
+            <div id="time-display" class="timer">50:00</div>
+        </div>
+        <div class="tracker" id="tracker-grid">
+            <!-- 40 boxes rendered by JS -->
+        </div>
+        <button class="submit-btn" onclick="submitExam()">Nộp Bài Thi</button>
+    </div>
+</div>
+
+<!-- MODAL NỘP BÀI -->
+<div id="result-modal" class="modal-overlay">
+    <div class="modal-content">
+        <h2>KẾT QUẢ BÀI LÀM</h2>
+        <div id="modal-score" class="score-display">0/40 (0.00 điểm)</div>
+        <div class="unanswered-text">Số câu bỏ trống: <span id="modal-unanswered">0</span></div>
+        <div id="submit-status" class="submit-status"></div>
+        <div class="modal-buttons">
+            <button id="btn-view-ans" class="btn btn-view" onclick="viewAnswers()" disabled>Xem Đáp Án</button>
+            <button class="btn btn-retry" onclick="location.reload()">Làm Lại Bài</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ==========================================
+    // KHAI BÁO LINK GOOGLE APPS SCRIPT Ở ĐÂY
+    // ==========================================
+    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyl7yEdzW3bUR8RxRIOsfTAo7N3bdvcy8KWRNc8ST9gTyvqEvDYFNNW1TpsrBIZkql_8w/exec'; 
+    
+    const dapAn = {
+        1: 'C', 2: 'A', 3: 'D', 4: 'D', 5: 'D', 6: 'C', 7: 'A', 8: 'B', 9: 'A', 10: 'D',
+        11: 'B', 12: 'A', 13: 'D', 14: 'A', 15: 'A', 16: 'C', 17: 'C', 18: 'C', 19: 'C', 20: 'A',
+        21: 'D', 22: 'A', 23: 'C', 24: 'B', 25: 'C', 26: 'C', 27: 'C', 28: 'B', 29: 'D', 30: 'B',
+        31: 'B', 32: 'A', 33: 'A', 34: 'C', 35: 'D', 36: 'B', 37: 'C', 38: 'A', 39: 'B', 40: 'D'
+    };
+
+    const giaiThich = {
+        1: "C. able to assist: Cấu trúc rút gọn mệnh đề quan hệ (who are able to -> able to).",
+        2: "A. energy: Cần một danh từ sau giới từ 'of'.",
+        3: "D. if: (Don't worry if: Đừng lo lắng nếu...)",
+        4: "D. Flexible working hours: Cụm danh từ chuẩn mang nghĩa 'Giờ làm việc linh hoạt'.",
+        5: "D. to apply: How + to V (Làm cách nào để...).",
+        6: "C. us with: Cấu trúc 'provide sb with sth' (cung cấp cho ai cái gì).",
+        7: "A. school youth union: Đoàn thanh niên trường học.",
+        8: "B. are hosting: Thì HTTD diễn tả kế hoạch tương lai chắc chắn (ngày 01/06).",
+        9: "A. interested: Rút gọn mệnh đề quan hệ dạng bị động.",
+        10: "D. which helps: 'which' thay thế cho mệnh đề phía trước (động từ chia số ít).",
+        11: "B. and enjoy: Nối 2 động từ cùng dạng (share và enjoy).",
+        12: "A. on how: (more details on how to... - chi tiết về cách thức tham gia).",
+        13: "D. b-a-c: Hỏi (b) -> Trả lời (a) -> Khen ngợi (c).",
+        14: "A. a-d-b-e-c: Sắp xếp hội thoại hợp lý logic hỏi đáp.",
+        15: "A. c-d-e-b-a: (c) Chủ đề chính -> (d) Firstly -> (e) Moreover -> (b) Additionally -> (a) Finally.",
+        16: "C. b-d-a-e-c: Thứ tự triển khai ý thư.",
+        17: "C. b-e-a-c-d: Trình tự logic của một bức thư xin việc.",
+        18: "C. opening many doors for young people: Rút gọn mệnh đề quan hệ chủ động.",
+        19: "C. prepares students for work right away: Động từ song song (gives... and prepares...).",
+        20: "A. enrolling in community college: V-ing làm bổ ngữ sau 'is'.",
+        21: "D. a simultaneously sustainable income: Mạo từ + Trạng từ + Tính từ + Danh từ.",
+        22: "A. as students can study from home: 'as' = 'because' (bởi vì).",
+        23: "C. Gasoline: Là nhiên liệu hóa thạch, không thể tái tạo.<br><button class='btn-evidence' onclick='showEvidence(\"ev-23\")'>📍 Xem dẫn chứng trong bài</button>",
+        24: "B. Fossil fuels: Trái nghĩa với năng lượng thay thế.<br><button class='btn-evidence' onclick='showEvidence(\"ev-24\")'>📍 Xem dẫn chứng trong bài</button>",
+        25: "C. refreshes: Recharges (Nạp lại) gần nghĩa với làm mới/phục hồi.<br><button class='btn-evidence' onclick='showEvidence(\"ev-25\")'>📍 Xem dẫn chứng trong bài</button>",
+        26: "C. things that can be turned into biofuels: Vật liệu sinh học làm nhiên liệu sinh học.<br><button class='btn-evidence' onclick='showEvidence(\"ev-26\")'>📍 Xem dẫn chứng trong bài</button>",
+        27: "C. Alternative sources of energy are unlimited and hardly cause pollution.<br><button class='btn-evidence' onclick='showEvidence(\"ev-27\")'>📍 Xem dẫn chứng trong bài</button>",
+        28: "B. It has one engine running on gasoline while the other runs on electricity.<br><button class='btn-evidence' onclick='showEvidence(\"ev-28\")'>📍 Xem dẫn chứng trong bài</button>",
+        29: "D. Paragraph 4: Đoạn 4 nói về động cơ Hydro (H2).<br><button class='btn-evidence' onclick='showEvidence(\"ev-29\")'>📍 Xem dẫn chứng trong bài</button>",
+        30: "B. Paragraph 2: Nhắc đến xe ở Brazil chạy cả xăng và nhiên liệu sinh học.<br><button class='btn-evidence' onclick='showEvidence(\"ev-30\")'>📍 Xem dẫn chứng trong bài</button>",
+        31: "B. Managing change: Managing fear: Tiêu đề bao quát đoạn văn.<br><button class='btn-evidence' onclick='showEvidence(\"ev-31\")'>📍 Xem dẫn chứng trong bài</button>",
+        32: "A. understand: Perceive = nhận thức, hiểu.<br><button class='btn-evidence' onclick='showEvidence(\"ev-32\")'>📍 Xem dẫn chứng trong bài</button>",
+        33: "A. an employee's: Đại từ thay thế cho 'the person' (nhân viên).<br><button class='btn-evidence' onclick='showEvidence(\"ev-33\")'>📍 Xem dẫn chứng trong bài</button>",
+        34: "C. suppress: Bulldoze (Đàn áp, chèn ép) = suppress.<br><button class='btn-evidence' onclick='showEvidence(\"ev-34\")'>📍 Xem dẫn chứng trong bài</button>",
+        35: "D. [D]: Vị trí chốt lại sau khi đưa ra các ví dụ tiêu cực.<br><button class='btn-evidence' onclick='showEvidence(\"ev-35\")'>📍 Xem dẫn chứng trong bài</button>",
+        36: "B. It is the employee's perception of the change itself...: Paraphrase chuẩn xác.<br><button class='btn-evidence' onclick='showEvidence(\"ev-36\")'>📍 Xem dẫn chứng trong bài</button>",
+        37: "C. Change itself is not problematic but it is the way people react to change that causes problems.<br><button class='btn-evidence' onclick='showEvidence(\"ev-37\")'>📍 Xem dẫn chứng trong bài</button>",
+        38: "A. Defining it and understand it: Dựa vào cụm 'definition and understanding'.<br><button class='btn-evidence' onclick='showEvidence(\"ev-38\")'>📍 Xem dẫn chứng trong bài</button>",
+        39: "B. To show how this action can be perceived differently.<br><button class='btn-evidence' onclick='showEvidence(\"ev-39\")'>📍 Xem dẫn chứng trong bài</button>",
+        40: "D. Employers: Bài viết hướng đến Quản lý / Người sử dụng lao động.<br><button class='btn-evidence' onclick='showEvidence(\"ev-40\")'>📍 Xem dẫn chứng trong bài</button>"
+    };
+
+    const questionsData = {
+        part1: [
+            {id: 1, ops: ["A. who to assist", "B. be able to assist", "C. able to assist", "D. who is able to assist"]},
+            {id: 2, ops: ["A. energy", "B. energetically", "C. energetic", "D. energizer"]},
+            {id: 3, ops: ["A. unless", "B. that", "C. about", "D. if"]},
+            {id: 4, ops: ["A. Working hours flexibility", "B. Working flexible hours", "C. Flexibly working hours", "D. Flexible working hours"]},
+            {id: 5, ops: ["A. you're applying", "B. you apply", "C. will apply", "D. to apply"]},
+            {id: 6, ops: ["A. us for", "B. with us", "C. us with", "D. for us"]}
+        ],
+        part2: [
+            {id: 7, ops: ["A. school youth union", "B. young union school", "C. school young union", "D. school"]},
+            {id: 8, ops: ["A. have hosted", "B. are hosting", "C. had hosted", "D. would host"]},
+            {id: 9, ops: ["A. interested", "B. interest", "C. uninteresting", "D. interesting"]},
+            {id: 10, ops: ["A. that helps", "B. that help", "C. which help", "D. which helps"]},
+            {id: 11, ops: ["A. please enjoy", "B. and enjoy", "C. but enjoy", "D. just enjoy"]},
+            {id: 12, ops: ["A. on how", "B. to how", "C. at how", "D. in how"]}
+        ],
+        part3: [
+            {id: 13, ops: ["A. c-b-a", "B. a-c-b", "C. b-c-a", "D. b-a-c"]},
+            {id: 14, ops: ["A. a-d-b-e-c", "B. a-b-c-d-e", "C. a-c-b-e-d", "D. b-a-c-e-d"]},
+            {id: 15, ops: ["A. c-d-e-b-a", "B. c-d-b-e-a", "C. d-e-b-a-c", "D. d-b-e-a-c"]},
+            {id: 16, ops: ["A. b-a-d-e-c", "B. b-e-d-a-c", "C. b-d-a-e-c", "D. b-c-a-e-d"]},
+            {id: 17, ops: ["A. a-b-e-c-d", "B. a-c-d-b-e", "C. b-e-a-c-d", "D. d-c-a-e-b"]}
+        ],
+        part4: [
+            {id: 18, ops: ["A. what opens many doors for young people", "B. that open many doors for young people", "C. opening many doors for young people", "D. opens many doors for young people"]},
+            {id: 19, ops: ["A. promptly prepare students for the workforce", "B. preparation students to swiftly enter the job market", "C. prepares students for work right away", "D. preparing students for immediate employment"]},
+            {id: 20, ops: ["A. enrolling in community college", "B. to enroll in college community", "C. enroll in community college", "D. enrolled in community college"]},
+            {id: 21, ops: ["A. a sustainable income simultaneous", "B. a sustainable income simultaneously", "C. an income sustainable simultaneously", "D. a simultaneously sustainable income"]},
+            {id: 22, ops: ["A. as students can study from home", "B. because of students can study from home", "C. if students can study from home", "D. though students can study from home"]}
+        ],
+        part5: [
+            {id: 23, text: "Which of the following is not mentioned in the text above as renewable energy?", ops: ["A. Electricity", "B. Biofuel", "C. Gasoline", "D. Hydrogen"]},
+            {id: 24, text: "The phrase \"alternative energy sources\" in paragraph 1 is OPPOSITE in meaning to", ops: ["A. Hybrid engines", "B. Fossil fuels", "C. Biological fuels", "D. Electric engines"]},
+            {id: 25, text: "The word \"recharges\" is closest in meaning to", ops: ["A. repels", "B. retreats", "C. refreshes", "D. resumes"]},
+            {id: 26, text: "The author uses corn, soybeans, and sugarcane as examples of", ops: ["A. crops that are grown in Brazil", "B. biological materials that grow quickly", "C. things that can be turned into biofuels", "D. plants that can be eaten by people"]},
+            {id: 27, text: "Which of the following best paraphrases the underlined sentence in paragraph 5?", ops: ["A. Alternative sources of energy can be used up and cause contamination.", "B. Alternative sources of energy are limited but cause no pollution.", "C. Alternative sources of energy are unlimited and hardly cause pollution.", "D. Alternative sources of energy are never used up but cause contamination."]},
+            {id: 28, text: "What is True about a hybrid car?", ops: ["A. It has one engine producing electricity while the other runs on gasoline.", "B. It has one engine running on gasoline while the other runs on electricity.", "C. It runs on electricity and produces gasoline at the same time.", "D. It runs on both gasoline and electricity at the same time."]},
+            {id: 29, text: "In which paragraph does the writer mention the engines running on H2?", ops: ["A. Paragraph 1", "B. Paragraph 2", "C. Paragraph 3", "D. Paragraph 4"]},
+            {id: 30, text: "In which paragraph does the writer mention cars running on biofuel and gasoline?", ops: ["A. Paragraph 1", "B. Paragraph 2", "C. Paragraph 3", "D. Paragraph 4"]}
+        ],
+        part6: [
+            {id: 31, text: "Which of the following best serves as the title for the passage?", ops: ["A. Failing to change: Planning to fail", "B. Managing change: Managing fear", "C. Tips for laying off employees without resistance", "D. Managing people in the time of change"]},
+            {id: 32, text: "The word \"perceive\" in paragraph 3 is closest in meaning to", ops: ["A. understand", "B. employ", "C. present", "D. ignore"]},
+            {id: 33, text: "The word \"their\" in paragraph 4 refers to", ops: ["A. an employee's", "B. a new job's", "C. a promotion", "D. a change's"]},
+            {id: 34, text: "The word \"bulldoze\" in paragraph 5 mostly means", ops: ["A. encourage", "B. receive", "C. suppress", "D. perform"]},
+            {id: 35, text: "Where does the following sentence best fit?<br><em>Instead, you overcome the resistance by defining the change and by getting a mutual understanding.</em>", ops: ["A. [A]", "B. [B]", "C. [C]", "D. [D]"]},
+            {id: 36, text: "Which of the following best expresses the essential information in the underlined sentence in paragraph 2?", ops: ["A. The more determination the employee has, the more resistant he or she is when dealing with the serious impact that the change has on him or her.", "B. It is the employee's perception of the change itself and the influence the change may exert on them that decide their reaction to change.", "C. A person will resist to change until the level that the severity of the effects caused by the change gets beyond his or her determination.", "D. No matter how determined an employee may be, they are unable to resist to the change that has too severe effects on them."]},
+            {id: 37, text: "Which of the following is TRUE about change?", ops: ["A. The organisations that have been inflexible to change can sustain during the course of time.", "B. Change is of little importance to the survival and development of an organisation.", "C. Change itself is not problematic but it is the way people react to change that causes problems.", "D. Most of the employers keep changes a secret and will not easily tell employees of the changes."]},
+            {id: 38, text: "What are the two things that employees should bear in mind when managing change?", ops: ["A. Defining it and understand it", "B. Expecting it and combatting it", "C. Predicting it and resisting it", "D. Perceiving it and expecting it"]},
+            {id: 39, text: "Why does the author mention moving an employee's desk?", ops: ["A. To highlight the need of change in the workplace", "B. To show how this action can be perceived differently", "C. To explain that most employees don't welcome change", "D. To show how small a change may be"]},
+            {id: 40, text: "Who would most probably be the target readers of the passage?", ops: ["A. Employees", "B. Psychologists", "C. Reformers", "D. Employers"]}
+        ]
+    };
+
+    // Render Questions
+    function renderQuestions(partData, containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        partData.forEach(q => {
+            let optionsHTML = '';
+            q.ops.forEach(opt => {
+                const val = opt.charAt(0);
+                optionsHTML += `<li><label><input type="radio" name="q${q.id}" value="${val}"> ${opt}</label></li>`;
+            });
+            const qText = q.text ? `<div class="question-text"><b>Question ${q.id}:</b> ${q.text}</div>` : `<div class="question-text"><b>Question ${q.id}:</b></div>`;
+            container.innerHTML += `
+                <div class="question-block" id="q-block-${q.id}">
+                    ${qText}
+                    <ul class="options">${optionsHTML}</ul>
+                    <div class="explanation" id="exp-${q.id}"></div>
+                </div>`;
+        });
+    }
+
+    renderQuestions(questionsData.part1, 'questions-part-1');
+    renderQuestions(questionsData.part2, 'questions-part-2');
+    renderQuestions(questionsData.part3, 'questions-part-3');
+    renderQuestions(questionsData.part4, 'questions-part-4');
+    renderQuestions(questionsData.part5, 'questions-part-5');
+    renderQuestions(questionsData.part6, 'questions-part-6');
+
+    // Render Tracker
+    const trackerGrid = document.getElementById('tracker-grid');
+    for (let i = 1; i <= 40; i++) {
+        let box = document.createElement('div');
+        box.className = 'tracker-box';
+        box.id = 'box-' + i;
+        box.innerText = i;
+        
+        box.onclick = function() {
+            let targetQ = document.querySelector(`input[name="q${i}"]`).closest('.question-block');
+            targetQ.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        };
+        trackerGrid.appendChild(box);
+    }
+
+    // Auto-update Tracker color
+    document.addEventListener('change', function(e) {
+        if(e.target.type === 'radio') {
+            let qNum = e.target.name.replace('q', '');
+            document.getElementById('box-' + qNum).classList.add('answered');
+        }
+    });
+
+    // Persistent Highlight Tool
+    document.addEventListener('mouseup', function(e) {
+        if (e.target.closest('.part-split')) {
+            const selection = window.getSelection();
+            if (!selection.isCollapsed && selection.toString().trim() !== '') {
+                document.designMode = "on";
+                document.execCommand("BackColor", false, "yellow");
+                document.designMode = "off";
+                selection.removeAllRanges();
+            }
+        }
+    });
+
+    // Evidence Linking Logic
+    function showEvidence(evidenceId) {
+        document.querySelectorAll('[id^="ev-"]').forEach(el => {
+            el.classList.remove('evidence-highlight');
+        });
+        const target = document.getElementById(evidenceId);
+        if (target) {
+            target.classList.add('evidence-highlight');
+            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            setTimeout(() => { target.classList.remove('evidence-highlight'); }, 4000);
+        }
+    }
+
+    // Timer Logic
+    let timeLeft = 50 * 60; // 50 minutes
+    let timerInterval = setInterval(() => {
+        timeLeft--;
+        let m = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+        let s = (timeLeft % 60).toString().padStart(2, '0');
+        document.getElementById('time-display').innerText = m + ":" + s;
+        if(timeLeft <= 0) {
+            clearInterval(timerInterval);
+            submitExam();
+        }
+    }, 1000);
+
+    // ==========================================
+    // CẬP NHẬT HÀM NỘP BÀI (THÊM XỬ LÝ FETCH API)
+    // ==========================================
+    let isSubmitted = false;
+    function submitExam() {
+        if (isSubmitted) return;
+
+        // 1. Kiểm tra thông tin bắt buộc
+        const studentName = document.getElementById('student-name').value.trim();
+        const studentClass = document.getElementById('student-class').value.trim();
+
+        if (!studentName || !studentClass) {
+            alert('Vui lòng điền đầy đủ Họ Tên và Lớp trước khi nộp bài!');
+            document.getElementById('student-name').focus();
+            return;
+        }
+
+        isSubmitted = true;
+        clearInterval(timerInterval);
+        
+        // 2. Chấm điểm
+        let correctCount = 0;
+        let unanswered = 0;
+
+        for(let i = 1; i <= 40; i++) {
+            let radios = document.getElementsByName('q' + i);
+            let selected = Array.from(radios).find(r => r.checked);
+            
+            if(!selected) {
+                unanswered++;
+            } else if (selected.value === dapAn[i]) {
+                correctCount++;
+            }
+        }
+
+        let diem = (correctCount * 0.25).toFixed(2);
+        
+        // Cập nhật giao diện Modal
+        document.getElementById('modal-score').innerText = correctCount + "/40 (" + diem + " điểm)";
+        document.getElementById('modal-unanswered').innerText = unanswered;
+        
+        const statusDiv = document.getElementById('submit-status');
+        const viewBtn = document.getElementById('btn-view-ans');
+        
+        statusDiv.innerText = '⏳ Đang gửi kết quả cho cô giáo...';
+        statusDiv.style.color = '#ff9800';
+        document.getElementById('result-modal').style.display = 'flex';
+
+        // 3. Chuẩn bị dữ liệu và gửi qua Google Sheets
+        const submissionTime = new Date().toLocaleString('vi-VN');
+        const dataToSend = {
+            time: submissionTime,
+            name: studentName,
+            className: studentClass,
+            score: diem
+        };
+
+        fetch(WEB_APP_URL, {
+            method: 'POST',
+            // Dùng text/plain để tránh lỗi bảo mật CORS preflight khi gửi từ GitHub Pages sang Google
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(dataToSend)
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.status === 'success') {
+                statusDiv.innerText = '✅ Nộp bài thành công! Điểm đã được ghi nhận.';
+                statusDiv.style.color = '#4CAF50';
+                viewBtn.disabled = false; // Mở nút xem đáp án
+            } else {
+                throw new Error('Lỗi server');
+            }
+        })
+        .catch(error => {
+            console.error('Lỗi khi gửi điểm:', error);
+            statusDiv.innerText = '⚠️ Lỗi mạng: Bài đã chấm nhưng chưa gửi được. Em vui lòng chụp màn hình gửi cho cô giáo!';
+            statusDiv.style.color = '#F44336';
+            viewBtn.disabled = false;
+        });
+    }
+
+    function viewAnswers() {
+        document.getElementById('result-modal').style.display = 'none';
+
+        for(let i = 1; i <= 40; i++) {
+            let box = document.getElementById('box-' + i);
+            let radios = document.getElementsByName('q' + i);
+            let selected = Array.from(radios).find(r => r.checked);
+            let isCorrect = selected && selected.value === dapAn[i];
+            
+            box.classList.remove('answered');
+            if(isCorrect) {
+                box.classList.add('correct');
+            } else {
+                box.classList.add('incorrect');
+            }
+
+            radios.forEach(r => {
+                let label = r.closest('label');
+                label.style.pointerEvents = 'none'; 
+                
+                if(r.value === dapAn[i]) {
+                    label.classList.add('correct-ans'); 
+                } else if(r.checked && !isCorrect) {
+                    label.classList.add('wrong-ans');   
+                }
+            });
+
+            let exp = document.getElementById('exp-' + i);
+            if (exp && giaiThich[i]) {
+                exp.innerHTML = "💡 <b>Giải thích:</b> " + giaiThich[i];
+                exp.style.display = 'block';
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
