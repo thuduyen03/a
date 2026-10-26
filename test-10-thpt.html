@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@600&display=swap" rel="stylesheet">
+    <title>Đề thi thử THPT Quốc Gia Môn Tiếng Anh - ĐỀ SỐ 10</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Segoe UI", Tahoma, Arial, sans-serif; background-color: #ffffff; line-height: 1.4; font-size: 16px; }
+        .header { background: linear-gradient(120deg, #e9eefb, #dfe7ff, #e9eefb); background-size: 200% 200%; animation: bannerFlow 8s ease-in-out infinite; padding: 10px 20px; border-bottom: 1px solid #d7def5; display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: nowrap; position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 60px; }
+        .header-right { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1 1 auto; justify-content: flex-start; }
+        .header-ad { display: inline-flex; align-items: center; gap: 0; padding: 4px 10px; border-radius: 14px; border: 1px solid rgba(215, 222, 245, 0.9); background: rgba(255, 255, 255, 0.24); backdrop-filter: blur(4px); text-decoration: none; color: inherit; box-shadow: 0 10px 24px rgba(33, 58, 128, 0.12); min-width: 180px; max-width: calc(100% - 70px); width: auto; flex: 1 1 auto; height: 48px; overflow: hidden; cursor: pointer;}
+        .header-ad:hover { background: rgba(255, 255, 255, 0.5); }
+        .ad-copy { display: flex; flex-direction: column; gap: 0; width: 100%; overflow: hidden; position: relative; }
+        .ad-eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: #6b7ac7; margin: 0; font-weight: 700; }
+        .ad-marquee { display: flex; gap: 24px; width: 100%; align-items: center; padding-left: 4px; }
+        .ad-headline { margin: 0; font-size: 16px; font-weight: 800; color: #1c2566; white-space: nowrap; }
+        .ad-loop { display: flex; gap: 40px; }
+        .ad-close { width: 32px; height: 32px; border-radius: 50%; border: 1px solid #cdd6f5; background: rgba(255, 255, 255, 0.7); color: #46507a; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; transition: transform 0.15s ease, box-shadow 0.2s ease, background-color 0.2s ease; text-decoration: none; font-weight: 800; flex: 0 0 auto; margin-left: 6px; font-size: 16px; }
+        .ad-close:hover { transform: translateY(-1px); box-shadow: 0 8px 18px rgba(70, 80, 122, 0.25); background: #f6f8ff; }
+        @keyframes bannerFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        
+        .main-container { margin-top: 90px; display: flex; flex-direction: column; background: #ffffff; height: calc(100vh - 90px); }
+        .panels-container { display: flex; flex: 1; overflow: hidden; }
+        .passage-panel { flex: 1; padding: 20px 20px 100px; overflow-y: auto; min-width: 200px; line-height: 1.6; scroll-behavior: smooth; }
+        .text-center { text-align: center; }
+        .reading-passage h4 { font-family: 'Merriweather', 'Times New Roman', serif; font-size: 22px; font-weight: 600; color: #2c3e50; line-height: 1.4; margin-bottom: 20px; text-align: center; border-bottom: 2px solid #4a90e2; padding-bottom: 5px; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); }
+        .reading-passage p { margin-bottom: 1.2em; }
+        .questions-panel { flex: 1; padding: 20px 20px 100px; overflow-y: auto; min-width: 200px; border-left: 1px solid #e0e0e0; scroll-behavior: smooth; }
+        .resizer { width: 10px; cursor: col-resize; background-color: #f0f0f0; background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="30" viewBox="0 0 10 30"><path d="M4 11h2v2H4zM4 15h2v2H4zM4 19h2v2H4z" fill="%23888"/></svg>'); background-repeat: no-repeat; background-position: center; flex-shrink: 0; flex-grow: 0; }
+        
+        .nav-arrows { position: fixed; bottom: 100px; right: 20px; display: flex; gap: 5px; z-index: 101; }
+        .nav-arrow { width: 50px; height: 50px; background: #333; color: white; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: bold; border-radius: 5px;}
+        .nav-arrow:hover { background: #555; }
+        
+        .nav-row { position: fixed; bottom: 0; left: 0; right: 0; background: #ffffff; padding: 0; display: flex; align-items: center; height: 80px; z-index: 100; overflow-x: auto; white-space: nowrap; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
+        .footer__questionWrapper___1tZ46 { display: inline-flex; align-items: center; margin-right: 20px; }
+        .footer__questionNo___3WNct { background: none; border: none; padding: 10px 15px; font-size: 16px; font-weight: 600; color: #333; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: background-color 0.2s; }
+        .footer__questionNo___3WNct:hover { background-color: #f8f9fa; border-radius: 5px;}
+        .section-prefix { font-size: 16px; }
+        .sectionNr { font-size: 16px; font-weight: bold; }
+        .attemptedCount { font-size: 14px; color: #666; margin-left: 5px; font-weight: 400; }
+        @media (max-width: 768px) { .attemptedCount { display: none; } }
+        .footer__questionWrapper___1tZ46.selected .attemptedCount { display: none; }
+        .footer__subquestionWrapper___9GgoP { display: none; gap: 4px; margin-left: 10px; }
+        .footer__questionWrapper___1tZ46.selected .footer__subquestionWrapper___9GgoP { display: flex; flex-wrap: wrap; }
+        
+        .subQuestion { width: 32px; height: 32px; border: 1px solid #ccc; background: white; color: #333; font-size: 14px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; border-radius: 4px; }
+        .subQuestion.answered { background-color: #6b7ac7; color: #ffffff; border-color: #46507a; font-weight: bold; }
+        .subQuestion.correct { background-color: #28a745 !important; color: white !important; border-color: #28a745 !important; }
+        .subQuestion.incorrect { background-color: #dc3545 !important; color: white !important; border-color: #dc3545 !important; }
+        .subQuestion.marked { position: relative; color: #333; border: 2px solid #ffc107;}
+        .subQuestion:hover { background-color: #f0f0f0; border-color: #999; }
+        .subQuestion.active { background-color: #4a90e2; color: white; border-color: #4a90e2; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+        
+        .footer__deliverButton___3FM07 { margin-left: auto; margin-right: 20px; background-color: #4a90e2; color: #fff; border: 1px solid #357abd; padding: 12px 20px; border-radius: 5px; font-size: 16px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: background-color 0.2s, border-color 0.2s; min-width: 150px; justify-content: center; position: sticky; right: 0; z-index: 10;}
+        .footer__deliverButton___3FM07:hover { background-color: #357abd; }
+        .footer__deliverButton___3FM07:disabled { background: #e9ecef; color: #6c757d; cursor: not-allowed; border-color: #ddd; }
+        .fa-check::before { content: "✓"; }
+        .hidden { display: none !important; }
+        
+        /* Highlight Tools */
+        .context-menu { position: absolute; background: white; border: 1px solid #ccc; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; display: none; min-width: 140px; overflow: hidden; }
+        .context-menu-item { padding: 12px 16px; cursor: pointer; font-size: 16px; border-bottom: 1px solid #f0f0f0; transition: background-color 0.2s; display: flex; align-items: center; gap: 8px; }
+        .context-menu-item:hover { background-color: #f8f9fa; }
+        .context-menu-item:last-child { border-bottom: none; }
+        .color-btn { width: 24px; height: 24px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.2); cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease; padding: 0; background-color: transparent; }
+        .color-btn:hover { transform: scale(1.15); box-shadow: 0 2px 5px rgba(0,0,0,0.15); }
+        .color-btn.yellow { background-color: #fff3a3; }
+        .color-btn.green { background-color: #b4f0c1; }
+        .color-btn.pink { background-color: #ffc7df; }
+        
+        .annotation-highlight { background-color: var(--highlight-color, #fff3a3); border-radius: 4px; padding: 0 2px; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05); cursor: pointer; }
+        .annotation-highlight.highlight-yellow { --highlight-color: #fff3a3; }
+        .annotation-highlight.highlight-green { --highlight-color: #b4f0c1; }
+        .annotation-highlight.highlight-pink { --highlight-color: #ffc7df; }
+        .annotation-highlight.highlight-blue { --highlight-color: #d0ebff; border: 1px dashed #339af0; animation: pulseHighlight 2s ease-in-out infinite alternate; }
+        
+        .annotation-note { background-color: #b4f0c1; border-radius: 4px; padding: 0 2px; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08); position: relative; cursor: pointer; }
+        .annotation-note[data-note]:hover::after { content: attr(data-note); position: absolute; left: 50%; bottom: 100%; transform: translate(-50%, -6px); background: #1f2937; color: #fff; padding: 6px 10px; border-radius: 4px; white-space: nowrap; font-size: 13px; z-index: 2000; }
+        
+        /* Question Layouts */
+        .part-header { background-color: #f1f2ec; padding: 12px 20px; border: 1px solid #e0e0e0; text-align: left; margin: 10px 20px; border-radius: 5px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+        .timer-container { display: flex; position: relative; cursor: default; color: #333; font-size: 16px; font-weight: 500; align-items: center; gap: 12px; flex: 0 0 auto; min-width: 220px; padding: 4px 10px; border-radius: 14px; border: 1px solid #d7def5; background: rgba(255, 255, 255, 0.24); box-shadow: 0 8px 18px rgba(33, 58, 128, 0.08); }
+        .timer-controls { display: flex; align-items: center; gap: 8px; margin-left: 15px; }
+        .timer-controls button { background: #f0f0f0; border: 1px solid #ccc; border-radius: 50%; padding: 0; cursor: pointer; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; transition: background-color 0.2s; }
+        .timer-controls button:hover { background: #e0e0e0; }
+        
+        .multi-choice-question { margin-bottom: 25px; padding: 15px; border-radius: 6px; border: 2px solid #f0f0f0; transition: border-color 0.3s, background-color 0.3s; background: #fafafa;}
+        .mcq-question-text { margin-bottom: 12px; display: flex; align-items: center;}
+        .question-number-box { border: 2px solid #4a90e2; padding: 2px 10px; margin-right: 12px; border-radius: 4px; font-weight: bold; display: inline-block; color: #4a90e2;}
+        
+        .multi-choice-option { margin-bottom: 8px; padding: 10px; border-radius: 4px; transition: background-color 0.2s; cursor: pointer; border: 1px solid transparent;}
+        .multi-choice-option:hover { background-color: #e9ecef; }
+        .multi-choice-option label { display: flex; align-items: center; cursor: pointer; font-size: 16px; width: 100%; height: 100%; font-weight: 500;}
+        .multi-choice-option input[type="radio"] { margin-right: 15px; transform: scale(1.3); accent-color: #4a90e2; cursor: pointer;}
+        
+        .multi-choice-option.correct { background-color: #e9f7ef; border-color: #28a745; }
+        .multi-choice-option.incorrect { background-color: #f8d7da; border-color: #dc3545;}
+        .correct-answer-highlight { background-color: #d4edda !important; border: 1px solid #c3e6cb !important; border-radius: 4px; color: #155724; font-weight: bold;}
+        
+        /* Modal Results - Updated Layout */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.75); z-index: 2000; display: flex; justify-content: center; align-items: center; }
+        .modal-overlay.hidden { display: none; }
+        .modal-content { background: white; padding: 30px; border-radius: 10px; width: 95%; max-width: 500px; max-height: 85vh; display: flex; flex-direction: column; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.2);}
+        .modal-close-btn { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 28px; cursor: pointer; color: #888; transition: color 0.2s;}
+        .modal-close-btn:hover { color: #333; }
+        .modal-content h2 { text-align: center; margin-bottom: 20px; color: #1c2566; font-size: 24px; }
+        
+        .results-summary { display: flex; justify-content: space-around; margin-bottom: 20px; font-size: 18px; font-weight: bold; text-align: center; border-bottom: 2px solid #eee; padding-bottom: 20px; background: #f8f9fa; border-radius: 8px; padding-top: 15px;}
+        .results-summary p { color: #333; }
+        .results-summary span { color: #4a90e2; font-size: 22px; }
+        
+        .results-details-container { overflow-y: auto; padding-right: 10px; }
+        
+        /* Tối giản bảng chỉ còn 3 cột: Q, Bài làm, Đáp án */
+        .result-header-row { display: grid; grid-template-columns: 60px 1fr 1fr; gap: 15px; padding: 10px 5px; border-bottom: 2px solid #ddd; font-weight: bold; color: #555; text-align: center;}
+        .result-row { display: grid; grid-template-columns: 60px 1fr 1fr; gap: 15px; padding: 10px 5px; border-bottom: 1px solid #f0f0f0; font-size: 15px; text-align: center; align-items: center;}
+        .result-row:hover { background-color: #f9f9f9; }
+        .result-row.incorrect { background-color: #fff3f3; }
+        .result-row .q-num { font-weight: bold; color: #4a90e2;}
+        .result-row .user-ans { color: #333; font-weight: 500;}
+        .result-row .correct-ans { color: #28a745; font-weight: bold; }
+
+        html, body { width: 100%; height: 100%; overflow: hidden; }
+        #launchScreen, #app { width: 100vw; height: 100vh; }
+        #app { display: none; }
+        #launchScreen { display: flex; align-items: center; justify-content: center; padding: 24px; background: radial-gradient(circle at 0% 0%, rgba(206, 219, 255, 0.48), transparent 34%), radial-gradient(circle at 100% 100%, rgba(221, 229, 255, 0.44), transparent 38%), #f4f6fc; color: #1f2b59; }
+        .launch-card { width: min(980px, 100%); border: 1px solid #d7def5; border-radius: 18px; background: linear-gradient(180deg, #ffffff, #f7f9ff); box-shadow: 0 16px 38px rgba(33, 58, 128, 0.14); padding: 35px 40px; display: grid; gap: 15px; }
+        .launch-eyebrow { margin: 0; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: #6f7cb2; font-weight: 700; }
+        .launch-title { margin: 5px 0 0; font-size: clamp(28px, 4vw, 42px); line-height: 1.2; letter-spacing: -0.02em; color: #1c2566; }
+        .launch-meta { margin: 10px 0 0; color: #3c4a81; font-size: 16px; font-weight: 600; }
+        .launch-guide { border: 1px solid #d7def5; border-radius: 12px; background: #f2f5ff; padding: 20px; display: grid; gap: 10px; margin-top: 10px;}
+        .launch-main { margin: 0; font-size: clamp(18px, 2.2vw, 20px); line-height: 1.4; font-weight: 700; color: #1d2a60; }
+        .launch-sub { margin: 0; color: #4c598f; font-size: 15px; line-height: 1.5; }
+        .student-info-form { margin-top: 15px; display: flex; flex-direction: column; gap: 15px; }
+        .student-info-form input { width: 100%; padding: 14px 18px; border: 1px solid #c5d0f2; border-radius: 8px; font-size: 16px; outline: none; transition: all 0.3s; box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);}
+        .student-info-form input:focus { border-color: #4a90e2; box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2); }
+        .launch-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 15px; }
+        .launch-btn { border: none; border-radius: 8px; cursor: pointer; font-size: 18px; font-weight: 700; padding: 14px 24px; color: #fff; background: #4a90e2; transition: all 0.2s ease; box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3); width: 100%; text-align: center; }
+        .launch-btn:hover { transform: translateY(-2px); background: #357abd; box-shadow: 0 6px 16px rgba(74, 144, 226, 0.4);}
+        
+        .mark-toggle-btn { background: none; border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; color: #ccc; margin-left: auto; transition: color 0.2s; float: right; padding-right: 10px;}
+        .mark-toggle-btn:hover { color: #888; }
+        .mark-toggle-btn.marked { color: #ffc107; }
+        .markable-question { position: relative; }
+        
+        /* Styles for Explanations */
+        .explanation-box { display: none; margin-top: 15px; padding: 15px 20px; background-color: #f0f7ff; border-left: 4px solid #4a90e2; border-radius: 6px; font-size: 15px; color: #2c3e50; line-height: 1.6; width: 100%; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: background-color 0.2s ease; cursor: pointer;}
+        .explanation-box:hover { background-color: #e6f2ff; }
+        .explanation-box.show { display: block; animation: fadeIn 0.4s ease-in-out; }
+        .explanation-title { font-weight: 700; margin-bottom: 8px; color: #1c2566; display: flex; align-items: center; gap: 6px; font-size: 16px;}
+        .explanation-content { font-weight: 500; }
+        .explanation-content i { color: #444; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulseHighlight { from { background-color: #d0ebff; } to { background-color: #a3daff; } }
+        
+        .part3-passage-item { padding: 15px; margin-bottom: 15px; border: 1px dashed #ccc; border-radius: 6px; background-color: #fcfcfc;}
+        .part3-passage-item h5 { color: #4a90e2; margin-bottom: 10px; font-size: 17px;}
+        .part3-passage-item p { margin-bottom: 6px; }
+    </style>
+</head>
+<body>
+    <!-- Launch Screen -->
+    <section id="launchScreen" aria-label="Launch screen">
+        <div class="launch-card">
+            <div>
+                <p class="launch-eyebrow">Hệ thống Thi Trắc Nghiệm Thông Minh</p>
+                <h1 class="launch-title" id="launchTestTitle">Đề thi thử THPT Quốc Gia Môn Tiếng Anh - ĐỀ SỐ 10</h1>
+                <p class="launch-meta">Môn: Tiếng Anh | Thời gian: 50 phút | Số lượng: 40 Câu</p>
+            </div>
+            <div class="launch-guide">
+                <p class="launch-main">💡 Nhấn F11 để bắt đầu làm bài ở chế độ toàn màn hình.</p>
+                <p class="launch-sub">Hoàn thành thông tin cá nhân bên dưới để hệ thống lưu điểm tự động.</p>
+                <div class="student-info-form">
+                    <input type="text" id="studentName" placeholder="Nhập Họ và tên của bạn..." required autocomplete="off">
+                    <input type="text" id="studentClass" placeholder="Nhập Lớp của bạn (VD: 12A1)..." required autocomplete="off">
+                    <p id="launchError" style="color: #dc3545; font-size: 14px; display: none; margin: 0; font-weight: 600;">⚠️ Vui lòng nhập đầy đủ Họ tên và Lớp!</p>
+                </div>
+            </div>
+            <div class="launch-row">
+                <button id="startNormalBtn" class="launch-btn" type="button">BẮT ĐẦU LÀM BÀI</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main App Layout -->
+    <div id="app">
+        <div class="header">
+            <div class="timer-container">
+                <span class="timer-display">50:00</span>
+                <div class="timer-controls">
+                    <button id="timer-toggle-btn" title="Pause/Resume Timer">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M8 5v14l11-7L8 5z"/></svg>
+                    </button>
+                </div>
+            </div>
+            <div class="header-right">
+                <!-- Banner Quảng cáo & Link FB cá nhân -->
+                <a href="https://www.facebook.com/thuduyen.nguyen.332" target="_blank" rel="noopener" class="header-ad" title="Liên hệ Facebook Giáo viên">
+                    <div class="ad-copy">
+                        <p class="ad-eyebrow">Luyện thi THPT QG</p>
+                        <div class="ad-marquee">
+                            <div class="ad-loop">
+                                <span class="ad-headline">🔥 Chinh phục điểm 9+ Tiếng Anh dễ dàng! Click ngay!</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <button class="ad-close" type="button" aria-label="Close ad" title="Close">×</button>
+            </div>
+        </div>
+
+        <div class="main-container" id="main-container">
+            <!-- Headers Section -->
+            <div id="passage-header-container">
+                <div id="part-header-1" class="part-header">
+                    <p><strong>Part 1: Guided Cloze 1</strong></p>
+                    <p>Read the following article and mark the letter A, B, C, or D to indicate the correct option that best fits each of the numbered blanks.</p>
+                </div>
+                <div id="part-header-2" class="part-header hidden">
+                    <p><strong>Part 2: Guided Cloze 2</strong></p>
+                    <p>Read the following leaflet and mark the letter A, B, C, or D to indicate the correct option that best fits each of the numbered blanks.</p>
+                </div>
+                <div id="part-header-3" class="part-header hidden">
+                    <p><strong>Part 3: Sentence Arrangement</strong></p>
+                    <p>Mark the letter A, B, C or D to indicate the best arrangement of utterances or sentences to make a meaningful exchange or text.</p>
+                </div>
+                <div id="part-header-4" class="part-header hidden">
+                    <p><strong>Part 4: Reading Comprehension 1</strong></p>
+                    <p>Read the following passage about adolescence and mark the letter A, B, C, or D to indicate the correct option that best fits each of the numbered blanks.</p>
+                </div>
+                <div id="part-header-5" class="part-header hidden">
+                    <p><strong>Part 5: Reading Comprehension 2</strong></p>
+                    <p>Read the following passage about tourist graffiti and mark the letter A, B, C, or D to indicate the correct answer to each of the questions.</p>
+                </div>
+                <div id="part-header-6" class="part-header hidden">
+                    <p><strong>Part 6: Reading Comprehension 3</strong></p>
+                    <p>Read the following passage about a cycling revolution in India and mark the letter A, B, C, or D to indicate the correct answer to each of the questions.</p>
+                </div>
+            </div>
+            
+            <div class="panels-container">
+                <!-- LEFT PANEL: PASSAGES -->
+                <div class="passage-panel" id="passage-panel">
+                    
+                    <!-- Passage 1 -->
+                    <div id="passage-text-1" class="reading-passage">
+                        <h4 class="text-center">Personal Development</h4>
+                        <p>The term 'personal development' is often connected with activities like dieting or exercise, or perhaps learning a <strong>(1) ______</strong>. But while these things are undoubtedly important, there are many other <strong>(2) ______</strong> skills which are often overlooked. Academic or cognitive skills <strong>(3) ______</strong> critical thinking, memorisation and creativity are important, as are <strong>(4) ______</strong> and emotional skills like friendliness, positive thinking, and self-esteem. <strong>(5) ______</strong> skills not to be neglected include self-control, time management, and finding a balanced life. The important thing is to <strong>(6) ______</strong> a 'holistic approach' to personal development, meaning you should aim to develop yourself as a whole person rather than focusing on one aspect of yourself at the expense of the others.</p>
+                    </div>
+
+                    <!-- Passage 2 -->
+                    <div id="passage-text-2" class="reading-passage hidden">
+                        <h4 class="text-center">Ways to Reduce Global Warming</h4>
+                        <p>Here are some ways to help reduce global warming. Which of these do you regularly do?</p>
+                        <ul>
+                            <li>Don't use private cars. Your willingness <strong>(7) ______</strong> or cycle to nearby places can help reduce your own carbon footprint.</li>
+                            <li>Make a decision to reduce, recycle, and reuse. Reduce waste by buying reusable products. Don't forget to recycle plastics, glass, and paper products. You may wish to reuse some of your old items to <strong>(8) ______</strong>, too. Take unneeded items <strong>(9) ______</strong> a recycling centre.</li>
+                            <li>Plant trees. Plants and trees are nature's lungs. They produce the oxygen we breathe. They also can shade your home, <strong>(10) ______</strong> it cooler so you don't need to run your air conditioners as much.</li>
+                            <li>Buy local goods. When you buy goods imported from far-away places, it takes a large <strong>(11) ______</strong> of energy to transport them to your area. This means that if you don't buy local food and products, then more <strong>(12) ______</strong> of carbon dioxide will happen during the transportation process.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Passage 3 (Sentence Arrangement Text) -->
+                    <div id="passage-text-3" class="reading-passage hidden">
+                        <h4 class="text-center">Reference Texts for Sentence Arrangement</h4>
+                        
+                        <div class="part3-passage-item">
+                            <h5>Question 13</h5>
+                            <p><strong>a.</strong> Mai: No, I don't. Shall we do something together?</p>
+                            <p><strong>b.</strong> Ann: Do you have any plans for this Saturday evening?</p>
+                            <p><strong>c.</strong> Ann: Yes, let's. How about going to a music show? Let me check the weekend programme at the Modern Arts Centre.</p>
+                        </div>
+                        
+                        <div class="part3-passage-item">
+                            <h5>Question 14</h5>
+                            <p><strong>a.</strong> Nam: Yes, we should all have these basic life skills to be adults.</p>
+                            <p><strong>b.</strong> Nam: Because doing housework helps them develop life skills.</p>
+                            <p><strong>c.</strong> Anna: It's true. Life skills such as cooking, cleaning, or taking care of others are really necessary for kids when they grow up.</p>
+                            <p><strong>d.</strong> Anna: Thank you for sharing your idea. It's very useful for my project.</p>
+                            <p><strong>e.</strong> Anna: Why do you think children should do housework?</p>
+                        </div>
+
+                        <div class="part3-passage-item">
+                            <h5>Question 15</h5>
+                            <p>Hi Jack,</p>
+                            <p><strong>a.</strong> I think we should try to help our parents because it's not fair for them to do everything.</p>
+                            <p><strong>b.</strong> I make my bed every day and clean my room twice a week, which makes my parents happy.</p>
+                            <p><strong>c.</strong> I'm sorry to hear that you're so busy with your studies and have too many chores to do.</p>
+                            <p><strong>d.</strong> I am very busy with school and other activities, too, but I still help around the house.</p>
+                            <p><strong>e.</strong> It's true that we don't have much free time, but doing a few chores doesn't take long.</p>
+                            <p>Talk to you soon!<br>Ryan</p>
+                        </div>
+
+                        <div class="part3-passage-item">
+                            <h5>Question 16</h5>
+                            <p><strong>a.</strong> There are songs for special occasions, such as moving into a new home, and songs with stories about the history of the Mường.</p>
+                            <p><strong>b.</strong> In modern life, many of the Mường people still make their clothes themselves.</p>
+                            <p><strong>c.</strong> The Muong people have their own style of music and they play the gong, one of the traditional musical instruments of the Mường culture.</p>
+                            <p><strong>d.</strong> They need to be very creative, talented, and patient because their clothes have colourful patterns on them, which are difficult to make and take a lot of skill and time.</p>
+                            <p><strong>e.</strong> The Mường people are proud of their traditions and culture.</p>
+                        </div>
+
+                        <div class="part3-passage-item">
+                            <h5>Question 17</h5>
+                            <p><strong>a.</strong> The way they come together and help each other is a real inspiration, and something I think a lot of us here have forgotten.</p>
+                            <p><strong>b.</strong> But I was also amazed at how positively people go about their everyday lives.</p>
+                            <p><strong>c.</strong> It was the month when I volunteered at a hospital in Africa that changed my life.</p>
+                            <p><strong>d.</strong> I was introduced to a world that is very different to mine in so many ways.</p>
+                            <p><strong>e.</strong> I was horrified at how poor so many of the families over there are and how difficult their lives can be.</p>
+                        </div>
+                    </div>
+
+                    <!-- Passage 4 -->
+                    <div id="passage-text-4" class="reading-passage hidden">
+                        <h4 class="text-center">Adolescence</h4>
+                        <p>Adolescence is a difficult time for both parents and teenagers as it is a period of physical, social and emotional change. Physically, as a dependent pre-teen child, <strong>(18) ______</strong>. In general, emotionally and socially, adolescents like you are experiencing profound changes in terms of freedom, privacy, interests, decisions and opinions.</p>
+                        <p>First, you want more freedom to choose who to see and when. <strong>(19) ______</strong>. Now you want to spend some more time on your own. Second, your parents made most decisions before adolescence. But now you want to decide things for yourselves. You hate being told what to do all the time. Above all, adolescents have strong opinions and are idealistic. <strong>(20) ______</strong>. You feel you have all the answers while adults don't.</p>
+                        <p>All these perfectly normal changes will affect teenagers' relationship with their parents. <strong>(21) ______</strong>? Firstly, let your parents know that you still love and value them. Secondly, try to agree to rules and boundaries and prove to be dependable. Keep your words and stick to rules. Thirdly, <strong>(22) ______</strong>. Show your parents that you are capable of an independent life by taking care of your own school work and maintaining a healthy lifestyle. Finally, it's all about communication! Keep talking to your parents.</p>
+                    </div>
+
+                    <!-- Passage 5 -->
+                    <div id="passage-text-5" class="reading-passage hidden">
+                        <h4 class="text-center">Tourist Graffiti</h4>
+                        <p>People in China were angry and there was a big hunt to find the person responsible for the graffiti in Chinese on a 3,500-year-old monument in Luxor. The message wasn't very imaginative but basically 'Ding Jinhao was here', so Internet users easily found this particular Ding Jinhao, a teenager in Nanjing. His parents then told a local newspaper that their son was sorry for his actions.</p>
+                        <p>It is a serious crime to write on a historic monument in Egypt. But in the past, people could write on monuments and no one was angry about it. At Giza there is an example of graffiti on a temple wall from 1244 BC. It says 'Hadnakhte came to make an excursion and amuse himself on the west of the Memphis, together with his brother, Panakhti'.</p>
+                        <p>In Roman times, one of the first Egyptologists, Giovanni Belzoni, was the first modern man to enter the pyramid of Khafre. Inside the pyramid today you can read his text celebrating the discovery. Later, in the second half of the 19th century, Europeans could travel around the world, and they could climb to the top of the Great Pyramid. There was graffiti in just about every language up there.</p>
+                        <p>Luckily, it wasn't difficult to make Ding Jinhao's graffiti disappear. But China's National Tourism Administration is right to advise all tourists to act in a civilised way.</p>
+                    </div>
+
+                    <!-- Passage 6 -->
+                    <div id="passage-text-6" class="reading-passage hidden">
+                        <h4 class="text-center">A Cycling Revolution in India</h4>
+                        <p>Nibha Kumari, a resident of Bihar, India's poorest state, recalls how a bicycle transformed her life when she turned 15. For two years, six days a week, she cycled two hours daily from home to school and coaching classes and back, using a bicycle provided by the state government. "If I didn't have a cycle, I don't think I could have finished high school. It changed my life," says Nibha, now 27.</p>
+                        <p>A new peer-reviewed study published in Journal of Transport Geography reveals remarkable insights about school-going children and cycling in rural India. The study by Srishti Agrawal, Adit Seth and Rahul Goel found that the most notable rise in cycling in India had occurred among rural girls - increasing more than two times from 4.5% in 2007 to 11% in 2017 reducing the gender gap in the activity. "This is a silent revolution. We call it a revolution because cycling levels increased among girls in a country which has high levels of gender inequality in terms of female mobility outside the home, in general, and for cycling, in particular," says Ms Agrawal.</p>
+                        <p><strong>[I]</strong> State-run free bicycle distribution schemes since 2004 have targeted girls, who had higher school dropout rates than boys due to household chores and exhausting long walks. <strong>[II]</strong> This approach isn't unique to India - evidence from countries like Colombia, Kenya, Malawi and Zimbabwe also shows that bicycles effectively boost girls' school enrolment and retention. <strong>[III]</strong> Cycling to school in rural areas doubled over the decade, while in urban areas, it remained steady. Indian city roads are notoriously unsafe, with low urban cycling to school linked to poor traffic safety and more cars on the road. <strong>[IV]</strong></p>
+                        <p>American suffragist Susan B Anthony famously said that the bicycle "has done more to emancipate women than anything else in the world. It gives women a feeling of freedom and self-reliance". Researchers wonder if women cycle less as they age due to shrinking job opportunities and workforce dropout. Nibha stopped cycling after marriage and moving to her in-laws' home. While she still travels outside the house as she trains to become a teacher, when asked about her commute, she simply says, "I don't need the cycle anymore."</p>
+                    </div>
+                </div>
+
+                <div class="resizer" id="resizer"></div>
+                
+                <!-- RIGHT PANEL: QUESTIONS -->
+                <div class="questions-panel" id="questions-panel">
+                    
+                    <script>
+                        function renderMCQ(qNum, options, extraClass = "") {
+                            let html = `<div class="multi-choice-question ${extraClass}" data-q-start="${qNum}" data-q-end="${qNum}">`;
+                            html += `<div class="mcq-question-text"><span class="mcq-question-number question-number-box" data-q-number="${qNum}">Question ${qNum}</span></div>`;
+                            const letters = ['A', 'B', 'C', 'D'];
+                            options.forEach((opt, idx) => {
+                                html += `<div class="multi-choice-option"><label><input type="radio" name="q${qNum}" value="${letters[idx]}"> <strong>${letters[idx]}.</strong>&nbsp; ${opt}</label></div>`;
+                            });
+                            html += `</div>`;
+                            document.write(html);
+                        }
+                    </script>
+
+                    <!-- Questions Part 1 -->
+                    <div id="questions-1" class="question-set">
+                        <script>
+                            renderMCQ(1, ["new programme computer", "programme new computer", "new computer programme", "computer programme new"]);
+                            renderMCQ(2, ["worthwhile", "potential", "meaningful", "ordinary"]);
+                            renderMCQ(3, ["in place of", "such as", "regardless of", "at least"]);
+                            renderMCQ(4, ["sociable", "society", "socially", "social"]);
+                            renderMCQ(5, ["Other", "The others", "Others", "Another"]);
+                            renderMCQ(6, ["make", "give", "lead", "take"]);
+                        </script>
+                    </div>
+
+                    <!-- Questions Part 2 -->
+                    <div id="questions-2" class="question-set hidden">
+                        <script>
+                            renderMCQ(7, ["to walk", "walking", "to walking", "walk"]);
+                            renderMCQ(8, ["make out", "turn out", "help out", "find out"]);
+                            renderMCQ(9, ["with", "for", "at", "to"]);
+                            renderMCQ(10, ["which make", "made", "to make", "making"]);
+                            renderMCQ(11, ["level", "amount", "degree", "number"]);
+                            renderMCQ(12, ["scales", "emissions", "portions", "purposes"]);
+                        </script>
+                    </div>
+
+                    <!-- Questions Part 3 -->
+                    <div id="questions-3" class="question-set hidden">
+                        <div style="margin-bottom: 20px; padding: 10px; background-color: #fff3cd; border-left: 5px solid #ffecb5; font-weight: 500; color: #856404; border-radius: 4px;">
+                            👉 Đọc kỹ dữ liệu tham khảo tương ứng ở cột bên trái để chọn đáp án Sắp xếp logic nhất!
+                        </div>
+                        <script>
+                            renderMCQ(13, ["b-c-a", "c-b-a", "b-a-c", "a-b-c"]);
+                            renderMCQ(14, ["e-b-c-a-d", "e-b-d-a-c", "d-a-e-b-c", "d-b-c-e-a"]);
+                            renderMCQ(15, ["a-e-c-d-b", "c-d-a-e-b", "c-e-a-d-b", "e-a-c-d-b"]);
+                            renderMCQ(16, ["e-c-a-b-d", "c-a-e-d-b", "a-c-d-b-e", "b-d-c-a-e"]);
+                            renderMCQ(17, ["c-d-e-b-a", "d-a-e-c-b", "c-e-d-b-a", "d-e-b-a-c"]);
+                        </script>
+                    </div>
+
+                    <!-- Questions Part 4 -->
+                    <div id="questions-4" class="question-set hidden">
+                        <script>
+                            renderMCQ(18, [
+                                "on which the transformation into an independent young adult triggers",
+                                "totally changed into an independent young adult",
+                                "you are being transformed into an independent young adult",
+                                "that the transition to an independent young adult finally occurs"
+                            ]);
+                            renderMCQ(19, [
+                                "Being in the company of your parents, you are thrilled",
+                                "You used to be most happy in the company of your parents",
+                                "You felt delighted without the company of your parents",
+                                "The company of your parents hardly satisfied you"
+                            ]);
+                            renderMCQ(20, [
+                                "You see the world differently, develop your own views and your own sense of right or wrong",
+                                "Seeing the world differently, your own views and your own sense of right or wrong are developed",
+                                "While you have developed your own views and your own sense of right or wrong, you now adopt a different viewpoint on the world",
+                                "Your own views and your own sense of right or wrong are developed so that the way you see the world changes"
+                            ]);
+                            renderMCQ(21, [
+                                "But as adolescents, how do you struggle to get on well with your parents",
+                                "So what should parents do to create a harmonious atmosphere in the family",
+                                "But what if adolescents try to maintain a good relationship with their parents",
+                                "So what can you, as adolescents, do to stay on good terms with your parents"
+                            ]);
+                            renderMCQ(22, [
+                                "having tried to see why your behaviour angers your parents",
+                                "try to understand why they might be irritated by your behaviour",
+                                "if you try to figure out why your parents are furious at your behaviour",
+                                "understand why they are trying to be annoyed by your behaviour"
+                            ]);
+                        </script>
+                    </div>
+
+                    <!-- Questions Part 5 -->
+                    <div id="questions-5" class="question-set hidden">
+                        <script>
+                            renderMCQ(23, [
+                                "there was a big hunt at a monument in Luxor", 
+                                "they saw the graffiti on an ancient monument", 
+                                "a teenager committed a violent crime", 
+                                "the graffiti artist didn't feel sorry for his actions"
+                            ], "q23-class");
+                            document.querySelector('.q23-class .mcq-question-text').innerHTML += ' As stated in paragraph 1, Chinese citizens were angry because';
+                            
+                            renderMCQ(24, [
+                                "creative", 
+                                "terrible", 
+                                "unclear", 
+                                "inspiring"
+                            ], "q24-class");
+                            document.querySelector('.q24-class .mcq-question-text').innerHTML += ' The word imaginative in paragraph 1 can be best replaced by';
+                            
+                            renderMCQ(25, [
+                                "a historic monument", 
+                                "an example of graffiti", 
+                                "writing on monuments", 
+                                "a temple wall"
+                            ], "q25-class");
+                            document.querySelector('.q25-class .mcq-question-text').innerHTML += ' The word it in paragraph 1 refers to';
+                            
+                            renderMCQ(26, [
+                                "It was fortunate that Ding Jinhao's graffiti was simple to remove.", 
+                                "Fortunately, erasing Ding Jinhao's graffiti was easier than expected.", 
+                                "It was fortunate that Ding Jinhao's graffiti was nearly possible to erase.", 
+                                "Luckily, Ding Jinhao's graffiti became less visible thanks to efforts."
+                            ], "q26-class");
+                            document.querySelector('.q26-class .mcq-question-text').innerHTML += ' Which of the following best paraphrases the underlined sentence in paragraph 4?';
+                            
+                            renderMCQ(27, [
+                                "normal", 
+                                "unacceptable", 
+                                "fair", 
+                                "dangerous"
+                            ], "q27-class");
+                            document.querySelector('.q27-class .mcq-question-text').innerHTML += ' The word civilised in paragraph 4 is OPPOSITE in meaning to';
+                            
+                            renderMCQ(28, [
+                                "Ding Jinhao was identified online, and his actions were publicly criticized.", 
+                                "Writing on an ancient monument was regarded as a serious crime in Egypt.", 
+                                "Giovanni Belzoni's writing in the pyramid of Khafre is hardly noticeable today.", 
+                                "The top of the Great Pyramid is now covered with writing in almost every language."
+                            ], "q28-class");
+                            document.querySelector('.q28-class .mcq-question-text').innerHTML += ' Which of the following is TRUE according to the passage?';
+                            
+                            renderMCQ(29, [
+                                "Paragraph 1", 
+                                "Paragraph 2", 
+                                "Paragraph 3", 
+                                "Paragraph 4"
+                            ], "q29-class");
+                            document.querySelector('.q29-class .mcq-question-text').innerHTML += ' In which paragraph does the author mention a contrast relationship?';
+                            
+                            renderMCQ(30, [
+                                "Paragraph 1", 
+                                "Paragraph 2", 
+                                "Paragraph 3", 
+                                "Paragraph 4"
+                            ], "q30-class");
+                            document.querySelector('.q30-class .mcq-question-text').innerHTML += ' In which paragraph does the author mention the outcome of a situation?';
+                        </script>
+                    </div>
+
+                    <!-- Questions Part 6 -->
+                    <div id="questions-6" class="question-set hidden">
+                        <script>
+                            renderMCQ(31, [
+                                "high school", 
+                                "a cycle", 
+                                "state government", 
+                                "life"
+                            ], "q31-class");
+                            document.querySelector('.q31-class .mcq-question-text').innerHTML += ' The word It in paragraph 1 refers to';
+
+                            renderMCQ(32, [
+                                "discloses", 
+                                "assesses", 
+                                "opposes", 
+                                "controls"
+                            ], "q32-class");
+                            document.querySelector('.q32-class .mcq-question-text').innerHTML += ' The word reveals in paragraph 2 is closest in meaning to';
+
+                            renderMCQ(33, [
+                                "a revolution in cycling is about to happen", 
+                                "gender inequality is a pressing issue in India", 
+                                "the gender gap in cycling has been narrowed", 
+                                "female mobility is limited in certain ways"
+                            ], "q33-class");
+                            document.querySelector('.q33-class .mcq-question-text').innerHTML += ' According to paragraph 2, a sharp rise in cycling rates among schoolgirls in India indicates that';
+
+                            renderMCQ(34, [
+                                "A study shows rural girls' cycling in India doubled, reducing the gender gap in mobility", 
+                                "A study demonstrates how cycling has transformed the way Indian girls go to school", 
+                                "A study illustrates that cycling in India rose despite high levels of gender inequality", 
+                                "A study clarifies the positive effects of cycling on both boys and girls in India"
+                            ], "q34-class");
+                            document.querySelector('.q34-class .mcq-question-text').innerHTML += ' Which of the following best summarises paragraph 2?';
+
+                            renderMCQ(35, [
+                                "[I]", 
+                                "[II]", 
+                                "[III]", 
+                                "[IV]"
+                            ], "q35-class");
+                            document.querySelector('.q35-class .mcq-question-text').innerHTML += ' Where in paragraph 3 does the following sentence best fit? "But the scale here is unmatched."';
+
+                            renderMCQ(36, [
+                                "Gender inequality regarding female cycling is still extremely high in India.", 
+                                "Nibha's success is partly attributed to a bicycle provided by the government.", 
+                                "Indian girls had higher school dropouts rates than boys as they didn't have a cycle.", 
+                                "The free bicycle distribution schemes have specifically targeted girls since 2004."
+                            ], "q36-class");
+                            document.querySelector('.q36-class .mcq-question-text').innerHTML += ' Which of the following is true according to the passage?';
+
+                            renderMCQ(37, [
+                                "restrict", 
+                                "reduce", 
+                                "free", 
+                                "object"
+                            ], "q37-class");
+                            document.querySelector('.q37-class .mcq-question-text').innerHTML += ' The word emancipate in paragraph 4 is OPPOSITE in meaning to';
+
+                            renderMCQ(38, [
+                                "Researchers doubt if women cycle more with age due to gaining more career opportunities and rejoining the workforce.", 
+                                "Researchers believe women stop cycling more as they age because their job options reduce.", 
+                                "Researchers speculate whether fewer job prospects and workforce exit cause women to cycle less over time.", 
+                                "Researchers assume that as women age, declining job opportunities lead to less cycling."
+                            ], "q38-class");
+                            document.querySelector('.q38-class .mcq-question-text').innerHTML += ' Which of the following best paraphrases the underlined sentence in paragraph 4?';
+
+                            renderMCQ(39, [
+                                "there is not much difference in cycling rates between rural and urban areas in India", 
+                                "a growth in car ownership in India is entirely to blame for low urban cycling", 
+                                "shifts in life priorities influence the continuation of cycling among women in India", 
+                                "cycling is not a preferred option for Indian women when they reach marriage age"
+                            ], "q39-class");
+                            document.querySelector('.q39-class .mcq-question-text').innerHTML += ' It can be inferred from the passage that';
+
+                            renderMCQ(40, [
+                                "State-run bicycle schemes in rural India helped boost school retention for girls, although the lack of significant infrastructure improvements continues to challenge the effectiveness of the program in increasing cycling.", 
+                                "Bicycle distribution in rural India, aimed at both boys and girls, significantly improved school attendance, but challenges like inadequate infrastructure and long commutes hindered long-term effectiveness, especially for girls.", 
+                                "The distribution of bicycles in rural India primarily benefited girls, dramatically reducing dropout rates and doubling their cycling participation, yet these efforts had little effect on boys' school retention.", 
+                                "Indian rural girls benefited the most from government bicycle schemes, with cycling rates increasing, leading to higher school retention, though life circumstances can limit the broader adoption of cycling for women."
+                            ], "q40-class");
+                            document.querySelector('.q40-class .mcq-question-text').innerHTML += ' Which of the following best summarises the passage?';
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Arrows -->
+    <div class="nav-arrows">
+        <button class="nav-arrow" onclick="previousQuestion()" id="prevBtn" title="Câu trước">‹</button>
+        <button class="nav-arrow" onclick="nextQuestion()" id="nextBtn" title="Câu tiếp theo">›</button>
+    </div>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="nav-row perScorableItem" aria-label="Questions">
+        <script>
+            function createNavPart(partNum, start, end) {
+                let html = `<div class="footer__questionWrapper___1tZ46 multiple ${partNum===1?'selected':''}" role="tablist">
+                    <button role="tab" class="footer__questionNo___3WNct" onclick="switchToPart(${partNum})">
+                        <span><span aria-hidden="true" class="section-prefix">Part </span><span class="sectionNr" aria-hidden="true">${partNum}</span><span class="attemptedCount" aria-hidden="true">0 of ${end - start + 1}</span></span>
+                    </button>
+                    <div class="footer__subquestionWrapper___9GgoP">`;
+                for(let i=start; i<=end; i++) {
+                    html += `<button class="subQuestion scorable-item" onclick="goToQuestion(${i})"><span class="sr-only">Question ${i}</span><span aria-hidden="true">${i}</span></button>`;
+                }
+                html += `</div></div>`;
+                document.write(html);
+            }
+            createNavPart(1, 1, 6);
+            createNavPart(2, 7, 12);
+            createNavPart(3, 13, 17);
+            createNavPart(4, 18, 22);
+            createNavPart(5, 23, 30);
+            createNavPart(6, 31, 40);
+        </script>
+        
+        <button id="deliver-button" aria-label="Review your answers" class="footer__deliverButton___3FM07">
+            <i class="fa fa-check" aria-hidden="true"></i>
+            <span>Nộp Bài</span>
+        </button>
+    </nav>
+
+    <!-- Context Menu for Highlights -->
+    <div id="contextMenu" class="context-menu">
+        <div id="menu-note" class="context-menu-item" onclick="addNote()">📝 Thêm ghi chú</div>
+        <div id="menu-highlight-colors" class="context-menu-item" style="display: flex; gap: 15px; justify-content: center; padding: 12px 16px;">
+            <button type="button" class="color-btn yellow" onclick="highlightText('yellow')" title="Highlight Vàng"></button>
+            <button type="button" class="color-btn green" onclick="highlightText('green')" title="Highlight Xanh"></button>
+            <button type="button" class="color-btn pink" onclick="highlightText('pink')" title="Highlight Hồng"></button>
+        </div>
+        <div id="menu-clear" class="context-menu-item" onclick="clearHighlight()">🗑️ Xóa highlight</div>
+        <div id="menu-clear-all" class="context-menu-item" onclick="clearAllHighlights()">🗑️ Xóa tất cả</div>
+    </div>
+
+    <!-- Results Modal (Bảng điểm tối giản theo yêu cầu) -->
+    <div id="results-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close-btn" onclick="closeResultsModal()">&times;</button>
+            <h2>KẾT QUẢ BÀI THI</h2>
+            <div id="submit-status" style="display: none; text-align: center; margin-bottom: 15px; padding: 10px; border-radius: 4px; font-weight: bold;"></div>
+            
+            <div class="results-summary">
+                <p>Số câu đúng: <br><span id="results-score"></span> / 40</p>
+                <p>Tổng Điểm: <br><span id="results-band"></span></p>
+            </div>
+            
+            <div class="result-header-row">
+                <span>Q</span>
+                <span>Trả lời</span>
+                <span>Đáp án</span>
+            </div>
+            
+            <div id="results-details" class="results-details-container">
+                <!-- Data will be injected here via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Core Data and Logic -->
+    <script>
+    // Toàn bộ dữ liệu đáp án chuẩn của đề
+    window.testMeta = {
+        "totalQuestions": 40,
+        "parts": [
+            {"part": 1, "start": 1, "end": 6},
+            {"part": 2, "start": 7, "end": 12},
+            {"part": 3, "start": 13, "end": 17},
+            {"part": 4, "start": 18, "end": 22},
+            {"part": 5, "start": 23, "end": 30},
+            {"part": 6, "start": 31, "end": 40}
+        ],
+        "correctAnswers": {
+            "1":"C", "2":"A", "3":"B", "4":"D", "5":"A", "6":"D",
+            "7":"A", "8":"C", "9":"D", "10":"D", "11":"B", "12":"B",
+            "13":"C", "14":"A", "15":"B", "16":"D", "17":"A",
+            "18":"C", "19":"B", "20":"A", "21":"D", "22":"B",
+            "23":"B", "24":"A", "25":"C", "26":"A", "27":"B", "28":"A", "29":"B", "30":"D",
+            "31":"B", "32":"A", "33":"C", "34":"A", "35":"C", "36":"D", "37":"A", "38":"C", "39":"C", "40":"D"
+        }
+    };
+
+    // Giải thích chi tiết, gắn thẳng dưới mỗi câu sau khi nộp bài
+    window.testExplanations = {
+        "1": "<div class='explanation-content'><b>Cụm danh từ:</b> 'learning a new computer programme' (học một chương trình máy tính mới). Tính từ 'new' đứng trước danh từ ghép 'computer programme'.</div>",
+        "2": "<div class='explanation-content'><b>Từ vựng:</b> 'worthwhile skills' mang nghĩa 'những kỹ năng đáng giá, hữu ích'.</div>",
+        "3": "<div class='explanation-content'><b>Giới từ/Liên từ:</b> 'such as' (như là) dùng để liệt kê ví dụ (tư duy phản biện, ghi nhớ...).</div>",
+        "4": "<div class='explanation-content'><b>Từ loại:</b> Đứng trước danh từ 'skills' và kết hợp với 'emotional' bằng chữ 'and', ta cần tính từ 'social' (kỹ năng xã hội và cảm xúc).</div>",
+        "5": "<div class='explanation-content'><b>Ngữ pháp:</b> 'Other' + danh từ số nhiều (Other skills = những kỹ năng khác). 'Others' không đi kèm danh từ.</div>",
+        "6": "<div class='explanation-content'><b>Collocation:</b> 'take an approach to something' nghĩa là tiếp cận, áp dụng một phương pháp đối với việc gì đó.</div>",
+        "7": "<div class='explanation-content'><b>Cấu trúc:</b> 'willingness to do something' (sự sẵn lòng làm gì đó). Ở đây nối bằng 'or cycle', nên ta dùng 'to walk'.</div>",
+        "8": "<div class='explanation-content'><b>Phrasal verb:</b> 'help out' (giúp đỡ một phần). Ý nói tái sử dụng đồ cũ để giúp ích bảo vệ môi trường.</div>",
+        "9": "<div class='explanation-content'><b>Giới từ:</b> 'take something to somewhere' (mang cái gì tới đâu). Dùng giới từ 'to'.</div>",
+        "10": "<div class='explanation-content'><b>Rút gọn mệnh đề:</b> Mệnh đề chỉ kết quả rút gọn dùng V-ing 'making it cooler' (làm cho nó mát hơn).</div>",
+        "11": "<div class='explanation-content'><b>Lượng từ:</b> 'a large amount of + danh từ không đếm được' (energy).</div>",
+        "12": "<div class='explanation-content'><b>Từ vựng:</b> 'emissions' mang nghĩa là khí thải. 'emissions of carbon dioxide' = sự phát thải khí CO2.</div>",
+        "13": "<div class='explanation-content'><b>Logic hội thoại:</b> b (Ann hỏi bạn có kế hoạch thứ 7 chưa?) -> a (Mai đáp Không, rủ đi chơi cùng) -> c (Ann đồng ý và đề xuất xem show ca nhạc). Trình tự <b>b-a-c</b>.</div>",
+        "14": "<div class='explanation-content'><b>Logic hội thoại:</b> e (Anna hỏi Nam tại sao trẻ em nên làm việc nhà) -> b (Nam đáp vì giúp phát triển kỹ năng) -> c (Anna đồng tình và lấy ví dụ) -> a (Nam chốt lại ai cũng cần kỹ năng đó) -> d (Anna cảm ơn ý kiến). Trình tự <b>e-b-c-a-d</b>.</div>",
+        "15": "<div class='explanation-content'><b>Bố cục lá thư:</b> c (Tôi rất tiếc nghe bạn đang bận rộn) -> d (Tôi cũng rất bận rộn nhưng vẫn giúp việc nhà) -> a (Tôi nghĩ chúng ta nên cố gắng giúp bố mẹ) -> e (Đúng là không có nhiều thời gian rảnh, nhưng...) -> b (Tôi tự dọn giường mỗi ngày...). Trình tự <b>c-d-a-e-b</b>.</div>",
+        "16": "<div class='explanation-content'><b>Bố cục đoạn văn:</b> b (Người Mường tự làm quần áo) -> d (Cần sự sáng tạo vì hoa văn phức tạp) -> c (Người Mường có phong cách âm nhạc riêng) -> a (Có những bài hát cho các dịp đặc biệt) -> e (Người Mường tự hào về truyền thống). Trình tự <b>b-d-c-a-e</b>.</div>",
+        "17": "<div class='explanation-content'><b>Bố cục đoạn văn:</b> c (Tháng tình nguyện ở châu Phi đã làm thay đổi đời tôi) -> d (Tôi được giới thiệu một thế giới khác) -> e (Tôi kinh hãi vì họ quá nghèo) -> b (Nhưng tôi cũng ngạc nhiên vì họ sống tích cực) -> a (Cách họ giúp đỡ nhau là nguồn cảm hứng). Trình tự <b>c-d-e-b-a</b>.</div>",
+        
+        "18": "<div class='explanation-content'><b>Cấu trúc câu:</b> 'you are being transformed into an independent young adult' (bạn đang được biến đổi thành một người trưởng thành độc lập). Câu mô tả sự thay đổi của tuổi dậy thì.</div>",
+        "19": "<div class='explanation-content'><b>Logic đoạn văn:</b> Câu tiếp theo là 'Now you want to spend some more time on your own', đối lập với 'You used to be most happy in the company of your parents' (Bạn từng hạnh phúc nhất khi ở bên cha mẹ).</div>",
+        "20": "<div class='explanation-content'><b>Cấu trúc câu:</b> 'You see the world differently, develop your own views and your own sense of right or wrong'. Các động từ song song mô tả đặc điểm của tuổi vị thành niên.</div>",
+        "21": "<div class='explanation-content'><b>Liên kết ý:</b> Đoạn cuối bắt đầu đưa ra lời khuyên (let your parents know, try to agree, etc.). Do đó câu hỏi dẫn dắt phải là 'So what can you, as adolescents, do to stay on good terms with your parents?' (Bạn có thể làm gì để giữ mối quan hệ tốt?).</div>",
+        "22": "<div class='explanation-content'><b>Từ vựng/Cấu trúc:</b> Lời khuyên thứ ba (Thirdly): 'try to understand why they might be irritated by your behaviour' (cố gắng hiểu tại sao họ lại bực mình vì hành vi của bạn).</div>",
+        
+        "23": "<div class='explanation-content'><b>Đọc hiểu ý chính:</b> Người dân Trung Quốc tức giận vì phát hiện hình vẽ bậy (graffiti) trên di tích 3,500 năm tuổi. <br><br>Trích dẫn: \"<i>People in China were angry and there was a big hunt to find the person responsible for the graffiti in Chinese on a 3,500-year-old monument...</i>\"</div>",
+        "24": "<div class='explanation-content'><b>Từ vựng:</b> 'imaginative' (có tính tưởng tượng, sáng tạo) gần nghĩa với <b>creative</b>.</div>",
+        "25": "<div class='explanation-content'><b>Tham chiếu đại từ:</b> 'But in the past, people could write on monuments and no one was angry about <b>it</b>'. Đại từ 'it' thay thế cho hành động 'writing on monuments' (viết lên các di tích).</div>",
+        "26": "<div class='explanation-content'><b>Paraphrase:</b> 'Luckily, it wasn't difficult to make Ding Jinhao's graffiti disappear' (May mắn thay, không khó để làm biến mất hình vẽ bậy của Ding Jinhao) = 'It was fortunate that Ding Jinhao's graffiti was simple to remove'.</div>",
+        "27": "<div class='explanation-content'><b>Trái nghĩa:</b> 'civilised' (văn minh, lịch sự). Trái nghĩa là <b>unacceptable</b> (không thể chấp nhận được).</div>",
+        "28": "<div class='explanation-content'><b>Chi tiết Đọc hiểu:</b> Cư dân mạng dễ dàng tìm ra Ding Jinhao và khiến cậu ta/gia đình phải xin lỗi trên báo -> hành động bị lên án công khai. <br><br>Trích dẫn: \"<i>Internet users easily found this particular Ding Jinhao... His parents then told a local newspaper that their son was sorry for his actions.</i>\"</div>",
+        "29": "<div class='explanation-content'><b>Đọc hiểu tổng quát:</b> Đoạn 2 chỉ ra sự tương phản: Hiện tại viết lên di tích là tội nghiêm trọng (serious crime), NHƯNG trong quá khứ thì không ai tức giận về việc đó. <br><br>Trích dẫn: \"<i>It is a serious crime... But in the past, people could write on monuments and no one was angry about it.</i>\"</div>",
+        "30": "<div class='explanation-content'><b>Đọc hiểu tổng quát:</b> Đoạn 4 nêu kết quả/hậu quả của vụ việc: Hình vẽ bậy đã bị xóa dễ dàng và Cơ quan Du lịch đưa ra lời khuyên. <br><br>Trích dẫn: \"<i>Luckily, it wasn't difficult to make Ding Jinhao's graffiti disappear.</i>\"</div>",
+        
+        "31": "<div class='explanation-content'><b>Tham chiếu đại từ:</b> 'If I didn't have a <b>cycle</b>, I don't think I could have finished high school. <b>It</b> changed my life'. Đại từ 'It' chỉ chiếc xe đạp.</div>",
+        "32": "<div class='explanation-content'><b>Từ vựng:</b> 'reveals' (tiết lộ, phơi bày) đồng nghĩa với <b>discloses</b>.</div>",
+        "33": "<div class='explanation-content'><b>Đọc hiểu chi tiết:</b> Sự gia tăng tỷ lệ đạp xe của nữ giới đã làm <b>giảm khoảng cách giới (reducing the gender gap)</b>. <br><br>Trích dẫn: \"<i>increasing more than two times... reducing the gender gap in the activity.</i>\"</div>",
+        "34": "<div class='explanation-content'><b>Tóm tắt đoạn:</b> Đoạn 2 nói về một nghiên cứu chỉ ra rằng tỷ lệ đạp xe của trẻ em nữ nông thôn đã tăng gấp đôi, làm giảm khoảng cách giới về khả năng di chuyển. Tương ứng đáp án A.</div>",
+        "35": "<div class='explanation-content'><b>Liên kết ý:</b> Câu cần điền: 'Nhưng quy mô ở đây là không thể sánh kịp' (But the scale here is unmatched). Rất phù hợp khi đặt ở <b>[III]</b> sau khi đã nêu các nước khác cũng có chương trình tương tự nhưng quy mô ở Ấn Độ lớn hơn (tăng gấp đôi).</div>",
+        "36": "<div class='explanation-content'><b>Đọc hiểu chi tiết:</b> Các chương trình phân phát xe đạp miễn phí (từ 2004) đã NHẮM MỤC TIÊU CỤ THỂ vào các bé gái (targeted girls). <br><br>Trích dẫn: \"<i>State-run free bicycle distribution schemes since 2004 have targeted girls...</i>\"</div>",
+        "37": "<div class='explanation-content'><b>Trái nghĩa:</b> 'emancipate' (giải phóng, làm cho tự do). Trái nghĩa là <b>restrict</b> (hạn chế, gò bó).</div>",
+        "38": "<div class='explanation-content'><b>Paraphrase:</b> 'Researchers wonder if women cycle less as they age due to shrinking job opportunities and workforce dropout' = Các nhà nghiên cứu suy đoán (speculate) liệu rằng cơ hội việc làm ít hơn (fewer job prospects) và việc rời bỏ lực lượng lao động (workforce exit) có khiến phụ nữ đạp xe ít hơn không.</div>",
+        "39": "<div class='explanation-content'><b>Suy luận:</b> Việc ưu tiên trong cuộc sống thay đổi (lấy chồng, nghỉ làm, học giáo viên nhưng không cần đạp xe nữa) ảnh hưởng đến việc phụ nữ có tiếp tục đạp xe hay không. <br><br>Trích dẫn: \"<i>Nibha stopped cycling after marriage... I don't need the cycle anymore.</i>\"</div>",
+        "40": "<div class='explanation-content'><b>Ý chính toàn bài:</b> Các bé gái nông thôn Ấn Độ hưởng lợi nhiều nhất từ chương trình xe đạp của chính phủ, giúp tăng tỷ lệ đến trường. Tuy nhiên, hoàn cảnh cuộc sống (như tuổi tác, kết hôn) có thể làm hạn chế việc đạp xe ở phụ nữ trưởng thành.</div>"
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const launchScreen = document.getElementById('launchScreen');
+        const app = document.getElementById('app');
+        const startNormalBtn = document.getElementById('startNormalBtn');
+        const launchTitle = document.getElementById('launchTestTitle');
+        if (launchTitle && document.title) { launchTitle.textContent = document.title; }
+        
+        let examStarted = false;
+        let currentStudentName = "";
+        let currentStudentClass = "";
+
+        // Function Start Exam
+        const beginExam = () => {
+            if (examStarted) return;
+            const nameInput = document.getElementById('studentName');
+            const classInput = document.getElementById('studentClass');
+            const errorMsg = document.getElementById('launchError');
+            
+            if (!nameInput.value.trim() || !classInput.value.trim()) {
+                errorMsg.style.display = 'block';
+                return;
+            }
+            errorMsg.style.display = 'none';
+            currentStudentName = nameInput.value.trim();
+            currentStudentClass = classInput.value.trim();
+            examStarted = true;
+            
+            launchScreen.style.display = 'none';
+            app.style.display = 'block';
+            initialize();
+        };
+
+        if (startNormalBtn) { startNormalBtn.addEventListener('click', beginExam); }
+        
+        const testMeta = window.testMeta;
+        const partRanges = testMeta.parts;
+        const correctAnswers = testMeta.correctAnswers;
+        const totalQuestions = testMeta.totalQuestions;
+
+        let currentPassage = partRanges[0]?.part || 1;
+        let currentQuestion = partRanges[0]?.start || 1;
+        let timeInSeconds = 3000; // 50 phút
+        let timerInterval;
+        let hasSubmitted = false;
+        
+        const markedQuestions = new Set();
+        const markButtons = new Map();
+        const timerDisplay = document.querySelector('.timer-display');
+        const timerToggleButton = document.getElementById('timer-toggle-btn');
+        const deliverButton = document.getElementById('deliver-button');
+        const resizer = document.getElementById('resizer');
+        const passagePanel = document.getElementById('passage-panel');
+        
+        // Context menu vars
+        let pendingSelectionRange = null;
+        let activeAnnotationTarget = null;
+        const contextMenu = document.getElementById('contextMenu');
+
+        const playIcon = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M8 5v14l11-7L8 5z"/></svg>';
+        const pauseIcon = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
+        const bookmarkIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h12v16l-6-4-6 4z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path></svg>';
+
+        function initialize() {
+            startTimer();
+            switchToPart(partRanges[0]?.part || 1);
+            
+            document.body.addEventListener('input', updateAllIndicators);
+            document.body.addEventListener('change', updateAllIndicators);
+            deliverButton.addEventListener('click', () => {
+                if(confirm("Bạn có chắc chắn muốn nộp bài? Hệ thống sẽ ghi nhận điểm ngay lập tức.")){
+                    checkAnswers();
+                }
+            });
+            timerToggleButton.addEventListener('click', toggleTimer);
+            
+            document.querySelectorAll('.multi-choice-question').forEach(el => {
+                el.addEventListener('click', (ev) => {
+                    // Ngăn không cho click nhảy câu nếu click vào đúng input radio hoặc label
+                    if (ev.target.closest('input, label, .explanation-box, .mark-toggle-btn')) { return; }
+                    const qNum = parseInt(el.dataset.qStart, 10);
+                    if (currentQuestion !== qNum) { goToQuestion(qNum); }
+                });
+            });
+            
+            resizer.addEventListener('mousedown', initResize, false);
+            initializeContextMenu();
+            initializeQuestionMarkers();
+        }
+
+        // --- Core Algorithm: Đánh dấu Minh Chứng Thông Minh ---
+        function highlightEvidenceInPassage(explanationText) {
+            let targetPhrase = "";
+            // Bóc tách text trong cấu trúc "Trích dẫn: ..."
+            let evidenceMatch = explanationText.match(/Trích dẫn:\s*(.*?)(<\/div>|$)/i);
+            if (evidenceMatch) {
+                // Loại bỏ mọi thẻ HTML (như <i>, <b>) và dấu nháy kép để có chuỗi thuần
+                targetPhrase = evidenceMatch[1].replace(/<[^>]+>/g, '').replace(/["“”]/g, '').trim();
+            }
+            if (!targetPhrase) return;
+
+            let cleanQuery = targetPhrase.replace(/^\.\.\./, "").replace(/\.\.\.$/, "").trim();
+            if (!cleanQuery) return;
+
+            const currentPassageEl = passagePanel.querySelector('.reading-passage:not(.hidden)');
+            if (!currentPassageEl) return;
+
+            // Xóa toàn bộ highlight cũ để bôi đen highlight mới
+            currentPassageEl.querySelectorAll('.highlight-blue').forEach(span => {
+                const parent = span.parentNode;
+                while (span.firstChild) { parent.insertBefore(span.firstChild, span); }
+                parent.removeChild(span);
+                parent.normalize(); // Nối lại các TextNode bị gãy
+            });
+
+            // Gom toàn bộ Text Nodes trong bài đọc
+            const walker = document.createTreeWalker(currentPassageEl, NodeFilter.SHOW_TEXT, null, false);
+            const textNodes = [];
+            let fullText = "";
+            let node;
+            
+            while (node = walker.nextNode()) {
+                textNodes.push({
+                    node: node,
+                    start: fullText.length,
+                    end: fullText.length + node.nodeValue.length
+                });
+                fullText += node.nodeValue;
+            }
+
+            // Tạo biểu thức Regex dò tìm mềm dẻo (bỏ qua khoảng trắng thừa, không phân biệt hoa thường)
+            const searchStr = cleanQuery.replace(/\s+/g, ' ').trim();
+            const pattern = searchStr.split(' ').map(word => word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('\\s+');
+            const regex = new RegExp(pattern, 'i');
+            
+            const fuzzyMatch = fullText.match(regex);
+            
+            if (fuzzyMatch) {
+                const matchStartIdx = fuzzyMatch.index;
+                const matchEndIdx = fuzzyMatch.index + fuzzyMatch[0].length;
+                
+                // Tìm những TextNodes nằm trong khu vực kết quả match
+                const nodesToWrap = [];
+                for (let i = 0; i < textNodes.length; i++) {
+                    const map = textNodes[i];
+                    if (map.end <= matchStartIdx) continue;
+                    if (map.start >= matchEndIdx) break;
+
+                    const startOffset = Math.max(0, matchStartIdx - map.start);
+                    const endOffset = Math.min(map.node.nodeValue.length, matchEndIdx - map.start);
+                    nodesToWrap.push({ node: map.node, startOffset, endOffset });
+                }
+
+                // Thực hiện bọc thẻ Span màu xanh dương từ dưới lên trên
+                nodesToWrap.reverse().forEach(info => {
+                    const n = info.node;
+                    if (info.startOffset === 0 && info.endOffset === n.nodeValue.length) {
+                        const span = document.createElement('span');
+                        span.className = 'annotation annotation-highlight highlight-blue';
+                        n.parentNode.insertBefore(span, n);
+                        span.appendChild(n);
+                    } else {
+                        const splitEnd = n.splitText(info.endOffset);
+                        const splitMid = n.splitText(info.startOffset);
+                        
+                        const span = document.createElement('span');
+                        span.className = 'annotation annotation-highlight highlight-blue';
+                        
+                        n.parentNode.insertBefore(span, splitMid);
+                        span.appendChild(splitMid);
+                    }
+                });
+
+                // Cuộn khung hiển thị tới vị trí bôi đen
+                const firstHighlight = currentPassageEl.querySelector('.highlight-blue');
+                if (firstHighlight) {
+                    firstHighlight.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        }
+
+        // --- Core: Submit & Check Answers ---
+        function checkAnswers() {
+            if (hasSubmitted) return;
+            hasSubmitted = true;
+            
+            // Khóa làm bài
+            const allInputs = document.querySelectorAll('input[type="radio"]');
+            allInputs.forEach(input => { input.disabled = true; });
+            deliverButton.disabled = true;
+            deliverButton.innerHTML = '<i class="fa fa-check"></i> Đã Nộp';
+            deliverButton.style.cursor = 'not-allowed';
+            
+            // Dừng time
+            const timeTakenSecs = 3000 - timeInSeconds;
+            clearInterval(timerInterval);
+            timerInterval = null;
+            timerToggleButton.innerHTML = playIcon;
+            
+            let score = 0;
+            const resultsDetailsContainer = document.getElementById('results-details');
+            resultsDetailsContainer.innerHTML = '';
+            
+            for (let i = 1; i <= totalQuestions; i++) {
+                const correctAnswer = correctAnswers[String(i)];
+                let userAnswer = '';
+                let isCorrect = false;
+                let userAnswerDisplay = '-';
+
+                const radioGroup = document.querySelectorAll(`input[name="q${i}"]`);
+                const questionContainer = document.querySelector(`.multi-choice-question[data-q-start="${i}"]`);
+                
+                const checkedRadio = document.querySelector(`input[name="q${i}"]:checked`);
+                if (checkedRadio) {
+                    userAnswer = checkedRadio.value;
+                    userAnswerDisplay = userAnswer;
+                    isCorrect = (userAnswer === correctAnswer);
+                    
+                    const userLabel = checkedRadio.closest('.multi-choice-option');
+                    if (userLabel) { userLabel.classList.add(isCorrect ? 'correct' : 'incorrect'); }
+                }
+                
+                if (isCorrect) { 
+                    score++; 
+                } else if (questionContainer) {
+                    // Highlight correct answer if user got it wrong
+                    const correctOptionEl = questionContainer.querySelector(`input[value="${correctAnswer}"]`);
+                    if (correctOptionEl) {
+                        const correctLabel = correctOptionEl.closest('.multi-choice-option');
+                        if (correctLabel) { correctLabel.classList.add('correct-answer-highlight'); }
+                    }
+                }
+
+                // Show Explanation directly under the question
+                if (window.testExplanations && window.testExplanations[i] && questionContainer) {
+                    let expElement = document.createElement('div');
+                    expElement.className = 'explanation-box show';
+                    expElement.dataset.forQ = i;
+                    
+                    let explainText = window.testExplanations[i];
+                    let hasEvidence = explainText.toLowerCase().includes("trích dẫn");
+                    let titleHtml = hasEvidence ? `<div class="explanation-title">💡 Giải thích Câu ${i} <span style="font-size: 13px; font-weight: normal; color: #e91e63;">(Bấm vào đây để xem vị trí minh chứng)</span>:</div>` : `<div class="explanation-title">💡 Giải thích Câu ${i}:</div>`;
+                    
+                    expElement.innerHTML = `${titleHtml}<div>${explainText}</div>`;
+                    
+                    // Add click to highlight evidence feature
+                    if (hasEvidence) {
+                        expElement.addEventListener('click', () => { highlightEvidenceInPassage(window.testExplanations[i]); });
+                    }
+                    
+                    if (!questionContainer.querySelector(`.explanation-box[data-for-q="${i}"]`)) { 
+                        questionContainer.appendChild(expElement); 
+                    }
+                }
+                   
+                // Render Row in Modal (Tối giản 3 cột: Q, Bài làm, Đáp án)
+                const resultRow = `
+                    <div class="result-row ${isCorrect ? '' : 'incorrect'}">
+                        <span class="q-num">Q${i}</span>
+                        <span class="user-ans">${userAnswerDisplay}</span>
+                        <span class="correct-ans">${correctAnswer}</span>
+                    </div>`;
+                resultsDetailsContainer.innerHTML += resultRow;
+                
+                // Update bottom nav colors
+                const navButton = document.querySelector(`.subQuestion[onclick="goToQuestion(${i})"]`);
+                if (navButton) {
+                    navButton.classList.remove('answered', 'active');
+                    navButton.classList.add(isCorrect ? 'correct' : 'incorrect');
+                }
+            }
+            
+            // Hệ điểm 10
+            const finalScore = (score * (10 / totalQuestions)).toFixed(2);
+            
+            document.getElementById('results-score').textContent = score;
+            document.getElementById('results-band').textContent = finalScore;
+            document.getElementById('results-modal').classList.remove('hidden');
+            
+            sendResultsToGoogle(score, finalScore, timeTakenSecs);
+        }
+        
+        // --- Fetch to Google Apps Script ---
+        function sendResultsToGoogle(scoreCount, finalScore, timeTakenSecs) {
+            const statusDiv = document.getElementById('submit-status');
+            statusDiv.style.display = 'block';
+            statusDiv.style.backgroundColor = '#fff3cd';
+            statusDiv.style.color = '#856404';
+            statusDiv.textContent = '⏳ Đang lưu bảng điểm vào hệ thống...';
+
+            const minutes = Math.floor(timeTakenSecs / 60);
+            const seconds = timeTakenSecs % 60;
+            const timeStr = `${minutes} phút ${seconds} giây`;
+            const dateStr = new Date().toLocaleString('vi-VN');
+            const examTitle = document.getElementById('launchTestTitle').textContent || document.title;
+
+            // Link Script Google Sheets do người dùng cung cấp
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbxwcbQZYaAxDKUcFlZdXv3VHeUYt6lpAH5FOxL9l1xgs5sQpaEh6IoyTwuepmO7Ie6EvQ/exec';
+            
+            const params = new URLSearchParams();
+            params.append('studentName', currentStudentName);
+            params.append('studentClass', currentStudentClass);
+            
+            // Gửi biến score là dạng "35/40" (Điền vào cột D: Correct answer)
+            params.append('score', `${scoreCount}/${totalQuestions}`);
+            // Gửi biến bandScore là dạng "8.75" (Điền vào cột E: Scores quy đổi)
+            params.append('bandScore', finalScore);
+            
+            params.append('timeTaken', timeStr);
+            params.append('submitDate', dateStr);
+            params.append('examTitle', examTitle);
+
+            fetch(scriptURL, { 
+                method: 'POST', 
+                mode: 'no-cors', 
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: params.toString() 
+            })
+            .then(() => {
+                statusDiv.style.backgroundColor = '#d4edda';
+                statusDiv.style.color = '#155724';
+                statusDiv.textContent = '✅ Kết quả làm bài đã được lưu vào hệ thống thành công!';
+            })
+            .catch(error => {
+                console.error('Error!', error.message);
+                statusDiv.style.backgroundColor = '#f8d7da';
+                statusDiv.style.color = '#721c24';
+                statusDiv.textContent = '⚠️ Mạng lỗi. Hãy chụp ảnh màn hình điểm số báo cho giáo viên!';
+            });
+        }
+
+        window.closeResultsModal = function() { document.getElementById('results-modal').classList.add('hidden'); }
+
+        // --- Navigation Logic ---
+        function switchToPart(partNumber) {
+            currentPassage = partNumber;
+            document.querySelectorAll('.reading-passage, .question-set, .part-header').forEach(el => { el.classList.add('hidden'); });
+            
+            document.getElementById(`passage-text-${partNumber}`).classList.remove('hidden');
+            document.getElementById(`questions-${partNumber}`).classList.remove('hidden');
+            document.getElementById(`part-header-${partNumber}`).classList.remove('hidden');
+            
+            document.querySelectorAll('.footer__questionWrapper___1tZ46').forEach((wrapper, index) => { 
+                wrapper.classList.toggle('selected', (index + 1) === partNumber); 
+            });
+            
+            // Tự động cuộn chuột về đầu trang khi chuyển Part
+            passagePanel.scrollTop = 0;
+            document.getElementById('questions-panel').scrollTop = 0;
+            
+            const match = partRanges.find(p => p.part === partNumber);
+            if(match) goToQuestion(match.start);
+        }
+        
+        function goToQuestion(qNum) {
+            currentQuestion = qNum;
+            const match = partRanges.find(p => qNum >= p.start && qNum <= p.end);
+            const passageNumber = match ? match.part : 1;
+            
+            if (currentPassage !== passageNumber) { 
+                switchToPart(passageNumber); 
+                return; 
+            }
+            
+            let targetEl = document.querySelector(`.multi-choice-question[data-q-start="${qNum}"]`);
+            if (targetEl) {
+                // Focus styling
+                document.querySelectorAll('.multi-choice-question').forEach(el => el.style.border = '2px solid #f0f0f0');
+                targetEl.style.border = '2px solid #4a90e2';
+                
+                // Scroll into view
+                const panel = document.getElementById('questions-panel');
+                const panelRect = panel.getBoundingClientRect();
+                const elementRect = targetEl.getBoundingClientRect();
+                if (elementRect.top < panelRect.top || elementRect.bottom > panelRect.bottom) { 
+                    targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' }); 
+                }
+            }
+            
+            // Update bottom nav highlighting
+            document.querySelectorAll('.subQuestion').forEach(btn => btn.classList.remove('active'));
+            const activeNav = Array.from(document.querySelectorAll('.subQuestion')).find(btn => {
+                const hiddenSpan = btn.querySelector('[aria-hidden="true"]');
+                const num = parseInt(hiddenSpan ? hiddenSpan.textContent : btn.textContent.replace(/\D/g, ''), 10);
+                return num === currentQuestion;
+            });
+            if (activeNav) { activeNav.classList.add('active'); }
+        }
+        
+        window.nextQuestion = () => { if(currentQuestion < totalQuestions) goToQuestion(currentQuestion + 1); };
+        window.previousQuestion = () => { if(currentQuestion > 1) goToQuestion(currentQuestion - 1); };
+        
+        window.switchToPart = switchToPart;
+        window.goToQuestion = goToQuestion;
+
+        function updateAllIndicators() { 
+            partRanges.forEach(range => {
+                let answeredCount = 0; 
+                for (let i = range.start; i <= range.end; i++) { 
+                    if (document.querySelector(`input[name="q${i}"]:checked`)) answeredCount++; 
+                }
+                const partHeader = document.querySelector(`.footer__questionNo___3WNct[onclick="switchToPart(${range.part})"]`);
+                if (partHeader) { 
+                    const countSpan = partHeader.querySelector('.attemptedCount'); 
+                    if (countSpan) countSpan.textContent = `${answeredCount} of ${range.end - range.start + 1}`; 
+                }
+            }); 
+            
+            document.querySelectorAll('.subQuestion').forEach(btn => {
+                const hiddenSpan = btn.querySelector('[aria-hidden="true"]');
+                const qNum = parseInt(hiddenSpan ? hiddenSpan.textContent : btn.textContent.replace(/\D/g, ''), 10);
+                if (!isNaN(qNum) && document.querySelector(`input[name="q${qNum}"]:checked`)) { 
+                    btn.classList.add('answered'); 
+                } else { 
+                    btn.classList.remove('answered'); 
+                }
+            });
+        }
+
+        // --- Timer logic ---
+        function updateTimerDisplay() {
+            const displaySeconds = Math.max(timeInSeconds, 0);
+            const minutes = Math.floor(displaySeconds / 60);
+            const seconds = displaySeconds % 60;
+            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            if(displaySeconds < 300) { timerDisplay.style.color = '#dc3545'; } // Đổi đỏ nếu còn dưới 5p
+        }
+
+        function startTimer() {
+            if (hasSubmitted) return;
+            if (timerInterval) clearInterval(timerInterval);
+            updateTimerDisplay();
+            timerInterval = setInterval(() => { 
+                timeInSeconds = Math.max(timeInSeconds - 1, 0); 
+                updateTimerDisplay(); 
+                if (timeInSeconds <= 0) { 
+                    timeInSeconds = 0; updateTimerDisplay(); 
+                    clearInterval(timerInterval); timerInterval = null; 
+                    timerToggleButton.innerHTML = playIcon; 
+                    alert("Đã hết thời gian làm bài. Hệ thống tự động nộp bài!");
+                    checkAnswers(); 
+                } 
+            }, 1000);
+            timerToggleButton.innerHTML = pauseIcon;
+        }
+
+        function toggleTimer() { 
+            if (timerInterval) { 
+                clearInterval(timerInterval); timerInterval = null; timerToggleButton.innerHTML = playIcon; 
+            } else { 
+                startTimer(); 
+            } 
+        }
+        
+        // --- Drag Resizer logic ---
+        function initResize(e) {
+            e.preventDefault(); const startX = e.clientX; const startWidth = passagePanel.offsetWidth;
+            const doDrag = (ev) => { 
+                const newWidth = startWidth + ev.clientX - startX; 
+                if (newWidth > 200 && (document.body.clientWidth - newWidth - resizer.offsetWidth) > 300) { 
+                    passagePanel.style.flex = `0 0 ${newWidth}px`; 
+                } 
+            };
+            const stopDrag = () => { 
+                window.removeEventListener('mousemove', doDrag, false); 
+                window.removeEventListener('mouseup', stopDrag, false); 
+            };
+            window.addEventListener('mousemove', doDrag, false); window.addEventListener('mouseup', stopDrag, false);
+        }
+
+        // --- Question Marking Logic ---
+        function initializeQuestionMarkers() { 
+            for (let i = 1; i <= totalQuestions; i++) { 
+                const anchor = document.querySelector(`.mcq-question-number[data-q-number="${i}"]`); 
+                if(anchor) {
+                    const button = document.createElement('button'); button.type = 'button';
+                    button.className = 'mark-toggle-btn';
+                    button.setAttribute('aria-label', `Đánh dấu câu ${i}`); 
+                    button.innerHTML = bookmarkIcon;
+                    button.addEventListener('click', (e) => { 
+                        e.stopPropagation(); 
+                        const isMarked = markedQuestions.has(i);
+                        if (isMarked) { markedQuestions.delete(i); } else { markedQuestions.add(i); }
+                        
+                        button.classList.toggle('marked', !isMarked);
+                        const navButton = document.querySelector(`.subQuestion[onclick="goToQuestion(${i})"]`);
+                        if (navButton) navButton.classList.toggle('marked', !isMarked);
+                    });
+                    anchor.parentNode.appendChild(button);
+                }
+            } 
+        }
+
+        // --- Highlight / Note feature Context Menu ---
+        function handleTextSelection(event) {
+            const selection = window.getSelection();
+            if (!selection || selection.rangeCount === 0 || selection.isCollapsed || !selection.toString().trim()) { return; }
+            
+            // Check if inside panels
+            const anchor = selection.anchorNode; const focus = selection.focusNode;
+            const inPanels = node => node && (passagePanel.contains(node) || document.getElementById('questions-panel').contains(node));
+            if (!(inPanels(anchor) && inPanels(focus))) return;
+
+            pendingSelectionRange = selection.getRangeAt(0).cloneRange();
+            activeAnnotationTarget = null;
+            
+            // Show menu
+            document.getElementById('menu-highlight-colors').style.display = 'flex'; 
+            document.getElementById('menu-note').style.display = 'flex'; 
+            document.getElementById('menu-clear').style.display = 'none'; 
+            document.getElementById('menu-clear-all').style.display = 'none';
+            
+            const menuHeight = contextMenu.offsetHeight; const menuWidth = contextMenu.offsetWidth;
+            let left = event.pageX; let top = event.pageY - menuHeight - 8;
+            if (left + menuWidth > window.innerWidth) left = window.innerWidth - menuWidth - 8;
+            if (left < 8) left = 8; if (top < 8) top = event.pageY + 8;
+            
+            contextMenu.style.display = 'block';
+            contextMenu.style.left = `${left}px`; 
+            contextMenu.style.top = `${top}px`;
+        }
+
+        function initializeContextMenu() {
+            [passagePanel, document.getElementById('questions-panel')].forEach(panel => { 
+                panel.addEventListener('mouseup', (e) => { setTimeout(() => handleTextSelection(e), 0); }); 
+            });
+            document.addEventListener('click', (e) => {
+                if (contextMenu.contains(e.target)) return;
+                const annotation = e.target.closest(`.annotation-highlight, .annotation-note`);
+                if (annotation && !annotation.classList.contains('highlight-blue')) { 
+                    // Show delete menu
+                    activeAnnotationTarget = annotation; pendingSelectionRange = null; window.getSelection().removeAllRanges();
+                    document.getElementById('menu-highlight-colors').style.display = 'none'; 
+                    document.getElementById('menu-note').style.display = 'none'; 
+                    document.getElementById('menu-clear').style.display = 'flex'; 
+                    document.getElementById('menu-clear-all').style.display = 'flex';
+                    
+                    contextMenu.style.display = 'block';
+                    contextMenu.style.left = `${e.pageX}px`; contextMenu.style.top = `${e.pageY}px`;
+                    return; 
+                }
+                contextMenu.style.display = 'none';
+            });
+        }
+
+        function applyAnnotation(type, noteText = '', color = 'yellow') {
+            if (!pendingSelectionRange) { contextMenu.style.display = 'none'; return; }
+            const range = pendingSelectionRange;
+            
+            const span = document.createElement('span');
+            span.classList.add('annotation', type === 'highlight' ? 'annotation-highlight' : 'annotation-note');
+            if (type === 'highlight') {
+                span.classList.add(`highlight-${color}`);
+            } else {
+                span.setAttribute('data-note', noteText);
+            }
+            
+            try {
+                range.surroundContents(span);
+            } catch(e) {
+                // Ignore complex cross-element highlights for simplicity in this pure JS version
+            }
+            contextMenu.style.display = 'none';
+            window.getSelection().removeAllRanges();
+        }
+
+        window.highlightText = (color) => applyAnnotation('highlight', '', color);
+        window.addNote = () => { 
+            const note = prompt('Nhập nội dung ghi chú:'); 
+            if (note) applyAnnotation('note', note.trim()); 
+            else contextMenu.style.display = 'none';
+        };
+        window.clearHighlight = () => { 
+            if (activeAnnotationTarget) { 
+                const parent = activeAnnotationTarget.parentNode;
+                while (activeAnnotationTarget.firstChild) { parent.insertBefore(activeAnnotationTarget.firstChild, activeAnnotationTarget); }
+                parent.removeChild(activeAnnotationTarget);
+            } 
+            contextMenu.style.display = 'none'; 
+        };
+        window.clearAllHighlights = () => { 
+            document.querySelectorAll(`.annotation-highlight:not(.highlight-blue), .annotation-note`).forEach(el => {
+                const parent = el.parentNode;
+                while (el.firstChild) { parent.insertBefore(el.firstChild, el); }
+                parent.removeChild(el);
+            });
+            contextMenu.style.display = 'none'; 
+        };
+    });
+    </script>
+</body>
+</html>
