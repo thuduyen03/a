@@ -3,665 +3,1325 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đề Thi THPT Quốc Gia - Tiếng Anh (Cấu trúc 2026)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@600&display=swap" rel="stylesheet">
+    <title>Đề thi thử THPT Quốc Gia Môn Tiếng Anh - ĐỀ SỐ 01</title>
     <style>
-        :root {
-            --primary: #1e90ff;
-            --success: #2ed573;
-            --danger: #ff4757;
-            --hover-bg: #e0f7fa;
-            --bg-color: #f4f7f6;
-            --highlight: yellow;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            padding-bottom: 80px; 
-            background-color: var(--bg-color);
-            color: #333;
-        }
-        .header {
-            text-align: center;
-            background: white;
-            padding: 20px;
-            margin-bottom: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .header h2, .header h3 { margin: 5px 0; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Segoe UI", Tahoma, Arial, sans-serif; background-color: #ffffff; line-height: 1.4; font-size: 16px; }
+        .header { background: linear-gradient(120deg, #e9eefb, #dfe7ff, #e9eefb); background-size: 200% 200%; animation: bannerFlow 8s ease-in-out infinite; padding: 10px 20px; border-bottom: 1px solid #d7def5; display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: nowrap; position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 60px; }
+        .header-right { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1 1 auto; justify-content: flex-start; }
+        .header-ad { display: inline-flex; align-items: center; gap: 0; padding: 4px 10px; border-radius: 14px; border: 1px solid rgba(215, 222, 245, 0.9); background: rgba(255, 255, 255, 0.24); backdrop-filter: blur(4px); text-decoration: none; color: inherit; box-shadow: 0 10px 24px rgba(33, 58, 128, 0.12); min-width: 180px; max-width: calc(100% - 70px); width: auto; flex: 1 1 auto; height: 48px; overflow: hidden; cursor: pointer;}
+        .header-ad:hover { background: rgba(255, 255, 255, 0.5); }
+        .ad-copy { display: flex; flex-direction: column; gap: 0; width: 100%; overflow: hidden; position: relative; }
+        .ad-eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: #6b7ac7; margin: 0; font-weight: 700; }
+        .ad-marquee { display: flex; gap: 24px; width: 100%; align-items: center; padding-left: 4px; }
+        .ad-headline { margin: 0; font-size: 16px; font-weight: 800; color: #1c2566; white-space: nowrap; }
+        .ad-loop { display: flex; gap: 40px; }
+        .ad-close { width: 32px; height: 32px; border-radius: 50%; border: 1px solid #cdd6f5; background: rgba(255, 255, 255, 0.7); color: #46507a; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; transition: transform 0.15s ease, box-shadow 0.2s ease, background-color 0.2s ease; text-decoration: none; font-weight: 800; flex: 0 0 auto; margin-left: 6px; font-size: 16px; }
+        .ad-close:hover { transform: translateY(-1px); box-shadow: 0 8px 18px rgba(70, 80, 122, 0.25); background: #f6f8ff; }
+        @keyframes bannerFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         
-        .timer {
-            position: fixed;
-            top: 15px;
-            right: 20px;
-            background: var(--danger);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: bold;
-            z-index: 1000;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        /* Layout */
-        .part-container {
-            display: flex;
-            margin: 15px auto;
-            width: 98%;
-            height: 85vh; 
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-        .left-pane {
-            width: 55%;
-            padding: 20px;
-            overflow-y: auto;
-            border-right: 2px solid #eee;
-            background-color: #fafafa;
-        }
-        .right-pane {
-            width: 45%;
-            padding: 20px;
-            overflow-y: auto;
-            background-color: #fff;
-        }
-
-        /* Typography & Effects */
-        .text-content {
-            font-size: 16px;
-            line-height: 1.8;
-        }
-        .text-content p {
-            padding: 5px;
-            border-radius: 4px;
-            transition: background-color 0.3s;
-        }
-        .text-content p:hover {
-            background-color: var(--hover-bg);
-        }
-        .highlight {
-            background-color: var(--highlight);
-        }
-
-        /* Questions */
-        .question-block {
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 1px dashed #ccc;
-        }
-        .question-text {
-            font-weight: bold;
-            margin-bottom: 12px;
-            font-size: 16px;
-        }
-        .options label {
-            display: block;
-            padding: 10px;
-            margin-bottom: 8px;
-            border-radius: 6px;
-            cursor: pointer;
-            border: 1px solid #f0f0f0;
-            transition: 0.2s;
-        }
-        .options label:hover {
-            background-color: #f8f9fa;
-        }
-        .options input { margin-right: 10px; }
+        .main-container { margin-top: 90px; display: flex; flex-direction: column; background: #ffffff; height: calc(100vh - 90px); }
+        .panels-container { display: flex; flex: 1; overflow: hidden; }
+        .passage-panel { flex: 1; padding: 20px 20px 100px; overflow-y: auto; min-width: 200px; line-height: 1.6; scroll-behavior: smooth; }
+        .text-center { text-align: center; }
+        .reading-passage h4 { font-family: 'Merriweather', 'Times New Roman', serif; font-size: 22px; font-weight: 600; color: #2c3e50; line-height: 1.4; margin-bottom: 20px; text-align: center; border-bottom: 2px solid #4a90e2; padding-bottom: 5px; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); }
+        .reading-passage p { margin-bottom: 1.2em; }
+        .questions-panel { flex: 1; padding: 20px 20px 100px; overflow-y: auto; min-width: 200px; border-left: 1px solid #e0e0e0; scroll-behavior: smooth; }
+        .resizer { width: 10px; cursor: col-resize; background-color: #f0f0f0; background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="30" viewBox="0 0 10 30"><path d="M4 11h2v2H4zM4 15h2v2H4zM4 19h2v2H4z" fill="%23888"/></svg>'); background-repeat: no-repeat; background-position: center; flex-shrink: 0; flex-grow: 0; }
         
-        .correct-ans {
-            background-color: var(--success) !important;
-            color: white;
-            font-weight: bold;
-            border-color: var(--success) !important;
-        }
-        .wrong-ans {
-            background-color: var(--danger) !important;
-            color: white;
-            border-color: var(--danger) !important;
-        }
-
-        .explanation {
-            display: none;
-            margin-top: 15px;
-            padding: 12px;
-            background-color: var(--hover-bg);
-            border-left: 5px solid var(--primary);
-            border-radius: 4px;
-            font-size: 15px;
-            line-height: 1.5;
-        }
-
-        /* Sidebar Tracker */
-        .tracker-bar {
-            position: fixed;
-            bottom: 0; left: 0; width: 100%;
-            background: white;
-            padding: 15px;
-            box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            box-sizing: border-box;
-        }
-        .tracker-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            flex: 1;
-        }
-        .track-box {
-            width: 32px; height: 32px;
-            display: flex; justify-content: center; align-items: center;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .track-box:hover { border-color: var(--primary); }
-        .track-box.active { background: var(--primary); color: white; border-color: var(--primary); }
-        .track-box.correct { background: var(--success); color: white; border-color: var(--success); }
-        .track-box.wrong { background: var(--danger); color: white; border-color: var(--danger); }
+        .nav-arrows { position: fixed; bottom: 100px; right: 20px; display: flex; gap: 5px; z-index: 101; }
+        .nav-arrow { width: 50px; height: 50px; background: #333; color: white; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: bold; border-radius: 5px;}
+        .nav-arrow:hover { background: #555; }
         
-        .submit-btn {
-            padding: 12px 25px;
-            background: var(--success);
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-left: 20px;
-            transition: 0.3s;
-        }
-        .submit-btn:hover { background: #26b360; }
+        .nav-row { position: fixed; bottom: 0; left: 0; right: 0; background: #ffffff; padding: 0; display: flex; align-items: center; height: 80px; z-index: 100; overflow-x: auto; white-space: nowrap; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
+        .footer__questionWrapper___1tZ46 { display: inline-flex; align-items: center; margin-right: 20px; }
+        .footer__questionNo___3WNct { background: none; border: none; padding: 10px 15px; font-size: 16px; font-weight: 600; color: #333; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: background-color 0.2s; }
+        .footer__questionNo___3WNct:hover { background-color: #f8f9fa; border-radius: 5px;}
+        .section-prefix { font-size: 16px; }
+        .sectionNr { font-size: 16px; font-weight: bold; }
+        .attemptedCount { font-size: 14px; color: #666; margin-left: 5px; font-weight: 400; }
+        @media (max-width: 768px) { .attemptedCount { display: none; } }
+        .footer__questionWrapper___1tZ46.selected .attemptedCount { display: none; }
+        .footer__subquestionWrapper___9GgoP { display: none; gap: 4px; margin-left: 10px; }
+        .footer__questionWrapper___1tZ46.selected .footer__subquestionWrapper___9GgoP { display: flex; flex-wrap: wrap; }
+        
+        .subQuestion { width: 32px; height: 32px; border: 1px solid #ccc; background: white; color: #333; font-size: 14px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; border-radius: 4px; }
+        .subQuestion.answered { background-color: #6b7ac7; color: #ffffff; border-color: #46507a; font-weight: bold; }
+        .subQuestion.correct { background-color: #28a745 !important; color: white !important; border-color: #28a745 !important; }
+        .subQuestion.incorrect { background-color: #dc3545 !important; color: white !important; border-color: #dc3545 !important; }
+        .subQuestion.marked { position: relative; color: #333; border: 2px solid #ffc107;}
+        .subQuestion:hover { background-color: #f0f0f0; border-color: #999; }
+        .subQuestion.active { background-color: #4a90e2; color: white; border-color: #4a90e2; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+        
+        .footer__deliverButton___3FM07 { margin-left: auto; margin-right: 20px; background-color: #4a90e2; color: #fff; border: 1px solid #357abd; padding: 12px 20px; border-radius: 5px; font-size: 16px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: background-color 0.2s, border-color 0.2s; min-width: 150px; justify-content: center; position: sticky; right: 0; z-index: 10;}
+        .footer__deliverButton___3FM07:hover { background-color: #357abd; }
+        .footer__deliverButton___3FM07:disabled { background: #e9ecef; color: #6c757d; cursor: not-allowed; border-color: #ddd; }
+        .fa-check::before { content: "✓"; }
+        .hidden { display: none !important; }
+        
+        /* Highlight Tools */
+        .context-menu { position: absolute; background: white; border: 1px solid #ccc; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; display: none; min-width: 140px; overflow: hidden; }
+        .context-menu-item { padding: 12px 16px; cursor: pointer; font-size: 16px; border-bottom: 1px solid #f0f0f0; transition: background-color 0.2s; display: flex; align-items: center; gap: 8px; }
+        .context-menu-item:hover { background-color: #f8f9fa; }
+        .context-menu-item:last-child { border-bottom: none; }
+        .color-btn { width: 24px; height: 24px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.2); cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease; padding: 0; background-color: transparent; }
+        .color-btn:hover { transform: scale(1.15); box-shadow: 0 2px 5px rgba(0,0,0,0.15); }
+        .color-btn.yellow { background-color: #fff3a3; }
+        .color-btn.green { background-color: #b4f0c1; }
+        .color-btn.pink { background-color: #ffc7df; }
+        
+        .annotation-highlight { background-color: var(--highlight-color, #fff3a3); border-radius: 4px; padding: 0 2px; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05); cursor: pointer; }
+        .annotation-highlight.highlight-yellow { --highlight-color: #fff3a3; }
+        .annotation-highlight.highlight-green { --highlight-color: #b4f0c1; }
+        .annotation-highlight.highlight-pink { --highlight-color: #ffc7df; }
+        .annotation-highlight.highlight-blue { --highlight-color: #d0ebff; border: 1px dashed #339af0; animation: pulseHighlight 2s ease-in-out infinite alternate; }
+        
+        .annotation-note { background-color: #b4f0c1; border-radius: 4px; padding: 0 2px; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08); position: relative; cursor: pointer; }
+        .annotation-note[data-note]:hover::after { content: attr(data-note); position: absolute; left: 50%; bottom: 100%; transform: translate(-50%, -6px); background: #1f2937; color: #fff; padding: 6px 10px; border-radius: 4px; white-space: nowrap; font-size: 13px; z-index: 2000; }
+        
+        /* Question Layouts */
+        .part-header { background-color: #f1f2ec; padding: 12px 20px; border: 1px solid #e0e0e0; text-align: left; margin: 10px 20px; border-radius: 5px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+        .timer-container { display: flex; position: relative; cursor: default; color: #333; font-size: 16px; font-weight: 500; align-items: center; gap: 12px; flex: 0 0 auto; min-width: 220px; padding: 4px 10px; border-radius: 14px; border: 1px solid #d7def5; background: rgba(255, 255, 255, 0.24); box-shadow: 0 8px 18px rgba(33, 58, 128, 0.08); }
+        .timer-controls { display: flex; align-items: center; gap: 8px; margin-left: 15px; }
+        .timer-controls button { background: #f0f0f0; border: 1px solid #ccc; border-radius: 50%; padding: 0; cursor: pointer; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; transition: background-color 0.2s; }
+        .timer-controls button:hover { background: #e0e0e0; }
+        
+        .multi-choice-question { margin-bottom: 25px; padding: 15px; border-radius: 6px; border: 2px solid #f0f0f0; transition: border-color 0.3s, background-color 0.3s; background: #fafafa;}
+        .mcq-question-text { margin-bottom: 12px; display: flex; align-items: center;}
+        .question-number-box { border: 2px solid #4a90e2; padding: 2px 10px; margin-right: 12px; border-radius: 4px; font-weight: bold; display: inline-block; color: #4a90e2;}
+        
+        .multi-choice-option { margin-bottom: 8px; padding: 10px; border-radius: 4px; transition: background-color 0.2s; cursor: pointer; border: 1px solid transparent;}
+        .multi-choice-option:hover { background-color: #e9ecef; }
+        .multi-choice-option label { display: flex; align-items: center; cursor: pointer; font-size: 16px; width: 100%; height: 100%; font-weight: 500;}
+        .multi-choice-option input[type="radio"] { margin-right: 15px; transform: scale(1.3); accent-color: #4a90e2; cursor: pointer;}
+        
+        .multi-choice-option.correct { background-color: #e9f7ef; border-color: #28a745; }
+        .multi-choice-option.incorrect { background-color: #f8d7da; border-color: #dc3545;}
+        .correct-answer-highlight { background-color: #d4edda !important; border: 1px solid #c3e6cb !important; border-radius: 4px; color: #155724; font-weight: bold;}
+        
+        /* Modal Results - Updated Layout */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.75); z-index: 2000; display: flex; justify-content: center; align-items: center; }
+        .modal-overlay.hidden { display: none; }
+        .modal-content { background: white; padding: 30px; border-radius: 10px; width: 95%; max-width: 500px; max-height: 85vh; display: flex; flex-direction: column; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.2);}
+        .modal-close-btn { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 28px; cursor: pointer; color: #888; transition: color 0.2s;}
+        .modal-close-btn:hover { color: #333; }
+        .modal-content h2 { text-align: center; margin-bottom: 20px; color: #1c2566; font-size: 24px; }
+        
+        .results-summary { display: flex; justify-content: space-around; margin-bottom: 20px; font-size: 18px; font-weight: bold; text-align: center; border-bottom: 2px solid #eee; padding-bottom: 20px; background: #f8f9fa; border-radius: 8px; padding-top: 15px;}
+        .results-summary p { color: #333; }
+        .results-summary span { color: #4a90e2; font-size: 22px; }
+        
+        .results-details-container { overflow-y: auto; padding-right: 10px; }
+        
+        /* Tối giản bảng chỉ còn 3 cột: Q, Bài làm, Đáp án */
+        .result-header-row { display: grid; grid-template-columns: 60px 1fr 1fr; gap: 15px; padding: 10px 5px; border-bottom: 2px solid #ddd; font-weight: bold; color: #555; text-align: center;}
+        .result-row { display: grid; grid-template-columns: 60px 1fr 1fr; gap: 15px; padding: 10px 5px; border-bottom: 1px solid #f0f0f0; font-size: 15px; text-align: center; align-items: center;}
+        .result-row:hover { background-color: #f9f9f9; }
+        .result-row.incorrect { background-color: #fff3f3; }
+        .result-row .q-num { font-weight: bold; color: #4a90e2;}
+        .result-row .user-ans { color: #333; font-weight: 500;}
+        .result-row .correct-ans { color: #28a745; font-weight: bold; }
 
-        /* Modal Popup */
-        .modal-overlay {
-            display: none;
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6);
-            z-index: 2000;
-            justify-content: center; align-items: center;
-        }
-        .modal-content {
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            text-align: center;
-            width: 400px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            animation: popIn 0.3s ease-out;
-        }
-        @keyframes popIn {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-        .modal-content h2 { color: #2f3542; margin-top: 0; font-size: 28px;}
-        .modal-content p { font-size: 18px; margin: 15px 0; color: #57606f;}
-        .score-display { font-size: 36px; font-weight: bold; color: var(--primary); margin: 20px 0; }
-        .modal-btns { margin-top: 30px; display: flex; justify-content: space-around; }
-        .modal-btns button {
-            padding: 12px 20px; border: none; border-radius: 6px;
-            font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.2s;
-        }
-        .btn-view { background: var(--primary); color: white; }
-        .btn-view:hover { background: #187bcd; }
-        .btn-redo { background: var(--danger); color: white; }
-        .btn-redo:hover { background: #e03e4d; }
-
-        u, b { font-weight: bold; }
-        u { text-decoration: underline; }
-
-        /* ========================================================
-           BỔ SUNG CSS RESPONSIVE CHO MÀN HÌNH ĐIỆN THOẠI / TABLET 
-           ======================================================== */
-        @media (max-width: 992px) {
-            /* 1. Xử lý phần thân trang để không bị lấp chữ */
-            body { 
-                padding-bottom: 140px; 
-            }
-            
-            /* 2. Ép cấu trúc chia đôi thành cột dọc */
-            .part-container {
-                flex-direction: column;
-                height: auto;
-                width: 100%;
-                box-sizing: border-box;
-            }
-            .left-pane, .right-pane {
-                width: 100%;
-                height: auto;
-                border-right: none;
-                box-sizing: border-box;
-            }
-            .left-pane {
-                border-bottom: 2px dashed #ccc;
-            }
-
-            /* 3. Sửa lỗi thanh Tracking che kín màn hình */
-            .tracker-bar { 
-                flex-direction: column; 
-                padding: 10px; 
-            }
-            .tracker-grid { 
-                flex-wrap: nowrap; 
-                overflow-x: auto; 
-                width: 100%; 
-                padding-bottom: 10px; 
-            }
-            .track-box { 
-                flex-shrink: 0; 
-            }
-            .submit-btn { 
-                width: 100%; 
-                margin-left: 0; 
-                margin-top: 5px; 
-            }
-            
-            /* 4. Tùy chỉnh thanh cuộn ngang nhỏ gọn cho điện thoại */
-            .tracker-grid::-webkit-scrollbar {
-                height: 5px;
-            }
-            .tracker-grid::-webkit-scrollbar-thumb {
-                background: #ccc;
-                border-radius: 10px;
-            }
-        }
+        html, body { width: 100%; height: 100%; overflow: hidden; }
+        #launchScreen, #app { width: 100vw; height: 100vh; }
+        #app { display: none; }
+        #launchScreen { display: flex; align-items: center; justify-content: center; padding: 24px; background: radial-gradient(circle at 0% 0%, rgba(206, 219, 255, 0.48), transparent 34%), radial-gradient(circle at 100% 100%, rgba(221, 229, 255, 0.44), transparent 38%), #f4f6fc; color: #1f2b59; }
+        .launch-card { width: min(980px, 100%); border: 1px solid #d7def5; border-radius: 18px; background: linear-gradient(180deg, #ffffff, #f7f9ff); box-shadow: 0 16px 38px rgba(33, 58, 128, 0.14); padding: 35px 40px; display: grid; gap: 15px; }
+        .launch-eyebrow { margin: 0; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: #6f7cb2; font-weight: 700; }
+        .launch-title { margin: 5px 0 0; font-size: clamp(28px, 4vw, 42px); line-height: 1.2; letter-spacing: -0.02em; color: #1c2566; }
+        .launch-meta { margin: 10px 0 0; color: #3c4a81; font-size: 16px; font-weight: 600; }
+        .launch-guide { border: 1px solid #d7def5; border-radius: 12px; background: #f2f5ff; padding: 20px; display: grid; gap: 10px; margin-top: 10px;}
+        .launch-main { margin: 0; font-size: clamp(18px, 2.2vw, 20px); line-height: 1.4; font-weight: 700; color: #1d2a60; }
+        .launch-sub { margin: 0; color: #4c598f; font-size: 15px; line-height: 1.5; }
+        .student-info-form { margin-top: 15px; display: flex; flex-direction: column; gap: 15px; }
+        .student-info-form input { width: 100%; padding: 14px 18px; border: 1px solid #c5d0f2; border-radius: 8px; font-size: 16px; outline: none; transition: all 0.3s; box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);}
+        .student-info-form input:focus { border-color: #4a90e2; box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2); }
+        .launch-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 15px; }
+        .launch-btn { border: none; border-radius: 8px; cursor: pointer; font-size: 18px; font-weight: 700; padding: 14px 24px; color: #fff; background: #4a90e2; transition: all 0.2s ease; box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3); width: 100%; text-align: center; }
+        .launch-btn:hover { transform: translateY(-2px); background: #357abd; box-shadow: 0 6px 16px rgba(74, 144, 226, 0.4);}
+        
+        .mark-toggle-btn { background: none; border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; color: #ccc; margin-left: auto; transition: color 0.2s; float: right; padding-right: 10px;}
+        .mark-toggle-btn:hover { color: #888; }
+        .mark-toggle-btn.marked { color: #ffc107; }
+        .markable-question { position: relative; }
+        
+        /* Styles for Explanations */
+        .explanation-box { display: none; margin-top: 15px; padding: 15px 20px; background-color: #f0f7ff; border-left: 4px solid #4a90e2; border-radius: 6px; font-size: 15px; color: #2c3e50; line-height: 1.6; width: 100%; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: background-color 0.2s ease; cursor: pointer;}
+        .explanation-box:hover { background-color: #e6f2ff; }
+        .explanation-box.show { display: block; animation: fadeIn 0.4s ease-in-out; }
+        .explanation-title { font-weight: 700; margin-bottom: 8px; color: #1c2566; display: flex; align-items: center; gap: 6px; font-size: 16px;}
+        .explanation-content { font-weight: 500; }
+        .explanation-content i { color: #444; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulseHighlight { from { background-color: #d0ebff; } to { background-color: #a3daff; } }
+        
+        .part3-passage-item { padding: 15px; margin-bottom: 15px; border: 1px dashed #ccc; border-radius: 6px; background-color: #fcfcfc;}
+        .part3-passage-item h5 { color: #4a90e2; margin-bottom: 10px; font-size: 17px;}
+        .part3-passage-item p { margin-bottom: 6px; }
     </style>
 </head>
 <body>
-
-    <div class="timer" id="timer">⏳ 50:00</div>
-
-    <div class="header">
-        <h2>ĐỀ SỐ 01</h2>
-        <h3>KỲ THI THPT QUỐC GIA</h3>
-        <p><strong>Môn thi: TIẾNG ANH</strong></p>
-        <p><strong>Giáo viên: NGUYỄN THỊ THU DUYÊN- Zalo: 0918204603</strong></p>
-    </div>
-
-    <!-- PART 1 -->
-    <div class="part-container">
-        <div class="left-pane text-content">
-            <p><strong>Read the following advertisement and mark the letter A, B, C or D on your answer sheet to indicate the option that best fits each of the numbered blanks.</strong></p>
-            <p><strong>Solo Female Travelers Club - Global Greeter Network</strong></p>
-            <p>Looking to enhance your travel experience with a local perspective? Join the Global Greeter Network, a service (1) ______ to connect travelers with friendly locals eager to (2) ______ you around. Whether you're (3) ______ in a guided tour, a scenic walk, or simply being dropped (4) ______ at a spot of interest, this program offering flexible options allows you to explore new destinations without the hassle of finding transportation. Perfect for solo female travelers wanting (5) ______ locals and like-minded explorers, the Global Greeter Network provides access to exclusive travel groups. Share experiences, make friends, and discover hidden gems. This service is designed for those eager to experience (6) ______ in a safe, comfortable way.</p>
-            <p><em>[Adapted from Solo Female Travelers]</em></p>
+    <!-- Launch Screen -->
+    <section id="launchScreen" aria-label="Launch screen">
+        <div class="launch-card">
+            <div>
+                <p class="launch-eyebrow">Hệ thống Thi Trắc Nghiệm Thông Minh</p>
+                <h1 class="launch-title" id="launchTestTitle">Đề thi thử THPT Quốc Gia Môn Tiếng Anh - ĐỀ SỐ 01</h1>
+                <p class="launch-meta">Môn: Tiếng Anh | Thời gian: 50 phút | Số lượng: 40 Câu</p>
+            </div>
+            <div class="launch-guide">
+                <p class="launch-main">💡 Nhấn F11 để bắt đầu làm bài ở chế độ toàn màn hình.</p>
+                <p class="launch-sub">Hoàn thành thông tin cá nhân bên dưới để hệ thống lưu điểm tự động.</p>
+                <div class="student-info-form">
+                    <input type="text" id="studentName" placeholder="Nhập Họ và tên của bạn..." required autocomplete="off">
+                    <input type="text" id="studentClass" placeholder="Nhập Lớp của bạn (VD: 12A1)..." required autocomplete="off">
+                    <p id="launchError" style="color: #dc3545; font-size: 14px; display: none; margin: 0; font-weight: 600;">⚠️ Vui lòng nhập đầy đủ Họ tên và Lớp!</p>
+                </div>
+            </div>
+            <div class="launch-row">
+                <button id="startNormalBtn" class="launch-btn" type="button">BẮT ĐẦU LÀM BÀI</button>
+            </div>
         </div>
-        <div class="right-pane" id="questions-part-1"></div>
-    </div>
+    </section>
 
-    <!-- PART 2 -->
-    <div class="part-container">
-        <div class="left-pane text-content">
-            <p><strong>Read the following leaflet and mark the letter A, B, C or D on your answer sheet to indicate the option that best fits each of the numbered blanks.</strong></p>
-            <p><strong>Save the Earth, One Step at a Time!</strong></p>
-            <p>Let's explore what we can do in our daily lives to help protect the environment.</p>
-            <p><strong>Key Facts:</strong><br>
-            Every year, over 8 million tonnes of plastic enter our oceans, threatening (7) ______ life and ecosystems.<br>
-            Transport is a significant contributor to greenhouse gas emissions, especially air travel, which can account for up to 10% of your yearly carbon footprint.</p>
-            <p><strong>What You Can Do:</strong><br>
-            1. Eat Sustainably: Choose a plant-based diet when possible. Reducing meat and dairy consumption not only (8) ______ on greenhouse gas emissions (9) ______ also helps prevent deforestation for animal feed crops.<br>
-            2. Reduce Waste: Avoid single-use plastics. Opt for reusable bags, containers, and water bottles. Every time you (10) ______, you prevent more plastic waste from ending up in landfills or oceans.<br>
-            3. Travel Responsibly: Whenever possible, walk or bike short distances. If traveling longer distances, (11) ______ public transport or trains instead of flights to save a large (12) ______ of carbon emission.</p>
-            <p><em>[Adapted from WWF, Global Stewards]</em></p>
+    <!-- Main App Layout -->
+    <div id="app">
+        <div class="header">
+            <div class="timer-container">
+                <span class="timer-display">50:00</span>
+                <div class="timer-controls">
+                    <button id="timer-toggle-btn" title="Pause/Resume Timer">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M8 5v14l11-7L8 5z"/></svg>
+                    </button>
+                </div>
+            </div>
+            <div class="header-right">
+                <!-- Banner Quảng cáo & Link FB cá nhân -->
+                <a href="https://www.facebook.com/thuduyen.nguyen.332" target="_blank" rel="noopener" class="header-ad" title="Liên hệ Facebook Giáo viên">
+                    <div class="ad-copy">
+                        <p class="ad-eyebrow">Luyện thi THPT QG</p>
+                        <div class="ad-marquee">
+                            <div class="ad-loop">
+                                <span class="ad-headline">🔥 Chinh phục điểm 9+ Tiếng Anh dễ dàng! Click ngay!</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <button class="ad-close" type="button" aria-label="Close ad" title="Close">×</button>
+            </div>
         </div>
-        <div class="right-pane" id="questions-part-2"></div>
-    </div>
 
-    <!-- PART 3 -->
-    <div class="part-container">
-        <div class="left-pane text-content">
-            <p><strong>Mark the letter A, B, C or D on your answer sheet to indicate the best arrangement of utterances or sentences to make a meaningful exchange or text in each of the following questions.</strong></p>
+        <div class="main-container" id="main-container">
+            <!-- Headers Section -->
+            <div id="passage-header-container">
+                <div id="part-header-1" class="part-header">
+                    <p><strong>Part 1: Guided Cloze 1</strong></p>
+                    <p>Read the following advertisement and mark the letter A, B, C or D to indicate the option that best fits each of the numbered blanks.</p>
+                </div>
+                <div id="part-header-2" class="part-header hidden">
+                    <p><strong>Part 2: Guided Cloze 2</strong></p>
+                    <p>Read the following leaflet and mark the letter A, B, C or D to indicate the option that best fits each of the numbered blanks.</p>
+                </div>
+                <div id="part-header-3" class="part-header hidden">
+                    <p><strong>Part 3: Sentence Arrangement</strong></p>
+                    <p>Mark the letter A, B, C or D to indicate the best arrangement of utterances or sentences to make a meaningful exchange or text.</p>
+                </div>
+                <div id="part-header-4" class="part-header hidden">
+                    <p><strong>Part 4: Reading Comprehension 1</strong></p>
+                    <p>Read the following passage and mark the letter A, B, C or D to indicate the correct answer to each of the questions.</p>
+                </div>
+                <div id="part-header-5" class="part-header hidden">
+                    <p><strong>Part 5: Reading Comprehension 2</strong></p>
+                    <p>Read the following passage and mark the letter A, B, C or D to indicate the correct answer to each of the questions.</p>
+                </div>
+                <div id="part-header-6" class="part-header hidden">
+                    <p><strong>Part 6: Reading Comprehension 3</strong></p>
+                    <p>Read the following passage and mark the letter A, B, C or D to indicate the correct answer to each of the questions.</p>
+                </div>
+            </div>
             
-            <p><strong>Question 13:</strong><br>
-            a. Nam: Hi, Jessica. I'm so excited as I've never met a talking robot before. Let's have a photo taken together!<br>
-            b. Teacher: Hello, class. Please meet Jessica. She's a human-like robot and will be your guide today.<br>
-            c. Jessica: Good morning, everybody. Welcome to the New Tech Centre.</p>
-            
-            <p><strong>Question 14:</strong><br>
-            a. Alex: That makes sense, but I don't think AI is suitable for basic tasks.<br>
-            b. Nick: Definitely. A doctor's job is such a tedious one that AI will likely take over.<br>
-            c. Nick: You're right. Basic jobs may be perfect for AI, but humans may not want to relinquish control of more boring tasks.<br>
-            d. Alex: Do you think AI will affect the role of doctors?</p>
+            <div class="panels-container">
+                <!-- LEFT PANEL: PASSAGES -->
+                <div class="passage-panel" id="passage-panel">
+                    
+                    <!-- Passage 1 -->
+                    <div id="passage-text-1" class="reading-passage">
+                        <h4 class="text-center">Solo Female Travelers Club - Global Greeter Network</h4>
+                        <p>Looking to enhance your travel experience with a local perspective? Join the Global Greeter Network, a service <strong>(1) ______</strong> to connect travelers with friendly locals eager to <strong>(2) ______</strong> you around. Whether you're <strong>(3) ______</strong> in a guided tour, a scenic walk, or simply being dropped <strong>(4) ______</strong> at a spot of interest, this program offering flexible options allows you to explore new destinations without the hassle of finding transportation. Perfect for solo female travelers wanting <strong>(5) ______</strong> locals and like-minded explorers, the Global Greeter Network provides access to exclusive travel groups. Share experiences, make friends, and discover hidden gems. This service is designed for those eager to experience <strong>(6) ______</strong> in a safe, comfortable way.</p>
+                    </div>
 
-            <p><strong>Question 15:</strong><br>
-            Dear Emily,<br>
-            a. I hope you're doing well! I just got back from an amazing trip to Italy and had to tell you about it.<br>
-            b. If you ever get the chance to visit Italy, you should go! I'd love for us to travel together someday.<br>
-            c. I loved the food, especially the pizza in Naples!<br>
-            d. It was the perfect getaway and a much-needed break from routine.<br>
-            e. The locals were so welcoming, and learning a few Italian phrases helped.<br>
-            f. The views at the Amalfi Coast were breathtaking, and I explored beautiful cities like Venice and Rome.<br>
-            Take care,<br>
-            Sarah</p>
+                    <!-- Passage 2 -->
+                    <div id="passage-text-2" class="reading-passage hidden">
+                        <h4 class="text-center">Save the Earth, One Step at a Time!</h4>
+                        <p>Let's explore what we can do in our daily lives to help protect the environment.</p>
+                        <p><strong>Key Facts:</strong></p>
+                        <ul>
+                            <li>Every year, over 8 million tonnes of plastic enter our oceans, threatening <strong>(7) ______</strong> life and ecosystems.</li>
+                            <li>Transport is a significant contributor to greenhouse gas emissions, especially air travel, which can account for up to 10% of your yearly carbon footprint.</li>
+                        </ul>
+                        <p><strong>What You Can Do:</strong></p>
+                        <p>1. Eat Sustainably: Choose a plant-based diet when possible. Reducing meat and dairy consumption not only <strong>(8) ______</strong> on greenhouse gas emissions <strong>(9) ______</strong> also helps prevent deforestation for animal feed crops.</p>
+                        <p>2. Reduce Waste: Avoid single-use plastics. Opt for reusable bags, containers, and water bottles. Every time you <strong>(10) ______</strong> you prevent more plastic waste from ending up in landfills or oceans.</p>
+                        <p>3. Travel Responsibly: Whenever possible, walk or bike short distances. If traveling longer distances, <strong>(11) ______</strong> public transport or trains instead of flights to save a large <strong>(12) ______</strong> of carbon emission.</p>
+                    </div>
 
-            <p><strong>Question 16:</strong><br>
-            a. Additionally, choosing eco-friendly products and supporting renewable energy sources, such as solar or wind power, contributes to a greener planet.<br>
-            b. Planting trees helps reduce carbon dioxide levels and improves air quality.<br>
-            c. Simple actions like reducing plastic use, recycling, and conserving water can make a significant difference.<br>
-            d. It's important for individuals, businesses, and governments to work together to preserve natural resources, reduce pollution, and combat climate change for future generations.<br>
-            e. Protecting the environment is crucial for ensuring a healthy and sustainable future.</p>
+                    <!-- Passage 3 (Sentence Arrangement Text) -->
+                    <div id="passage-text-3" class="reading-passage hidden">
+                        <h4 class="text-center">Reference Texts for Sentence Arrangement</h4>
+                        
+                        <div class="part3-passage-item">
+                            <h5>Question 13</h5>
+                            <p><strong>a.</strong> Nam: Hi, Jessica. I'm so excited as I've never met a talking robot before. Let's have a photo taken together!</p>
+                            <p><strong>b.</strong> Teacher: Hello, class. Please meet Jessica. She's a human-like robot and will be your guide today.</p>
+                            <p><strong>c.</strong> Jessica: Good morning, everybody. Welcome to the New Tech Centre.</p>
+                        </div>
+                        
+                        <div class="part3-passage-item">
+                            <h5>Question 14</h5>
+                            <p><strong>a.</strong> Alex: That makes sense, but I don't think AI is suitable for basic tasks.</p>
+                            <p><strong>b.</strong> Nick: Definitely. A doctor's job is such a tedious one that Al will likely take over.</p>
+                            <p><strong>c.</strong> Nick: You're right. Basic jobs may be perfect for AI, but humans may not want to relinquish control of more boring tasks.</p>
+                            <p><strong>d.</strong> Alex: Do you think AI will affect the role of doctors?</p>
+                        </div>
 
-            <p><strong>Question 17:</strong><br>
-            a. As AI continues to advance, it holds the potential to revolutionize fields such as healthcare, education, and business, though ethical considerations about job displacement and privacy are increasingly important.<br>
-            b. Initially focused on basic problem-solving and calculations, Al now powers complex systems, from virtual assistants like Siri and Alexa to self-driving cars and advanced medical diagnostics.<br>
-            c. Artificial Intelligence (AI) has rapidly evolved, transforming industries and everyday life.<br>
-            d. Machine learning and deep learning technologies enable AI to analyze vast amounts of data, improving its decision-making abilities.</p>
-        </div>
-        <div class="right-pane" id="questions-part-3"></div>
-    </div>
+                        <div class="part3-passage-item">
+                            <h5>Question 15</h5>
+                            <p>Dear Emily,</p>
+                            <p><strong>a.</strong> I hope you're doing well! I just got back from an amazing trip to Italy and had to tell you about it.</p>
+                            <p><strong>b.</strong> If you ever get the chance to visit Italy, you should go! I'd love for us to travel together someday.</p>
+                            <p><strong>c.</strong> I loved the food, especially the pizza in Naples!</p>
+                            <p><strong>d.</strong> It was the perfect getaway and a much-needed break from routine.</p>
+                            <p><strong>e.</strong> The locals were so welcoming, and learning a few Italian phrases helped.</p>
+                            <p><strong>f.</strong> The views at the Amalfi Coast were breathtaking, and I explored beautiful cities like Venice and Rome.</p>
+                            <p>Take care,<br>Sarah</p>
+                        </div>
 
-    <!-- PART 4 -->
-    <div class="part-container">
-        <div class="left-pane text-content">
-            <p><strong>Read the following passage and mark the letter A, B, C or D on your answer sheet to indicate the option that best fits each of the numbered blanks.</strong></p>
-            <p><strong>The World's First GPS</strong></p>
-            <p>On a stormy night in 1707, four ships struck rocks off the south coast of England and sank. One thousand, four hundred sailors were drowned. The ships had crashed because they had no way of knowing how far they had travelled in a particular direction; they could not calculate their longitude, which required accurate time measurement. (18) ______ In such difficult circumstances, they believed that the best response to the disaster was a competition: the Longitude Prize.</p>
-            <p>The Longitude Prize was no ordinary competition. (19) ______ Geniuses such as Sir Isaac Newton had failed to find a solution, so to ensure the interest of Britain's greatest scientific minds, the government offered a prize of £20,000 - the equivalent of £2.6 million in today's money. But to everyone's surprise, it wasn't a famous academic who solved the problem, but an unknown carpenter. When John Harrison wasn't working with wood, (20) ______ An accurate clock would allow sailors to calculate their position, but at the time it was thought impossible to create a mechanical clock (21) ______ The movement of the sea and the changes in temperature destroyed the delicate parts. However, after three frustrated attempts, Harrison's fourth sea clock, H4, finally triumphed. Its mechanics were so good that the H4 worked better than most clocks on land.</p>
-            <p>The Longitude Prize and Harrison's success (22) ______ However, in 2013, the British government created a new Longitude Prize, offering £10 million to the person who could solve a great challenge to humanity.</p>
-        </div>
-        <div class="right-pane" id="questions-part-4"></div>
-    </div>
+                        <div class="part3-passage-item">
+                            <h5>Question 16</h5>
+                            <p><strong>a.</strong> Additionally, choosing eco-friendly products and supporting renewable energy sources, such as solar or wind power, contributes to a greener planet.</p>
+                            <p><strong>b.</strong> Planting trees helps reduce carbon dioxide levels and improves air quality.</p>
+                            <p><strong>c.</strong> Simple actions like reducing plastic use, recycling, and conserving water can make a significant difference.</p>
+                            <p><strong>d.</strong> It's important for individuals, businesses, and governments to work together to preserve natural resources, reduce pollution, and combat climate change for future generations.</p>
+                            <p><strong>e.</strong> Protecting the environment is crucial for ensuring a healthy and sustainable future.</p>
+                        </div>
 
-    <!-- PART 5 -->
-    <div class="part-container">
-        <div class="left-pane text-content">
-            <p><strong>Read the following passage and mark the letter A, B, C or D on your answer sheet to indicate the option that best fits each of the numbered blanks.</strong></p>
-            <p>Urbanization refers to the process through which cities grow and expand as more people move from rural to urban areas. This phenomenon is driven by various factors, including economic opportunities, educational facilities, and healthcare services, which often attract individuals seeking better living standards. As cities become more populated, <b><u>they</u></b> undergo significant transformations in infrastructure, including housing, transportation, and public services.</p>
-            <p>The rise in urban populations can lead to both positive and negative outcomes. On the positive side, urbanization can <b><u>stimulate</u></b> economic development, innovation, and cultural exchange. It often brings improvements in living standards and provides better access to services and amenities. However, rapid urban growth can also strain existing infrastructure, leading to issues such as overcrowding, pollution, and inadequate public services. These challenges can impact the quality of life in urban areas and require careful planning and management.</p>
-            <p><b><u>Effective urban planning is crucial to mitigating the negative effects of urbanization.</u></b> This includes creating sustainable infrastructure, managing resources efficiently, and ensuring equitable access to services for all residents. By addressing these challenges, cities can harness the benefits of urbanization while improving the overall quality of urban life.</p>
-        </div>
-        <div class="right-pane" id="questions-part-5"></div>
-    </div>
+                        <div class="part3-passage-item">
+                            <h5>Question 17</h5>
+                            <p><strong>a.</strong> As AI continues to advance, it holds the potential to revolutionize fields such as healthcare, education, and business, though ethical considerations about job displacement and privacy are increasingly important.</p>
+                            <p><strong>b.</strong> Initially focused on basic problem-solving and calculations, AI now powers complex systems, from virtual assistants like Siri and Alexa to self-driving cars and advanced medical diagnostics.</p>
+                            <p><strong>c.</strong> Artificial Intelligence (AI) has rapidly evolved, transforming industries and everyday life.</p>
+                            <p><strong>d.</strong> Machine learning and deep learning technologies enable Al to analyze vast amounts of data, improving its decision-making abilities.</p>
+                        </div>
+                    </div>
 
-    <!-- PART 6 -->
-    <div class="part-container">
-        <div class="left-pane text-content">
-            <p><strong>Read the following passage and mark the letter A, B, C or D on your answer sheet to indicate the option that best fits each of the numbered blanks.</strong></p>
-            <p><strong>Gender Equality Today:</strong></p>
-            <p>Gender equality is a fundamental human right and a critical foundation for a peaceful, prosperous, and sustainable world. <strong>[I]</strong> Despite significant progress in recent years, gender inequality remains a pressing issue across the globe. <strong>[II]</strong> Women continue to be underrepresented in leadership positions and face numerous <b><u>barriers</u></b> in various sectors, including education, healthcare, and the workforce. <strong>[III]</strong> According to the World Economic Forum's Global Gender Gap Report 2021, it will take an estimated 135.6 years to close the gender gap globally if current trends continue. <strong>[IV]</strong></p>
-            <p>In many countries, women are still subjected to discrimination and violence. Gender-based violence, including domestic violence and sexual harassment, affects millions of women worldwide and hinders <b><u>their</u></b> ability to participate fully in society. Additionally, cultural and societal norms often perpetuate stereotypes that limit women's roles and opportunities.</p>
-            <p>However, there are positive signs of change. Movements advocating for gender equality have gained <b><u>momentum</u></b>, and more individuals are recognizing the importance of women's rights. Governments and organizations are implementing policies to promote equal opportunities and protect against discrimination. Education plays a vital role in this transformation, as empowering girls through education can lead to improved economic outcomes and healthier communities.</p>
-            <p><b><u>Achieving gender equality is not only a matter of fairness; it is essential for the advancement of society as a whole.</u></b> By ensuring equal rights and opportunities for all genders, we can create a more just and equitable world.</p>
-        </div>
-        <div class="right-pane" id="questions-part-6"></div>
-    </div>
+                    <!-- Passage 4 -->
+                    <div id="passage-text-4" class="reading-passage hidden">
+                        <h4 class="text-center">The World's First GPS</h4>
+                        <p>On a stormy night in 1707, four ships struck rocks off the south coast of England and sank. One thousand, four hundred sailors were drowned. The ships had crashed because they had no way of knowing how far they had travelled in a particular direction; they could not calculate their longitude, which required accurate time measurement. <strong>(18) ______</strong> In such difficult circumstances, they believed that the best response to the disaster was a competition: the Longitude Prize.</p>
+                        <p>The Longitude Prize was no ordinary competition. <strong>(19) ______</strong> Geniuses such as Sir Isaac Newton had failed to find a solution, so to ensure the interest of Britain's greatest scientific minds, the government offered a prize of £20,000 - the equivalent of £2.6 million in today's money. But to everyone's surprise, it wasn't a famous academic who solved the problem, but an unknown carpenter. When John Harrison wasn't working with wood, <strong>(20) ______</strong> An accurate clock would allow sailors to calculate their position, but at the time it was thought impossible to create a mechanical clock <strong>(21) ______</strong> The movement of the sea and the changes in temperature destroyed the delicate parts. However, after three frustrated attempts, Harrison's fourth sea clock, H4, finally triumphed. Its mechanics were so good that the H4 worked better than most clocks on land.</p>
+                        <p>The Longitude Prize and Harrison's success <strong>(22) ______</strong> However, in 2013, the British government created a new Longitude Prize, offering £10 million to the person who could solve a great challenge to humanity.</p>
+                    </div>
 
-    <!-- Sidebar Tracker -->
-    <div class="tracker-bar">
-        <div class="tracker-grid" id="tracker-grid"></div>
-        <button class="submit-btn" onclick="submitExam()">NỘP BÀI THI</button>
-    </div>
+                    <!-- Passage 5 -->
+                    <div id="passage-text-5" class="reading-passage hidden">
+                        <h4 class="text-center">Urbanization</h4>
+                        <p>Urbanization refers to the process through which cities grow and expand as more people move from rural to urban areas. This phenomenon is driven by various factors, including economic opportunities, educational facilities, and healthcare services, which often attract individuals seeking better living standards. As cities become more populated, they undergo significant transformations in infrastructure, including housing, transportation, and public services.</p>
+                        <p>The rise in urban populations can lead to both positive and negative outcomes. On the positive side, urbanization can stimulate economic development, innovation, and cultural exchange. It often brings improvements in living standards and provides better access to services and amenities. However, rapid urban growth can also strain existing infrastructure, leading to issues such as overcrowding, pollution, and inadequate public services. These challenges can impact the quality of life in urban areas and require careful planning and management.</p>
+                        <p>Effective urban planning is crucial to mitigating the negative effects of urbanization. This includes creating sustainable infrastructure, managing resources efficiently, and ensuring equitable access to services for all residents. By addressing these challenges, cities can harness the benefits of urbanization while improving the overall quality of urban life.</p>
+                    </div>
 
-    <!-- Modal Popup -->
-    <div class="modal-overlay" id="modal">
-        <div class="modal-content">
-            <h2>Kết Quả Bài Thi</h2>
-            <div class="score-display" id="score-text">0 / 40</div>
-            <p>Số câu bỏ trống: <strong id="unanswered-count" style="color:var(--danger)">0</strong></p>
-            <div class="modal-btns">
-                <button class="btn-view" onclick="viewAnswers()">XEM ĐÁP ÁN</button>
-                <button class="btn-redo" onclick="location.reload()">LÀM LẠI BÀI</button>
+                    <!-- Passage 6 -->
+                    <div id="passage-text-6" class="reading-passage hidden">
+                        <h4 class="text-center">Gender Equality Today</h4>
+                        <p>Gender equality is a fundamental human right and a critical foundation for a peaceful, prosperous, and sustainable world. <strong>[I]</strong> Despite significant progress in recent years, gender inequality remains a pressing issue across the globe. <strong>[II]</strong> Women continue to be underrepresented in leadership positions and face numerous barriers in various sectors, including education, healthcare, and the workforce. <strong>[III]</strong> According to the World Economic Forum's Global Gender Gap Report 2021, it will take an estimated 135.6 years to close the gender gap globally if current trends continue. <strong>[IV]</strong></p>
+                        <p>In many countries, women are still subjected to discrimination and violence. Gender-based violence, including domestic violence and sexual harassment, affects millions of women worldwide and hinders their ability to participate fully in society. Additionally, cultural and societal norms often perpetuate stereotypes that limit women's roles and opportunities.</p>
+                        <p>However, there are positive signs of change. Movements advocating for gender equality have gained momentum, and more individuals are recognizing the importance of women's rights. Governments and organizations are implementing policies to promote equal opportunities and protect against discrimination. Education plays a vital role in this transformation, as empowering girls through education can lead to improved economic outcomes and healthier communities.</p>
+                        <p>Achieving gender equality is not only a matter of fairness; <span style="text-decoration: underline;">it is essential for the advancement of society as a whole</span>. By ensuring equal rights and opportunities for all genders, we can create a more just and equitable world.</p>
+                    </div>
+                </div>
+
+                <div class="resizer" id="resizer"></div>
+                
+                <!-- RIGHT PANEL: QUESTIONS -->
+                <div class="questions-panel" id="questions-panel">
+                    
+                    <script>
+                        function renderMCQ(qNum, options, extraClass = "") {
+                            let html = `<div class="multi-choice-question ${extraClass}" data-q-start="${qNum}" data-q-end="${qNum}">`;
+                            html += `<div class="mcq-question-text"><span class="mcq-question-number question-number-box" data-q-number="${qNum}">Question ${qNum}</span></div>`;
+                            const letters = ['A', 'B', 'C', 'D'];
+                            options.forEach((opt, idx) => {
+                                html += `<div class="multi-choice-option"><label><input type="radio" name="q${qNum}" value="${letters[idx]}"> <strong>${letters[idx]}.</strong>&nbsp; ${opt}</label></div>`;
+                            });
+                            html += `</div>`;
+                            document.write(html);
+                        }
+                    </script>
+
+                    <!-- Questions Part 1 -->
+                    <div id="questions-1" class="question-set">
+                        <script>
+                            renderMCQ(1, ["design", "was designed", "designed", "that designed"]);
+                            renderMCQ(2, ["go", "see", "show", "look"]);
+                            renderMCQ(3, ["interested", "interesting", "interest", "interestingly"]);
+                            renderMCQ(4, ["on", "off", "to", "about"]);
+                            renderMCQ(5, ["to meet", "meeting", "meet", "met"]);
+                            renderMCQ(6, ["local authentic culture", "culture authentic local", "authentic culture local", "authentic local culture"]);
+                        </script>
+                    </div>
+
+                    <!-- Questions Part 2 -->
+                    <div id="questions-2" class="question-set hidden">
+                        <script>
+                            renderMCQ(7, ["aquatic", "wildlife", "marine", "coastal"]);
+                            renderMCQ(8, ["gets down", "cuts down", "breaks up", "breaks down"]);
+                            renderMCQ(9, ["and", "or", "so", "but"]);
+                            renderMCQ(10, ["reuse", "recycle", "reduce", "refill"]);
+                            renderMCQ(11, ["avoid", "consider", "ignore", "prefer"]);
+                            renderMCQ(12, ["other", "many", "much", "amount"]);
+                        </script>
+                    </div>
+
+                    <!-- Questions Part 3 (Questions Only - text is in passage panel) -->
+                    <div id="questions-3" class="question-set hidden">
+                        <div style="margin-bottom: 20px; padding: 10px; background-color: #fff3cd; border-left: 5px solid #ffecb5; font-weight: 500; color: #856404; border-radius: 4px;">
+                            👉 Đọc kỹ dữ liệu tham khảo tương ứng ở cột bên trái để chọn đáp án Sắp xếp logic nhất!
+                        </div>
+                        <script>
+                            renderMCQ(13, ["a-b-c", "b-a-c", "c-a-b", "b-c-a"]);
+                            renderMCQ(14, ["d-c-a-b", "d-b-a-c", "d-b-c-a", "a-d-c-b"]);
+                            renderMCQ(15, ["a-f-e-d-c-b", "a-e-d-c-b-f", "a-f-c-d-e-b", "a-f-c-e-d-b"]);
+                            renderMCQ(16, ["e-c-b-a-d", "e-a-c-d-b", "e-c-a-b-d", "d-e-a-c-b"]);
+                            renderMCQ(17, ["c-b-d-a", "c-d-a-b", "b-c-a-d", "c-a-d-b"]);
+                        </script>
+                    </div>
+
+                    <!-- Questions Part 4 -->
+                    <div id="questions-4" class="question-set hidden">
+                        <script>
+                            renderMCQ(18, [
+                                "It was one of the most serious maritime accidents in the world that forced the British government to take action.",
+                                "A series of such incidents occurred, leaving the British government stunned and deciding to act.",
+                                "It was the most serious in a series of accidents at sea, and a stunned British government decided to act.",
+                                "The British government was shocked by the incident and decided to respond, as it was a frequent occurrence."
+                            ]);
+                            renderMCQ(19, [
+                                "To win, one had to calculate the distance a ship had travelled since it set out.",
+                                "Someone was required to discover a method for determining how far a ship had gone east or west from its starting point.",
+                                "To win it, someone had to find a way of calculating how far a ship had travelled east or west from its point of departure.",
+                                "The competition required the winner to find a method to calculate the east-west distance of the ship from its starting point."
+                            ]);
+                            renderMCQ(20, [
+                                "He studied to make clocks.",
+                                "Making clocks.",
+                                "While John Harrison wasn't making clocks.",
+                                "Teaching how to make clocks."
+                            ]);
+                            renderMCQ(21, [
+                                "Which work on a ship",
+                                "Working on a ship",
+                                "That could operate on a ship",
+                                "Designed to function on a ship"
+                            ]);
+                            renderMCQ(22, [
+                                "Makes people interested in the 18th century, but it remained noted in the years that followed.",
+                                "Attracting a lot of attention in the 18th century and was quickly forgotten.",
+                                "Generated a lot of interest in the 18th century, but it was soon forgotten.",
+                                "It caused significant interest in the 18th century, although it quickly faded away."
+                            ]);
+                        </script>
+                    </div>
+
+                    <!-- Questions Part 5 -->
+                    <div id="questions-5" class="question-set hidden">
+                        <script>
+                            renderMCQ(23, [
+                                "Economic opportunities", 
+                                "Healthcare services", 
+                                "Climate change", 
+                                "Educational facilities"
+                            ], "q23-class");
+                            document.querySelector('.q23-class .mcq-question-text').innerHTML += ' Which of the following is NOT mentioned as a factor driving urbanization?';
+                            
+                            renderMCQ(24, [
+                                "encourage", 
+                                "promote", 
+                                "hinder", 
+                                "accelerate"
+                            ], "q24-class");
+                            document.querySelector('.q24-class .mcq-question-text').innerHTML += ' The word "stimulate" in paragraph 2 is OPPOSITE in meaning to:';
+                            
+                            renderMCQ(25, [
+                                "rural areas", 
+                                "cities", 
+                                "economic opportunities", 
+                                "suburban"
+                            ], "q25-class");
+                            document.querySelector('.q25-class .mcq-question-text').innerHTML += ' The word "they" in paragraph 1 refers to:';
+                            
+                            renderMCQ(26, [
+                                "worsening", 
+                                "addressing", 
+                                "preventing", 
+                                "reducing"
+                            ], "q26-class");
+                            document.querySelector('.q26-class .mcq-question-text').innerHTML += ' The word "mitigating" in paragraph 3 could best be replaced by:';
+                            
+                            renderMCQ(27, [
+                                "Good urban planning is essential to address urbanization's adverse effects.", 
+                                "Proper urban planning can help reduce the negative impacts of urban growth.", 
+                                "Mitigating urbanization's drawbacks requires effective urban planning.", 
+                                "Managing urbanization's negative consequences relies on strategic urban planning."
+                            ], "q27-class");
+                            document.querySelector('.q27-class .mcq-question-text').innerHTML += ' Which of the following best paraphrases the underlined sentence in paragraph 3?';
+                            
+                            renderMCQ(28, [
+                                "Rapid urbanization can lead to overcrowding and pollution.", 
+                                "Urbanization always improves living standards.", 
+                                "Economic development is rarely associated with urbanization.", 
+                                "Urban growth only brings negative outcomes."
+                            ], "q28-class");
+                            document.querySelector('.q28-class .mcq-question-text').innerHTML += ' According to the passage, which of the following is TRUE?';
+                            
+                            renderMCQ(29, [
+                                "Paragraph 1", 
+                                "Paragraph 2", 
+                                "Paragraph 3", 
+                                "Paragraph 4"
+                            ], "q29-class");
+                            document.querySelector('.q29-class .mcq-question-text').innerHTML += ' In which paragraph does the writer mention the benefits of urbanization?';
+                            
+                            renderMCQ(30, [
+                                "Paragraph 1", 
+                                "Paragraph 2", 
+                                "Paragraph 3", 
+                                "Paragraph 4"
+                            ], "q30-class");
+                            document.querySelector('.q30-class .mcq-question-text').innerHTML += ' In which passage does the author mention that durable infrastructure helps manage the impacts of urbanization?';
+                        </script>
+                    </div>
+
+                    <!-- Questions Part 6 -->
+                    <div id="questions-6" class="question-set hidden">
+                        <script>
+                            renderMCQ(31, [
+                                "[I]", 
+                                "[II]", 
+                                "[III]", 
+                                "[IV]"
+                            ], "q31-class");
+                            document.querySelector('.q31-class .mcq-question-text').innerHTML += ' Which position in paragraph 1 is the most appropriate for the sentence: "Ensuring that women and men have equal opportunities is essential for the development of society."?';
+
+                            renderMCQ(32, [
+                                "Challenges", 
+                                "Benefits", 
+                                "Rights", 
+                                "Laws"
+                            ], "q32-class");
+                            document.querySelector('.q32-class .mcq-question-text').innerHTML += ' The phrase "barriers" in paragraph 1 can be replaced with which word?';
+
+                            renderMCQ(33, [
+                                "Men", 
+                                "Governments", 
+                                "Women", 
+                                "Norms"
+                            ], "q33-class");
+                            document.querySelector('.q33-class .mcq-question-text').innerHTML += ' Whose is the word "their" in paragraph 2 mentioned:';
+
+                            renderMCQ(34, [
+                                "Violence", 
+                                "Cultural norms", 
+                                "Equal opportunities", 
+                                "Stereotypes"
+                            ], "q34-class");
+                            document.querySelector('.q34-class .mcq-question-text').innerHTML += ' According to paragraph 2, which of the following is NOT a reason preventing women from fully participating in society?';
+
+                            renderMCQ(35, [
+                                "Women's rights are gaining more recognition.", 
+                                "Violence against women is decreasing rapidly.", 
+                                "Gender equality movements are ineffective.", 
+                                "Discrimination is no longer an issue for women."
+                            ], "q35-class");
+                            document.querySelector('.q35-class .mcq-question-text').innerHTML += ' What is the best summary of paragraph 3?';
+
+                            renderMCQ(36, [
+                                "Increase", 
+                                "Decline", 
+                                "Growth", 
+                                "Movement"
+                            ], "q36-class");
+                            document.querySelector('.q36-class .mcq-question-text').innerHTML += ' The word "momentum" in paragraph 3 is OPPOSITE in meaning to which word?';
+
+                            renderMCQ(37, [
+                                "Education plays a key role in promoting gender equality.", 
+                                "Gender inequality is no longer a major issue globally.", 
+                                "Women's leadership roles are now equal to men's.", 
+                                "Gender-based violence has decreased worldwide."
+                            ], "q37-class");
+                            document.querySelector('.q37-class .mcq-question-text').innerHTML += ' Which statement is true according to the reading?';
+
+                            renderMCQ(38, [
+                                "Gender equality can be achieved quickly through government policies.", 
+                                "Gender equality is essential for ensuring that women have more rights than men.", 
+                                "Achieving gender equality is primarily about securing jobs for women.", 
+                                "Gender equality is necessary for the advancement of society as a whole."
+                            ], "q38-class");
+                            document.querySelector('.q38-class .mcq-question-text').innerHTML += ' Which statement best expresses the meaning of the underlined sentence in paragraph 4?';
+
+                            renderMCQ(39, [
+                                "Gender equality movements have completely eliminated discrimination.", 
+                                "It will take less than 50 years to close the gender gap.", 
+                                "Cultural norms still play a role in limiting women's opportunities.", 
+                                "Education alone is enough to solve gender inequality issues."
+                            ], "q39-class");
+                            document.querySelector('.q39-class .mcq-question-text').innerHTML += ' What can be inferred from the reading?';
+
+                            renderMCQ(40, [
+                                "Gender equality is no longer an issue in most parts of the world.", 
+                                "Progress has been made, but gender inequality still requires attention and action.", 
+                                "Women are now equally represented in all leadership positions.", 
+                                "The education system has solved the issue of gender inequality."
+                            ], "q40-class");
+                            document.querySelector('.q40-class .mcq-question-text').innerHTML += ' What is the best summary of the entire reading?';
+                        </script>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
+    <!-- Navigation Arrows -->
+    <div class="nav-arrows">
+        <button class="nav-arrow" onclick="previousQuestion()" id="prevBtn" title="Câu trước">‹</button>
+        <button class="nav-arrow" onclick="nextQuestion()" id="nextBtn" title="Câu tiếp theo">›</button>
+    </div>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="nav-row perScorableItem" aria-label="Questions">
+        <script>
+            function createNavPart(partNum, start, end) {
+                let html = `<div class="footer__questionWrapper___1tZ46 multiple ${partNum===1?'selected':''}" role="tablist">
+                    <button role="tab" class="footer__questionNo___3WNct" onclick="switchToPart(${partNum})">
+                        <span><span aria-hidden="true" class="section-prefix">Part </span><span class="sectionNr" aria-hidden="true">${partNum}</span><span class="attemptedCount" aria-hidden="true">0 of ${end - start + 1}</span></span>
+                    </button>
+                    <div class="footer__subquestionWrapper___9GgoP">`;
+                for(let i=start; i<=end; i++) {
+                    html += `<button class="subQuestion scorable-item" onclick="goToQuestion(${i})"><span class="sr-only">Question ${i}</span><span aria-hidden="true">${i}</span></button>`;
+                }
+                html += `</div></div>`;
+                document.write(html);
+            }
+            createNavPart(1, 1, 6);
+            createNavPart(2, 7, 12);
+            createNavPart(3, 13, 17);
+            createNavPart(4, 18, 22);
+            createNavPart(5, 23, 30);
+            createNavPart(6, 31, 40);
+        </script>
+        
+        <button id="deliver-button" aria-label="Review your answers" class="footer__deliverButton___3FM07">
+            <i class="fa fa-check" aria-hidden="true"></i>
+            <span>Nộp Bài</span>
+        </button>
+    </nav>
+
+    <!-- Context Menu for Highlights -->
+    <div id="contextMenu" class="context-menu">
+        <div id="menu-note" class="context-menu-item" onclick="addNote()">📝 Thêm ghi chú</div>
+        <div id="menu-highlight-colors" class="context-menu-item" style="display: flex; gap: 15px; justify-content: center; padding: 12px 16px;">
+            <button type="button" class="color-btn yellow" onclick="highlightText('yellow')" title="Highlight Vàng"></button>
+            <button type="button" class="color-btn green" onclick="highlightText('green')" title="Highlight Xanh"></button>
+            <button type="button" class="color-btn pink" onclick="highlightText('pink')" title="Highlight Hồng"></button>
+        </div>
+        <div id="menu-clear" class="context-menu-item" onclick="clearHighlight()">🗑️ Xóa highlight</div>
+        <div id="menu-clear-all" class="context-menu-item" onclick="clearAllHighlights()">🗑️ Xóa tất cả</div>
+    </div>
+
+    <!-- Results Modal (Bảng điểm tối giản theo yêu cầu) -->
+    <div id="results-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close-btn" onclick="closeResultsModal()">&times;</button>
+            <h2>KẾT QUẢ BÀI THI</h2>
+            <div id="submit-status" style="display: none; text-align: center; margin-bottom: 15px; padding: 10px; border-radius: 4px; font-weight: bold;"></div>
+            
+            <div class="results-summary">
+                <p>Số câu đúng: <br><span id="results-score"></span> / 40</p>
+                <p>Tổng Điểm: <br><span id="results-band"></span></p>
+            </div>
+            
+            <div class="result-header-row">
+                <span>Q</span>
+                <span>Trả lời</span>
+                <span>Đáp án</span>
+            </div>
+            
+            <div id="results-details" class="results-details-container">
+                <!-- Data will be injected here via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Core Data and Logic -->
     <script>
-        // Dữ liệu Đáp án và Giải thích chi tiết
-        const dapAn = {
-            1: 'C', 2: 'C', 3: 'A', 4: 'B', 5: 'A', 6: 'D', 7: 'C', 8: 'B', 9: 'D', 10: 'A',
-            11: 'B', 12: 'D', 13: 'D', 14: 'B', 15: 'D', 16: 'A', 17: 'A', 18: 'C', 19: 'C', 20: 'A',
-            21: 'B', 22: 'C', 23: 'C', 24: 'C', 25: 'B', 26: 'D', 27: 'B', 28: 'A', 29: 'B', 30: 'C',
-            31: 'A', 32: 'A', 33: 'C', 34: 'C', 35: 'A', 36: 'B', 37: 'A', 38: 'D', 39: 'C', 40: 'B'
-        };
-
-        const giaiThich = {
-            1: "Rút gọn mệnh đề quan hệ dạng bị động: a service (which is) designed to... -> designed.",
-            2: "Cụm từ 'show sb around': đưa ai đó đi tham quan.",
-            3: "Cấu trúc 'be interested in': quan tâm, hứng thú với.",
-            4: "Cụm động từ 'drop off': thả khách/xuống xe tại một địa điểm.",
-            5: "Sau 'want' dùng to V -> 'wanting to meet'.",
-            6: "Trật tự tính từ: authentic (chất lượng/đích thực) + local (địa phương) + culture (văn hóa).",
-            7: "Marine life: sinh vật biển.",
-            8: "Cuts down on: cắt giảm (lượng khí thải nhà kính).",
-            9: "Cấu trúc 'not only... but also': không những... mà còn.",
-            10: "Reuse: Tái sử dụng. Tránh đồ nhựa dùng một lần và ưu tiên đồ dùng lại.",
-            11: "Consider + V-ing/N: cân nhắc sử dụng phương tiện giao thông công cộng.",
-            12: "A large amount of + danh từ không đếm được (carbon emission).",
-            13: "Trình tự hợp lý: Giáo viên giới thiệu (b) -> Jessica chào (c) -> Nam hào hứng (a).",
-            14: "Trình tự hợp lý: Hỏi về AI và bác sĩ (d) -> Nick đồng ý AI có thể đảm nhận (b) -> Alex nghĩ AI không phù hợp công việc cơ bản (a) -> Nick phản biện (c).",
-            15: "Trình tự: Chào hỏi, báo tin đi Ý (a) -> Cảnh đẹp ở Amalfi (f) -> Thích đồ ăn (c) -> Người dân thân thiện (e) -> Kì nghỉ hoàn hảo (d) -> Khuyên bạn đi (b).",
-            16: "Đoạn văn: (e) Câu chủ đề -> (c) Hành động đơn giản -> (b) Trồng cây -> (a) Sản phẩm thân thiện -> (d) Kết luận.",
-            17: "Đoạn văn: (c) AI phát triển nhanh -> (b) Ứng dụng ban đầu và hiện tại -> (d) Công nghệ học máy -> (a) Tiềm năng và thách thức.",
-            18: "It was the most serious in a series of accidents at sea, and a stunned British government decided to act.",
-            19: "To win it, someone had to find a way of calculating how far a ship had travelled east or west from its point of departure.",
-            20: "He studied to make clocks.",
-            21: "Working on a ship: Rút gọn mệnh đề quan hệ chủ động.",
-            22: "Generated a lot of interest in the 18th century, but it was soon forgotten.",
-            23: "Climate change không được nhắc đến là yếu tố thúc đẩy đô thị hóa trong bài.",
-            24: "Stimulate (thúc đẩy, kích thích) >< hinder (cản trở).",
-            25: "They thay thế cho danh từ số nhiều đứng trước nó là 'cities'.",
-            26: "Mitigating (làm giảm nhẹ) = reducing.",
-            27: "Proper urban planning can help reduce the negative impacts of urban growth. (Quy hoạch tốt giúp giảm tác động tiêu cực).",
-            28: "Rapid urbanization can lead to overcrowding and pollution (Đoạn 2).",
-            29: "Đoạn 2 (Paragraph 2) nhắc đến lợi ích của đô thị hóa (On the positive side...).",
-            30: "Đoạn 3 (Paragraph 3) nhắc đến việc tạo ra cơ sở hạ tầng bền vững (sustainable infrastructure).",
-            31: "Vị trí [I] phù hợp vì là câu giải thích chung nhất về tầm quan trọng của cơ hội bình đẳng ngay sau câu mở đoạn.",
-            32: "Barriers (rào cản) = Challenges (thách thức).",
-            33: "Their thay thế cho Women (phụ nữ).",
-            34: "Equal opportunities là cơ hội bình đẳng, không phải là nguyên nhân ngăn cản phụ nữ.",
-            35: "Tóm tắt đoạn 3: Quyền của phụ nữ đang ngày càng được công nhận (Women's rights are gaining more recognition).",
-            36: "Momentum (đà phát triển) >< Decline (sự suy giảm).",
-            37: "Education plays a key role in promoting gender equality. (Đoạn 3).",
-            38: "Bình đẳng giới là cần thiết cho sự tiến bộ của toàn xã hội.",
-            39: "Cultural norms still play a role in limiting women's opportunities (Đoạn 2).",
-            40: "Tóm tắt toàn bài: Dù đã có tiến bộ, bất bình đẳng giới vẫn cần sự chú ý và hành động."
-        };
-
-        const questionsData = {
-            part1: [
-                {id: 1, ops: ["A. design", "B. was designed", "C. designed", "D. that designed"]},
-                {id: 2, ops: ["A. go", "B. see", "C. show", "D. look"]},
-                {id: 3, ops: ["A. interested", "B. interesting", "C. interest", "D. interestingly"]},
-                {id: 4, ops: ["A. on", "B. off", "C. to", "D. about"]},
-                {id: 5, ops: ["A. to meet", "B. meeting", "C. meet", "D. meeting"]},
-                {id: 6, ops: ["A. local authentic culture", "B. culture authentic local", "C. authentic culture local", "D. authentic local culture"]}
-            ],
-            part2: [
-                {id: 7, ops: ["A. aquatic", "B. wildlife", "C. marine", "D. coastal"]},
-                {id: 8, ops: ["A. gets down", "B. cuts down", "C. breaks up", "D. breaks down"]},
-                {id: 9, ops: ["A. and", "B. or", "C. so", "D. but"]},
-                {id: 10, ops: ["A. reuse", "B. recycle", "C. reduce", "D. refill"]},
-                {id: 11, ops: ["A. avoid", "B. consider", "C. ignore", "D. prefer"]},
-                {id: 12, ops: ["A. other", "B. many", "C. much", "D. amount"]}
-            ],
-            part3: [
-                {id: 13, ops: ["A. a-b-c", "B. b-a-c", "C. c-a-b", "D. b-c-a"]},
-                {id: 14, ops: ["A. d-c-a-b", "B. d-b-a-c", "C. d-b-c-a", "D. a-d-c-b"]},
-                {id: 15, ops: ["A. a-f-e-d-c-b", "B. a-e-d-c-b-f", "C. a-f-c-d-e-b", "D. a-f-c-e-d-b"]},
-                {id: 16, ops: ["A. e-c-b-a-d", "B. e-a-c-d-b", "C. e-c-a-b-d", "D. d-e-a-c-b"]},
-                {id: 17, ops: ["A. c-b-d-a", "B. c-d-a-b", "C. b-c-a-d", "D. c-a-d-b"]}
-            ],
-            part4: [
-                {id: 18, ops: ["A. It was one of the most serious maritime accidents in the world that forced the British government to take action.", "B. A series of such incidents occurred, leaving the British government stunned and deciding to act.", "C. It was the most serious in a series of accidents at sea, and a stunned British government decided to act.", "D. The British government was shocked by the incident and decided to respond, as it was a frequent occurrence."]},
-                {id: 19, ops: ["A. To win, one had to calculate the distance a ship had travelled since it set out.", "B. Someone was required to discover a method for determining how far a ship had gone east or west from its starting point.", "C. To win it, someone had to find a way of calculating how far a ship had travelled east or west from its point of departure.", "D. The competition required the winner to find a method to calculate the east-west distance of the ship from its starting point."]},
-                {id: 20, ops: ["A. He studied to make clocks.", "B. Making clocks.", "C. While John Harrison wasn't making clocks.", "D. Teaching how to make clocks."]},
-                {id: 21, ops: ["A. Which work on a ship", "B. Working on a ship", "C. That could operate on a ship", "D. Designed to function on a ship"]},
-                {id: 22, ops: ["A. Makes people interested in the 18th century, but it remained noted in the years that followed.", "B. Attracting a lot of attention in the 18th century and was quickly forgotten.", "C. Generated a lot of interest in the 18th century, but it was soon forgotten.", "D. It caused significant interest in the 18th century, although it quickly faded away."]}
-            ],
-            part5: [
-                {id: 23, text: "Which of the following is NOT mentioned as a factor driving urbanization?", ops: ["A. Economic opportunities", "B. Healthcare services", "C. Climate change", "D. Educational facilities"]},
-                {id: 24, text: "The word stimulate in paragraph 2 is OPPOSITE in meaning to", ops: ["A. encourage", "B. promote", "C. hinder", "D. accelerate"]},
-                {id: 25, text: "The word they in paragraph 1 refers to", ops: ["A. rural areas", "B. cities", "C. economic opportunities", "D. suburban"]},
-                {id: 26, text: "The word mitigating in paragraph 3 could best be replaced by", ops: ["A. worsening", "B. addressing", "C. preventing", "D. reducing"]},
-                {id: 27, text: "Which of the following best paraphrases the underlined sentence in paragraph 3?", ops: ["A. Good urban planning is essential to address urbanization's adverse effects.", "B. Proper urban planning can help reduce the negative impacts of urban growth.", "C. Mitigating urbanization's drawbacks requires effective urban planning.", "D. Managing urbanization's negative consequences relies on strategic urban planning."]},
-                {id: 28, text: "According to the passage, which of the following is TRUE?", ops: ["A. Rapid urbanization can lead to overcrowding and pollution.", "B. Urbanization always improves living standards.", "C. Economic development is rarely associated with urbanization.", "D. Urban growth only brings negative outcomes."]},
-                {id: 29, text: "In which paragraph does the writer mention the benefits of urbanization?", ops: ["A. Paragraph 1", "B. Paragraph 2", "C. Paragraph 3", "D. Paragraph 4"]},
-                {id: 30, text: "In which passage does the author mention that durable infrastructure helps manage the impacts of urbanization?", ops: ["A. Paragraph 1", "B. Paragraph 2", "C. Paragraph 3", "D. Paragraph 4"]}
-            ],
-            part6: [
-                {id: 31, text: "Which position in paragraph 1 is the most appropriate for the sentence: \"Ensuring that women and men have equal opportunities is essential for the development of society.\"", ops: ["A. [I]", "B. [II]", "C. [III]", "D. [IV]"]},
-                {id: 32, text: "The phrase \"barriers\" in paragraph 1 can be replaced with which word?", ops: ["A. Challenges", "B. Benefits", "C. Rights", "D. Laws"]},
-                {id: 33, text: "Whose is the word \"their\" in paragraph 2 mentioned:", ops: ["A. Men", "B. Governments", "C. Women", "D. Norms"]},
-                {id: 34, text: "According to paragraph 2, which of the following is NOT a reason preventing women from fully participating in society?", ops: ["A. Violence", "B. Cultural norms", "C. Equal opportunities", "D. Stereotypes"]},
-                {id: 35, text: "What is the best summary of paragraph 3?", ops: ["A. Women's rights are gaining more recognition.", "B. Violence against women is decreasing rapidly.", "C. Gender equality movements are ineffective.", "D. Discrimination is no longer an issue for women."]},
-                {id: 36, text: "The word \"momentum\" in paragraph 3 is OPPOSITE in meaning to which word?", ops: ["A. Increase", "B. Decline", "C. Growth", "D. Movement"]},
-                {id: 37, text: "Which statement is true according to the reading?", ops: ["A. Education plays a key role in promoting gender equality.", "B. Gender inequality is no longer a major issue globally.", "C. Women's leadership roles are now equal to men's.", "D. Gender-based violence has decreased worldwide."]},
-                {id: 38, text: "Which statement best expresses the meaning of the underlined sentence in paragraph 4?", ops: ["A. Gender equality can be achieved quickly through government policies.", "B. Gender equality is essential for ensuring that women have more rights than men.", "C. Achieving gender equality is primarily about securing jobs for women.", "D. Gender equality is necessary for the advancement of society as a whole."]},
-                {id: 39, text: "What can be inferred from the reading?", ops: ["A. Gender equality movements have completely eliminated discrimination.", "B. It will take less than 50 years to close the gender gap.", "C. Cultural norms still play a role in limiting women's opportunities.", "D. Education alone is enough to solve gender inequality issues."]},
-                {id: 40, text: "What is the best summary of the entire reading?", ops: ["A. Gender equality is no longer an issue in most parts of the world.", "B. Progress has been made, but gender inequality still requires attention and action.", "C. Women are now equally represented in all leadership positions.", "D. The education system has solved the issue of gender inequality."]}
-            ]
-        };
-
-        // Render Questions
-        function renderQuestions(partData, containerId) {
-            const container = document.getElementById(containerId);
-            partData.forEach(q => {
-                let optionsHTML = '';
-                q.ops.forEach(opt => {
-                    const val = opt.charAt(0); // A, B, C or D
-                    optionsHTML += `<label><input type="radio" name="q${q.id}" value="${val}"> ${opt}</label>`;
-                });
-                
-                const qText = q.text ? `<div class="question-text">Question ${q.id}: ${q.text}</div>` : `<div class="question-text">Question ${q.id}:</div>`;
-
-                container.innerHTML += `
-                    <div class="question-block" id="q-block-${q.id}">
-                        ${qText}
-                        <div class="options">
-                            ${optionsHTML}
-                        </div>
-                        <div class="explanation" id="exp-${q.id}"></div>
-                    </div>
-                `;
-            });
+    // Toàn bộ dữ liệu đáp án chuẩn của đề
+    window.testMeta = {
+        "totalQuestions": 40,
+        "parts": [
+            {"part": 1, "start": 1, "end": 6},
+            {"part": 2, "start": 7, "end": 12},
+            {"part": 3, "start": 13, "end": 17},
+            {"part": 4, "start": 18, "end": 22},
+            {"part": 5, "start": 23, "end": 30},
+            {"part": 6, "start": 31, "end": 40}
+        ],
+        "correctAnswers": {
+            "1":"C", "2":"C", "3":"A", "4":"B", "5":"A", "6":"D",
+            "7":"C", "8":"B", "9":"D", "10":"A", "11":"B", "12":"D",
+            "13":"D", "14":"B", "15":"D", "16":"A", "17":"A",
+            "18":"C", "19":"C", "20":"A", "21":"B", "22":"C",
+            "23":"C", "24":"C", "25":"B", "26":"D", "27":"B", "28":"A", "29":"B", "30":"C",
+            "31":"A", "32":"A", "33":"C", "34":"C", "35":"A", "36":"B", "37":"A", "38":"D", "39":"C", "40":"B"
         }
+    };
 
-        renderQuestions(questionsData.part1, 'questions-part-1');
-        renderQuestions(questionsData.part2, 'questions-part-2');
-        renderQuestions(questionsData.part3, 'questions-part-3');
-        renderQuestions(questionsData.part4, 'questions-part-4');
-        renderQuestions(questionsData.part5, 'questions-part-5');
-        renderQuestions(questionsData.part6, 'questions-part-6');
+    // Giải thích chi tiết, gắn thẳng dưới mỗi câu sau khi nộp bài
+    window.testExplanations = {
+        "1": "<div class='explanation-content'><b>Giải thích cấu trúc:</b> Rút gọn mệnh đề quan hệ dạng bị động. Đầy đủ: '...a service <i>which was designed</i> to connect...'. Rút gọn đi ta còn <b>designed</b> (V-ed/P2).</div>",
+        "2": "<div class='explanation-content'><b>Từ vựng/Collocation:</b> Cụm động từ <b>show someone around</b> có nghĩa là đưa ai đó đi thăm quan, dạo quanh một nơi nào đó.</div>",
+        "3": "<div class='explanation-content'><b>Ngữ pháp (Tính từ đuôi -ed/-ing):</b> Chủ ngữ 'you' chỉ người đang trải nghiệm cảm giác, nên dùng tính từ đuôi -ed. Cụm từ cố định: <b>be interested in</b> (quan tâm, hứng thú với).</div>",
+        "4": "<div class='explanation-content'><b>Từ vựng/Phrasal Verb:</b> Động từ <b>drop someone off</b> mang nghĩa thả ai đó xuống (khỏi xe) tại một điểm đến. Dạng bị động: 'being dropped off'.</div>",
+        "5": "<div class='explanation-content'><b>Ngữ pháp:</b> Động từ <b>want + to V</b> (muốn làm gì đó). Do đó đáp án là <b>to meet</b>.</div>",
+        "6": "<div class='explanation-content'><b>Cụm danh từ:</b> Trật tự từ loại tính từ đứng trước danh từ: <i>authentic</i> (tính từ mô tả/chất lượng) + <i>local</i> (tính từ nguồn gốc) + <i>culture</i> (danh từ chính). Ghép lại ta có: <b>authentic local culture</b> (văn hóa địa phương đích thực).</div>",
+        "7": "<div class='explanation-content'><b>Từ vựng:</b> <b>marine life</b> là cụm danh từ cố định nghĩa là 'sinh vật biển' (phù hợp với bối cảnh 'enter our oceans'). <br><br>Trích dẫn: \"<i>over 8 million tonnes of plastic enter our oceans, threatening marine life</i>\"</div>",
+        "8": "<div class='explanation-content'><b>Phrasal verb:</b> <b>cut down on</b> something có nghĩa là cắt giảm, giảm bớt (lượng khí thải nhà kính). <br><br>Trích dẫn: \"<i>Reducing meat and dairy consumption not only cuts down on greenhouse gas emissions</i>\"</div>",
+        "9": "<div class='explanation-content'><b>Cấu trúc song song:</b> Cấu trúc <b>not only... but also...</b> (Không những... mà còn...). Ở vế trước đã có 'not only', vế sau điền 'but'. <br><br>Trích dẫn: \"<i>not only cuts down on greenhouse gas emissions but also helps prevent</i>\"</div>",
+        "10": "<div class='explanation-content'><b>Từ vựng (Ngữ cảnh):</b> Đoạn văn khuyên dùng túi, hộp, chai nước có thể dùng nhiều lần (reusable). Mỗi khi bạn 'tái sử dụng' (reuse), bạn sẽ ngăn chặn được rác thải. <br><br>Trích dẫn: \"<i>Opt for reusable bags, containers, and water bottles. Every time you reuse</i>\"</div>",
+        "11": "<div class='explanation-content'><b>Từ vựng:</b> Dựa vào nghĩa của câu khuyên bảo: \"hãy <b>consider</b> (cân nhắc) việc sử dụng phương tiện công cộng thay vì máy bay\". <br><br>Trích dẫn: \"<i>consider public transport or trains</i>\"</div>",
+        "12": "<div class='explanation-content'><b>Ngữ pháp:</b> 'Carbon emission' là danh từ không đếm được, dùng <b>amount</b> (a large amount of: một lượng lớn). <br><br>Trích dẫn: \"<i>save a large amount of carbon emission.</i>\"</div>",
+        "13": "<div class='explanation-content'><b>Logic giao tiếp:</b> Trình tự hợp lý: Giáo viên giới thiệu robot (b) -> Robot chào mọi người (c) -> Học sinh Nam thể hiện sự hào hứng và muốn chụp ảnh (a). Thứ tự: <b>b - c - a</b>.</div>",
+        "14": "<div class='explanation-content'><b>Logic hội thoại:</b> Nick đưa ra quan điểm (d) hỏi về vai trò bác sĩ -> Alex đồng tình (b) -> Nick đồng tình lại ý của Alex (c). Thứ tự: <b>d - b - a - c</b>.</div>",
+        "15": "<div class='explanation-content'><b>Bố cục lá thư:</b> Mở đầu (a) chào hỏi và giới thiệu chuyến đi -> kể về cảnh đẹp (f) -> người dân địa phương (e) -> món ăn (c) -> cảm nghĩ tóm lại (d) -> mời bạn bè (b). Thứ tự: <b>a - f - c - e - d - b</b>.</div>",
+        "16": "<div class='explanation-content'><b>Bố cục đoạn văn:</b> Câu chủ đề nói về bảo vệ môi trường (e) -> hành động nhỏ như giảm rác (c) -> trồng cây (b) -> sử dụng năng lượng sạch (a) -> kết luận mọi người phải cùng nhau hành động (d). Thứ tự: <b>e - c - b - a - d</b>.</div>",
+        "17": "<div class='explanation-content'><b>Bố cục đoạn văn:</b> Câu chủ đề giới thiệu AI (c) -> Quá khứ tới hiện tại của AI (b) -> Công nghệ giúp AI phân tích dữ liệu (d) -> Tương lai cách mạng hóa và đạo đức (a). Thứ tự: <b>c - b - d - a</b>.</div>",
+        "18": "<div class='explanation-content'><b>Logic câu:</b> Câu trước nói về việc tàu không thể tính toán kinh độ vì không có cách đo thời gian chính xác, dẫn tới tai nạn. Tóm lược lại hậu quả: \"Đó là vụ tai nạn nghiêm trọng nhất... và chính phủ Anh quyết định hành động\".</div>",
+        "19": "<div class='explanation-content'><b>Liên kết ý:</b> Cuộc thi Longitude Prize yêu cầu người thắng cuộc phải giải được bài toán kinh độ (đo lường khoảng cách Đông/Tây).</div>",
+        "20": "<div class='explanation-content'><b>Cấu trúc câu:</b> Phía trước là mệnh đề phụ thời gian \"When John Harrison wasn't working with wood,\" -> Vế sau cần một mệnh đề chính độc lập có S + V. \"He studied to make clocks.\" là đáp án chính xác nhất mô tả hoạt động của người thợ mộc này.</div>",
+        "21": "<div class='explanation-content'><b>Rút gọn mệnh đề quan hệ:</b> Cụm đầy đủ: \"a mechanical clock <b>which worked on a ship</b>\". Rút gọn mệnh đề chủ động, ta đưa động từ về V-ing -> <b>Working on a ship</b>.</div>",
+        "22": "<div class='explanation-content'><b>Đọc hiểu thông tin:</b> Sự thành công của giải thưởng thu hút rất nhiều sự chú ý ở thế kỷ 18, nhưng rồi nhanh chóng bị lãng quên.</div>",
+        
+        "23": "<div class='explanation-content'><b>Chi tiết Đọc hiểu:</b> Yếu tố KHÔNG được nhắc đến là động lực thúc đẩy đô thị hóa là 'Climate change'. <br><br>Trích dẫn: \"<i>This phenomenon is driven by various factors, including economic opportunities, educational facilities, and healthcare services</i>\"</div>",
+        "24": "<div class='explanation-content'><b>Từ vựng:</b> Từ \"<b>stimulate</b>\" (kích thích, thúc đẩy) trái nghĩa hoàn toàn với từ \"<b>hinder</b>\" (cản trở, kìm hãm). <br><br>Trích dẫn: \"<i>urbanization can stimulate economic development, innovation, and cultural exchange.</i>\"</div>",
+        "25": "<div class='explanation-content'><b>Tham chiếu đại từ:</b> Đại từ \"they\" thay thế cho danh từ số nhiều ngay trước đó là \"cities\" (Khi các thành phố trở nên đông đúc hơn, chúng phải trải qua những chuyển biến...). <br><br>Trích dẫn: \"<i>As cities become more populated, they undergo significant transformations</i>\"</div>",
+        "26": "<div class='explanation-content'><b>Từ vựng:</b> Từ \"<b>mitigating</b>\" mang nghĩa giảm nhẹ, làm bớt mức độ nghiêm trọng. Bằng nghĩa với \"<b>reducing</b>\". <br><br>Trích dẫn: \"<i>Effective urban planning is crucial to mitigating the negative effects of urbanization.</i>\"</div>",
+        "27": "<div class='explanation-content'><b>Viết lại câu:</b> Câu gốc: \"Quy hoạch đô thị hiệu quả là rất quan trọng để giảm thiểu các tác động tiêu cực của đô thị hóa.\" Câu B viết lại: \"Quy hoạch đô thị phù hợp có thể giúp làm giảm các tác động tiêu cực của sự tăng trưởng đô thị.\" <br><br>Trích dẫn: \"<i>Effective urban planning is crucial to mitigating the negative effects of urbanization.</i>\"</div>",
+        "28": "<div class='explanation-content'><b>Chi tiết Đọc hiểu:</b> Việc đô thị hóa quá nhanh sẽ gây áp lực lên cơ sở hạ tầng, dẫn tới các vấn đề như quá tải và ô nhiễm. <br><br>Trích dẫn: \"<i>rapid urban growth can also strain existing infrastructure, leading to issues such as overcrowding, pollution</i>\"</div>",
+        "29": "<div class='explanation-content'><b>Đọc hiểu tìm ý chính đoạn:</b> Đoạn 2 trực tiếp liệt kê các lợi ích (stimulate economic development, improvements in living standards...). <br><br>Trích dẫn: \"<i>On the positive side, urbanization can stimulate economic development, innovation, and cultural exchange.</i>\"</div>",
+        "30": "<div class='explanation-content'><b>Đọc hiểu tìm ý chính đoạn:</b> Việc nhắc đến xây dựng cơ sở hạ tầng bền vững (sustainable/durable infrastructure) nằm ở Đoạn 3. <br><br>Trích dẫn: \"<i>This includes creating sustainable infrastructure, managing resources efficiently</i>\"</div>",
+        
+        "31": "<div class='explanation-content'><b>Logic liên kết ý:</b> Câu mang nghĩa: \"Đảm bảo rằng phụ nữ và nam giới có cơ hội bình đẳng là cần thiết cho sự phát triển xã hội.\" Nó làm rõ nghĩa cho cụm 'sustainable world'. Do đó vị trí [I] là hợp lý nhất.</div>",
+        "32": "<div class='explanation-content'><b>Từ vựng:</b> Từ \"<b>barriers</b>\" (rào cản, chướng ngại) đồng nghĩa với từ \"<b>Challenges</b>\" (những thử thách, khó khăn). <br><br>Trích dẫn: \"<i>Women continue to be underrepresented in leadership positions and face numerous barriers in various sectors</i>\"</div>",
+        "33": "<div class='explanation-content'><b>Tham chiếu đại từ:</b> Chữ 'their' thay thế cho danh từ 'millions of women' ở ngay trước đó (hàng triệu phụ nữ). <br><br>Trích dẫn: \"<i>affects millions of women worldwide and hinders their ability to participate fully in society.</i>\"</div>",
+        "34": "<div class='explanation-content'><b>Chi tiết Đọc hiểu:</b> Các rào cản ngăn cản phụ nữ là Violence, Cultural norms, Stereotypes. Equal opportunities (Cơ hội bình đẳng) là MỤC TIÊU hướng tới chứ KHÔNG PHẢI rào cản. <br><br>Trích dẫn: \"<i>Gender-based violence... cultural and societal norms often perpetuate stereotypes that limit women's roles</i>\"</div>",
+        "35": "<div class='explanation-content'><b>Đọc hiểu tìm ý chính:</b> Đoạn 3 nói về các dấu hiệu thay đổi tích cực, các phong trào nhận được sự quan tâm, quyền phụ nữ được coi trọng. <br><br>Trích dẫn: \"<i>Movements advocating for gender equality have gained momentum, and more individuals are recognizing the importance of women's rights.</i>\"</div>",
+        "36": "<div class='explanation-content'><b>Từ vựng:</b> Cụm từ \"<b>gain momentum</b>\" mang nghĩa là có đà phát triển, tăng tốc phát triển. Trái nghĩa với nó sẽ là \"<b>Decline</b>\" (sự giảm sút). <br><br>Trích dẫn: \"<i>Movements advocating for gender equality have gained momentum</i>\"</div>",
+        "37": "<div class='explanation-content'><b>Chi tiết Đọc hiểu:</b> Giáo dục đóng vai trò then chốt (vital role) trong việc trao quyền và thúc đẩy bình đẳng giới. <br><br>Trích dẫn: \"<i>Education plays a vital role in this transformation, as empowering girls through education can lead to improved economic outcomes</i>\"</div>",
+        "38": "<div class='explanation-content'><b>Đọc hiểu nghĩa câu:</b> Sự bình đẳng giới không chỉ vì công bằng cá nhân, mà nó là điều cốt lõi và cần thiết cho sự tiến bộ của toàn bộ xã hội. Đáp án D phản ánh chuẩn xác nhất. <br><br>Trích dẫn: \"<i>it is essential for the advancement of society as a whole</i>\"</div>",
+        "39": "<div class='explanation-content'><b>Đọc hiểu Suy luận (Inference):</b> Qua việc \"chuẩn mực văn hóa xã hội vẫn duy trì định kiến giới hạn vai trò của phụ nữ\", ta suy ra văn hóa vẫn đóng vai trò kìm hãm cơ hội của nữ giới. <br><br>Trích dẫn: \"<i>cultural and societal norms often perpetuate stereotypes that limit women's roles and opportunities.</i>\"</div>",
+        "40": "<div class='explanation-content'><b>Ý chính toàn bài (Main idea):</b> Dù đã có một vài bước tiến (Progress), nhưng sự bất bình đẳng giới vẫn là một vấn đề nhức nhối cần sự chung tay hành động để khắc phục triệt để. <br><br>Trích dẫn: \"<i>Despite significant progress in recent years, gender inequality remains a pressing issue across the globe.</i>\"</div>"
+    };
 
-        // Initialize Tracker
-        const trackerGrid = document.getElementById('tracker-grid');
-        for (let i = 1; i <= 40; i++) {
-            trackerGrid.innerHTML += `<div class="track-box" id="track-${i}" onclick="scrollToQ(${i})">${i}</div>`;
-        }
+    document.addEventListener('DOMContentLoaded', () => {
+        const launchScreen = document.getElementById('launchScreen');
+        const app = document.getElementById('app');
+        const startNormalBtn = document.getElementById('startNormalBtn');
+        const launchTitle = document.getElementById('launchTestTitle');
+        if (launchTitle && document.title) { launchTitle.textContent = document.title; }
+        
+        let examStarted = false;
+        let currentStudentName = "";
+        let currentStudentClass = "";
 
-        // Scroll to question
-        function scrollToQ(id) {
-            document.getElementById(`q-block-${id}`).scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-
-        // Update Tracker on Radio Change
-        document.querySelectorAll('input[type=radio]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                if(isSubmitted) return;
-                const qNum = this.name.replace('q', '');
-                document.getElementById(`track-${qNum}`).classList.add('active');
-            });
-        });
-
-        // Timer Logic
-        let timeLeft = 50 * 60; // 50 minutes
-        const timerEl = document.getElementById('timer');
-        let timerInterval = setInterval(() => {
-            if (timeLeft <= 0) {
-                clearInterval(timerInterval);
-                submitExam();
-            } else {
-                timeLeft--;
-                let m = Math.floor(timeLeft / 60);
-                let s = timeLeft % 60;
-                timerEl.innerText = `⏳ ${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-            }
-        }, 1000);
-
-        // Submission & Grading
-        let isSubmitted = false;
-        function submitExam() {
-            if (isSubmitted) return;
-            let answered = 0;
-            let score = 0;
+        // Function Start Exam
+        const beginExam = () => {
+            if (examStarted) return;
+            const nameInput = document.getElementById('studentName');
+            const classInput = document.getElementById('studentClass');
+            const errorMsg = document.getElementById('launchError');
             
-            for (let i = 1; i <= 40; i++) {
-                const selected = document.querySelector(`input[name="q${i}"]:checked`);
-                if (selected) {
-                    answered++;
-                    if (selected.value === dapAn[i]) score++;
+            if (!nameInput.value.trim() || !classInput.value.trim()) {
+                errorMsg.style.display = 'block';
+                return;
+            }
+            errorMsg.style.display = 'none';
+            currentStudentName = nameInput.value.trim();
+            currentStudentClass = classInput.value.trim();
+            examStarted = true;
+            
+            launchScreen.style.display = 'none';
+            app.style.display = 'block';
+            initialize();
+        };
+
+        if (startNormalBtn) { startNormalBtn.addEventListener('click', beginExam); }
+        
+        const testMeta = window.testMeta;
+        const partRanges = testMeta.parts;
+        const correctAnswers = testMeta.correctAnswers;
+        const totalQuestions = testMeta.totalQuestions;
+
+        let currentPassage = partRanges[0]?.part || 1;
+        let currentQuestion = partRanges[0]?.start || 1;
+        let timeInSeconds = 3000; // 50 phút
+        let timerInterval;
+        let hasSubmitted = false;
+        
+        const markedQuestions = new Set();
+        const markButtons = new Map();
+        const timerDisplay = document.querySelector('.timer-display');
+        const timerToggleButton = document.getElementById('timer-toggle-btn');
+        const deliverButton = document.getElementById('deliver-button');
+        const resizer = document.getElementById('resizer');
+        const passagePanel = document.getElementById('passage-panel');
+        
+        // Context menu vars
+        let pendingSelectionRange = null;
+        let activeAnnotationTarget = null;
+        const contextMenu = document.getElementById('contextMenu');
+
+        const playIcon = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M8 5v14l11-7L8 5z"/></svg>';
+        const pauseIcon = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
+        const bookmarkIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h12v16l-6-4-6 4z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path></svg>';
+
+        function initialize() {
+            startTimer();
+            switchToPart(partRanges[0]?.part || 1);
+            
+            document.body.addEventListener('input', updateAllIndicators);
+            document.body.addEventListener('change', updateAllIndicators);
+            deliverButton.addEventListener('click', () => {
+                if(confirm("Bạn có chắc chắn muốn nộp bài? Hệ thống sẽ ghi nhận điểm ngay lập tức.")){
+                    checkAnswers();
                 }
-            }
+            });
+            timerToggleButton.addEventListener('click', toggleTimer);
             
-            let unanswered = 40 - answered;
-            document.getElementById('score-text').innerText = `${score} / 40`;
-            document.getElementById('unanswered-count').innerText = unanswered;
-            document.getElementById('modal').style.display = 'flex';
+            document.querySelectorAll('.multi-choice-question').forEach(el => {
+                el.addEventListener('click', (ev) => {
+                    // Ngăn không cho click nhảy câu nếu click vào đúng input radio hoặc label
+                    if (ev.target.closest('input, label, .explanation-box, .mark-toggle-btn')) { return; }
+                    const qNum = parseInt(el.dataset.qStart, 10);
+                    if (currentQuestion !== qNum) { goToQuestion(qNum); }
+                });
+            });
+            
+            resizer.addEventListener('mousedown', initResize, false);
+            initializeContextMenu();
+            initializeQuestionMarkers();
         }
 
-        function viewAnswers() {
-            isSubmitted = true;
-            document.getElementById('modal').style.display = 'none';
-            clearInterval(timerInterval);
+        // --- Core Algorithm: Đánh dấu Minh Chứng Thông Minh ---
+        function highlightEvidenceInPassage(explanationText) {
+            let targetPhrase = "";
+            // Bóc tách text trong cấu trúc "Trích dẫn: ..."
+            let evidenceMatch = explanationText.match(/Trích dẫn:\s*(.*?)(<\/div>|$)/i);
+            if (evidenceMatch) {
+                // Loại bỏ mọi thẻ HTML (như <i>, <b>) và dấu nháy kép để có chuỗi thuần
+                targetPhrase = evidenceMatch[1].replace(/<[^>]+>/g, '').replace(/["“”]/g, '').trim();
+            }
+            if (!targetPhrase) return;
+
+            let cleanQuery = targetPhrase.replace(/^\.\.\./, "").replace(/\.\.\.$/, "").trim();
+            if (!cleanQuery) return;
+
+            const currentPassageEl = passagePanel.querySelector('.reading-passage:not(.hidden)');
+            if (!currentPassageEl) return;
+
+            // Xóa toàn bộ highlight cũ để bôi đen highlight mới
+            currentPassageEl.querySelectorAll('.highlight-blue').forEach(span => {
+                const parent = span.parentNode;
+                while (span.firstChild) { parent.insertBefore(span.firstChild, span); }
+                parent.removeChild(span);
+                parent.normalize(); // Nối lại các TextNode bị gãy
+            });
+
+            // Gom toàn bộ Text Nodes trong bài đọc
+            const walker = document.createTreeWalker(currentPassageEl, NodeFilter.SHOW_TEXT, null, false);
+            const textNodes = [];
+            let fullText = "";
+            let node;
             
-            for (let i = 1; i <= 40; i++) {
-                const selected = document.querySelector(`input[name="q${i}"]:checked`);
-                const correctAns = dapAn[i];
-                const trackBox = document.getElementById(`track-${i}`);
-                const allLabels = document.querySelectorAll(`input[name="q${i}"]`);
-                
-                // Disable & Style radios
-                allLabels.forEach(radio => {
-                    radio.disabled = true;
-                    if (radio.value === correctAns) {
-                        radio.parentElement.classList.add('correct-ans');
-                    }
+            while (node = walker.nextNode()) {
+                textNodes.push({
+                    node: node,
+                    start: fullText.length,
+                    end: fullText.length + node.nodeValue.length
                 });
+                fullText += node.nodeValue;
+            }
+
+            // Tạo biểu thức Regex dò tìm mềm dẻo (bỏ qua khoảng trắng thừa, không phân biệt hoa thường)
+            const searchStr = cleanQuery.replace(/\s+/g, ' ').trim();
+            const pattern = searchStr.split(' ').map(word => word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('\\s+');
+            const regex = new RegExp(pattern, 'i');
+            
+            const fuzzyMatch = fullText.match(regex);
+            
+            if (fuzzyMatch) {
+                const matchStartIdx = fuzzyMatch.index;
+                const matchEndIdx = fuzzyMatch.index + fuzzyMatch[0].length;
                 
-                // Grade & Tracker Update
-                trackBox.classList.remove('active');
-                if (selected) {
-                    if (selected.value === correctAns) {
-                        trackBox.classList.add('correct');
+                // Tìm những TextNodes nằm trong khu vực kết quả match
+                const nodesToWrap = [];
+                for (let i = 0; i < textNodes.length; i++) {
+                    const map = textNodes[i];
+                    if (map.end <= matchStartIdx) continue;
+                    if (map.start >= matchEndIdx) break;
+
+                    const startOffset = Math.max(0, matchStartIdx - map.start);
+                    const endOffset = Math.min(map.node.nodeValue.length, matchEndIdx - map.start);
+                    nodesToWrap.push({ node: map.node, startOffset, endOffset });
+                }
+
+                // Thực hiện bọc thẻ Span màu xanh dương từ dưới lên trên
+                nodesToWrap.reverse().forEach(info => {
+                    const n = info.node;
+                    if (info.startOffset === 0 && info.endOffset === n.nodeValue.length) {
+                        const span = document.createElement('span');
+                        span.className = 'annotation annotation-highlight highlight-blue';
+                        n.parentNode.insertBefore(span, n);
+                        span.appendChild(n);
                     } else {
-                        selected.parentElement.classList.add('wrong-ans');
-                        trackBox.classList.add('wrong');
+                        const splitEnd = n.splitText(info.endOffset);
+                        const splitMid = n.splitText(info.startOffset);
+                        
+                        const span = document.createElement('span');
+                        span.className = 'annotation annotation-highlight highlight-blue';
+                        
+                        n.parentNode.insertBefore(span, splitMid);
+                        span.appendChild(splitMid);
                     }
-                } else {
-                    trackBox.classList.add('wrong'); // Unanswered
-                }
-                
-                // Show Explanation
-                const expDiv = document.getElementById(`exp-${i}`);
-                if (expDiv && giaiThich[i]) {
-                    expDiv.innerHTML = `<strong>💡 Giải thích:</strong> ${giaiThich[i]}`;
-                    expDiv.style.display = 'block';
+                });
+
+                // Cuộn khung hiển thị tới vị trí bôi đen
+                const firstHighlight = currentPassageEl.querySelector('.highlight-blue');
+                if (firstHighlight) {
+                    firstHighlight.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
             }
         }
-// Bôi đen chữ tự động lưu lại nền vàng dạ quang (Persistent Highlight)
-        document.addEventListener('mouseup', function(e) {
-            // Cho phép highlight trong toàn bộ khu vực làm bài (cả phần bài đọc và phần câu hỏi)
-            if (e.target.closest('.part-container') || e.target.closest('.part-split')) {
-                const selection = window.getSelection();
-                if (!selection.isCollapsed && selection.toString().trim() !== '') {
-                    document.designMode = "on";
-                    document.execCommand("BackColor", false, "yellow");
-                    document.designMode = "off";
-                    // Xóa vùng chọn sau khi highlight để giao diện gọn gàng
-                    selection.removeAllRanges();
+
+        // --- Core: Submit & Check Answers ---
+        function checkAnswers() {
+            if (hasSubmitted) return;
+            hasSubmitted = true;
+            
+            // Khóa làm bài
+            const allInputs = document.querySelectorAll('input[type="radio"]');
+            allInputs.forEach(input => { input.disabled = true; });
+            deliverButton.disabled = true;
+            deliverButton.innerHTML = '<i class="fa fa-check"></i> Đã Nộp';
+            deliverButton.style.cursor = 'not-allowed';
+            
+            // Dừng time
+            const timeTakenSecs = 3000 - timeInSeconds;
+            clearInterval(timerInterval);
+            timerInterval = null;
+            timerToggleButton.innerHTML = playIcon;
+            
+            let score = 0;
+            const resultsDetailsContainer = document.getElementById('results-details');
+            resultsDetailsContainer.innerHTML = '';
+            
+            for (let i = 1; i <= totalQuestions; i++) {
+                const correctAnswer = correctAnswers[String(i)];
+                let userAnswer = '';
+                let isCorrect = false;
+                let userAnswerDisplay = '-';
+
+                const radioGroup = document.querySelectorAll(`input[name="q${i}"]`);
+                const questionContainer = document.querySelector(`.multi-choice-question[data-q-start="${i}"]`);
+                
+                const checkedRadio = document.querySelector(`input[name="q${i}"]:checked`);
+                if (checkedRadio) {
+                    userAnswer = checkedRadio.value;
+                    userAnswerDisplay = userAnswer;
+                    isCorrect = (userAnswer === correctAnswer);
+                    
+                    const userLabel = checkedRadio.closest('.multi-choice-option');
+                    if (userLabel) { userLabel.classList.add(isCorrect ? 'correct' : 'incorrect'); }
+                }
+                
+                if (isCorrect) { 
+                    score++; 
+                } else if (questionContainer) {
+                    // Highlight correct answer if user got it wrong
+                    const correctOptionEl = questionContainer.querySelector(`input[value="${correctAnswer}"]`);
+                    if (correctOptionEl) {
+                        const correctLabel = correctOptionEl.closest('.multi-choice-option');
+                        if (correctLabel) { correctLabel.classList.add('correct-answer-highlight'); }
+                    }
+                }
+
+                // Show Explanation directly under the question
+                if (window.testExplanations && window.testExplanations[i] && questionContainer) {
+                    let expElement = document.createElement('div');
+                    expElement.className = 'explanation-box show';
+                    expElement.dataset.forQ = i;
+                    
+                    let explainText = window.testExplanations[i];
+                    let hasEvidence = explainText.toLowerCase().includes("trích dẫn");
+                    let titleHtml = hasEvidence ? `<div class="explanation-title">💡 Giải thích Câu ${i} <span style="font-size: 13px; font-weight: normal; color: #e91e63;">(Bấm vào đây để xem vị trí minh chứng)</span>:</div>` : `<div class="explanation-title">💡 Giải thích Câu ${i}:</div>`;
+                    
+                    expElement.innerHTML = `${titleHtml}<div>${explainText}</div>`;
+                    
+                    // Add click to highlight evidence feature
+                    if (hasEvidence) {
+                        expElement.addEventListener('click', () => { highlightEvidenceInPassage(window.testExplanations[i]); });
+                    }
+                    
+                    if (!questionContainer.querySelector(`.explanation-box[data-for-q="${i}"]`)) { 
+                        questionContainer.appendChild(expElement); 
+                    }
+                }
+                   
+                // Render Row in Modal (Tối giản 3 cột: Q, Bài làm, Đáp án)
+                const resultRow = `
+                    <div class="result-row ${isCorrect ? '' : 'incorrect'}">
+                        <span class="q-num">Q${i}</span>
+                        <span class="user-ans">${userAnswerDisplay}</span>
+                        <span class="correct-ans">${correctAnswer}</span>
+                    </div>`;
+                resultsDetailsContainer.innerHTML += resultRow;
+                
+                // Update bottom nav colors
+                const navButton = document.querySelector(`.subQuestion[onclick="goToQuestion(${i})"]`);
+                if (navButton) {
+                    navButton.classList.remove('answered', 'active');
+                    navButton.classList.add(isCorrect ? 'correct' : 'incorrect');
                 }
             }
-        });
+            
+            // Hệ điểm 10
+            const finalScore = (score * (10 / totalQuestions)).toFixed(2);
+            
+            document.getElementById('results-score').textContent = score;
+            document.getElementById('results-band').textContent = finalScore;
+            document.getElementById('results-modal').classList.remove('hidden');
+            
+            sendResultsToGoogle(score, finalScore, timeTakenSecs);
+        }
+        
+        // --- Fetch to Google Apps Script ---
+        function sendResultsToGoogle(scoreCount, finalScore, timeTakenSecs) {
+            const statusDiv = document.getElementById('submit-status');
+            statusDiv.style.display = 'block';
+            statusDiv.style.backgroundColor = '#fff3cd';
+            statusDiv.style.color = '#856404';
+            statusDiv.textContent = '⏳ Đang lưu bảng điểm vào hệ thống...';
+
+            const minutes = Math.floor(timeTakenSecs / 60);
+            const seconds = timeTakenSecs % 60;
+            const timeStr = `${minutes} phút ${seconds} giây`;
+            const dateStr = new Date().toLocaleString('vi-VN');
+            const examTitle = document.getElementById('launchTestTitle').textContent || document.title;
+
+            // Link Script Google Sheets
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbxwcbQZYaAxDKUcFlZdXv3VHeUYt6lpAH5FOxL9l1xgs5sQpaEh6IoyTwuepmO7Ie6EvQ/exec';
+            
+            const params = new URLSearchParams();
+            params.append('studentName', currentStudentName);
+            params.append('studentClass', currentStudentClass);
+            
+            // Gửi biến score là dạng "35/40" (Điền vào cột D: Correct answer)
+            params.append('score', `${scoreCount}/${totalQuestions}`);
+            // Gửi biến bandScore là dạng "8.75" (Điền vào cột E: Scores quy đổi)
+            params.append('bandScore', finalScore);
+            
+            params.append('timeTaken', timeStr);
+            params.append('submitDate', dateStr);
+            params.append('examTitle', examTitle);
+
+            fetch(scriptURL, { 
+                method: 'POST', 
+                mode: 'no-cors', 
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: params.toString() 
+            })
+            .then(() => {
+                statusDiv.style.backgroundColor = '#d4edda';
+                statusDiv.style.color = '#155724';
+                statusDiv.textContent = '✅ Kết quả làm bài đã được lưu vào hệ thống thành công!';
+            })
+            .catch(error => {
+                console.error('Error!', error.message);
+                statusDiv.style.backgroundColor = '#f8d7da';
+                statusDiv.style.color = '#721c24';
+                statusDiv.textContent = '⚠️ Mạng lỗi. Hãy chụp ảnh màn hình điểm số báo cho giáo viên!';
+            });
+        }
+
+        window.closeResultsModal = function() { document.getElementById('results-modal').classList.add('hidden'); }
+
+        // --- Navigation Logic ---
+        function switchToPart(partNumber) {
+            currentPassage = partNumber;
+            document.querySelectorAll('.reading-passage, .question-set, .part-header').forEach(el => { el.classList.add('hidden'); });
+            
+            document.getElementById(`passage-text-${partNumber}`).classList.remove('hidden');
+            document.getElementById(`questions-${partNumber}`).classList.remove('hidden');
+            document.getElementById(`part-header-${partNumber}`).classList.remove('hidden');
+            
+            document.querySelectorAll('.footer__questionWrapper___1tZ46').forEach((wrapper, index) => { 
+                wrapper.classList.toggle('selected', (index + 1) === partNumber); 
+            });
+            
+            // Tự động cuộn chuột về đầu trang khi chuyển Part
+            passagePanel.scrollTop = 0;
+            document.getElementById('questions-panel').scrollTop = 0;
+            
+            const match = partRanges.find(p => p.part === partNumber);
+            if(match) goToQuestion(match.start);
+        }
+        
+        function goToQuestion(qNum) {
+            currentQuestion = qNum;
+            const match = partRanges.find(p => qNum >= p.start && qNum <= p.end);
+            const passageNumber = match ? match.part : 1;
+            
+            if (currentPassage !== passageNumber) { 
+                switchToPart(passageNumber); 
+                return; 
+            }
+            
+            let targetEl = document.querySelector(`.multi-choice-question[data-q-start="${qNum}"]`);
+            if (targetEl) {
+                // Focus styling
+                document.querySelectorAll('.multi-choice-question').forEach(el => el.style.border = '2px solid #f0f0f0');
+                targetEl.style.border = '2px solid #4a90e2';
+                
+                // Scroll into view
+                const panel = document.getElementById('questions-panel');
+                const panelRect = panel.getBoundingClientRect();
+                const elementRect = targetEl.getBoundingClientRect();
+                if (elementRect.top < panelRect.top || elementRect.bottom > panelRect.bottom) { 
+                    targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' }); 
+                }
+            }
+            
+            // Update bottom nav highlighting
+            document.querySelectorAll('.subQuestion').forEach(btn => btn.classList.remove('active'));
+            const activeNav = Array.from(document.querySelectorAll('.subQuestion')).find(btn => {
+                const hiddenSpan = btn.querySelector('[aria-hidden="true"]');
+                const num = parseInt(hiddenSpan ? hiddenSpan.textContent : btn.textContent.replace(/\D/g, ''), 10);
+                return num === currentQuestion;
+            });
+            if (activeNav) { activeNav.classList.add('active'); }
+        }
+        
+        window.nextQuestion = () => { if(currentQuestion < totalQuestions) goToQuestion(currentQuestion + 1); };
+        window.previousQuestion = () => { if(currentQuestion > 1) goToQuestion(currentQuestion - 1); };
+        
+        window.switchToPart = switchToPart;
+        window.goToQuestion = goToQuestion;
+
+        function updateAllIndicators() { 
+            partRanges.forEach(range => {
+                let answeredCount = 0; 
+                for (let i = range.start; i <= range.end; i++) { 
+                    if (document.querySelector(`input[name="q${i}"]:checked`)) answeredCount++; 
+                }
+                const partHeader = document.querySelector(`.footer__questionNo___3WNct[onclick="switchToPart(${range.part})"]`);
+                if (partHeader) { 
+                    const countSpan = partHeader.querySelector('.attemptedCount'); 
+                    if (countSpan) countSpan.textContent = `${answeredCount} of ${range.end - range.start + 1}`; 
+                }
+            }); 
+            
+            document.querySelectorAll('.subQuestion').forEach(btn => {
+                const hiddenSpan = btn.querySelector('[aria-hidden="true"]');
+                const qNum = parseInt(hiddenSpan ? hiddenSpan.textContent : btn.textContent.replace(/\D/g, ''), 10);
+                if (!isNaN(qNum) && document.querySelector(`input[name="q${qNum}"]:checked`)) { 
+                    btn.classList.add('answered'); 
+                } else { 
+                    btn.classList.remove('answered'); 
+                }
+            });
+        }
+
+        // --- Timer logic ---
+        function updateTimerDisplay() {
+            const displaySeconds = Math.max(timeInSeconds, 0);
+            const minutes = Math.floor(displaySeconds / 60);
+            const seconds = displaySeconds % 60;
+            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            if(displaySeconds < 300) { timerDisplay.style.color = '#dc3545'; } // Đổi đỏ nếu còn dưới 5p
+        }
+
+        function startTimer() {
+            if (hasSubmitted) return;
+            if (timerInterval) clearInterval(timerInterval);
+            updateTimerDisplay();
+            timerInterval = setInterval(() => { 
+                timeInSeconds = Math.max(timeInSeconds - 1, 0); 
+                updateTimerDisplay(); 
+                if (timeInSeconds <= 0) { 
+                    timeInSeconds = 0; updateTimerDisplay(); 
+                    clearInterval(timerInterval); timerInterval = null; 
+                    timerToggleButton.innerHTML = playIcon; 
+                    alert("Đã hết thời gian làm bài. Hệ thống tự động nộp bài!");
+                    checkAnswers(); 
+                } 
+            }, 1000);
+            timerToggleButton.innerHTML = pauseIcon;
+        }
+
+        function toggleTimer() { 
+            if (timerInterval) { 
+                clearInterval(timerInterval); timerInterval = null; timerToggleButton.innerHTML = playIcon; 
+            } else { 
+                startTimer(); 
+            } 
+        }
+        
+        // --- Drag Resizer logic ---
+        function initResize(e) {
+            e.preventDefault(); const startX = e.clientX; const startWidth = passagePanel.offsetWidth;
+            const doDrag = (ev) => { 
+                const newWidth = startWidth + ev.clientX - startX; 
+                if (newWidth > 200 && (document.body.clientWidth - newWidth - resizer.offsetWidth) > 300) { 
+                    passagePanel.style.flex = `0 0 ${newWidth}px`; 
+                } 
+            };
+            const stopDrag = () => { 
+                window.removeEventListener('mousemove', doDrag, false); 
+                window.removeEventListener('mouseup', stopDrag, false); 
+            };
+            window.addEventListener('mousemove', doDrag, false); window.addEventListener('mouseup', stopDrag, false);
+        }
+
+        // --- Question Marking Logic ---
+        function initializeQuestionMarkers() { 
+            for (let i = 1; i <= totalQuestions; i++) { 
+                const anchor = document.querySelector(`.mcq-question-number[data-q-number="${i}"]`); 
+                if(anchor) {
+                    const button = document.createElement('button'); button.type = 'button';
+                    button.className = 'mark-toggle-btn';
+                    button.setAttribute('aria-label', `Đánh dấu câu ${i}`); 
+                    button.innerHTML = bookmarkIcon;
+                    button.addEventListener('click', (e) => { 
+                        e.stopPropagation(); 
+                        const isMarked = markedQuestions.has(i);
+                        if (isMarked) { markedQuestions.delete(i); } else { markedQuestions.add(i); }
+                        
+                        button.classList.toggle('marked', !isMarked);
+                        const navButton = document.querySelector(`.subQuestion[onclick="goToQuestion(${i})"]`);
+                        if (navButton) navButton.classList.toggle('marked', !isMarked);
+                    });
+                    anchor.parentNode.appendChild(button);
+                }
+            } 
+        }
+
+        // --- Highlight / Note feature Context Menu ---
+        function handleTextSelection(event) {
+            const selection = window.getSelection();
+            if (!selection || selection.rangeCount === 0 || selection.isCollapsed || !selection.toString().trim()) { return; }
+            
+            // Check if inside panels
+            const anchor = selection.anchorNode; const focus = selection.focusNode;
+            const inPanels = node => node && (passagePanel.contains(node) || document.getElementById('questions-panel').contains(node));
+            if (!(inPanels(anchor) && inPanels(focus))) return;
+
+            pendingSelectionRange = selection.getRangeAt(0).cloneRange();
+            activeAnnotationTarget = null;
+            
+            // Show menu
+            document.getElementById('menu-highlight-colors').style.display = 'flex'; 
+            document.getElementById('menu-note').style.display = 'flex'; 
+            document.getElementById('menu-clear').style.display = 'none'; 
+            document.getElementById('menu-clear-all').style.display = 'none';
+            
+            const menuHeight = contextMenu.offsetHeight; const menuWidth = contextMenu.offsetWidth;
+            let left = event.pageX; let top = event.pageY - menuHeight - 8;
+            if (left + menuWidth > window.innerWidth) left = window.innerWidth - menuWidth - 8;
+            if (left < 8) left = 8; if (top < 8) top = event.pageY + 8;
+            
+            contextMenu.style.display = 'block';
+            contextMenu.style.left = `${left}px`; 
+            contextMenu.style.top = `${top}px`;
+        }
+
+        function initializeContextMenu() {
+            [passagePanel, document.getElementById('questions-panel')].forEach(panel => { 
+                panel.addEventListener('mouseup', (e) => { setTimeout(() => handleTextSelection(e), 0); }); 
+            });
+            document.addEventListener('click', (e) => {
+                if (contextMenu.contains(e.target)) return;
+                const annotation = e.target.closest(`.annotation-highlight, .annotation-note`);
+                if (annotation && !annotation.classList.contains('highlight-blue')) { 
+                    // Show delete menu
+                    activeAnnotationTarget = annotation; pendingSelectionRange = null; window.getSelection().removeAllRanges();
+                    document.getElementById('menu-highlight-colors').style.display = 'none'; 
+                    document.getElementById('menu-note').style.display = 'none'; 
+                    document.getElementById('menu-clear').style.display = 'flex'; 
+                    document.getElementById('menu-clear-all').style.display = 'flex';
+                    
+                    contextMenu.style.display = 'block';
+                    contextMenu.style.left = `${e.pageX}px`; contextMenu.style.top = `${e.pageY}px`;
+                    return; 
+                }
+                contextMenu.style.display = 'none';
+            });
+        }
+
+        function applyAnnotation(type, noteText = '', color = 'yellow') {
+            if (!pendingSelectionRange) { contextMenu.style.display = 'none'; return; }
+            const range = pendingSelectionRange;
+            
+            const span = document.createElement('span');
+            span.classList.add('annotation', type === 'highlight' ? 'annotation-highlight' : 'annotation-note');
+            if (type === 'highlight') {
+                span.classList.add(`highlight-${color}`);
+            } else {
+                span.setAttribute('data-note', noteText);
+            }
+            
+            try {
+                range.surroundContents(span);
+            } catch(e) {
+                // Ignore complex cross-element highlights for simplicity in this pure JS version
+            }
+            contextMenu.style.display = 'none';
+            window.getSelection().removeAllRanges();
+        }
+
+        window.highlightText = (color) => applyAnnotation('highlight', '', color);
+        window.addNote = () => { 
+            const note = prompt('Nhập nội dung ghi chú:'); 
+            if (note) applyAnnotation('note', note.trim()); 
+            else contextMenu.style.display = 'none';
+        };
+        window.clearHighlight = () => { 
+            if (activeAnnotationTarget) { 
+                const parent = activeAnnotationTarget.parentNode;
+                while (activeAnnotationTarget.firstChild) { parent.insertBefore(activeAnnotationTarget.firstChild, activeAnnotationTarget); }
+                parent.removeChild(activeAnnotationTarget);
+            } 
+            contextMenu.style.display = 'none'; 
+        };
+        window.clearAllHighlights = () => { 
+            document.querySelectorAll(`.annotation-highlight:not(.highlight-blue), .annotation-note`).forEach(el => {
+                const parent = el.parentNode;
+                while (el.firstChild) { parent.insertBefore(el.firstChild, el); }
+                parent.removeChild(el);
+            });
+            contextMenu.style.display = 'none'; 
+        };
+    });
     </script>
 </body>
 </html>
