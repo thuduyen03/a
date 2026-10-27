@@ -3,659 +3,1264 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đề Số 03 - THPT Quốc Gia Môn Tiếng Anh (Cấu trúc 2026)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@600&display=swap" rel="stylesheet">
+    <title>Đề thi thử THPT Quốc Gia Môn Tiếng Anh - ĐỀ SỐ 03</title>
     <style>
-        :root {
-            --primary: #1e90ff;
-            --success: #2ed573;
-            --danger: #ff4757;
-            --hover-bg: #e0f7fa;
-            --bg-color: #f4f7f6;
-            --highlight: yellow;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            padding-bottom: 80px; 
-            background-color: var(--bg-color);
-            color: #333;
-        }
-        .header {
-            text-align: center;
-            background: white;
-            padding: 20px;
-            margin-bottom: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .header h2, .header h3 { margin: 5px 0; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Segoe UI", Tahoma, Arial, sans-serif; background-color: #ffffff; line-height: 1.4; font-size: 16px; }
+        .header { background: linear-gradient(120deg, #e9eefb, #dfe7ff, #e9eefb); background-size: 200% 200%; animation: bannerFlow 8s ease-in-out infinite; padding: 10px 20px; border-bottom: 1px solid #d7def5; display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: nowrap; position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 60px; }
+        .header-right { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1 1 auto; justify-content: flex-start; }
+        .header-ad { display: inline-flex; align-items: center; gap: 0; padding: 4px 10px; border-radius: 14px; border: 1px solid rgba(215, 222, 245, 0.9); background: rgba(255, 255, 255, 0.24); backdrop-filter: blur(4px); text-decoration: none; color: inherit; box-shadow: 0 10px 24px rgba(33, 58, 128, 0.12); min-width: 180px; max-width: calc(100% - 70px); width: auto; flex: 1 1 auto; height: 48px; overflow: hidden; cursor: pointer;}
+        .header-ad:hover { background: rgba(255, 255, 255, 0.5); }
+        .ad-copy { display: flex; flex-direction: column; gap: 0; width: 100%; overflow: hidden; position: relative; }
+        .ad-eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: #6b7ac7; margin: 0; font-weight: 700; }
+        .ad-marquee { display: flex; gap: 24px; width: 100%; align-items: center; padding-left: 4px; }
+        .ad-headline { margin: 0; font-size: 16px; font-weight: 800; color: #1c2566; white-space: nowrap; }
+        .ad-loop { display: flex; gap: 40px; }
+        .ad-close { width: 32px; height: 32px; border-radius: 50%; border: 1px solid #cdd6f5; background: rgba(255, 255, 255, 0.7); color: #46507a; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; transition: transform 0.15s ease, box-shadow 0.2s ease, background-color 0.2s ease; text-decoration: none; font-weight: 800; flex: 0 0 auto; margin-left: 6px; font-size: 16px; }
+        .ad-close:hover { transform: translateY(-1px); box-shadow: 0 8px 18px rgba(70, 80, 122, 0.25); background: #f6f8ff; }
+        @keyframes bannerFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         
-        .timer {
-            position: fixed;
-            top: 15px;
-            right: 20px;
-            background: var(--danger);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: bold;
-            z-index: 1000;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        /* Layout */
-        .part-container {
-            display: flex;
-            margin: 15px auto;
-            width: 98%;
-            height: 85vh; 
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-        .left-pane {
-            width: 55%;
-            padding: 20px;
-            overflow-y: auto;
-            border-right: 2px solid #eee;
-            background-color: #fafafa;
-        }
-        .right-pane {
-            width: 45%;
-            padding: 20px;
-            overflow-y: auto;
-            background-color: #fff;
-        }
-
-        /* Typography & Effects */
-        .text-content {
-            font-size: 16px;
-            line-height: 1.8;
-        }
-        .text-content p {
-            padding: 5px;
-            border-radius: 4px;
-            transition: background-color 0.3s;
-        }
-        .text-content p:hover {
-            background-color: var(--hover-bg);
-        }
-        .highlight {
-            background-color: var(--highlight);
-        }
-
-        /* Questions */
-        .question-block {
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 1px dashed #ccc;
-        }
-        .question-text {
-            font-weight: bold;
-            margin-bottom: 12px;
-            font-size: 16px;
-        }
-        .options label {
-            display: block;
-            padding: 10px;
-            margin-bottom: 8px;
-            border-radius: 6px;
-            cursor: pointer;
-            border: 1px solid #f0f0f0;
-            transition: 0.2s;
-        }
-        .options label:hover {
-            background-color: #f8f9fa;
-        }
-        .options input { margin-right: 10px; }
+        .main-container { margin-top: 90px; display: flex; flex-direction: column; background: #ffffff; height: calc(100vh - 90px); }
+        .panels-container { display: flex; flex: 1; overflow: hidden; }
+        .passage-panel { flex: 1; padding: 20px 20px 100px; overflow-y: auto; min-width: 200px; line-height: 1.6; scroll-behavior: smooth; }
+        .text-center { text-align: center; }
+        .reading-passage h4 { font-family: 'Merriweather', 'Times New Roman', serif; font-size: 22px; font-weight: 600; color: #2c3e50; line-height: 1.4; margin-bottom: 20px; text-align: center; border-bottom: 2px solid #4a90e2; padding-bottom: 5px; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); }
+        .reading-passage p { margin-bottom: 1.2em; }
+        .questions-panel { flex: 1; padding: 20px 20px 100px; overflow-y: auto; min-width: 200px; border-left: 1px solid #e0e0e0; scroll-behavior: smooth; }
+        .resizer { width: 10px; cursor: col-resize; background-color: #f0f0f0; background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="30" viewBox="0 0 10 30"><path d="M4 11h2v2H4zM4 15h2v2H4zM4 19h2v2H4z" fill="%23888"/></svg>'); background-repeat: no-repeat; background-position: center; flex-shrink: 0; flex-grow: 0; }
         
-        .correct-ans {
-            background-color: var(--success) !important;
-            color: white;
-            font-weight: bold;
-            border-color: var(--success) !important;
-        }
-        .wrong-ans {
-            background-color: var(--danger) !important;
-            color: white;
-            border-color: var(--danger) !important;
-        }
-
-        .explanation {
-            display: none;
-            margin-top: 15px;
-            padding: 12px;
-            background-color: var(--hover-bg);
-            border-left: 5px solid var(--primary);
-            border-radius: 4px;
-            font-size: 15px;
-            line-height: 1.5;
-        }
-
-        /* Sidebar Tracker */
-        .tracker-bar {
-            position: fixed;
-            bottom: 0; left: 0; width: 100%;
-            background: white;
-            padding: 15px;
-            box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            box-sizing: border-box;
-        }
-        .tracker-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            flex: 1;
-        }
-        .track-box {
-            width: 32px; height: 32px;
-            display: flex; justify-content: center; align-items: center;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .track-box:hover { border-color: var(--primary); }
-        .track-box.active { background: var(--primary); color: white; border-color: var(--primary); }
-        .track-box.correct { background: var(--success); color: white; border-color: var(--success); }
-        .track-box.wrong { background: var(--danger); color: white; border-color: var(--danger); }
+        .nav-arrows { position: fixed; bottom: 100px; right: 20px; display: flex; gap: 5px; z-index: 101; }
+        .nav-arrow { width: 50px; height: 50px; background: #333; color: white; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: bold; border-radius: 5px;}
+        .nav-arrow:hover { background: #555; }
         
-        .submit-btn {
-            padding: 12px 25px;
-            background: var(--success);
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-left: 20px;
-            transition: 0.3s;
-        }
-        .submit-btn:hover { background: #26b360; }
+        .nav-row { position: fixed; bottom: 0; left: 0; right: 0; background: #ffffff; padding: 0; display: flex; align-items: center; height: 80px; z-index: 100; overflow-x: auto; white-space: nowrap; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
+        .footer__questionWrapper___1tZ46 { display: inline-flex; align-items: center; margin-right: 20px; }
+        .footer__questionNo___3WNct { background: none; border: none; padding: 10px 15px; font-size: 16px; font-weight: 600; color: #333; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: background-color 0.2s; }
+        .footer__questionNo___3WNct:hover { background-color: #f8f9fa; border-radius: 5px;}
+        .section-prefix { font-size: 16px; }
+        .sectionNr { font-size: 16px; font-weight: bold; }
+        .attemptedCount { font-size: 14px; color: #666; margin-left: 5px; font-weight: 400; }
+        @media (max-width: 768px) { .attemptedCount { display: none; } }
+        .footer__questionWrapper___1tZ46.selected .attemptedCount { display: none; }
+        .footer__subquestionWrapper___9GgoP { display: none; gap: 4px; margin-left: 10px; }
+        .footer__questionWrapper___1tZ46.selected .footer__subquestionWrapper___9GgoP { display: flex; flex-wrap: wrap; }
+        
+        .subQuestion { width: 32px; height: 32px; border: 1px solid #ccc; background: white; color: #333; font-size: 14px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; border-radius: 4px; }
+        .subQuestion.answered { background-color: #6b7ac7; color: #ffffff; border-color: #46507a; font-weight: bold; }
+        .subQuestion.correct { background-color: #28a745 !important; color: white !important; border-color: #28a745 !important; }
+        .subQuestion.incorrect { background-color: #dc3545 !important; color: white !important; border-color: #dc3545 !important; }
+        .subQuestion.marked { position: relative; color: #333; border: 2px solid #ffc107;}
+        .subQuestion:hover { background-color: #f0f0f0; border-color: #999; }
+        .subQuestion.active { background-color: #4a90e2; color: white; border-color: #4a90e2; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+        
+        .footer__deliverButton___3FM07 { margin-left: auto; margin-right: 20px; background-color: #4a90e2; color: #fff; border: 1px solid #357abd; padding: 12px 20px; border-radius: 5px; font-size: 16px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: background-color 0.2s, border-color 0.2s; min-width: 150px; justify-content: center; position: sticky; right: 0; z-index: 10;}
+        .footer__deliverButton___3FM07:hover { background-color: #357abd; }
+        .footer__deliverButton___3FM07:disabled { background: #e9ecef; color: #6c757d; cursor: not-allowed; border-color: #ddd; }
+        .fa-check::before { content: "✓"; }
+        .hidden { display: none !important; }
+        
+        /* Highlight Tools */
+        .context-menu { position: absolute; background: white; border: 1px solid #ccc; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000; display: none; min-width: 140px; overflow: hidden; }
+        .context-menu-item { padding: 12px 16px; cursor: pointer; font-size: 16px; border-bottom: 1px solid #f0f0f0; transition: background-color 0.2s; display: flex; align-items: center; gap: 8px; }
+        .context-menu-item:hover { background-color: #f8f9fa; }
+        .context-menu-item:last-child { border-bottom: none; }
+        .color-btn { width: 24px; height: 24px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.2); cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease; padding: 0; background-color: transparent; }
+        .color-btn:hover { transform: scale(1.15); box-shadow: 0 2px 5px rgba(0,0,0,0.15); }
+        .color-btn.yellow { background-color: #fff3a3; }
+        .color-btn.green { background-color: #b4f0c1; }
+        .color-btn.pink { background-color: #ffc7df; }
+        
+        .annotation-highlight { background-color: var(--highlight-color, #fff3a3); border-radius: 4px; padding: 0 2px; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05); cursor: pointer; }
+        .annotation-highlight.highlight-yellow { --highlight-color: #fff3a3; }
+        .annotation-highlight.highlight-green { --highlight-color: #b4f0c1; }
+        .annotation-highlight.highlight-pink { --highlight-color: #ffc7df; }
+        .annotation-highlight.highlight-blue { --highlight-color: #d0ebff; border: 1px dashed #339af0; animation: pulseHighlight 2s ease-in-out infinite alternate; }
+        
+        .annotation-note { background-color: #b4f0c1; border-radius: 4px; padding: 0 2px; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08); position: relative; cursor: pointer; }
+        .annotation-note[data-note]:hover::after { content: attr(data-note); position: absolute; left: 50%; bottom: 100%; transform: translate(-50%, -6px); background: #1f2937; color: #fff; padding: 6px 10px; border-radius: 4px; white-space: nowrap; font-size: 13px; z-index: 2000; }
+        
+        /* Question Layouts */
+        .part-header { background-color: #f1f2ec; padding: 12px 20px; border: 1px solid #e0e0e0; text-align: left; margin: 10px 20px; border-radius: 5px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+        .timer-container { display: flex; position: relative; cursor: default; color: #333; font-size: 16px; font-weight: 500; align-items: center; gap: 12px; flex: 0 0 auto; min-width: 220px; padding: 4px 10px; border-radius: 14px; border: 1px solid #d7def5; background: rgba(255, 255, 255, 0.24); box-shadow: 0 8px 18px rgba(33, 58, 128, 0.08); }
+        .timer-controls { display: flex; align-items: center; gap: 8px; margin-left: 15px; }
+        .timer-controls button { background: #f0f0f0; border: 1px solid #ccc; border-radius: 50%; padding: 0; cursor: pointer; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; transition: background-color 0.2s; }
+        .timer-controls button:hover { background: #e0e0e0; }
+        
+        .multi-choice-question { margin-bottom: 25px; padding: 15px; border-radius: 6px; border: 2px solid #f0f0f0; transition: border-color 0.3s, background-color 0.3s; background: #fafafa;}
+        .mcq-question-text { margin-bottom: 12px; display: block; font-weight: 500;}
+        .question-number-box { border: 2px solid #4a90e2; padding: 2px 10px; margin-right: 8px; border-radius: 4px; font-weight: bold; display: inline-block; color: #4a90e2;}
+        
+        .multi-choice-option { margin-bottom: 8px; padding: 10px; border-radius: 4px; transition: background-color 0.2s; cursor: pointer; border: 1px solid transparent;}
+        .multi-choice-option:hover { background-color: #e9ecef; }
+        .multi-choice-option label { display: flex; align-items: center; cursor: pointer; font-size: 16px; width: 100%; height: 100%; font-weight: 500;}
+        .multi-choice-option input[type="radio"] { margin-right: 15px; transform: scale(1.3); accent-color: #4a90e2; cursor: pointer;}
+        
+        .multi-choice-option.correct { background-color: #e9f7ef; border-color: #28a745; }
+        .multi-choice-option.incorrect { background-color: #f8d7da; border-color: #dc3545;}
+        .correct-answer-highlight { background-color: #d4edda !important; border: 1px solid #c3e6cb !important; border-radius: 4px; color: #155724; font-weight: bold;}
+        
+        /* Modal Results - Updated Layout */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.75); z-index: 2000; display: flex; justify-content: center; align-items: center; }
+        .modal-overlay.hidden { display: none; }
+        .modal-content { background: white; padding: 30px; border-radius: 10px; width: 95%; max-width: 500px; max-height: 85vh; display: flex; flex-direction: column; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.2);}
+        .modal-close-btn { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 28px; cursor: pointer; color: #888; transition: color 0.2s;}
+        .modal-close-btn:hover { color: #333; }
+        .modal-content h2 { text-align: center; margin-bottom: 20px; color: #1c2566; font-size: 24px; }
+        
+        .results-summary { display: flex; justify-content: space-around; margin-bottom: 20px; font-size: 18px; font-weight: bold; text-align: center; border-bottom: 2px solid #eee; padding-bottom: 20px; background: #f8f9fa; border-radius: 8px; padding-top: 15px;}
+        .results-summary p { color: #333; }
+        .results-summary span { color: #4a90e2; font-size: 22px; }
+        
+        .results-details-container { overflow-y: auto; padding-right: 10px; }
+        
+        /* Tối giản bảng chỉ còn 3 cột: Q, Bài làm, Đáp án */
+        .result-header-row { display: grid; grid-template-columns: 60px 1fr 1fr; gap: 15px; padding: 10px 5px; border-bottom: 2px solid #ddd; font-weight: bold; color: #555; text-align: center;}
+        .result-row { display: grid; grid-template-columns: 60px 1fr 1fr; gap: 15px; padding: 10px 5px; border-bottom: 1px solid #f0f0f0; font-size: 15px; text-align: center; align-items: center;}
+        .result-row:hover { background-color: #f9f9f9; }
+        .result-row.incorrect { background-color: #fff3f3; }
+        .result-row .q-num { font-weight: bold; color: #4a90e2;}
+        .result-row .user-ans { color: #333; font-weight: 500;}
+        .result-row .correct-ans { color: #28a745; font-weight: bold; }
 
-        /* Modal Popup */
-        .modal-overlay {
-            display: none;
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6);
-            z-index: 2000;
-            justify-content: center; align-items: center;
-        }
-        .modal-content {
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            text-align: center;
-            width: 400px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            animation: popIn 0.3s ease-out;
-        }
-        @keyframes popIn {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-        .modal-content h2 { color: #2f3542; margin-top: 0; font-size: 28px;}
-        .modal-content p { font-size: 18px; margin: 15px 0; color: #57606f;}
-        .score-display { font-size: 36px; font-weight: bold; color: var(--primary); margin: 20px 0; }
-        .modal-btns { margin-top: 30px; display: flex; justify-content: space-around; }
-        .modal-btns button {
-            padding: 12px 20px; border: none; border-radius: 6px;
-            font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.2s;
-        }
-        .btn-view { background: var(--primary); color: white; }
-        .btn-view:hover { background: #187bcd; }
-        .btn-redo { background: var(--danger); color: white; }
-        .btn-redo:hover { background: #e03e4d; }
-
-        u, b { font-weight: bold; }
-        u { text-decoration: underline; }
-
-        /* ========================================================
-           BỔ SUNG CSS RESPONSIVE CHO MÀN HÌNH ĐIỆN THOẠI / TABLET 
-           ======================================================== */
-        @media (max-width: 992px) {
-            /* Xử lý phần thân trang để không bị lấp chữ */
-            body { 
-                padding-bottom: 140px; 
-            }
-            
-            /* Ép cấu trúc chia đôi thành cột dọc */
-            .part-container {
-                flex-direction: column;
-                height: auto;
-                width: 100%;
-                box-sizing: border-box;
-            }
-            .left-pane, .right-pane {
-                width: 100%;
-                height: auto;
-                border-right: none;
-                box-sizing: border-box;
-            }
-            .left-pane {
-                border-bottom: 2px dashed #ccc;
-            }
-
-            /* Sửa lỗi thanh Tracking che kín màn hình */
-            .tracker-bar { 
-                flex-direction: column; 
-                padding: 10px; 
-            }
-            .tracker-grid { 
-                flex-wrap: nowrap; 
-                overflow-x: auto; 
-                width: 100%; 
-                padding-bottom: 10px; 
-            }
-            .track-box { 
-                flex-shrink: 0; 
-            }
-            .submit-btn { 
-                width: 100%; 
-                margin-left: 0; 
-                margin-top: 5px; 
-            }
-            
-            /* Tùy chỉnh thanh cuộn ngang nhỏ gọn cho điện thoại */
-            .tracker-grid::-webkit-scrollbar {
-                height: 5px;
-            }
-            .tracker-grid::-webkit-scrollbar-thumb {
-                background: #ccc;
-                border-radius: 10px;
-            }
-        }
+        html, body { width: 100%; height: 100%; overflow: hidden; }
+        #launchScreen, #app { width: 100vw; height: 100vh; }
+        #app { display: none; }
+        #launchScreen { display: flex; align-items: center; justify-content: center; padding: 24px; background: radial-gradient(circle at 0% 0%, rgba(206, 219, 255, 0.48), transparent 34%), radial-gradient(circle at 100% 100%, rgba(221, 229, 255, 0.44), transparent 38%), #f4f6fc; color: #1f2b59; }
+        .launch-card { width: min(980px, 100%); border: 1px solid #d7def5; border-radius: 18px; background: linear-gradient(180deg, #ffffff, #f7f9ff); box-shadow: 0 16px 38px rgba(33, 58, 128, 0.14); padding: 35px 40px; display: grid; gap: 15px; }
+        .launch-eyebrow { margin: 0; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: #6f7cb2; font-weight: 700; }
+        .launch-title { margin: 5px 0 0; font-size: clamp(28px, 4vw, 42px); line-height: 1.2; letter-spacing: -0.02em; color: #1c2566; }
+        .launch-meta { margin: 10px 0 0; color: #3c4a81; font-size: 16px; font-weight: 600; }
+        .launch-guide { border: 1px solid #d7def5; border-radius: 12px; background: #f2f5ff; padding: 20px; display: grid; gap: 10px; margin-top: 10px;}
+        .launch-main { margin: 0; font-size: clamp(18px, 2.2vw, 20px); line-height: 1.4; font-weight: 700; color: #1d2a60; }
+        .launch-sub { margin: 0; color: #4c598f; font-size: 15px; line-height: 1.5; }
+        .student-info-form { margin-top: 15px; display: flex; flex-direction: column; gap: 15px; }
+        .student-info-form input { width: 100%; padding: 14px 18px; border: 1px solid #c5d0f2; border-radius: 8px; font-size: 16px; outline: none; transition: all 0.3s; box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);}
+        .student-info-form input:focus { border-color: #4a90e2; box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2); }
+        .launch-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 15px; }
+        .launch-btn { border: none; border-radius: 8px; cursor: pointer; font-size: 18px; font-weight: 700; padding: 14px 24px; color: #fff; background: #4a90e2; transition: all 0.2s ease; box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3); width: 100%; text-align: center; }
+        .launch-btn:hover { transform: translateY(-2px); background: #357abd; box-shadow: 0 6px 16px rgba(74, 144, 226, 0.4);}
+        
+        .mark-toggle-btn { background: none; border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; color: #ccc; margin-left: auto; transition: color 0.2s; float: right; padding-right: 10px;}
+        .mark-toggle-btn:hover { color: #888; }
+        .mark-toggle-btn.marked { color: #ffc107; }
+        .markable-question { position: relative; }
+        
+        /* Styles for Explanations */
+        .explanation-box { display: none; margin-top: 15px; padding: 15px 20px; background-color: #f0f7ff; border-left: 4px solid #4a90e2; border-radius: 6px; font-size: 15px; color: #2c3e50; line-height: 1.6; width: 100%; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: background-color 0.2s ease; cursor: pointer;}
+        .explanation-box:hover { background-color: #e6f2ff; }
+        .explanation-box.show { display: block; animation: fadeIn 0.4s ease-in-out; }
+        .explanation-title { font-weight: 700; margin-bottom: 8px; color: #1c2566; display: flex; align-items: center; gap: 6px; font-size: 16px;}
+        .explanation-content { font-weight: 500; }
+        .explanation-content i { color: #444; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulseHighlight { from { background-color: #d0ebff; } to { background-color: #a3daff; } }
+        
+        .part3-passage-item { padding: 15px; margin-bottom: 15px; border: 1px dashed #ccc; border-radius: 6px; background-color: #fcfcfc;}
+        .part3-passage-item h5 { color: #4a90e2; margin-bottom: 10px; font-size: 17px;}
+        .part3-passage-item p { margin-bottom: 6px; }
     </style>
 </head>
 <body>
-
-    <div class="timer" id="timer">⏳ 50:00</div>
-
-    <div class="header">
-        <h2>ĐỀ SỐ 03 - KỲ THI THPT QUỐC GIA</h2>
-        <h3>Môn thi: TIẾNG ANH</h3>
-        <p><strong>Giáo viên: NGUYỄN THỊ THU DUYÊN - Zalo: 0918204603</strong></p>
-    </div>
-
-    <!-- PART 1 -->
-    <div class="part-container">
-        <div class="left-pane text-content">
-            <p><strong>Read the following advertisement and mark the letter A, B, C or D on your answer sheet to indicate the correct option that best fits each of the numbered blanks from 1 to 6.</strong></p>
-            <p><strong>Super Typhoon Milton and its Destruction</strong></p>
-            <p>Super Typhoon Milton struck the eastern coastline last weekend, causing widespread devastation. Many residents described it as the most (1) ______ experience they had ever faced. The combination of (2) ______ and relentless rain left the town completely paralyzed.</p>
-            <p>The typhoon, (3) ______ the coast at around 3 PM, brought winds exceeding 180 km/h. This resulted in massive flooding and left thousands (4) ______ need of emergency assistance. The authorities worked hard to (5) ______ a difference, but the sheer scale of the disaster made recovery efforts slow.</p>
-            <p>Now, the community is slowly rebuilding their homes, hoping (6) ______ what was lost.</p>
+    <!-- Launch Screen -->
+    <section id="launchScreen" aria-label="Launch screen">
+        <div class="launch-card">
+            <div>
+                <p class="launch-eyebrow">Hệ thống Thi Trắc Nghiệm Thông Minh</p>
+                <h1 class="launch-title" id="launchTestTitle">Đề thi thử THPT Quốc Gia Môn Tiếng Anh - ĐỀ SỐ 03</h1>
+                <p class="launch-meta">Môn: Tiếng Anh | Thời gian: 50 phút | Số lượng: 40 Câu</p>
+            </div>
+            <div class="launch-guide">
+                <p class="launch-main">💡 Nhấn F11 để bắt đầu làm bài ở chế độ toàn màn hình.</p>
+                <p class="launch-sub">Hoàn thành thông tin cá nhân bên dưới để hệ thống lưu điểm tự động.</p>
+                <div class="student-info-form">
+                    <input type="text" id="studentName" placeholder="Nhập Họ và tên của bạn..." required autocomplete="off">
+                    <input type="text" id="studentClass" placeholder="Nhập Lớp của bạn (VD: 12A1)..." required autocomplete="off">
+                    <p id="launchError" style="color: #dc3545; font-size: 14px; display: none; margin: 0; font-weight: 600;">⚠️ Vui lòng nhập đầy đủ Họ tên và Lớp!</p>
+                </div>
+            </div>
+            <div class="launch-row">
+                <button id="startNormalBtn" class="launch-btn" type="button">BẮT ĐẦU LÀM BÀI</button>
+            </div>
         </div>
-        <div class="right-pane" id="questions-part-1"></div>
-    </div>
+    </section>
 
-    <!-- PART 2 -->
-    <div class="part-container">
-        <div class="left-pane text-content">
-            <p><strong>Read the following leaflet and mark the letter A, B, C or D on your answer sheet to indicate the correct option that best fits each of the numbered blanks from 7 to 12.</strong></p>
-            <p>Students born in 2007 have just received the university entrance mock exam issued by the Ministry of Education. The exam, which is reportedly shorter and more difficult than previous years, has left many (7) ______ feeling anxious. The questions are mainly focused on reading comprehension and vocabulary, requiring students to (8) ______ complex words and phrases.</p>
-            <p>Teachers have acknowledged that this is a (9) ______ exam, but they believe it has the potential to accurately classify students based on their abilities. (10) ______ the increased difficulty, the exam is considered fair and capable of assessing the students' true competencies.</p>
-            <p>Despite the pressure, the (11) ______ of students sitting for the exam remains high. With a focus on reading comprehension, the exam is expected to test the (12) ______ of students' preparedness for the university entrance process.</p>
+    <!-- Main App Layout -->
+    <div id="app">
+        <div class="header">
+            <div class="timer-container">
+                <span class="timer-display">50:00</span>
+                <div class="timer-controls">
+                    <button id="timer-toggle-btn" title="Pause/Resume Timer">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M8 5v14l11-7L8 5z"/></svg>
+                    </button>
+                </div>
+            </div>
+            <div class="header-right">
+                <!-- Banner Quảng cáo & Link FB cá nhân -->
+                <a href="https://www.facebook.com/thuduyen.nguyen.332" target="_blank" rel="noopener" class="header-ad" title="Liên hệ Facebook Giáo viên">
+                    <div class="ad-copy">
+                        <p class="ad-eyebrow">Luyện thi THPT QG</p>
+                        <div class="ad-marquee">
+                            <div class="ad-loop">
+                                <span class="ad-headline">🔥 Chinh phục điểm 9+ Tiếng Anh dễ dàng! Click ngay!</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <button class="ad-close" type="button" aria-label="Close ad" title="Close">×</button>
+            </div>
         </div>
-        <div class="right-pane" id="questions-part-2"></div>
-    </div>
 
-    <!-- PART 3 -->
-    <div class="part-container">
-        <div class="left-pane text-content">
-            <p><strong>Mark the letter A, B, C, or D on your answer sheet to indicate the correct arrangement of the sentences to make a meaningful exchange or text in each of the following questions.</strong></p>
+        <div class="main-container" id="main-container">
+            <!-- Headers Section -->
+            <div id="passage-header-container">
+                <div id="part-header-1" class="part-header">
+                    <p><strong>Part 1: Guided Cloze 1</strong></p>
+                    <p>Read the following advertisement and mark the letter A, B, C or D to indicate the option that best fits each of the numbered blanks.</p>
+                </div>
+                <div id="part-header-2" class="part-header hidden">
+                    <p><strong>Part 2: Guided Cloze 2</strong></p>
+                    <p>Read the following leaflet and mark the letter A, B, C or D to indicate the option that best fits each of the numbered blanks.</p>
+                </div>
+                <div id="part-header-3" class="part-header hidden">
+                    <p><strong>Part 3: Sentence Arrangement</strong></p>
+                    <p>Mark the letter A, B, C or D to indicate the best arrangement of utterances or sentences to make a meaningful exchange or text.</p>
+                </div>
+                <div id="part-header-4" class="part-header hidden">
+                    <p><strong>Part 4: Reading Comprehension 1</strong></p>
+                    <p>Read the following passage about artificial intelligence and mark the letter A, B, C or D to indicate the option that best fits each of the numbered blanks.</p>
+                </div>
+                <div id="part-header-5" class="part-header hidden">
+                    <p><strong>Part 5: Reading Comprehension 2</strong></p>
+                    <p>Read the following passage about relaxation and mark the letter A, B, C or D to indicate the best answer to each of the following questions.</p>
+                </div>
+                <div id="part-header-6" class="part-header hidden">
+                    <p><strong>Part 6: Reading Comprehension 3</strong></p>
+                    <p>Read the following passage about sperm whales and mark the letter A, B, C or D to indicate the best answer to each of the following questions.</p>
+                </div>
+            </div>
             
-            <p><strong>Question 13.</strong><br>
-            a. Alice: "That sounds serious. Have you been to see a doctor?"<br>
-            b. Mark: "Not great, actually. I've been feeling under the weather for a few days."<br>
-            c. Alice: "How have you been, Mark?"</p>
-            
-            <p><strong>Question 14.</strong><br>
-            a. Mark: "Yeah, I really needed to relax after such a stressful week at work."<br>
-            b. Alice: "Did you do anything fun this weekend, Mark?"<br>
-            c. Alice: "I'm glad to hear that! What did you do?"<br>
-            d. Mark: "I went hiking in the mountains. The fresh air was amazing."<br>
-            e. Alice: "That sounds like a perfect way to unwind!"</p>
+            <div class="panels-container">
+                <!-- LEFT PANEL: PASSAGES -->
+                <div class="passage-panel" id="passage-panel">
+                    
+                    <!-- Passage 1 -->
+                    <div id="passage-text-1" class="reading-passage">
+                        <h4 class="text-center">Super Typhoon Milton and its Destruction</h4>
+                        <p>Super Typhoon Milton struck the eastern coastline last weekend, causing widespread devastation. Many residents described it as the most <strong>(1) ______</strong> experience they had ever faced. The combination of <strong>(2) ______</strong> and relentless rain left the town completely paralyzed.</p>
+                        <p>The typhoon, <strong>(3) ______</strong> the coast at around 3 PM, brought winds exceeding 180 km/h. This resulted in massive flooding and left thousands <strong>(4) ______</strong> need of emergency assistance. The authorities worked hard to <strong>(5) ______</strong> a difference, but the sheer scale of the disaster made recovery efforts slow.</p>
+                        <p>Now, the community is slowly rebuilding their homes, hoping <strong>(6) ______</strong> what was lost.</p>
+                    </div>
 
-            <p><strong>Question 15.</strong><br>
-            Dear Emily,<br>
-            a. I wanted to tell you that I've recently accepted a new job in New York, and I'll be moving there next month. It's a big change, but I'm really excited about this new chapter in my life.<br>
-            b. I'm planning to visit my family before the big move, and I'd love to see you if you're free during that time.<br>
-            c. Hope this message finds you well! I wanted to catch you up on some recent news.<br>
-            d. Take care, and I hope to see you soon!</p>
+                    <!-- Passage 2 -->
+                    <div id="passage-text-2" class="reading-passage hidden">
+                        <h4 class="text-center">University Entrance Mock Exam</h4>
+                        <p>Students born in 2007 have just received the university entrance mock exam issued by the Ministry of Education. The exam, which is reportedly shorter and more difficult than previous years, has left many <strong>(7) ______</strong> feeling anxious. The questions are mainly focused on reading comprehension and vocabulary, requiring students to <strong>(8) ______</strong> complex words and phrases.</p>
+                        <p>Teachers have acknowledged that this is a <strong>(9) ______</strong> exam, but they believe it has the potential to accurately classify students based on their abilities. <strong>(10) ______</strong> the increased difficulty, the exam is considered fair and capable of assessing the students' true competencies.</p>
+                        <p>Despite the pressure, the <strong>(11) ______</strong> of students sitting for the exam remains high. With a focus on reading comprehension, the exam is expected to test the <strong>(12) ______</strong> of students' preparedness for the university entrance process.</p>
+                    </div>
 
-            <p><strong>Question 16.</strong><br>
-            a. Online education has grown in popularity due to its flexibility, allowing students to balance their studies with personal and professional responsibilities.<br>
-            b. This means that students can attend classes from anywhere in the world, without being tied to a specific location.<br>
-            c. In addition to convenience, online courses often provide a wide range of resources, such as recorded lectures, discussion forums, and interactive assignments.<br>
-            d. In conclusion, online education offers students the flexibility and resources they need to succeed, especially in today's fast-paced world.<br>
-            e. Furthermore, online platforms are accessible at any time, allowing learners to study at their own pace, which is particularly beneficial for those with busy schedules.</p>
+                    <!-- Passage 3 (Sentence Arrangement Text) -->
+                    <div id="passage-text-3" class="reading-passage hidden">
+                        <h4 class="text-center">Reference Texts for Sentence Arrangement</h4>
+                        
+                        <div class="part3-passage-item">
+                            <h5>Question 13</h5>
+                            <p><strong>a.</strong> Alice: "That sounds serious. Have you been to see a doctor?"</p>
+                            <p><strong>b.</strong> Mark: "Not great, actually. I've been feeling under the weather for a few days."</p>
+                            <p><strong>c.</strong> Alice: "How have you been, Mark?"</p>
+                        </div>
+                        
+                        <div class="part3-passage-item">
+                            <h5>Question 14</h5>
+                            <p><strong>a.</strong> Mark: "Yeah, I really needed to relax after such a stressful week at work."</p>
+                            <p><strong>b.</strong> Alice: "Did you do anything fun this weekend, Mark?"</p>
+                            <p><strong>c.</strong> Alice: "I'm glad to hear that! What did you do?"</p>
+                            <p><strong>d.</strong> Mark: "I went hiking in the mountains. The fresh air was amazing."</p>
+                            <p><strong>e.</strong> Alice: "That sounds like a perfect way to unwind!"</p>
+                        </div>
 
-            <p><strong>Question 17.</strong><br>
-            a. However, once the foundation is laid, the real work begins as they start building more complex systems of thought and understanding.<br>
-            b. Learning a new language is challenging, especially at the beginning when students are overwhelmed by grammar rules and unfamiliar vocabulary.<br>
-            c. With continuous practice, learners gradually develop confidence in their speaking, listening, and writing skills, although progress may seem slow at first.<br>
-            d. Many language learners experience frustration early on, but it's important to remember that fluency comes with time and dedication.<br>
-            e. In the end, the sense of accomplishment that comes from mastering a language makes the effort worthwhile, opening doors to new cultures and opportunities.</p>
-        </div>
-        <div class="right-pane" id="questions-part-3"></div>
-    </div>
+                        <div class="part3-passage-item">
+                            <h5>Question 15</h5>
+                            <p>Dear Emily,</p>
+                            <p><strong>a.</strong> I wanted to tell you that I've recently accepted a new job in New York, and I'll be moving there next month. It's a big change, but I'm really excited about this new chapter in my life.</p>
+                            <p><strong>b.</strong> I'm planning to visit my family before the big move, and I'd love to see you if you're free during that time.</p>
+                            <p><strong>c.</strong> Hope this message finds you well! I wanted to catch you up on some recent news.</p>
+                            <p><strong>d.</strong> Take care, and I hope to see you soon!</p>
+                        </div>
 
-    <!-- PART 4 -->
-    <div class="part-container">
-        <div class="left-pane text-content">
-            <p><strong>Read the following passage about humanoid robots and mark the letter A, B, C or D on your answer sheet to indicate the option that best fits each of the numbered blanks from 18 to 22.</strong></p>
-            <p>In recent years, artificial intelligence (AI) has been widely applied in various fields, including healthcare, finance, and education. AI systems are now (18) ______. Despite these advancements, there are still concerns about the ethical use of AI, particularly in (19) ______.</p>
-            <p>Many organizations are adopting AI technologies (20) ______. These technologies have the potential to transform industries, but experts emphasize that AI should complement human abilities rather than replace them.</p>
-            <p>For example, in education, AI can (21) ______, allowing teachers to focus on other important aspects of teaching. However, it remains crucial to ensure that AI (22) ______.</p>
-        </div>
-        <div class="right-pane" id="questions-part-4"></div>
-    </div>
+                        <div class="part3-passage-item">
+                            <h5>Question 16</h5>
+                            <p><strong>a.</strong> Online education has grown in popularity due to its flexibility, allowing students to balance their studies with personal and professional responsibilities.</p>
+                            <p><strong>b.</strong> This means that students can attend classes from anywhere in the world, without being tied to a specific location.</p>
+                            <p><strong>c.</strong> In addition to convenience, online courses often provide a wide range of resources, such as recorded lectures, discussion forums, and interactive assignments.</p>
+                            <p><strong>d.</strong> In conclusion, online education offers students the flexibility and resources they need to succeed, especially in today's fast-paced world.</p>
+                            <p><strong>e.</strong> Furthermore, online platforms are accessible at any time, allowing learners to study at their own pace, which is particularly beneficial for those with busy schedules.</p>
+                        </div>
 
-    <!-- PART 5 -->
-    <div class="part-container">
-        <div class="left-pane text-content">
-            <p><strong>Read the following passage about endangered languages and mark the letter A, B, C, D on your answer sheet to indicate the best answer to each of the following questions from 23 to 30.</strong></p>
-            <p>Living in the stressful modern era, most of us usually look for sources of relaxation, and it's no secret that viewing nature and being outdoors can be pleasant and <b><u>restorative</u></b>. Spending time in nature is linked to improvements in mental health, mood, emotional well-being, and cognitive benefits. However, the more surprising thing is that, according to new research, viewing water may be a better environment for relaxation than green areas with grass and trees.</p>
-            <p>In a recent article, Harvard psychologist Adam Grant discussed a remarkable 2024 study that he <b><u>came across</u></b>, showing that people who viewed water for less than two minutes had reduced blood pressure compared to people who viewied green areas and trees.</p>
-            <p>So why are nature's blue spaces more relaxing than green ones? According to the original authors of the study, the reason might be related to the process of our evolution. For early humans who have to work hard to survive day by day, the lack of water has always been a major challenge, as <b><u>it</u></b> posed a direct threat to life, leading to heightened levels of stress, increases in blood pressure and cardiac stress. Therefore, successfully detecting water or simply just looking at it can provide a sense of great relief.</p>
-            <p><b><u>Being in nature can help you re-invigorate your body, mind, and spirit, offering moments of awe, calm, and relaxation.</u></b> And now we are learning that bodies of water may bring even greater relaxation. So, whether it's a river, lake, or ocean, it might be time to go outside and find the nearest blue space to experience the effects for yourself!</p>
-        </div>
-        <div class="right-pane" id="questions-part-5"></div>
-    </div>
+                        <div class="part3-passage-item">
+                            <h5>Question 17</h5>
+                            <p><strong>a.</strong> However, once the foundation is laid, the real work begins as they start building more complex systems of thought and understanding.</p>
+                            <p><strong>b.</strong> Learning a new language is challenging, especially at the beginning when students are overwhelmed by grammar rules and unfamiliar vocabulary.</p>
+                            <p><strong>c.</strong> With continuous practice, learners gradually develop confidence in their speaking, listening, and writing skills, although progress may seem slow at first.</p>
+                            <p><strong>d.</strong> Many language learners experience frustration early on, but it's important to remember that fluency comes with time and dedication.</p>
+                            <p><strong>e.</strong> In the end, the sense of accomplishment that comes from mastering a language makes the effort worthwhile, opening doors to new cultures and opportunities.</p>
+                        </div>
+                    </div>
 
-    <!-- PART 6 -->
-    <div class="part-container">
-        <div class="left-pane text-content">
-            <p><strong>Read the following passage about urban shift and mark the letter A, B, C, D on your answer sheet to indicate the best answer to each of the following questions from 31 to 40.</strong></p>
-            <p>[I] Sperm whales are fascinating creatures. [II] They possess the biggest brain of any species, six times larger than a human's, which scientists believe may have evolved to support intelligent, rational behavior. [III] They're also highly social and capable of making decisions as a group. [IV] But there's also a lot we don't know about them, including what they may be saying to one another when communicating with a system of short clicks, known as codas.</p>
-            <p>Now, new research published in Nature Communications today suggests that sperm whales' communication is actually much more expressive and complicated than was previously thought. A team of researchers led by Pratyusha Sharma at MIT's Computer Science and Artificial Intelligence Lab (CSAIL) working with Project CETI, a nonprofit focused on using AI to understand whales, used statistical models to analyze whale codas and managed to identify a structure to their language that's similar to features of human language. Their findings represent a tool future researchers could use to <b><u>decipher</u></b> not just the structure but the actual meaning of whale sounds.</p>
-            <p>For the study, the researchers examined recordings of 8,719 codas from around 60 whales collected by the Dominica Sperm Whale Project between 2005 and 2018, using a mix of AI algorithms for pattern recognition and classification. The AI then turned the clicks within the coda data into a new kind of data visualization called an exchange plot, revealing that some codas featured extra clicks. These extra clicks, combined with variations in the duration of their calls, appeared in interactions between multiple whales, which <b><u>they</u></b> say suggests that codas can carry more information and possess a more complicated internal structure than we had previously believed.</p>
-            <p>The team's next step is to build language models of whale calls and to examine how those calls relate to different behaviors. They also plan to work on a more <b><u>universal</u></b> system that could be used across species, says Sharma. <b><u>Taking a communication system we know nothing about, working out how it encodes and transmits information, and slowly beginning to understand what's being communicated could have many purposes beyond whales.</u></b> "I think we're just starting to understand some of these things," she says. "We're very much at the beginning, but we are slowly making our way through."</p>
-        </div>
-        <div class="right-pane" id="questions-part-6"></div>
-    </div>
+                    <!-- Passage 4 -->
+                    <div id="passage-text-4" class="reading-passage hidden">
+                        <h4 class="text-center">Artificial Intelligence</h4>
+                        <p>In recent years, artificial intelligence (AI) has been widely applied in various fields, including healthcare, finance, and education. AI systems are now <strong>(18) ______</strong>. Despite these advancements, there are still concerns about the ethical use of AI, particularly in <strong>(19) ______</strong>.</p>
+                        <p>Many organizations are adopting AI technologies <strong>(20) ______</strong>. These technologies have the potential to transform industries, but experts emphasize that AI should complement human abilities rather than replace them.</p>
+                        <p>For example, in education, AI can <strong>(21) ______</strong>, allowing teachers to focus on other important aspects of teaching. However, it remains crucial to ensure that AI <strong>(22) ______</strong>.</p>
+                    </div>
 
-    <!-- Sidebar Tracker -->
-    <div class="tracker-bar">
-        <div class="tracker-grid" id="tracker-grid"></div>
-        <button class="submit-btn" onclick="submitExam()">NỘP BÀI THI</button>
-    </div>
+                    <!-- Passage 5 -->
+                    <div id="passage-text-5" class="reading-passage hidden">
+                        <h4 class="text-center">Blue Spaces vs. Green Spaces</h4>
+                        <p>Living in the stressful modern era, most of us usually look for sources of relaxation, and it's no secret that viewing nature and being outdoors can be pleasant and restorative. Spending time in nature is linked to improvements in mental health, mood, emotional well-being, and cognitive benefits. However, the more surprising thing is that, according to new research, viewing water may be a better environment for relaxation than green areas with grass and trees.</p>
+                        <p>In a recent article, Harvard psychologist Adam Grant discussed a remarkable 2024 study that he came across, showing that people who viewed water for less than two minutes had reduced blood pressure compared to people who viewed green areas and trees.</p>
+                        <p>So why are nature's blue spaces more relaxing than green ones? According to the original authors of the study, the reason might be related to the process of our evolution. For early humans who have to work hard to survive day by day, the lack of water has always been a major challenge, as it posed a direct threat to life, leading to heightened levels of stress, increases in blood pressure and cardiac stress. Therefore, successfully detecting water or simply just looking at it can provide a sense of great relief.</p>
+                        <p>Being in nature can help you re-invigorate your body, mind, and spirit, offering moments of awe, calm, and relaxation. And now we are learning that bodies of water may bring even greater relaxation. So, whether it's a river, lake, or ocean, it might be time to go outside and find the nearest blue space to experience the effects for yourself!</p>
+                    </div>
 
-    <!-- Modal Popup -->
-    <div class="modal-overlay" id="modal">
-        <div class="modal-content">
-            <h2>Kết Quả Bài Thi</h2>
-            <div class="score-display" id="score-text">0 / 40</div>
-            <p>Số câu bỏ trống: <strong id="unanswered-count" style="color:var(--danger)">0</strong></p>
-            <div class="modal-btns">
-                <button class="btn-view" onclick="viewAnswers()">XEM ĐÁP ÁN</button>
-                <button class="btn-redo" onclick="location.reload()">LÀM LẠI BÀI</button>
+                    <!-- Passage 6 -->
+                    <div id="passage-text-6" class="reading-passage hidden">
+                        <h4 class="text-center">Sperm Whales and Project CETI</h4>
+                        <p><strong>[I]</strong> Sperm whales are fascinating creatures. <strong>[II]</strong> They possess the biggest brain of any species, six times larger than a human's, which scientists believe may have evolved to support intelligent, rational behavior. <strong>[III]</strong> They're also highly social and capable of making decisions as a group. <strong>[IV]</strong> But there's also a lot we don't know about them, including what they may be saying to one another when communicating with a system of short clicks, known as codas.</p>
+                        <p>Now, new research published in Nature Communications today suggests that sperm whales' communication is actually much more expressive and complicated than was previously thought. A team of researchers led by Pratyusha Sharma at MIT's Computer Science and Artificial Intelligence Lab (CSAIL) working with Project CETI, a nonprofit focused on using AI to understand whales, used statistical models to analyze whale codas and managed to identify a structure to their language that's similar to features of human language. Their findings represent a tool future researchers could use to decipher not just the structure but the actual meaning of whale sounds.</p>
+                        <p>For the study, the researchers examined recordings of 8,719 codas from around 60 whales collected by the Dominica Sperm Whale Project between 2005 and 2018, using a mix of AI algorithms for pattern recognition and classification. The AI then turned the clicks within the coda data into a new kind of data visualization called an exchange plot, revealing that some codas featured extra clicks. These extra clicks, combined with variations in the duration of their calls, appeared in interactions between multiple whales, which they say suggests that codas can carry more information and possess a more complicated internal structure than we had previously believed.</p>
+                        <p>The team's next step is to build language models of whale calls and to examine how those calls relate to different behaviors. They also plan to work on a more universal system that could be used across species, says Sharma. Taking a communication system we know nothing about, working out how it encodes and transmits information, and slowly beginning to understand what's being communicated could have many purposes beyond whales. "I think we're just starting to understand some of these things," she says. "We're very much at the beginning, but we are slowly making our way through."</p>
+                    </div>
+                </div>
+
+                <div class="resizer" id="resizer"></div>
+                
+                <!-- RIGHT PANEL: QUESTIONS -->
+                <div class="questions-panel" id="questions-panel">
+                    
+                    <script>
+                        function renderMCQ(qNum, options, prompt = "") {
+                            let html = `<div class="multi-choice-question" data-q-start="${qNum}" data-q-end="${qNum}">`;
+                            html += `<div class="mcq-question-text"><span class="mcq-question-number question-number-box" data-q-number="${qNum}">Question ${qNum}</span> ${prompt}</div>`;
+                            const letters = ['A', 'B', 'C', 'D'];
+                            options.forEach((opt, idx) => {
+                                html += `<div class="multi-choice-option"><label><input type="radio" name="q${qNum}" value="${letters[idx]}"> <strong>${letters[idx]}.</strong>&nbsp; ${opt}</label></div>`;
+                            });
+                            html += `</div>`;
+                            document.write(html);
+                        }
+                    </script>
+
+                    <!-- Questions Part 1 -->
+                    <div id="questions-1" class="question-set">
+                        <script>
+                            renderMCQ(1, ["terrifying", "terrified", "terrifies", "terrify"]);
+                            renderMCQ(2, ["strong stormy winds", "winds strong stormy", "stormy strong winds", "stormy winds strong"]);
+                            renderMCQ(3, ["which hit", "hitting", "that hits", "hit"]);
+                            renderMCQ(4, ["in", "at", "on", "with"]);
+                            renderMCQ(5, ["make", "take", "do", "have"]);
+                            renderMCQ(6, ["to be restored", "restoring", "to restore", "being restored"]);
+                        </script>
+                    </div>
+
+                    <!-- Questions Part 2 -->
+                    <div id="questions-2" class="question-set hidden">
+                        <script>
+                            renderMCQ(7, ["another", "others", "other", "the other"]);
+                            renderMCQ(8, ["figure out", "look for", "take in", "give up"]);
+                            renderMCQ(9, ["challenging", "relaxing", "simple", "boring"]);
+                            renderMCQ(10, ["Instead of", "On account of", "Irrespective of", "In spite of"]);
+                            renderMCQ(11, ["number", "amount", "quantity", "level"]);
+                            renderMCQ(12, ["accuracy", "width", "depth", "randomness"]);
+                        </script>
+                    </div>
+
+                    <!-- Questions Part 3 (Questions Only - text is in passage panel) -->
+                    <div id="questions-3" class="question-set hidden">
+                        <div style="margin-bottom: 20px; padding: 10px; background-color: #fff3cd; border-left: 5px solid #ffecb5; font-weight: 500; color: #856404; border-radius: 4px;">
+                            👉 Đọc kỹ dữ liệu tham khảo tương ứng ở cột bên trái để chọn đáp án Sắp xếp logic nhất!
+                        </div>
+                        <script>
+                            renderMCQ(13, ["c-a-b", "b-c-a", "c-b-a", "a-c-b"]);
+                            renderMCQ(14, ["c-b-a-e-d", "c-e-d-b-a", "d-b-a-e-c", "b-a-c-d-e"]);
+                            renderMCQ(15, ["c-a-b-d", "d-a-b-c", "c-b-a-d", "a-b-d-c"]);
+                            renderMCQ(16, ["a-b-e-c-d", "b-c-e-d-a", "d-a-c-e-b", "a-e-b-c-d"]);
+                            renderMCQ(17, ["d-b-a-c-e", "b-a-c-d-e", "a-b-d-e-c", "b-d-a-c-e"]);
+                        </script>
+                    </div>
+
+                    <!-- Questions Part 4 -->
+                    <div id="questions-4" class="question-set hidden">
+                        <script>
+                            renderMCQ(18, [
+                                "being integrating into critical industries that handle complex decision-making processes",
+                                "integrated in workflows where human input is gradually becoming unnecessary",
+                                "being integrated into systems designed to automate repetitive and data - driven tasks",
+                                "being integrate into systems which still depend on human supervision"
+                            ]);
+                            renderMCQ(19, [
+                                "making decisions which traditionally relied on human expertise",
+                                "to make decisions that required careful consideration and judgment",
+                                "making of decisions that influence significant outcomes in various sectors",
+                                "make decisions in situations that require ethical responsibility"
+                            ]);
+                            renderMCQ(20, [
+                                "with aim improve processes and increase productivity",
+                                "in order improving operations across various departments",
+                                "with the goal of to enhancing performance and minimizing errors",
+                                "in order to improve efficiency and reduce human mistakes"
+                            ]);
+                            renderMCQ(21, [
+                                "helps performing automated grading and feedback tasks",
+                                "perform tasks like grading and giving feedback for students",
+                                "be applied to doing various tasks in educational settings",
+                                "performs tasks to providing real - time feedback to students"
+                            ]);
+                            renderMCQ(22, [
+                                "operating in a manner which respects human oversight",
+                                "operate with consistent regulations to guarantee fairness",
+                                "operates consistently to ensure that ethical standards are met",
+                                "are operating according to principles of fairness and transparency"
+                            ]);
+                        </script>
+                    </div>
+
+                    <!-- Questions Part 5 -->
+                    <div id="questions-5" class="question-set hidden">
+                        <script>
+                            renderMCQ(23, [
+                                "Improvements in mental health", 
+                                "Cognitive benefits", 
+                                "Increased creativity", 
+                                "Emotional well - being"
+                            ], "Which of the following is NOT mentioned in paragraph 1 as a benefit of spending time in nature?");
+                            
+                            renderMCQ(24, [
+                                "damaging", 
+                                "energizing", 
+                                "refreshing", 
+                                "beneficial"
+                            ], "The word \"restorative\" in paragraph 1 is OPPOSITE in meaning to");
+                            
+                            renderMCQ(25, [
+                                "discovered", 
+                                "ignored", 
+                                "created", 
+                                "explained"
+                            ], "The word \"came across\" in paragraph 2 could be best replaced by");
+                            
+                            renderMCQ(26, [
+                                "stressor", 
+                                "blood pressure", 
+                                "cardiac stress", 
+                                "water"
+                            ], "The word \"it\" in paragraph 3 refers to");
+                            
+                            renderMCQ(27, [
+                                "Finding water was the biggest survival challenge for early humans.", 
+                                "Early humans suffered more stress when there is not enough water.", 
+                                "Only by being in nature can we heal both our body and our spirit.", 
+                                "The larger the area of water you look at, the more relaxed you are."
+                            ], "Which of the following is TRUE, according to paragraphs 2 and 3?");
+                            
+                            renderMCQ(28, [
+                                "Spending time outdoors in nature can refresh both your physical and mental state, providing peaceful and uplifting experiences.", 
+                                "Nature is a perfect escape from modern life, allowing people to rest while boosting their physical and spiritual well-being.", 
+                                "Nature offers a temporary distraction from life's problems, but its benefits are limited to short-term relaxation.", 
+                                "Being in nature brings challenges to both the mind and body, creating feelings of stress and discomfort."
+                            ], "Which of the following best paraphrases the underlined sentence in paragraph 4?");
+                            
+                            renderMCQ(29, [
+                                "Paragraph 1", 
+                                "Paragraph 2", 
+                                "Paragraph 3", 
+                                "Paragraph 4"
+                            ], "In which paragraph does the writer mention the possible evolutionary reasons why viewing water can be more relaxing than viewing green areas?");
+                            
+                            renderMCQ(30, [
+                                "Paragraph 1", 
+                                "Paragraph 2", 
+                                "Paragraph 3", 
+                                "Paragraph 4"
+                            ], "In which paragraph does the writer explain why viewing water might be more relaxing than viewing green areas?");
+                        </script>
+                    </div>
+
+                    <!-- Questions Part 6 -->
+                    <div id="questions-6" class="question-set hidden">
+                        <script>
+                            renderMCQ(31, [
+                                "[I]", 
+                                "[II]", 
+                                "[III]", 
+                                "[IV]"
+                            ], "Where in paragraph 1 does the following sentence best fit?<br><i>They demonstrate a high level of sociability and are capable of collective decision - making.</i>");
+
+                            renderMCQ(32, [
+                                "They are one of the most interesting creatures for humans to study.", 
+                                "Their brains are more advanced than human brains by six times.", 
+                                "The size of their brains is the reason why they are highly social.", 
+                                "They have the ability to make decisions together rather than alone."
+                            ], "What do we learn about sperm whales in paragraph 1?");
+
+                            renderMCQ(33, [
+                                "AI algorithms for pattern recognition", 
+                                "Statistical models", 
+                                "Recordings of codas", 
+                                "Behavioral experiments with whales"
+                            ], "According to paragraph 2, which of the following is NOT mentioned as a tool or method used by researchers to study whale communication?");
+
+                            renderMCQ(34, [
+                                "decode", 
+                                "resolve", 
+                                "detect", 
+                                "reveal"
+                            ], "The word \"decipher\" in paragraph 2 can be best replaced by");
+
+                            renderMCQ(35, [
+                                "researchers", 
+                                "algorithms", 
+                                "clicks", 
+                                "interactions"
+                            ], "The word \"they\" in paragraph 3 refers to");
+
+                            renderMCQ(36, [
+                                "The study involved over 10,000 recordings of codas from various species of whales.", 
+                                "The research found that whale communication is simpler than previously thought.", 
+                                "AI algorithms were used to analyze whale codas and uncover patterns.", 
+                                "The study concluded that codas cannot carry more information than was once believed."
+                            ], "Which of the following is TRUE about the study discussed in this passage?");
+
+                            renderMCQ(37, [
+                                "general", 
+                                "conventional", 
+                                "prevalent", 
+                                "ordinary"
+                            ], "The word \"universal\" in paragraph 4 is closest in meaning to");
+
+                            renderMCQ(38, [
+                                "Studying whale communication will provide insights useful for understanding other communication systems.", 
+                                "Once we decode whale communication, we will fully understand how they transmit information.", 
+                                "Understanding whale communication systems has limited applications outside marine biology.", 
+                                "Whale communication can only be understood through long - term study without further application."
+                            ], "Which of the following best paraphrases the underlined sentence in paragraph 4?");
+
+                            renderMCQ(39, [
+                                "Sperm whales are much more intelligent than what people commonly think.", 
+                                "Project CETI is using the most advanced Al in order to achieve their end goal.", 
+                                "Codas with extra clicks are the most structurally similar to human language.", 
+                                "We have yet to fully grasp the complexity of the sperm whale language system."
+                            ], "Which of the following can most likely be inferred from the passage?");
+
+                            renderMCQ(40, [
+                                "Sperm whales are known for their large brains and complex group behavior, though their communication remains largely mysterious.", 
+                                "Researchers have fully decoded the structure and meaning of whale codas using advanced AI technology.", 
+                                "A recent study suggests that sperm whale communication may be more complex than previously thought, and researchers are beginning to unravel its structure and meaning with the help of AI.", 
+                                "The study found that whale communication is not related to behavior, but rather to random environmental factors."
+                            ], "Which of the following best summarizes the passage?");
+                        </script>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
+    <!-- Navigation Arrows -->
+    <div class="nav-arrows">
+        <button class="nav-arrow" onclick="previousQuestion()" id="prevBtn" title="Câu trước">‹</button>
+        <button class="nav-arrow" onclick="nextQuestion()" id="nextBtn" title="Câu tiếp theo">›</button>
+    </div>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="nav-row perScorableItem" aria-label="Questions">
+        <script>
+            function createNavPart(partNum, start, end) {
+                let html = `<div class="footer__questionWrapper___1tZ46 multiple ${partNum===1?'selected':''}" role="tablist">
+                    <button role="tab" class="footer__questionNo___3WNct" onclick="switchToPart(${partNum})">
+                        <span><span aria-hidden="true" class="section-prefix">Part </span><span class="sectionNr" aria-hidden="true">${partNum}</span><span class="attemptedCount" aria-hidden="true">0 of ${end - start + 1}</span></span>
+                    </button>
+                    <div class="footer__subquestionWrapper___9GgoP">`;
+                for(let i=start; i<=end; i++) {
+                    html += `<button class="subQuestion scorable-item" onclick="goToQuestion(${i})"><span class="sr-only">Question ${i}</span><span aria-hidden="true">${i}</span></button>`;
+                }
+                html += `</div></div>`;
+                document.write(html);
+            }
+            createNavPart(1, 1, 6);
+            createNavPart(2, 7, 12);
+            createNavPart(3, 13, 17);
+            createNavPart(4, 18, 22);
+            createNavPart(5, 23, 30);
+            createNavPart(6, 31, 40);
+        </script>
+        
+        <button id="deliver-button" aria-label="Review your answers" class="footer__deliverButton___3FM07">
+            <i class="fa fa-check" aria-hidden="true"></i>
+            <span>Nộp Bài</span>
+        </button>
+    </nav>
+
+    <!-- Context Menu for Highlights -->
+    <div id="contextMenu" class="context-menu">
+        <div id="menu-note" class="context-menu-item" onclick="addNote()">📝 Thêm ghi chú</div>
+        <div id="menu-highlight-colors" class="context-menu-item" style="display: flex; gap: 15px; justify-content: center; padding: 12px 16px;">
+            <button type="button" class="color-btn yellow" onclick="highlightText('yellow')" title="Highlight Vàng"></button>
+            <button type="button" class="color-btn green" onclick="highlightText('green')" title="Highlight Xanh"></button>
+            <button type="button" class="color-btn pink" onclick="highlightText('pink')" title="Highlight Hồng"></button>
+        </div>
+        <div id="menu-clear" class="context-menu-item" onclick="clearHighlight()">🗑️ Xóa highlight</div>
+        <div id="menu-clear-all" class="context-menu-item" onclick="clearAllHighlights()">🗑️ Xóa tất cả</div>
+    </div>
+
+    <!-- Results Modal -->
+    <div id="results-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close-btn" onclick="closeResultsModal()">&times;</button>
+            <h2>KẾT QUẢ BÀI THI</h2>
+            <div id="submit-status" style="display: none; text-align: center; margin-bottom: 15px; padding: 10px; border-radius: 4px; font-weight: bold;"></div>
+            
+            <div class="results-summary">
+                <p>Số câu đúng: <br><span id="results-score"></span> / 40</p>
+                <p>Tổng Điểm: <br><span id="results-band"></span></p>
+            </div>
+            
+            <div class="result-header-row">
+                <span>Q</span>
+                <span>Trả lời</span>
+                <span>Đáp án</span>
+            </div>
+            
+            <div id="results-details" class="results-details-container">
+                <!-- Data will be injected here via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Core Data and Logic -->
     <script>
-        // Dữ liệu Đáp án và Giải thích chi tiết
-        const dapAn = {
-            1: 'A', 2: 'A', 3: 'B', 4: 'A', 5: 'A', 6: 'C', 7: 'B', 8: 'A', 9: 'A', 10: 'B',
-            11: 'A', 12: 'C', 13: 'C', 14: 'D', 15: 'A', 16: 'A', 17: 'D', 18: 'C', 19: 'A', 20: 'D',
-            21: 'B', 22: 'C', 23: 'C', 24: 'A', 25: 'A', 26: 'D', 27: 'B', 28: 'A', 29: 'C', 30: 'C',
-            31: 'C', 32: 'D', 33: 'D', 34: 'A', 35: 'A', 36: 'C', 37: 'A', 38: 'A', 39: 'D', 40: 'C'
-        };
-
-        const giaiThich = {
-            1: "Dùng tính từ đuôi -ing (terrifying) để miêu tả tính chất của trải nghiệm (experience).",
-            2: "Trật tự cụm danh từ: tính từ (strong, stormy) đứng trước danh từ (winds).",
-            3: "Rút gọn mệnh đề quan hệ chủ động dùng V-ing (hitting) thay thế cho 'which hit'.",
-            4: "Cụm từ cố định: in need of (cần thiết, trong tình trạng cần sự giúp đỡ).",
-            5: "Cụm từ cố định: make a difference (tạo ra sự khác biệt).",
-            6: "Cấu trúc: hope + to V (hy vọng làm gì đó). Đáp án C (to restore).",
-            7: "Many others = nhiều người khác (đại từ 'others' thay thế cho học sinh).",
-            8: "Figure out: hiểu ra, tìm ra. Complex words: những từ phức tạp.",
-            9: "Challenging (thử thách). Bài thi mang tính thử thách nhưng có thể phân loại đúng năng lực.",
-            10: "On account of = bởi vì (Do độ khó tăng lên, bài thi được đánh giá là công bằng).",
-            11: "The number of + N(số nhiều) dùng với động từ số ít (remains). Dịch: Số lượng học sinh.",
-            12: "The depth of students' preparedness: chiều sâu của sự chuẩn bị.",
-            13: "Trình tự hợp lý: (c) Hỏi thăm -> (b) Đáp bị ốm -> (a) Lời khuyên đi khám bác sĩ.",
-            14: "Trình tự: (b) Bạn có làm gì vui không -> (a) Cần thư giãn -> (c) Bạn đã làm gì -> (d) Đi leo núi -> (e) Cách hoàn hảo để giải tỏa.",
-            15: "Trình tự viết thư: (c) Hỏi thăm sức khỏe -> (a) Báo tin nhận việc mới -> (b) Kế hoạch thăm gia đình -> (d) Lời chào tạm biệt.",
-            16: "Đoạn văn: (a) Giáo dục trực tuyến phổ biến -> (b) Giải thích ý nghĩa 'this means' -> (e) Hơn nữa (furthermore) -> (c) Thêm vào đó (In addition) -> (d) Kết luận (In conclusion).",
-            17: "Đoạn văn: (b) Học ngôn ngữ rất khó -> (d) Nhiều người nản lòng -> (a) Tuy nhiên khi có nền tảng -> (c) Thực hành liên tục -> (e) Cuối cùng đạt thành quả.",
-            18: "Being integrated into systems designed to automate: Đang được tích hợp vào các hệ thống tự động hóa.",
-            19: "Making decisions which traditionally relied on human expertise: Đưa ra những quyết định mà trước đây phụ thuộc vào chuyên gia con người.",
-            20: "In order to improve efficiency: Nhằm mục đích cải thiện hiệu suất.",
-            21: "Perform tasks like grading: Thực hiện các tác vụ như chấm điểm.",
-            22: "Operates consistently to ensure: Hoạt động nhất quán để đảm bảo tiêu chuẩn đạo đức.",
-            23: "Increased creativity (Tăng cường sáng tạo) không được đề cập trong đoạn 1.",
-            24: "Restorative (phục hồi) trái nghĩa với damaging (phá hoại).",
-            25: "Came across (tình cờ thấy/phát hiện) đồng nghĩa với discovered.",
-            26: "It thay thế cho 'the lack of water' (việc thiếu nước).",
-            27: "Đoạn 3 chỉ ra rằng: Con người cổ đại chịu nhiều căng thẳng hơn khi không có đủ nước (the lack of water posed a direct threat to life).",
-            28: "Câu này paraphrase lại ý: Ở ngoài thiên nhiên giúp làm mới lại thể chất lẫn tinh thần.",
-            29: "Đoạn 3 đề cập đến quá trình tiến hóa (the process of our evolution).",
-            30: "Đoạn 3 giải thích lý do (why) không gian xanh dương giúp thư giãn hơn (vì lý do sinh tồn cổ đại).",
-            31: "Câu [III] nói về tính xã hội, câu chèn vào cung cấp thêm thông tin chứng minh khả năng ra quyết định tập thể.",
-            32: "Đoạn 1 nêu: Chúng có khả năng đưa ra quyết định cùng nhau (capable of making decisions as a group).",
-            33: "Behavioral experiments (Thí nghiệm hành vi) không được đề cập là phương pháp ở đoạn 2 và 3.",
-            34: "Decipher (giải mã) đồng nghĩa với decode.",
-            35: "They thay thế cho nhóm nghiên cứu (researchers).",
-            36: "Theo đoạn 3: Thuật toán AI được sử dụng để phân tích các đoạn mã coda và tìm ra mẫu.",
-            37: "Universal (phổ quát, chung) đồng nghĩa với general.",
-            38: "Paraphrase: Việc nghiên cứu hệ thống giao tiếp của cá voi mang lại hiểu biết hữu ích cho nhiều mục đích hoặc hệ thống khác.",
-            39: "Suy luận từ câu cuối: Chúng ta vẫn đang ở vạch xuất phát, chưa hoàn toàn hiểu được sự phức tạp ngôn ngữ của cá voi.",
-            40: "Tóm tắt: Giao tiếp cá voi phức tạp hơn suy nghĩ trước đây và AI đang giúp các nhà nghiên cứu bắt đầu giải mã điều này."
-        };
-
-        const questionsData = {
-            part1: [
-                {id: 1, ops: ["A. terrifying", "B. terrified", "C. terrifies", "D. terrify"]},
-                {id: 2, ops: ["A. strong stormy winds", "B. winds strong stormy", "C. stormy strong winds", "D. stormy winds strong"]},
-                {id: 3, ops: ["A. which hit", "B. hitting", "C. that hits", "D. hit"]},
-                {id: 4, ops: ["A. in", "B. at", "C. on", "D. with"]},
-                {id: 5, ops: ["A. make", "B. take", "C. do", "D. have"]},
-                {id: 6, ops: ["A. to be restored", "B. restoring", "C. to restore", "D. being restored"]}
-            ],
-            part2: [
-                {id: 7, ops: ["A. another", "B. others", "C. other", "D. the other"]},
-                {id: 8, ops: ["A. figure out", "B. look for", "C. take in", "D. give up"]},
-                {id: 9, ops: ["A. challenging", "B. relaxing", "C. simple", "D. boring"]},
-                {id: 10, ops: ["A. Instead of", "B. On account of", "C. Irrespective of", "D. In spite of"]},
-                {id: 11, ops: ["A. number", "B. amount", "C. quantity", "D. level"]},
-                {id: 12, ops: ["A. accuracy", "B. width", "C. depth", "D. randomness"]}
-            ],
-            part3: [
-                {id: 13, ops: ["A. c-a-b", "B. b-c-a", "C. c-b-a", "D. a-c-b"]},
-                {id: 14, ops: ["A. c-b-a-e-d", "B. c-e-d-b-a", "C. d-b-a-e-c", "D. b-a-c-d-e"]},
-                {id: 15, ops: ["A. c-a-b-d", "B. d-a-b-c", "C. c-b-a-d", "D. a-b-d-c"]},
-                {id: 16, ops: ["A. a-b-e-c-d", "B. b-c-e-d-a", "C. d-a-c-e-b", "D. a-e-b-c-d"]},
-                {id: 17, ops: ["A. d-b-a-c-e", "B. b-a-c-d-e", "C. a-b-d-e-c", "D. b-d-a-c-e"]}
-            ],
-            part4: [
-                {id: 18, ops: ["A. being integrating into critical industries that handle complex decision-making processes", "B. integrated in workflows where human input is gradually becoming unnecessary", "C. being integrated into systems designed to automate repetitive and data - driven tasks", "D. being integrate into systems which still depend on human supervision"]},
-                {id: 19, ops: ["A. making decisions which traditionally relied on human expertise", "B. to make decisions that required careful consideration and judgment", "C. making of decisions that influence significant outcomes in various sectors", "D. make decisions in situations that require ethical responsibility"]},
-                {id: 20, ops: ["A. with aim improve processes and increase productivity", "B. in order improving operations across various departments", "C. with the goal of to enhancing performance and minimizing errors", "D. in order to improve efficiency and reduce human mistakes"]},
-                {id: 21, ops: ["A. helps performing automated grading and feedback tasks", "B. perform tasks like grading and giving feedback for students", "C. be applied to doing various tasks in educational settings", "D. performs tasks to providing real - time feedback to students"]},
-                {id: 22, ops: ["A. operating in a manner which respects human oversight", "B. operate with consistent regulations to guarantee fairness", "C. operates consistently to ensure that ethical standards are met", "D. are operating according to principles of fairness and transparency"]}
-            ],
-            part5: [
-                {id: 23, text: "Which of the following is NOT mentioned in paragraph 1 as a benefit of spending time in nature?", ops: ["A. Improvements in mental health", "B. Cognitive benefits", "C. Increased creativity", "D. Emotional well - being"]},
-                {id: 24, text: "The word \"restorative\" in paragraph 1 is OPPOSITE in meaning to", ops: ["A. damaging", "B. energizing", "C. refreshing", "D. beneficial"]},
-                {id: 25, text: "The word \"came across\" in paragraph 2 could be best replaced by", ops: ["A. discovered", "B. ignored", "C. created", "D. explained"]},
-                {id: 26, text: "The word \"it\" in paragraph 3 refers to", ops: ["A. stressor", "B. blood pressure", "C. cardiac stress", "D. water"]},
-                {id: 27, text: "Which of the following is TRUE, according to paragraphs 2 and 3?", ops: ["A. Finding water was the biggest survival challenge for early humans.", "B. Early humans suffered more stress when there is not enough water.", "C. Only by being in nature can we heal both our body and our spirit.", "D. The larger the area of water you look at, the more relaxed you are."]},
-                {id: 28, text: "Which of the following best paraphrases the underlined sentence in paragraph 4?", ops: ["A. Spending time outdoors in nature can refresh both your physical and mental state, providing peaceful and uplifting experiences.", "B. Nature is a perfect escape from modern life, allowing people to rest while boosting their physical and spiritual well - being.", "C. Nature offers a temporary distraction from life's problems, but its benefits are limited to short-term relaxation.", "D. Being in nature brings challenges to both the mind and body, creating feelings of stress and discomfort."]},
-                {id: 29, text: "In which paragraph does the writer mention the possible evolutionary reasons why viewing water can be more relaxing than viewing green areas?", ops: ["A. Paragraph 1", "B. Paragraph 2", "C. Paragraph 3", "D. Paragraph 4"]},
-                {id: 30, text: "In which paragraph does the writer explain why viewing water might be more relaxing than viewing green areas?", ops: ["A. Paragraph 1", "B. Paragraph 2", "C. Paragraph 3", "D. Paragraph 4"]}
-            ],
-            part6: [
-                {id: 31, text: "Where in paragraph 1 does the following sentence best fit?<br><em>They demonstrate a high level of sociability and are capable of collective decision - making.</em>", ops: ["A. [I]", "B. [II]", "C. [III]", "D. [IV]"]},
-                {id: 32, text: "What do we learn about sperm whales in paragraph 1?", ops: ["A. They are one of the most interesting creatures for humans to study.", "B. Their brains are more advanced than human brains by six times.", "C. The size of their brains is the reason why they are highly social.", "D. They have the ability to make decisions together rather than alone."]},
-                {id: 33, text: "According to paragraph 2, which of the following is NOT mentioned as a tool or method used by researchers to study whale communication?", ops: ["A. AI algorithms for pattern recognition", "B. Statistical models", "C. Recordings of codas", "D. Behavioral experiments with whales"]},
-                {id: 34, text: "The word \"decipher\" in paragraph 2 can be best replaced by", ops: ["A. decode", "B. resolve", "C. detect", "D. reveal"]},
-                {id: 35, text: "The word \"they\" in paragraph 3 refers to", ops: ["A. researchers", "B. algorithms", "C. clicks", "D. interactions"]},
-                {id: 36, text: "Which of the following is TRUE about the study discussed in this passage?", ops: ["A. The study involved over 10,000 recordings of codas from various species of whales.", "B. The research found that whale communication is simpler than previously thought.", "C. AI algorithms were used to analyze whale codas and uncover patterns.", "D. The study concluded that codas cannot carry more information than was once believed."]},
-                {id: 37, text: "The word \"universal\" in paragraph 4 is closest in meaning to", ops: ["A. general", "B. conventional", "C. prevalent", "D. ordinary"]},
-                {id: 38, text: "Which of the following best paraphrases the underlined sentence in paragraph 4?", ops: ["A. Studying whale communication will provide insights useful for understanding other communication systems.", "B. Once we decode whale communication, we will fully understand how they transmit information.", "C. Understanding whale communication systems has limited applications outside marine biology.", "D. Whale communication can only be understood through long - term study without further application."]},
-                {id: 39, text: "Which of the following can most likely be inferred from the passage?", ops: ["A. Sperm whales are much more intelligent than what people commonly think.", "B. Project CETI is using the most advanced AI in order to achieve their end goal.", "C. Codas with extra clicks are the most structurally similar to human language.", "D. We have yet to fully grasp the complexity of the sperm whale language system."]},
-                {id: 40, text: "Which of the following best summarizes the passage?", ops: ["A. Sperm whales are known for their large brains and complex group behavior, though their communication remains largely mysterious.", "B. Researchers have fully decoded the structure and meaning of whale codas using advanced AI technology.", "C. A recent study suggests that sperm whale communication may be more complex than previously thought, and researchers are beginning to unravel its structure and meaning with the help of AI.", "D. The study found that whale communication is not related to behavior, but rather to random environmental factors."]}
-            ]
-        };
-
-        // Render Questions
-        function renderQuestions(partData, containerId) {
-            const container = document.getElementById(containerId);
-            partData.forEach(q => {
-                let optionsHTML = '';
-                q.ops.forEach(opt => {
-                    const val = opt.charAt(0); // A, B, C or D
-                    optionsHTML += `<label><input type="radio" name="q${q.id}" value="${val}"> ${opt}</label>`;
-                });
-                
-                const qText = q.text ? `<div class="question-text">Question ${q.id}: ${q.text}</div>` : `<div class="question-text">Question ${q.id}:</div>`;
-
-                container.innerHTML += `
-                    <div class="question-block" id="q-block-${q.id}">
-                        ${qText}
-                        <div class="options">
-                            ${optionsHTML}
-                        </div>
-                        <div class="explanation" id="exp-${q.id}"></div>
-                    </div>
-                `;
-            });
+    // Toàn bộ dữ liệu đáp án chuẩn của đề 03
+    window.testMeta = {
+        "totalQuestions": 40,
+        "parts": [
+            {"part": 1, "start": 1, "end": 6},
+            {"part": 2, "start": 7, "end": 12},
+            {"part": 3, "start": 13, "end": 17},
+            {"part": 4, "start": 18, "end": 22},
+            {"part": 5, "start": 23, "end": 30},
+            {"part": 6, "start": 31, "end": 40}
+        ],
+        "correctAnswers": {
+            "1":"A", "2":"A", "3":"B", "4":"A", "5":"A", "6":"C",
+            "7":"B", "8":"A", "9":"A", "10":"D", "11":"A", "12":"C",
+            "13":"C", "14":"D", "15":"A", "16":"A", "17":"D",
+            "18":"C", "19":"A", "20":"D", "21":"B", "22":"C",
+            "23":"C", "24":"A", "25":"A", "26":"D", "27":"B", "28":"A", "29":"C", "30":"C",
+            "31":"C", "32":"D", "33":"D", "34":"A", "35":"A", "36":"C", "37":"A", "38":"A", "39":"D", "40":"C"
         }
+    };
 
-        renderQuestions(questionsData.part1, 'questions-part-1');
-        renderQuestions(questionsData.part2, 'questions-part-2');
-        renderQuestions(questionsData.part3, 'questions-part-3');
-        renderQuestions(questionsData.part4, 'questions-part-4');
-        renderQuestions(questionsData.part5, 'questions-part-5');
-        renderQuestions(questionsData.part6, 'questions-part-6');
+    // Giải thích chi tiết và liên kết minh chứng
+    window.testExplanations = {
+        "1": "<div class='explanation-content'><b>Từ vựng:</b> Tính từ 'terrifying' (đáng sợ) bổ nghĩa cho danh từ 'experience' (trải nghiệm đáng sợ). Tính từ 'terrified' chỉ dùng để miêu tả cảm xúc của con người.</div>",
+        "2": "<div class='explanation-content'><b>Cụm danh từ:</b> 'strong stormy winds' (những cơn gió bão mạnh). Trật tự tính từ: 'strong' (mức độ/kích thước) đứng trước 'stormy' (tính chất).</div>",
+        "3": "<div class='explanation-content'><b>Ngữ pháp:</b> Rút gọn mệnh đề quan hệ dạng chủ động: 'which hit' -> <b>hitting</b>.</div>",
+        "4": "<div class='explanation-content'><b>Giới từ/Thành ngữ:</b> Cụm từ cố định <b>in need of</b> (đang cần cái gì đó). 'in need of emergency assistance' (cần hỗ trợ khẩn cấp).</div>",
+        "5": "<div class='explanation-content'><b>Collocation:</b> Cụm từ <b>make a difference</b> (tạo ra sự khác biệt, mang lại sự thay đổi tốt hơn).</div>",
+        "6": "<div class='explanation-content'><b>Ngữ pháp:</b> Động từ 'hope' + <b>to V</b> (hy vọng làm gì). 'restore' mang nghĩa khôi phục, ở đây là nghĩa chủ động nên dùng 'to restore'.</div>",
+        
+        "7": "<div class='explanation-content'><b>Đại từ:</b> Từ <b>others</b> đóng vai trò đại từ thay thế cho 'other students' (những học sinh khác).</div>",
+        "8": "<div class='explanation-content'><b>Phrasal verb:</b> <b>figure out</b> mang nghĩa 'tìm ra, hiểu ra, giải quyết được' (những từ vựng phức tạp).</div>",
+        "9": "<div class='explanation-content'><b>Từ vựng:</b> <b>challenging</b> (đầy thử thách, khó khăn). Nó phù hợp với ngữ cảnh kỳ thi được cho là ngắn nhưng khó hơn.</div>",
+        "10": "<div class='explanation-content'><b>Liên từ:</b> <b>In spite of</b> (Mặc dù). 'Mặc dù độ khó tăng lên, kỳ thi vẫn được coi là công bằng'.</div>",
+        "11": "<div class='explanation-content'><b>Ngữ pháp:</b> <b>the number of</b> + danh từ đếm được số nhiều (students) mang nghĩa 'số lượng...'.</div>",
+        "12": "<div class='explanation-content'><b>Từ vựng:</b> <b>depth</b> (chiều sâu). Kỳ thi sẽ kiểm tra chiều sâu sự chuẩn bị của học sinh.</div>",
+        
+        "13": "<div class='explanation-content'><b>Logic hội thoại:</b> c (Hỏi thăm sức khỏe: Dạo này sao rồi?) -> b (Không khỏe lắm, mệt mỏi mấy ngày nay) -> a (Nghe có vẻ nghiêm trọng, đã đi khám bác sĩ chưa?). Trình tự <b>c-b-a</b>.</div>",
+        "14": "<div class='explanation-content'><b>Logic hội thoại:</b> b (Cuối tuần có làm gì vui không?) -> a (Có, cần thư giãn sau 1 tuần mệt mỏi) -> c (Tuyệt quá! Bạn đã làm gì?) -> d (Đi leo núi, không khí tuyệt vời) -> e (Cách xả stress hoàn hảo). Trình tự <b>b-a-c-d-e</b>.</div>",
+        "15": "<div class='explanation-content'><b>Bố cục lá thư:</b> c (Chào hỏi và báo tin) -> a (Kể tin nhận việc ở New York) -> b (Dự định thăm gia đình và muốn gặp bạn) -> d (Lời chào tạm biệt). Trình tự <b>c-a-b-d</b>.</div>",
+        "16": "<div class='explanation-content'><b>Bố cục đoạn văn:</b> a (Giáo dục online phổ biến nhờ tính linh hoạt) -> b (Điều này nghĩa là học sinh có thể học từ bất cứ đâu) -> e (Hơn nữa, có thể truy cập mọi lúc) -> c (Ngoài sự tiện lợi, khóa học còn cung cấp tài nguyên) -> d (Kết luận). Trình tự <b>a-b-e-c-d</b>.</div>",
+        "17": "<div class='explanation-content'><b>Bố cục đoạn văn:</b> b (Học ngôn ngữ rất khó lúc đầu do ngữ pháp, từ vựng) -> d (Nhiều người nản chí nhưng trôi chảy cần thời gian) -> a (Tuy nhiên, khi có nền tảng, công việc thực sự mới bắt đầu) -> c (Với sự luyện tập liên tục, sẽ tiến bộ) -> e (Cuối cùng, cảm giác thành tựu). Trình tự <b>b-d-a-c-e</b>.</div>",
 
-        // Initialize Tracker
-        const trackerGrid = document.getElementById('tracker-grid');
-        for (let i = 1; i <= 40; i++) {
-            trackerGrid.innerHTML += `<div class="track-box" id="track-${i}" onclick="scrollToQ(${i})">${i}</div>`;
-        }
+        "18": "<div class='explanation-content'><b>Ngữ cảnh:</b> AI hiện nay đang \"được tích hợp vào các hệ thống tự động hóa các tác vụ lặp đi lặp lại\". Cấu trúc bị động hiện tại tiếp diễn: <b>being integrated into systems...</b>.</div>",
+        "19": "<div class='explanation-content'><b>Cấu trúc/Rút gọn mệnh đề:</b> Đặc biệt trong việc <b>making decisions</b> (đưa ra các quyết định) vốn dựa vào con người.</div>",
+        "20": "<div class='explanation-content'><b>Cấu trúc chỉ mục đích:</b> <b>in order to + V</b> (để làm gì). \"in order to improve efficiency and reduce human mistakes\".</div>",
+        "21": "<div class='explanation-content'><b>Cấu trúc câu:</b> AI có thể (can) + <b>V (nguyên thể)</b>. Chọn \"perform tasks like grading and giving feedback for students\".</div>",
+        "22": "<div class='explanation-content'><b>Ngữ pháp:</b> ensure that AI (số ít) + <b>operates</b>. \"đảm bảo AI hoạt động nhất quán để đáp ứng tiêu chuẩn đạo đức\".</div>",
 
-        // Scroll to question
-        function scrollToQ(id) {
-            document.getElementById(`q-block-${id}`).scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
+        "23": "<div class='explanation-content'><b>Chi tiết Đọc hiểu:</b> Yếu tố KHÔNG được đề cập là \"Increased creativity\".<br><br>Trích dẫn: \"<i>improvements in mental health, mood, emotional well-being, and cognitive benefits.</i>\"</div>",
+        "24": "<div class='explanation-content'><b>Trái nghĩa:</b> \"restorative\" (giúp phục hồi, khỏe lại) >< <b>damaging</b> (gây tổn hại).<br><br>Trích dẫn: \"<i>pleasant and restorative</i>\"</div>",
+        "25": "<div class='explanation-content'><b>Từ vựng:</b> \"came across\" (tình cờ đọc được, tìm thấy) đồng nghĩa với <b>discovered</b> (khám phá, tìm ra).<br><br>Trích dẫn: \"<i>he came across, showing that people</i>\"</div>",
+        "26": "<div class='explanation-content'><b>Tham chiếu đại từ:</b> \"detecting water or simply just looking at <b>it</b>\" -> Từ 'it' thay thế cho <b>water</b>.<br><br>Trích dẫn: \"<i>successfully detecting water or simply just looking at it</i>\"</div>",
+        "27": "<div class='explanation-content'><b>Đọc hiểu chi tiết:</b> Con người cổ đại chịu nhiều căng thẳng hơn khi KHÔNG CÓ ĐỦ NƯỚC (the lack of water).<br><br>Trích dẫn: \"<i>the lack of water has always been a major challenge, as it posed a direct threat to life, leading to heightened levels of stress</i>\"</div>",
+        "28": "<div class='explanation-content'><b>Paraphrase:</b> Câu gốc: \"Ở trong thiên nhiên giúp phục hồi cơ thể, tâm trí, và tinh thần... mang đến sự thư giãn\". Tương đương đáp án A.<br><br>Trích dẫn: \"<i>Being in nature can help you re-invigorate your body, mind, and spirit, offering moments of awe, calm, and relaxation.</i>\"</div>",
+        "29": "<div class='explanation-content'><b>Ý chính đoạn:</b> Đoạn 3 đề cập đến \"the process of our evolution\" (quá trình tiến hóa) để giải thích.<br><br>Trích dẫn: \"<i>the reason might be related to the process of our evolution.</i>\"</div>",
+        "30": "<div class='explanation-content'><b>Ý chính đoạn:</b> Tương tự, Đoạn 3 là phần tác giả GIAỈ THÍCH lý do (the reason might be related to...).<br><br>Trích dẫn: \"<i>the reason might be related to the process of our evolution.</i>\"</div>",
 
-        // Update Tracker on Radio Change
-        document.querySelectorAll('input[type=radio]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                if(isSubmitted) return;
-                const qNum = this.name.replace('q', '');
-                document.getElementById(`track-${qNum}`).classList.add('active');
-            });
-        });
+        "31": "<div class='explanation-content'><b>Điền câu:</b> Câu \"Họ thể hiện tính xã hội cao và khả năng quyết định tập thể\" là một cách diễn đạt lại/tóm tắt tương tự nội dung \"They're also highly social and capable of making decisions as a group.\" ở vị trí [III].<br><br>Trích dẫn: \"<i>They're also highly social and capable of making decisions as a group.</i>\"</div>",
+        "32": "<div class='explanation-content'><b>Chi tiết Đọc hiểu:</b> Ở đoạn 1, chúng ta biết rằng cá nhà táng (sperm whales) có khả năng đưa ra quyết định CÙNG NHAU (making decisions as a group / together).<br><br>Trích dẫn: \"<i>They're also highly social and capable of making decisions as a group.</i>\"</div>",
+        "33": "<div class='explanation-content'><b>Chi tiết Đọc hiểu (Câu hỏi NOT):</b> Các nhà nghiên cứu dùng mô hình thống kê, bản ghi âm, thuật toán AI. KHÔNG CÓ 'Thử nghiệm hành vi' (Behavioral experiments).<br><br>Trích dẫn: \"<i>used statistical models to analyze whale codas... examined recordings of 8,719 codas... using a mix of Al algorithms</i>\"</div>",
+        "34": "<div class='explanation-content'><b>Từ vựng:</b> \"decipher\" (giải mã) = <b>decode</b>.<br><br>Trích dẫn: \"<i>decipher not just the structure but the actual meaning</i>\"</div>",
+        "35": "<div class='explanation-content'><b>Tham chiếu đại từ:</b> \"between multiple whales, which <b>they</b> say suggests...\" Từ 'they' chỉ những NHÀ NGHIÊN CỨU (researchers).<br><br>Trích dẫn: \"<i>which they say suggests that codas can carry more information</i>\"</div>",
+        "36": "<div class='explanation-content'><b>Tìm ý đúng:</b> Thuật toán AI được dùng để phân tích tín hiệu âm thanh và nhận diện mẫu (pattern recognition).<br><br>Trích dẫn: \"<i>using a mix of Al algorithms for pattern recognition and classification.</i>\"</div>",
+        "37": "<div class='explanation-content'><b>Từ vựng:</b> \"universal\" (phổ quát, chung cho tất cả) gần nghĩa với <b>general</b>.<br><br>Trích dẫn: \"<i>a more universal system that could be used across species</i>\"</div>",
+        "38": "<div class='explanation-content'><b>Paraphrase:</b> Câu gốc: Việc tìm ra cách mã hóa thông tin của hệ thống giao tiếp này sẽ có rất nhiều mục đích vượt ra ngoài việc chỉ nghiên cứu cá nhà táng (giúp hiểu các hệ thống giao tiếp khác).<br><br>Trích dẫn: \"<i>slowly beginning to understand what's being communicated could have many purposes beyond whales.</i>\"</div>",
+        "39": "<div class='explanation-content'><b>Suy luận (Inference):</b> Câu cuối: \"Chúng ta mới chỉ ở vạch xuất phát...\" cho thấy con người VẪN CHƯA HIỂU ĐƯỢC TOÀN BỘ (have yet to fully grasp) sự phức tạp của ngôn ngữ cá nhà táng.<br><br>Trích dẫn: \"<i>We're very much at the beginning, but we are slowly making our way through.</i>\"</div>",
+        "40": "<div class='explanation-content'><b>Tóm tắt bài:</b> Giao tiếp của cá nhà táng phức tạp hơn ta nghĩ, và con người đang bắt đầu sử dụng AI để giải mã (unravel) cấu trúc và ý nghĩa của nó.<br><br>Trích dẫn: \"<i>sperm whales' communication is actually much more expressive and complicated than was previously thought.</i>\"</div>"
+    };
 
-        // Timer Logic
-        let timeLeft = 50 * 60; // 50 minutes
-        const timerEl = document.getElementById('timer');
-        let timerInterval = setInterval(() => {
-            if (timeLeft <= 0) {
-                clearInterval(timerInterval);
-                submitExam();
-            } else {
-                timeLeft--;
-                let m = Math.floor(timeLeft / 60);
-                let s = timeLeft % 60;
-                timerEl.innerText = `⏳ ${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+    document.addEventListener('DOMContentLoaded', () => {
+        const launchScreen = document.getElementById('launchScreen');
+        const app = document.getElementById('app');
+        const startNormalBtn = document.getElementById('startNormalBtn');
+        const launchTitle = document.getElementById('launchTestTitle');
+        if (launchTitle && document.title) { launchTitle.textContent = document.title; }
+        
+        let examStarted = false;
+        let currentStudentName = "";
+        let currentStudentClass = "";
+
+        const beginExam = () => {
+            if (examStarted) return;
+            const nameInput = document.getElementById('studentName');
+            const classInput = document.getElementById('studentClass');
+            const errorMsg = document.getElementById('launchError');
+            
+            if (!nameInput.value.trim() || !classInput.value.trim()) {
+                errorMsg.style.display = 'block';
+                return;
             }
-        }, 1000);
+            errorMsg.style.display = 'none';
+            currentStudentName = nameInput.value.trim();
+            currentStudentClass = classInput.value.trim();
+            examStarted = true;
+            
+            launchScreen.style.display = 'none';
+            app.style.display = 'block';
+            initialize();
+        };
 
-        // Persistent Text Highlight Logic
-        document.addEventListener('mouseup', function(e) {
-            if (e.target.closest('.text-content')) {
-                let selection = window.getSelection();
-                if (selection.toString().trim().length > 0) {
-                    try {
-                        let range = selection.getRangeAt(0);
-                        let span = document.createElement('span');
-                        span.className = 'highlight';
-                        range.surroundContents(span);
-                        selection.removeAllRanges();
-                    } catch (error) {
-                        console.log("Không thể highlight khi chọn qua nhiều thẻ.");
-                    }
+        if (startNormalBtn) { startNormalBtn.addEventListener('click', beginExam); }
+        
+        const testMeta = window.testMeta;
+        const partRanges = testMeta.parts;
+        const correctAnswers = testMeta.correctAnswers;
+        const totalQuestions = testMeta.totalQuestions;
+
+        let currentPassage = partRanges[0]?.part || 1;
+        let currentQuestion = partRanges[0]?.start || 1;
+        let timeInSeconds = 3000;
+        let timerInterval;
+        let hasSubmitted = false;
+        
+        const markedQuestions = new Set();
+        const markButtons = new Map();
+        const timerDisplay = document.querySelector('.timer-display');
+        const timerToggleButton = document.getElementById('timer-toggle-btn');
+        const deliverButton = document.getElementById('deliver-button');
+        const resizer = document.getElementById('resizer');
+        const passagePanel = document.getElementById('passage-panel');
+        
+        let pendingSelectionRange = null;
+        let activeAnnotationTarget = null;
+        const contextMenu = document.getElementById('contextMenu');
+
+        const playIcon = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M8 5v14l11-7L8 5z"/></svg>';
+        const pauseIcon = '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
+        const bookmarkIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h12v16l-6-4-6 4z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path></svg>';
+
+        function initialize() {
+            startTimer();
+            switchToPart(partRanges[0]?.part || 1);
+            
+            document.body.addEventListener('input', updateAllIndicators);
+            document.body.addEventListener('change', updateAllIndicators);
+            deliverButton.addEventListener('click', () => {
+                if(confirm("Bạn có chắc chắn muốn nộp bài? Hệ thống sẽ ghi nhận điểm ngay lập tức.")){
+                    checkAnswers();
                 }
-            }
-        });
-
-        // Submission & Grading
-        let isSubmitted = false;
-        function submitExam() {
-            if (isSubmitted) return;
-            let answered = 0;
-            let score = 0;
+            });
+            timerToggleButton.addEventListener('click', toggleTimer);
             
-            for (let i = 1; i <= 40; i++) {
-                const selected = document.querySelector(`input[name="q${i}"]:checked`);
-                if (selected) {
-                    answered++;
-                    if (selected.value === dapAn[i]) score++;
-                }
-            }
+            document.querySelectorAll('.multi-choice-question').forEach(el => {
+                el.addEventListener('click', (ev) => {
+                    if (ev.target.closest('input, label, .explanation-box, .mark-toggle-btn')) { return; }
+                    const qNum = parseInt(el.dataset.qStart, 10);
+                    if (currentQuestion !== qNum) { goToQuestion(qNum); }
+                });
+            });
             
-            let unanswered = 40 - answered;
-            document.getElementById('score-text').innerText = `${score} / 40`;
-            document.getElementById('unanswered-count').innerText = unanswered;
-            document.getElementById('modal').style.display = 'flex';
+            resizer.addEventListener('mousedown', initResize, false);
+            initializeContextMenu();
+            initializeQuestionMarkers();
         }
 
-        function viewAnswers() {
-            isSubmitted = true;
-            document.getElementById('modal').style.display = 'none';
-            clearInterval(timerInterval);
+        function highlightEvidenceInPassage(explanationText) {
+            let targetPhrase = "";
+            let evidenceMatch = explanationText.match(/Trích dẫn:\s*(.*?)(<\/div>|$)/i);
+            if (evidenceMatch) {
+                targetPhrase = evidenceMatch[1].replace(/<[^>]+>/g, '').replace(/["“”]/g, '').trim();
+            }
+            if (!targetPhrase) return;
+
+            let cleanQuery = targetPhrase.replace(/^\.\.\./, "").replace(/\.\.\.$/, "").trim();
+            if (!cleanQuery) return;
+
+            const currentPassageEl = passagePanel.querySelector('.reading-passage:not(.hidden)');
+            if (!currentPassageEl) return;
+
+            currentPassageEl.querySelectorAll('.highlight-blue').forEach(span => {
+                const parent = span.parentNode;
+                while (span.firstChild) { parent.insertBefore(span.firstChild, span); }
+                parent.removeChild(span);
+                parent.normalize(); 
+            });
+
+            const walker = document.createTreeWalker(currentPassageEl, NodeFilter.SHOW_TEXT, null, false);
+            const textNodes = [];
+            let fullText = "";
+            let node;
             
-            for (let i = 1; i <= 40; i++) {
-                const selected = document.querySelector(`input[name="q${i}"]:checked`);
-                const correctAns = dapAn[i];
-                const trackBox = document.getElementById(`track-${i}`);
-                const allLabels = document.querySelectorAll(`input[name="q${i}"]`);
-                
-                // Disable & Style radios
-                allLabels.forEach(radio => {
-                    radio.disabled = true;
-                    if (radio.value === correctAns) {
-                        radio.parentElement.classList.add('correct-ans');
-                    }
+            while (node = walker.nextNode()) {
+                textNodes.push({
+                    node: node,
+                    start: fullText.length,
+                    end: fullText.length + node.nodeValue.length
                 });
+                fullText += node.nodeValue;
+            }
+
+            const searchStr = cleanQuery.replace(/\s+/g, ' ').trim();
+            const pattern = searchStr.split(' ').map(word => word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('\\s+');
+            const regex = new RegExp(pattern, 'i');
+            
+            const fuzzyMatch = fullText.match(regex);
+            
+            if (fuzzyMatch) {
+                const matchStartIdx = fuzzyMatch.index;
+                const matchEndIdx = fuzzyMatch.index + fuzzyMatch[0].length;
                 
-                // Grade & Tracker Update
-                trackBox.classList.remove('active');
-                if (selected) {
-                    if (selected.value === correctAns) {
-                        trackBox.classList.add('correct');
+                const nodesToWrap = [];
+                for (let i = 0; i < textNodes.length; i++) {
+                    const map = textNodes[i];
+                    if (map.end <= matchStartIdx) continue;
+                    if (map.start >= matchEndIdx) break;
+
+                    const startOffset = Math.max(0, matchStartIdx - map.start);
+                    const endOffset = Math.min(map.node.nodeValue.length, matchEndIdx - map.start);
+                    nodesToWrap.push({ node: map.node, startOffset, endOffset });
+                }
+
+                nodesToWrap.reverse().forEach(info => {
+                    const n = info.node;
+                    if (info.startOffset === 0 && info.endOffset === n.nodeValue.length) {
+                        const span = document.createElement('span');
+                        span.className = 'annotation annotation-highlight highlight-blue';
+                        n.parentNode.insertBefore(span, n);
+                        span.appendChild(n);
                     } else {
-                        selected.parentElement.classList.add('wrong-ans');
-                        trackBox.classList.add('wrong');
+                        const splitEnd = n.splitText(info.endOffset);
+                        const splitMid = n.splitText(info.startOffset);
+                        
+                        const span = document.createElement('span');
+                        span.className = 'annotation annotation-highlight highlight-blue';
+                        
+                        n.parentNode.insertBefore(span, splitMid);
+                        span.appendChild(splitMid);
                     }
-                } else {
-                    trackBox.classList.add('wrong'); // Unanswered
-                }
-                
-                // Show Explanation
-                const expDiv = document.getElementById(`exp-${i}`);
-                if (expDiv && giaiThich[i]) {
-                    expDiv.innerHTML = `<strong>💡 Giải thích:</strong> ${giaiThich[i]}`;
-                    expDiv.style.display = 'block';
+                });
+
+                const firstHighlight = currentPassageEl.querySelector('.highlight-blue');
+                if (firstHighlight) {
+                    firstHighlight.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
             }
         }
+
+        function checkAnswers() {
+            if (hasSubmitted) return;
+            hasSubmitted = true;
+            
+            const allInputs = document.querySelectorAll('input[type="radio"]');
+            allInputs.forEach(input => { input.disabled = true; });
+            deliverButton.disabled = true;
+            deliverButton.innerHTML = '<i class="fa fa-check"></i> Đã Nộp';
+            deliverButton.style.cursor = 'not-allowed';
+            
+            const timeTakenSecs = 3000 - timeInSeconds;
+            clearInterval(timerInterval);
+            timerInterval = null;
+            timerToggleButton.innerHTML = playIcon;
+            
+            let score = 0;
+            const resultsDetailsContainer = document.getElementById('results-details');
+            resultsDetailsContainer.innerHTML = '';
+            
+            for (let i = 1; i <= totalQuestions; i++) {
+                const correctAnswer = correctAnswers[String(i)];
+                let userAnswer = '';
+                let isCorrect = false;
+                let userAnswerDisplay = '-';
+
+                const radioGroup = document.querySelectorAll(`input[name="q${i}"]`);
+                const questionContainer = document.querySelector(`.multi-choice-question[data-q-start="${i}"]`);
+                
+                const checkedRadio = document.querySelector(`input[name="q${i}"]:checked`);
+                if (checkedRadio) {
+                    userAnswer = checkedRadio.value;
+                    userAnswerDisplay = userAnswer;
+                    isCorrect = (userAnswer === correctAnswer);
+                    
+                    const userLabel = checkedRadio.closest('.multi-choice-option');
+                    if (userLabel) { userLabel.classList.add(isCorrect ? 'correct' : 'incorrect'); }
+                }
+                
+                if (isCorrect) { 
+                    score++; 
+                } else if (questionContainer) {
+                    const correctOptionEl = questionContainer.querySelector(`input[value="${correctAnswer}"]`);
+                    if (correctOptionEl) {
+                        const correctLabel = correctOptionEl.closest('.multi-choice-option');
+                        if (correctLabel) { correctLabel.classList.add('correct-answer-highlight'); }
+                    }
+                }
+
+                if (window.testExplanations && window.testExplanations[i] && questionContainer) {
+                    let expElement = document.createElement('div');
+                    expElement.className = 'explanation-box show';
+                    expElement.dataset.forQ = i;
+                    
+                    let explainText = window.testExplanations[i];
+                    let hasEvidence = explainText.toLowerCase().includes("trích dẫn");
+                    let titleHtml = hasEvidence ? `<div class="explanation-title">💡 Giải thích Câu ${i} <span style="font-size: 13px; font-weight: normal; color: #e91e63;">(Bấm vào đây để xem vị trí minh chứng)</span>:</div>` : `<div class="explanation-title">💡 Giải thích Câu ${i}:</div>`;
+                    
+                    expElement.innerHTML = `${titleHtml}<div>${explainText}</div>`;
+                    
+                    if (hasEvidence) {
+                        expElement.addEventListener('click', () => { highlightEvidenceInPassage(window.testExplanations[i]); });
+                    }
+                    
+                    if (!questionContainer.querySelector(`.explanation-box[data-for-q="${i}"]`)) { 
+                        questionContainer.appendChild(expElement); 
+                    }
+                }
+                   
+                const resultRow = `
+                    <div class="result-row ${isCorrect ? '' : 'incorrect'}">
+                        <span class="q-num">Q${i}</span>
+                        <span class="user-ans">${userAnswerDisplay}</span>
+                        <span class="correct-ans">${correctAnswer}</span>
+                    </div>`;
+                resultsDetailsContainer.innerHTML += resultRow;
+                
+                const navButton = document.querySelector(`.subQuestion[onclick="goToQuestion(${i})"]`);
+                if (navButton) {
+                    navButton.classList.remove('answered', 'active');
+                    navButton.classList.add(isCorrect ? 'correct' : 'incorrect');
+                }
+            }
+            
+            const finalScore = (score * (10 / totalQuestions)).toFixed(2);
+            
+            document.getElementById('results-score').textContent = score;
+            document.getElementById('results-band').textContent = finalScore;
+            document.getElementById('results-modal').classList.remove('hidden');
+            
+            sendResultsToGoogle(score, finalScore, timeTakenSecs);
+        }
+        
+        function sendResultsToGoogle(scoreCount, finalScore, timeTakenSecs) {
+            const statusDiv = document.getElementById('submit-status');
+            statusDiv.style.display = 'block';
+            statusDiv.style.backgroundColor = '#fff3cd';
+            statusDiv.style.color = '#856404';
+            statusDiv.textContent = '⏳ Đang lưu bảng điểm vào hệ thống...';
+
+            const minutes = Math.floor(timeTakenSecs / 60);
+            const seconds = timeTakenSecs % 60;
+            const timeStr = `${minutes} phút ${seconds} giây`;
+            const dateStr = new Date().toLocaleString('vi-VN');
+            const examTitle = document.getElementById('launchTestTitle').textContent || document.title;
+
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbxwcbQZYaAxDKUcFlZdXv3VHeUYt6lpAH5FOxL9l1xgs5sQpaEh6IoyTwuepmO7Ie6EvQ/exec';
+            
+            const params = new URLSearchParams();
+            params.append('studentName', currentStudentName);
+            params.append('studentClass', currentStudentClass);
+            params.append('score', `${scoreCount}/${totalQuestions}`);
+            params.append('bandScore', finalScore);
+            params.append('timeTaken', timeStr);
+            params.append('submitDate', dateStr);
+            params.append('examTitle', examTitle);
+
+            fetch(scriptURL, { 
+                method: 'POST', 
+                mode: 'no-cors', 
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: params.toString() 
+            })
+            .then(() => {
+                statusDiv.style.backgroundColor = '#d4edda';
+                statusDiv.style.color = '#155724';
+                statusDiv.textContent = '✅ Kết quả làm bài đã được lưu vào hệ thống thành công!';
+            })
+            .catch(error => {
+                console.error('Error!', error.message);
+                statusDiv.style.backgroundColor = '#f8d7da';
+                statusDiv.style.color = '#721c24';
+                statusDiv.textContent = '⚠️ Mạng lỗi. Hãy chụp ảnh màn hình điểm số báo cho giáo viên!';
+            });
+        }
+
+        window.closeResultsModal = function() { document.getElementById('results-modal').classList.add('hidden'); }
+
+        function switchToPart(partNumber) {
+            currentPassage = partNumber;
+            document.querySelectorAll('.reading-passage, .question-set, .part-header').forEach(el => { el.classList.add('hidden'); });
+            
+            document.getElementById(`passage-text-${partNumber}`).classList.remove('hidden');
+            document.getElementById(`questions-${partNumber}`).classList.remove('hidden');
+            document.getElementById(`part-header-${partNumber}`).classList.remove('hidden');
+            
+            document.querySelectorAll('.footer__questionWrapper___1tZ46').forEach((wrapper, index) => { 
+                wrapper.classList.toggle('selected', (index + 1) === partNumber); 
+            });
+            
+            passagePanel.scrollTop = 0;
+            document.getElementById('questions-panel').scrollTop = 0;
+            
+            const match = partRanges.find(p => p.part === partNumber);
+            if(match) goToQuestion(match.start);
+        }
+        
+        function goToQuestion(qNum) {
+            currentQuestion = qNum;
+            const match = partRanges.find(p => qNum >= p.start && qNum <= p.end);
+            const passageNumber = match ? match.part : 1;
+            
+            if (currentPassage !== passageNumber) { 
+                switchToPart(passageNumber); 
+                return; 
+            }
+            
+            let targetEl = document.querySelector(`.multi-choice-question[data-q-start="${qNum}"]`);
+            if (targetEl) {
+                document.querySelectorAll('.multi-choice-question').forEach(el => el.style.border = '2px solid #f0f0f0');
+                targetEl.style.border = '2px solid #4a90e2';
+                
+                const panel = document.getElementById('questions-panel');
+                const panelRect = panel.getBoundingClientRect();
+                const elementRect = targetEl.getBoundingClientRect();
+                if (elementRect.top < panelRect.top || elementRect.bottom > panelRect.bottom) { 
+                    targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' }); 
+                }
+            }
+            
+            document.querySelectorAll('.subQuestion').forEach(btn => btn.classList.remove('active'));
+            const activeNav = Array.from(document.querySelectorAll('.subQuestion')).find(btn => {
+                const hiddenSpan = btn.querySelector('[aria-hidden="true"]');
+                const num = parseInt(hiddenSpan ? hiddenSpan.textContent : btn.textContent.replace(/\D/g, ''), 10);
+                return num === currentQuestion;
+            });
+            if (activeNav) { activeNav.classList.add('active'); }
+        }
+        
+        window.nextQuestion = () => { if(currentQuestion < totalQuestions) goToQuestion(currentQuestion + 1); };
+        window.previousQuestion = () => { if(currentQuestion > 1) goToQuestion(currentQuestion - 1); };
+        
+        window.switchToPart = switchToPart;
+        window.goToQuestion = goToQuestion;
+
+        function updateAllIndicators() { 
+            partRanges.forEach(range => {
+                let answeredCount = 0; 
+                for (let i = range.start; i <= range.end; i++) { 
+                    if (document.querySelector(`input[name="q${i}"]:checked`)) answeredCount++; 
+                }
+                const partHeader = document.querySelector(`.footer__questionNo___3WNct[onclick="switchToPart(${range.part})"]`);
+                if (partHeader) { 
+                    const countSpan = partHeader.querySelector('.attemptedCount'); 
+                    if (countSpan) countSpan.textContent = `${answeredCount} of ${range.end - range.start + 1}`; 
+                }
+            }); 
+            
+            document.querySelectorAll('.subQuestion').forEach(btn => {
+                const hiddenSpan = btn.querySelector('[aria-hidden="true"]');
+                const qNum = parseInt(hiddenSpan ? hiddenSpan.textContent : btn.textContent.replace(/\D/g, ''), 10);
+                if (!isNaN(qNum) && document.querySelector(`input[name="q${qNum}"]:checked`)) { 
+                    btn.classList.add('answered'); 
+                } else { 
+                    btn.classList.remove('answered'); 
+                }
+            });
+        }
+
+        function updateTimerDisplay() {
+            const displaySeconds = Math.max(timeInSeconds, 0);
+            const minutes = Math.floor(displaySeconds / 60);
+            const seconds = displaySeconds % 60;
+            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            if(displaySeconds < 300) { timerDisplay.style.color = '#dc3545'; } 
+        }
+
+        function startTimer() {
+            if (hasSubmitted) return;
+            if (timerInterval) clearInterval(timerInterval);
+            updateTimerDisplay();
+            timerInterval = setInterval(() => { 
+                timeInSeconds = Math.max(timeInSeconds - 1, 0); 
+                updateTimerDisplay(); 
+                if (timeInSeconds <= 0) { 
+                    timeInSeconds = 0; updateTimerDisplay(); 
+                    clearInterval(timerInterval); timerInterval = null; 
+                    timerToggleButton.innerHTML = playIcon; 
+                    alert("Đã hết thời gian làm bài. Hệ thống tự động nộp bài!");
+                    checkAnswers(); 
+                } 
+            }, 1000);
+            timerToggleButton.innerHTML = pauseIcon;
+        }
+
+        function toggleTimer() { 
+            if (timerInterval) { 
+                clearInterval(timerInterval); timerInterval = null; timerToggleButton.innerHTML = playIcon; 
+            } else { 
+                startTimer(); 
+            } 
+        }
+        
+        function initResize(e) {
+            e.preventDefault(); const startX = e.clientX; const startWidth = passagePanel.offsetWidth;
+            const doDrag = (ev) => { 
+                const newWidth = startWidth + ev.clientX - startX; 
+                if (newWidth > 200 && (document.body.clientWidth - newWidth - resizer.offsetWidth) > 300) { 
+                    passagePanel.style.flex = `0 0 ${newWidth}px`; 
+                } 
+            };
+            const stopDrag = () => { 
+                window.removeEventListener('mousemove', doDrag, false); 
+                window.removeEventListener('mouseup', stopDrag, false); 
+            };
+            window.addEventListener('mousemove', doDrag, false); window.addEventListener('mouseup', stopDrag, false);
+        }
+
+        function initializeQuestionMarkers() { 
+            for (let i = 1; i <= totalQuestions; i++) { 
+                const anchor = document.querySelector(`.mcq-question-number[data-q-number="${i}"]`); 
+                if(anchor) {
+                    const button = document.createElement('button'); button.type = 'button';
+                    button.className = 'mark-toggle-btn';
+                    button.setAttribute('aria-label', `Đánh dấu câu ${i}`); 
+                    button.innerHTML = bookmarkIcon;
+                    button.addEventListener('click', (e) => { 
+                        e.stopPropagation(); 
+                        const isMarked = markedQuestions.has(i);
+                        if (isMarked) { markedQuestions.delete(i); } else { markedQuestions.add(i); }
+                        
+                        button.classList.toggle('marked', !isMarked);
+                        const navButton = document.querySelector(`.subQuestion[onclick="goToQuestion(${i})"]`);
+                        if (navButton) navButton.classList.toggle('marked', !isMarked);
+                    });
+                    anchor.parentNode.appendChild(button);
+                }
+            } 
+        }
+
+        function handleTextSelection(event) {
+            const selection = window.getSelection();
+            if (!selection || selection.rangeCount === 0 || selection.isCollapsed || !selection.toString().trim()) { return; }
+            
+            const anchor = selection.anchorNode; const focus = selection.focusNode;
+            const inPanels = node => node && (passagePanel.contains(node) || document.getElementById('questions-panel').contains(node));
+            if (!(inPanels(anchor) && inPanels(focus))) return;
+
+            pendingSelectionRange = selection.getRangeAt(0).cloneRange();
+            activeAnnotationTarget = null;
+            
+            document.getElementById('menu-highlight-colors').style.display = 'flex'; 
+            document.getElementById('menu-note').style.display = 'flex'; 
+            document.getElementById('menu-clear').style.display = 'none'; 
+            document.getElementById('menu-clear-all').style.display = 'none';
+            
+            const menuHeight = contextMenu.offsetHeight; const menuWidth = contextMenu.offsetWidth;
+            let left = event.pageX; let top = event.pageY - menuHeight - 8;
+            if (left + menuWidth > window.innerWidth) left = window.innerWidth - menuWidth - 8;
+            if (left < 8) left = 8; if (top < 8) top = event.pageY + 8;
+            
+            contextMenu.style.display = 'block';
+            contextMenu.style.left = `${left}px`; 
+            contextMenu.style.top = `${top}px`;
+        }
+
+        function initializeContextMenu() {
+            [passagePanel, document.getElementById('questions-panel')].forEach(panel => { 
+                panel.addEventListener('mouseup', (e) => { setTimeout(() => handleTextSelection(e), 0); }); 
+            });
+            document.addEventListener('click', (e) => {
+                if (contextMenu.contains(e.target)) return;
+                const annotation = e.target.closest(`.annotation-highlight, .annotation-note`);
+                if (annotation && !annotation.classList.contains('highlight-blue')) { 
+                    activeAnnotationTarget = annotation; pendingSelectionRange = null; window.getSelection().removeAllRanges();
+                    document.getElementById('menu-highlight-colors').style.display = 'none'; 
+                    document.getElementById('menu-note').style.display = 'none'; 
+                    document.getElementById('menu-clear').style.display = 'flex'; 
+                    document.getElementById('menu-clear-all').style.display = 'flex';
+                    
+                    contextMenu.style.display = 'block';
+                    contextMenu.style.left = `${e.pageX}px`; contextMenu.style.top = `${e.pageY}px`;
+                    return; 
+                }
+                contextMenu.style.display = 'none';
+            });
+        }
+
+        function applyAnnotation(type, noteText = '', color = 'yellow') {
+            if (!pendingSelectionRange) { contextMenu.style.display = 'none'; return; }
+            const range = pendingSelectionRange;
+            
+            const span = document.createElement('span');
+            span.classList.add('annotation', type === 'highlight' ? 'annotation-highlight' : 'annotation-note');
+            if (type === 'highlight') {
+                span.classList.add(`highlight-${color}`);
+            } else {
+                span.setAttribute('data-note', noteText);
+            }
+            
+            try {
+                range.surroundContents(span);
+            } catch(e) { }
+            contextMenu.style.display = 'none';
+            window.getSelection().removeAllRanges();
+        }
+
+        window.highlightText = (color) => applyAnnotation('highlight', '', color);
+        window.addNote = () => { 
+            const note = prompt('Nhập nội dung ghi chú:'); 
+            if (note) applyAnnotation('note', note.trim()); 
+            else contextMenu.style.display = 'none';
+        };
+        window.clearHighlight = () => { 
+            if (activeAnnotationTarget) { 
+                const parent = activeAnnotationTarget.parentNode;
+                while (activeAnnotationTarget.firstChild) { parent.insertBefore(activeAnnotationTarget.firstChild, activeAnnotationTarget); }
+                parent.removeChild(activeAnnotationTarget);
+            } 
+            contextMenu.style.display = 'none'; 
+        };
+        window.clearAllHighlights = () => { 
+            document.querySelectorAll(`.annotation-highlight:not(.highlight-blue), .annotation-note`).forEach(el => {
+                const parent = el.parentNode;
+                while (el.firstChild) { parent.insertBefore(el.firstChild, el); }
+                parent.removeChild(el);
+            });
+            contextMenu.style.display = 'none'; 
+        };
+    });
     </script>
 </body>
 </html>
